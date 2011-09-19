@@ -27,8 +27,8 @@ SalesforceService = {
       var result = this.doPartnerSoapRequest(
         this._url + '/services/Soap/u/19.0',
         param);
-      Logger.log(result.Envelope.Body.loginResponse.result.sessionId.getText());
-      Logger.log(result.Envelope.Body.loginResponse.result.serverUrl.getText());
+//Logger.log(result.Envelope.Body.loginResponse.result.sessionId.getText());
+//Logger.log(result.Envelope.Body.loginResponse.result.serverUrl.getText());
       //  return result.Envelope.Body.loginResponse.result.sessionId.getText();
       var retParam = {};
       retParam.sessionId = 
@@ -51,8 +51,8 @@ SalesforceService = {
         ["soapenv:Body", body]
       ];
       
-      Logger.log(body);
-      Logger.log(Xml.parseJS(req).toXmlString());
+      //Logger.log(body);
+      //Logger.log(Xml.parseJS(req).toXmlString());
       var options = {
           "method": "post",
           "contentType": "text/xml;charset=UTF-8",
@@ -62,8 +62,8 @@ SalesforceService = {
           }
       };
       var fetchRes = UrlFetchApp.fetch(url, options);
-      Logger.log(fetchRes.getContentText());
-      Logger.log(url);
+      //Logger.log(fetchRes.getContentText());
+      //Logger.log(url);
       var result = Xml.parse(fetchRes.getContentText(), false);
       return result;
   },
@@ -73,7 +73,7 @@ SalesforceService = {
       this.login();  
     }
     
-    Logger.log(this._authinfo.serverUrl.split("/")[2]);
+    //Logger.log(this._authinfo.serverUrl.split("/")[2]);
     var instanceUrl = this._authinfo.serverUrl.split("/")[2];
     instanceUrl = instanceUrl.replace("-api", "");
     instanceUrl = "https://" + instanceUrl;
@@ -87,14 +87,14 @@ SalesforceService = {
         "Authorization": "OAuth " + this._authinfo.sessionId
       }
     });
-    Logger.log(response.getContentText());
+    //Logger.log(response.getContentText());
     var queryResult = Utilities.jsonParse(response.getContentText());
     fieldNames = [];
     queryResult.fields.forEach(function(field, i) {
       Logger.log(field.name);
       fieldNames.push(field.name);
     });
-    Logger.log(fieldNames);
+    //Logger.log(fieldNames);
     return fieldNames;
   },
   dump : ''
