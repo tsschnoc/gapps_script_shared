@@ -19,7 +19,7 @@ Solve360Service = {
     this._url = url;
   },
   
-  salesforce_login : function(username, password, sfurl) {
+  salesforce_login : function() {
       var param = ["urn:login", ["urn:username", this._username],
           ["urn:password", this._password]
       ];
