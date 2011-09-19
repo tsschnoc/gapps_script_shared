@@ -23,7 +23,7 @@ SalesforceService = {
       var param = ["urn:login", ["urn:username", this._username],
           ["urn:password", this._password]
       ];
-      var result = doPartnerSoapRequest(
+      var result = this.doPartnerSoapRequest(
         this._url + '/services/Soap/u/19.0',
         param);
       Logger.log(result.Envelope.Body.loginResponse.result.sessionId.getText());
