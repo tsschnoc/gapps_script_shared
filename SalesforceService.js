@@ -84,7 +84,7 @@ SalesforceService = {
     var response = UrlFetchApp.fetch(queryUrl, {
       method: "GET",
       headers: {
-        "Authorization": "OAuth " + this._authinfo.sessionId + 'X'
+        "Authorization": "XAuth " + this._authinfo.sessionId
       }
     });
     Logger.log(response.getContentText());
