@@ -19,6 +19,9 @@ SalesforceService = {
     this._url = url;
   },
 
+  helloWorls : function() {
+    return this._url;
+  },
 
 
 
