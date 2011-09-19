@@ -2,6 +2,7 @@ SalesforceService = {
   _url : 'https://secure.solve360.com',
   _username : null,
   _password : null,
+  _authinfo : null,
 
   /**
    * Sets the credentials authentication string
@@ -30,13 +31,13 @@ SalesforceService = {
       Logger.log(result.Envelope.Body.loginResponse.result.serverUrl.getText());
       //  return result.Envelope.Body.loginResponse.result.sessionId.getText();
       var retParam = {};
-      retParam['sessionId'] = 
+      retParam.sessionId = 
         result.Envelope.Body.loginResponse.result.sessionId.getText();
-      retParam['serverUrl'] =
+      retParam.serverUrl =
         result.Envelope.Body.loginResponse.result.serverUrl.getText();
-      retParam['metadataServerUrl'] =
+      retParam.metadataServerUrl =
         result.Envelope.Body.loginResponse.result.metadataServerUrl.getText();
-      return retParam;
+      _authinfo = retParam;
   },
 
   doPartnerSoapRequest : function(url, body, header) {
