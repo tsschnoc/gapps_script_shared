@@ -91,6 +91,7 @@ SalesforceService = {
       });
     }
     catch (err) {
+      Logger.log(err);
       Logger.log(err.description);
       this.login();
       response = UrlFetchApp.fetch(queryUrl, {
