@@ -69,6 +69,10 @@ SalesforceService = {
   },
   
   getObjectFields: function(sf_objectname) {
+    if (this._authinfo === null) {
+      this.login();  
+    }
+    
     Logger.log(this._authinfo.serverUrl.split("/")[2]);
     var instanceUrl = this._authinfo.serverUrl.split("/")[2];
     instanceUrl = instanceUrl.replace("-api", "");
