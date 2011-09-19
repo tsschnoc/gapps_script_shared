@@ -36,10 +36,19 @@ SalesforceService = {
         result.Envelope.Body.loginResponse.result.serverUrl.getText();
       retParam.metadataServerUrl =
         result.Envelope.Body.loginResponse.result.metadataServerUrl.getText();
+        
+        
+      retParam.restServerUrl = retParam.serverUrl.split("/")[2];
+      retParam.restServerUrl = retParam.restServerUrl.replace("-api","");
+      retParam.restServerUrl = "https://" + retParam.restServerUrl;
+        
+        
+        
+        
       this._authinfo = retParam;
     }
     catch (err) {
-      throw new Error('Login not possible');
+      throw new Error('Login not possible (check username, password, url)');
     }
   },
 
@@ -77,10 +86,9 @@ SalesforceService = {
     }
     
     //Logger.log(this._authinfo.serverUrl.split("/")[2]);
-    var instanceUrl = this._authinfo.serverUrl.split("/")[2];
-    instanceUrl = instanceUrl.replace("-api", "");
-    instanceUrl = "https://" + instanceUrl;
-    var queryUrl = instanceUrl + 
+   
+   
+    var queryUrl = this._authinfo.restServerUrl + 
       "/services/data/v20.0/sobjects/" + 
       encodeURIComponent(sf_objectname) + "/describe/";
       
@@ -114,5 +122,56 @@ SalesforceService = {
     //Logger.log(fieldNames);
     return fieldNames;
   },
+  
+  
+  readObjectValues: function(sf_objectname, fieldNames) {
+    var sql = "SELECT ";
+    for (var i = 0; i < fieldNames.length; i++) {
+      sql = sql + fieldNames[i] + ", ";
+      Logger.log(sql);
+    }
+    sql = sql.substring(0, sql.length - 2);
+    Logger.log(sql);
+    sql = sql + " from " + sf_objectname + " ";
+    Logger.log(sql);
+    var queryUrl = this._authinfo.restServerUrl +
+      "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
+    var response = UrlFetchApp.fetch(queryUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": "OAuth " + this._authinfo.sessionId
+      }
+    });
+    Logger.log(response.getContentText());
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    var lines = [];
+    var line = [];
+    // Render result records into cells
+    queryResult.records.forEach(function(record, i) {
+      line = [];
+      fieldNames.forEach(function(field, j) {
+        line.push(record[field]);
+      });
+      Logger.log(line);
+      lines.push(line);
+    });
+    return lines;
+  },
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   dump : ''
 };
