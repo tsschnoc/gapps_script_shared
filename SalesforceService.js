@@ -19,25 +19,28 @@ SalesforceService = {
   setUrl : function(url) {
     this._url = url;
   },
-  
-  login : function() {
+  login: function() {
+    try {
       var param = ["urn:login", ["urn:username", this._username],
-          ["urn:password", this._password]
+        ["urn:password", this._password]
       ];
       var result = this.doPartnerSoapRequest(
-        this._url + '/services/Soap/u/19.0',
-        param);
-//Logger.log(result.Envelope.Body.loginResponse.result.sessionId.getText());
-//Logger.log(result.Envelope.Body.loginResponse.result.serverUrl.getText());
+      this._url + '/services/Soap/u/19.0', param);
+      //Logger.log(result.Envelope.Body.loginResponse.result.sessionId.getText());
+      //Logger.log(result.Envelope.Body.loginResponse.result.serverUrl.getText());
       //  return result.Envelope.Body.loginResponse.result.sessionId.getText();
       var retParam = {};
-      retParam.sessionId = 
+      retParam.sessionId =
         result.Envelope.Body.loginResponse.result.sessionId.getText();
       retParam.serverUrl =
         result.Envelope.Body.loginResponse.result.serverUrl.getText();
       retParam.metadataServerUrl =
         result.Envelope.Body.loginResponse.result.metadataServerUrl.getText();
       this._authinfo = retParam;
+    }
+    catch (err) {
+      throw new Error('Login not possible');
+    }
   },
 
   doPartnerSoapRequest : function(url, body, header) {
@@ -86,13 +89,12 @@ SalesforceService = {
       response = UrlFetchApp.fetch(queryUrl, {
         method: "GET",
         headers: {
-          "Authorization": "XAuth " + this._authinfo.sessionId
+          "Authorization": "OAuth " + this._authinfo.sessionId
         }
       });
     }
     catch (err) {
       Logger.log(err);
-      Logger.log(err.description);
       this.login();
       response = UrlFetchApp.fetch(queryUrl, {
         method: "GET",
@@ -102,7 +104,7 @@ SalesforceService = {
       });
     }
     
-    Logger.log(response.getContentText());    
+    //Logger.log(response.getContentText());    
     var queryResult = Utilities.jsonParse(response.getContentText());
     fieldNames = [];
     queryResult.fields.forEach(function(field, i) {
