@@ -20,7 +20,7 @@ SalesforceService = {
     this._url = url;
   },
   
-  salesforce_login : function() {
+  login : function() {
       var param = ["urn:login", ["urn:username", this._username],
           ["urn:password", this._password]
       ];
@@ -37,22 +37,20 @@ SalesforceService = {
         result.Envelope.Body.loginResponse.result.serverUrl.getText();
       retParam.metadataServerUrl =
         result.Envelope.Body.loginResponse.result.metadataServerUrl.getText();
-      _authinfo = retParam;
+      this._authinfo = retParam;
   },
 
   doPartnerSoapRequest : function(url, body, header) {
-      var req = ["soapenv:Envelope",
-      {
-          "xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope/"
-      }, {
-          "xmlns:meta": "http://soap.sforce.com/2006/04/metadata"
-      }, {
-          "xmlns:urn": "urn:partner.soap.sforce.com"
-      }, {
-          "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"
-      }, ["soapenv:Header", header],
-          ["soapenv:Body", body]
+    var req = 
+      ["soapenv:Envelope",
+        {"xmlns:soapenv": "http://schemas.xmlsoap.org/soap/envelope/"}, 
+        {"xmlns:meta": "http://soap.sforce.com/2006/04/metadata"}, 
+        {"xmlns:urn": "urn:partner.soap.sforce.com"}, 
+        {"xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance"},
+        ["soapenv:Header", header],
+        ["soapenv:Body", body]
       ];
+      
       Logger.log(body);
       Logger.log(Xml.parseJS(req).toXmlString());
       var options = {
@@ -69,9 +67,31 @@ SalesforceService = {
       var result = Xml.parse(fetchRes.getContentText(), false);
       return result;
   },
-
-
-
-
+  
+  getObjectFields: function(sf_objectname) {
+    Logger.log(this._authinfo.serverUrl.split("/")[2]);
+    var instanceUrl = this._authinfo.serverUrl.split("/")[2];
+    instanceUrl = instanceUrl.replace("-api", "");
+    instanceUrl = "https://" + instanceUrl;
+    var queryUrl = instanceUrl + 
+      "/services/data/v20.0/sobjects/" + 
+      encodeURIComponent(sf_objectname) + "/describe/";
+      
+    var response = UrlFetchApp.fetch(queryUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": "OAuth " + this._authinfo.sessionId
+      }
+    });
+    Logger.log(response.getContentText());
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    fieldNames = [];
+    queryResult.fields.forEach(function(field, i) {
+      Logger.log(field.name);
+      fieldNames.push(field.name);
+    });
+    Logger.log(fieldNames);
+    return fieldNames;
+  },
   dump : ''
 };
