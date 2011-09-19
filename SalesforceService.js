@@ -81,13 +81,27 @@ SalesforceService = {
       "/services/data/v20.0/sobjects/" + 
       encodeURIComponent(sf_objectname) + "/describe/";
       
-    var response = UrlFetchApp.fetch(queryUrl, {
-      method: "GET",
-      headers: {
-        "Authorization": "XAuth " + this._authinfo.sessionId
-      }
-    });
-    Logger.log(response.getContentText());
+    var response = null;
+    try {
+      response = UrlFetchApp.fetch(queryUrl, {
+        method: "GET",
+        headers: {
+          "Authorization": "XAuth " + this._authinfo.sessionId
+        }
+      });
+    }
+    catch (err) {
+      Logger.log(err.description);
+      this.login();
+      response = UrlFetchApp.fetch(queryUrl, {
+        method: "GET",
+        headers: {
+          "Authorization": "OAuth " + this._authinfo.sessionId
+        }
+      });
+    }
+    
+    Logger.log(response.getContentText());    
     var queryResult = Utilities.jsonParse(response.getContentText());
     fieldNames = [];
     queryResult.fields.forEach(function(field, i) {
