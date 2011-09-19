@@ -84,14 +84,14 @@ SalesforceService = {
     var response = UrlFetchApp.fetch(queryUrl, {
       method: "GET",
       headers: {
-        "Authorization": "OAuth " + this._authinfo.sessionId
+        "Authorization": "OAuth " + this._authinfo.sessionId + 'X'
       }
     });
-    //Logger.log(response.getContentText());
+    Logger.log(response.getContentText());
     var queryResult = Utilities.jsonParse(response.getContentText());
     fieldNames = [];
     queryResult.fields.forEach(function(field, i) {
-      Logger.log(field.name);
+//      Logger.log(field.name);
       fieldNames.push(field.name);
     });
     //Logger.log(fieldNames);
