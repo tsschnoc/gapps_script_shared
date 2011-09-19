@@ -1,4 +1,4 @@
-Solve360Service = {
+SalesforceService = {
   _url : 'https://secure.solve360.com',
   _username : null,
   _password : null,
