@@ -12,7 +12,7 @@ AmazonService = {
   },
 
   
-  sendMail : function() {
+  sendMail : function(sourceAddress, toAddress, subject, body) {
     var timeStamp = Utilities.formatDate(
       new Date(), 
       "GMT", "EEE, dd MMM yyyy HH:mm:ss");
@@ -28,13 +28,21 @@ AmazonService = {
     
     
     //encodeURIComponent(sql)
-    
+   /* 
     var url = 'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=thomas.schnocklake%40gmail.com&Destination.ToAddresses.member.1=thomas.schnocklake%40parx.com&Message.Subject.Data=Christian%20nerven%20mit%20emails.This%20is%20the%20subject%20line.%20sent%20by%20aws%20ses.%20And%20by%20GAPPS%20Script.&Message.Body.Text.Data=Hello.%20I%20hope%20you%20are%20having%20a%20good%20day.';
- /*   
-    var url = 
-      'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=' + 
-      encodeURIComponent(Source)
-   */ 
+    */
+    var url =
+      'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=' +    
+      encodeURIComponent(sourceAddress) + 
+      '&Destination.ToAddresses.member.1=' +
+      encodeURIComponent(toAddress) + 
+      '&Message.Subject.Data=' +
+      encodeURIComponent(subject) + 
+      '&Message.Body.Text.Data=' +
+      encodeURIComponent(body) + 
+      '';
+ 
+    Logger.log(url);
     var response = UrlFetchApp.fetch(url, {
       method: 'get',
       headers: {
