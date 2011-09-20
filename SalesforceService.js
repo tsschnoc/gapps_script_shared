@@ -124,7 +124,7 @@ SalesforceService = {
   },
   
   
-  readObjectValues: function(sf_objectname, fieldNames) {
+  readObjectValues: function(sf_objectname, fieldNames, where) {
     var sql = "SELECT ";
     for (var i = 0; i < fieldNames.length; i++) {
       sql = sql + fieldNames[i] + ", ";
@@ -135,7 +135,9 @@ SalesforceService = {
     sql = sql + " from " + sf_objectname + " ";
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
-    
+    if (where != null) {
+      queryUrl += ' where ' + where; 
+    }
     var lines = [];
     while (queryUrl != null) {
       var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
