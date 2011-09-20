@@ -128,16 +128,15 @@ SalesforceService = {
     var sql = "SELECT ";
     for (var i = 0; i < fieldNames.length; i++) {
       sql = sql + fieldNames[i] + ", ";
-      Logger.log(sql);
     }
     sql = sql.substring(0, sql.length - 2);
     Logger.log(sql);
     sql = sql + " from " + sf_objectname + " ";
+    if (where != null) {
+      sql += ' where ' + where; 
+    }
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
-    if (where != null) {
-      queryUrl += ' where ' + where; 
-    }
     var lines = [];
     while (queryUrl != null) {
       var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
