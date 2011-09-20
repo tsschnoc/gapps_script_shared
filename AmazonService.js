@@ -54,9 +54,36 @@ AmazonService = {
     Logger.log(response.getContentText());
   },
 
-  
-  
-  
+  amazonSearch: function(searchIndex, keyWord) {
+    var timeStamp = Utilities.formatDate(new Date(), "GMT",
+      "yyyy-MM-dd'T'HH:mm:ss'Z'");
+    var valueForSignature = "ItemSearch" + timeStamp;
+    var step1 = Utilities.computeHmacSha256Signature(valueForSignature,
+      this._SECRET_ACCESS_KEY);
+    var sig = Utilities.base64Encode(step1);
+    var param = ["ItemSearch", ["AWSAccessKeyId", this._ACCESS_KEY_ID],
+      ["Signature", sig],
+      ["Timestamp", timeStamp],
+      ["Request", ["SearchIndex", searchIndex],
+        ["Keywords", keyWord]
+      ]
+    ];
+    var wsdl = SoapService.wsdl(
+      "http://webservices.amazon.com/AWSECommerceService/" +
+      "AWSECommerceService.wsdl");
+    var awseService = wsdl.getService("AWSECommerceService");
+    var result = awseService.ItemSearch(param);
+    var list = result.Envelope.Body.ItemSearchResponse.Items.Item;
+    var items = [];
+    for (var i = 0; i < list.length; i++) {
+      item = new Object();
+      item.Title = list[i].ItemAttributes.Title.getText();
+      item.Manufacturer = list[i].ItemAttributes.Manufacturer.getText();
+      item.DetailPageURL = list[i].DetailPageURL.getText();
+      items.push(item);
+    }
+    return items;
+  },
   
   
   dump : ''
