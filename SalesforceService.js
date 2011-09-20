@@ -134,34 +134,92 @@ SalesforceService = {
     Logger.log(sql);
     sql = sql + " from " + sf_objectname + " ";
     Logger.log(sql);
-    var queryUrl = this._authinfo.restServerUrl +
-      "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
-    var response = UrlFetchApp.fetch(queryUrl, {
-      method: "GET",
-      headers: {
-        "Authorization": "OAuth " + this._authinfo.sessionId
-      }
-    });
-    Logger.log(response.getContentText());
-    var queryResult = Utilities.jsonParse(response.getContentText());
+    var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
+    
     var lines = [];
-    var line = [];
-    // Render result records into cells
-    queryResult.records.forEach(function(record, i) {
-      line = [];
-      fieldNames.forEach(function(field, j) {
-        line.push(record[field]);
+    while (queryUrl != null) {
+      var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
+        method: "GET",
+        headers: {
+          "Authorization": "OAuth " + this._authinfo.sessionId
+        }
       });
-      Logger.log(line);
-      lines.push(line);
-    });
+      Logger.log(response.getContentText());
+      var queryResult = Utilities.jsonParse(response.getContentText());
+      
+      var line = [];
+      // Render result records into cells
+      queryResult.records.forEach(function(record, i) {
+        line = [];
+        fieldNames.forEach(function(field, j) {
+          line.push(record[field]);
+          SalesforceService.getValueInSobject(record, field);
+        });
+        //      Logger.log(line);
+        lines.push(line);
+      });
+      
+      queryUrl = queryResult.nextRecordsUrl;
+      Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
+    }
+    
+    
+    
+    
     return lines;
   },
   
   
+  getValueInSobject: function(sobject, fieldNames) {
+    var val = sobject;
+    fieldNames.split(".").forEach(function(name, i) {
+      val = val[name];  
+    });
+    return val;
+  },
   
-  
-  
+  insertToSf : function(sf_objectname, fieldNames, records) {
+    var stmts = [];
+    Logger.log(fieldNames);
+    records.forEach(function(record, i) {
+      var stmt = {};
+      record.forEach(function(value, j) {
+        if (
+          fieldNames[j] == "Id" || 
+          fieldNames[j] == "IsDeleted" || 
+          fieldNames[j] == "SetupOwnerId" || 
+          fieldNames[j] == "CreatedDate" || 
+          fieldNames[j] == "CreatedById" || 
+          fieldNames[j] == "LastModifiedDate" || 
+          fieldNames[j] == "LastModifiedById" || 
+          fieldNames[j] == "SystemModstamp") {}
+        else {
+          stmt[fieldNames[j]] = value;
+        }
+      });
+      Logger.log("JSON: " + JSON.stringify(stmt));
+      stmts.push(stmt);
+    });
+    
+
+    var queryUrl = this._authinfo.restServerUrl + 
+      "/services/data/v20.0/sobjects/" + 
+      encodeURIComponent(sf_objectname) + "/";
+      
+    stmts.forEach(function(stmt, j) {
+      var payload = JSON.stringify(stmt);
+      var response = UrlFetchApp.fetch(queryUrl, {
+        method: "POST",
+        headers: {
+          "Authorization": "OAuth " + this._authinfo.sessionId
+        },
+        contentType: "application/json",
+        payload: payload
+      });
+      var queryResult = Utilities.jsonParse(response.getContentText());
+      Logger.log(queryResult);
+    });
+  },
   
   
   
