@@ -12,7 +12,7 @@ AmazonService = {
   },
 
   
-  sendMail: function SendMail() {
+  sendMail : function() {
     var timeStamp = Utilities.formatDate(
       new Date(), 
       "GMT", "EEE, dd MMM yyyy HH:mm:ss");
