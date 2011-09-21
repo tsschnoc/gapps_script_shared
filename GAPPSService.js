@@ -35,7 +35,7 @@ GAPPSService = {
     Logger.log(payloadX);
     var response = UrlFetchApp.fetch(
       'https://apps-apis.google.com/a/feeds/emailsettings/2.0/' + 
-      'parx.com/' + email + '/signature', 
+      'parx.com/' + email + '/signature?alt=json', 
       {
       method: 'GET',
       payload: payloadX,
@@ -46,6 +46,7 @@ GAPPSService = {
       contentType: "application/atom+xml charset=UTF-8"
     });
     //  Logger.log(response.getContentText());
+    Logger.log(response.getContentText());
     var result = Xml.parse(response.getContentText(), false);
     Logger.log(result.toXmlString());
     Logger.log(result.entry.toXmlString());
