@@ -212,13 +212,16 @@ SalesforceService = {
     var queryUrl = this._authinfo.restServerUrl + 
       "/services/data/v20.0/sobjects/" + 
       encodeURIComponent(sf_objectname) + "/";
-      
+     
+    var sessionId = this._authinfo.sessionId; 
+    
     stmts.forEach(function(stmt, j) {
+      
       var payload = JSON.stringify(stmt);
       var response = UrlFetchApp.fetch(queryUrl, {
         method: "POST",
         headers: {
-          "Authorization": "OAuth " + this._authinfo.sessionId
+          "Authorization": "OAuth " + sessionId
         },
         contentType: "application/json",
         payload: payload
