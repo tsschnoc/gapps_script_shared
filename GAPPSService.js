@@ -30,15 +30,11 @@ GAPPSService = {
   
   getSignature : function(email) {
     var auth = GAPPSService.getAuth('apps');
-    var payloadX = '<entry xmlns=\"http://www.w3.org/2005/Atom\" ' + 
-      'xmlns:docs=\"http://schemas.google.com/docs/2007\">  ';
-    Logger.log(payloadX);
     var response = UrlFetchApp.fetch(
       'https://apps-apis.google.com/a/feeds/emailsettings/2.0/' + 
       'parx.com/' + email + '/signature?alt=json', 
       {
       method: 'GET',
-      payload: payloadX,
       headers: {
         Authorization: 'GoogleLogin Auth=' + escape(auth),
         Accept: "*/*"
@@ -50,14 +46,29 @@ GAPPSService = {
     var result = Utilities.jsonParse(response.getContentText());    
 //    Logger.log(Utilities.jsonParse(response.getContentText()).version);
 //    var result = Xml.parse(response.getContentText(), false);
-/*    Logger.log(result.toXmlString());
-    Logger.log(result.entry.toXmlString());
-    Logger.log(result.entry.property.toXmlString());
-    Logger.log(result.entry.property.value);
-    */
-    Logger.log(result.entry);
-    Logger.log(result.entry.apps$property);
-    Logger.log(result.entry.apps$property[0].value);
+    return result.entry.apps$property[0].value;
+  },
+  
+  searchDocuments : function(searchText) {
+    var auth = GAPPSService.getAuth('writely');
+
+    var response = UrlFetchApp.fetch(
+      'https://docs.google.com/feeds/default/private/full?' + 
+      'q=' + searchText + '&alt=json', 
+      {
+      method: 'GET',
+      headers: {
+        Authorization: 'GoogleLogin Auth=' + escape(auth),
+        Accept: "*/*",
+        GData-Version: "3.0"
+      },
+      contentType: "application/atom+xml charset=UTF-8"
+    });
+    //  Logger.log(response.getContentText());
+    Logger.log(response.getContentText());
+    var result = Utilities.jsonParse(response.getContentText());    
+//    Logger.log(Utilities.jsonParse(response.getContentText()).version);
+//    var result = Xml.parse(response.getContentText(), false);
     return result.entry.apps$property[0].value;
   },
   
