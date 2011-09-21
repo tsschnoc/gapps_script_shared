@@ -125,6 +125,11 @@ SalesforceService = {
   
   
   readObjectValues: function(sf_objectname, fieldNames, where) {
+    if (this._authinfo === null) {
+      this.login();  
+    }
+    
+    
     var sql = "SELECT ";
     for (var i = 0; i < fieldNames.length; i++) {
       sql = sql + fieldNames[i] + ", ";
@@ -180,11 +185,9 @@ SalesforceService = {
   },
   
   insertToSf : function(sf_objectname, fieldNames, records) {
-    Logger.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
-    Logger.log(this);
-    Logger.log(this._authinfo);
-    Logger.log(this._authinfo.sessionId);
-    
+    if (this._authinfo === null) {
+      this.login();  
+    }
     
     var stmts = [];
     Logger.log(fieldNames);
