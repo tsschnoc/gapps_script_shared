@@ -47,12 +47,14 @@ GAPPSService = {
     });
     //  Logger.log(response.getContentText());
     Logger.log(response.getContentText());
-    Logger.log(Utilities.jsonParse(response.getContentText()).version);
-    var result = Xml.parse(response.getContentText(), false);
-    Logger.log(result.toXmlString());
+    var result = Utilities.jsonParse(response.getContentText());    
+//    Logger.log(Utilities.jsonParse(response.getContentText()).version);
+//    var result = Xml.parse(response.getContentText(), false);
+/*    Logger.log(result.toXmlString());
     Logger.log(result.entry.toXmlString());
     Logger.log(result.entry.property.toXmlString());
     Logger.log(result.entry.property.value);
+    */
     return result.entry.property.value;
   },
   
