@@ -60,7 +60,7 @@ GAPPSService = {
       headers: {
         Authorization: 'GoogleLogin Auth=' + escape(auth),
         Accept: "*/*",
-        ""GData-Version"": "3.0"
+        "GData-Version": "3.0"
       },
       contentType: "application/atom+xml charset=UTF-8"
     });
