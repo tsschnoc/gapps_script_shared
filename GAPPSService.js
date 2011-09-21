@@ -57,8 +57,8 @@ GAPPSService = {
     */
     Logger.log(result.entry);
     Logger.log(result.entry.apps$property);
-    Logger.log(result.entry.apps$property.value);
-    return result.entry.apps$property.value;
+    Logger.log(result.entry.apps$property[0].value);
+    return result.entry.apps$property[0].value;
   },
   
   
