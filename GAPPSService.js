@@ -47,7 +47,7 @@ GAPPSService = {
     });
     //  Logger.log(response.getContentText());
     Logger.log(response.getContentText());
-    Logger.log(response.getContentText().version);
+    Logger.log(Utilities.jsonParse(response.getContentText()).version);
     var result = Xml.parse(response.getContentText(), false);
     Logger.log(result.toXmlString());
     Logger.log(result.entry.toXmlString());
