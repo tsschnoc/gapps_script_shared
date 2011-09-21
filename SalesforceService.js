@@ -1,4 +1,4 @@
-SalesforceService = {
+AmazonService = {
   _url : 'https://secure.solve360.com',
   _username : null,
   _password : null,
@@ -180,6 +180,12 @@ SalesforceService = {
   },
   
   insertToSf : function(sf_objectname, fieldNames, records) {
+    Logger.log('XXXXXXXXXXXXXXXXXXXXXXXXXXXX');
+    Logger.log(this);
+    Logger.log(this._authinfo);
+    Logger.log(this._authinfo.sessionId);
+    
+    
     var stmts = [];
     Logger.log(fieldNames);
     records.forEach(function(record, i) {
