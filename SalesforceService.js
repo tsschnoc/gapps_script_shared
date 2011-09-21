@@ -201,7 +201,8 @@ SalesforceService = {
           fieldNames[j] == "LastModifiedById" || 
           fieldNames[j] == "SystemModstamp") {}
         else {
-          stmt[fieldNames[j]] = value;
+//          stmt[fieldNames[j]] = value;        
+          insertToSObject(stmt, fieldNames[j], value);
         }
       });
       Logger.log("JSON: " + JSON.stringify(stmt));
@@ -232,51 +233,45 @@ SalesforceService = {
   },
   
   
-  insertToSObject : function(sObject, fieldName, value) {
-    var val = sobject;
-    var name_comp = fieldName.split(".");
-    name_comp.forEach(function(name, i) {
-      val[name] = value;  
-    });
-    return val;
-
-  },
-      
-  
-  
-  
-  
-  
-  
-  
   
   
   dump : ''
 };
 
-
-
-
+ 
+function insertToSObject(sObject, fieldName, value) {
+  var name_comp = fieldName.split(".");
+  var val = null;
+  for (i = name_comp.length - 1; i >= 0; i--) {
+    if (val == null) {
+      val = {};
+      val[name_comp[i]] = value;
+    }
+    else {
+      var newVal = {};
+      newVal[name_comp[i]] = val;
+      val = newVal;
+    }
+    Logger.log(val);
+  }
+  MergeObjectsRecursive(sObject, val);
+}
 
 function MergeObjectsRecursive(obj1, obj2) {
-
   for (var p in obj2) {
     try {
       // Property in destination object set; update its value.
-      if ( obj2[p].constructor==Object ) {
+      if (obj2[p].constructor == Object) {
         obj1[p] = MergeRecursive(obj1[p], obj2[p]);
-
-      } else {
-        obj1[p] = obj2[p];
-
       }
-
-    } catch(e) {
+      else {
+        obj1[p] = obj2[p];
+      }
+    }
+    catch (e) {
       // Property in destination object not set; create it and set its value.
       obj1[p] = obj2[p];
-
     }
   }
-
   return obj1;
 }
