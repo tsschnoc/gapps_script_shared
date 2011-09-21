@@ -52,7 +52,7 @@ GAPPSService = {
     Logger.log(result.entry.property.toXmlString());
     Logger.log(result.entry.property.value);
     return result.entry.property.value;
-  }
+  },
   
   
   
