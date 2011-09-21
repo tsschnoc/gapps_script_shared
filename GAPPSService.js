@@ -27,5 +27,56 @@ GAPPSService = {
     Logger.log(auth);
     return auth;
   },
+  
+  getSignature : function(email) {
+    var auth = GAPPSService.getAuth('apps');
+    var payloadX = '<entry xmlns=\"http://www.w3.org/2005/Atom\" ' + 
+      'xmlns:docs=\"http://schemas.google.com/docs/2007\">  ';
+    Logger.log(payloadX);
+    var response = UrlFetchApp.fetch(
+      'https://apps-apis.google.com/a/feeds/emailsettings/2.0/' + 
+      'parx.com/' + email + '/signature', 
+      {
+      method: 'GET',
+      payload: payloadX,
+      headers: {
+        Authorization: 'GoogleLogin Auth=' + escape(auth),
+        Accept: "*/*"
+      },
+      contentType: "application/atom+xml charset=UTF-8"
+    });
+    //  Logger.log(response.getContentText());
+    var result = Xml.parse(response.getContentText(), false);
+    Logger.log(result.toXmlString());
+    Logger.log(result.entry.toXmlString());
+    Logger.log(result.entry.property.toXmlString());
+    Logger.log(result.entry.property.value);
+    return result.entry.property.value;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   depp: null
 };
+
+
+
