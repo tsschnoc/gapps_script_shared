@@ -69,7 +69,7 @@ GAPPSService = {
     var result = Utilities.jsonParse(response.getContentText());    
 //    Logger.log(Utilities.jsonParse(response.getContentText()).version);
 //    var result = Xml.parse(response.getContentText(), false);
-    return result.entry.apps$property[0].value;
+    return result.feed.entry;
   },
   
   
