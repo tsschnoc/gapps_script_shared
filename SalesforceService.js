@@ -137,13 +137,13 @@ SalesforceService = {
     sql = sql.substring(0, sql.length - 2);
     Logger.log(sql);
     sql = sql + " from " + sf_objectname + " ";
-    if (where != null) {
+    if (where !== null) {
       sql += ' where ' + where; 
     }
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
     var lines = [];
-    while (queryUrl != null) {
+    while (queryUrl !== null) {
       var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
         method: "GET",
         headers: {
@@ -173,6 +173,23 @@ SalesforceService = {
     
     
     return lines;
+  },
+  
+  readObjects: function() {
+    if(this._authinfo === null) {
+      this.login();
+    }
+    var queryUrl = "/services/data/v20.0/sobjects/";
+    var response = UrlFetchApp.fetch(
+    this._authinfo.restServerUrl + queryUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": "OAuth " + this._authinfo.sessionId
+      }
+    });
+    Logger.log(response.getContentText());
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    return queryResult.sobjects;
   },
   
   
@@ -246,7 +263,7 @@ function insertToSObject(sObject, fieldName, value) {
   var name_comp = fieldName.split(".");
   var val = null;
   for (i = name_comp.length - 1; i >= 0; i--) {
-    if (val == null) {
+    if (val === null) {
       val = {};
       val[name_comp[i]] = value;
     }
