@@ -144,7 +144,7 @@ SalesforceService = {
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
     var lines = [];
     
-//    while (queryUrl != null && queryUrl != 'undefined') {
+    while (queryUrl != null && queryUrl != 'undefined') {
 
       var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
         method: "GET",
@@ -169,7 +169,7 @@ SalesforceService = {
       
       queryUrl = queryResult.nextRecordsUrl;
       Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
-//    }
+    }
     
     
     
