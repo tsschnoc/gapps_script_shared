@@ -3,6 +3,7 @@ AmazonService = {
   _SECRET_ACCESS_KEY : null,
   _authinfo : null,
 
+
   /**
    * Sets the credentials authentication string
    */

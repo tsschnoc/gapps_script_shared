@@ -2,6 +2,7 @@ GAPPSService = {
   _email: null,
   _password: null,
   _authinfo: null,
+  
   /**
    * Sets the credentials authentication string
    */

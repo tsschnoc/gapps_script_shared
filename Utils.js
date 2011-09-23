@@ -4,6 +4,7 @@ function SHA1(msg) {
     return t4;
   };
 
+
   function lsb_hex(val) {
     var str = "";
     var i;
