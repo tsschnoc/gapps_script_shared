@@ -81,7 +81,7 @@ SalesforceService = {
   },
   
   getObjectFields: function(sf_objectname) {
-    if (this._authinfo === null) {
+    if (this._authinfo == null) {
       this.login();  
     }
     
@@ -125,7 +125,7 @@ SalesforceService = {
   
   
   readObjectValues: function(sf_objectname, fieldNames, where) {
-    if (this._authinfo === null) {
+    if (this._authinfo == null) {
       this.login();  
     }
     
@@ -143,7 +143,8 @@ SalesforceService = {
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
     var lines = [];
-    while (queryUrl !== null) {
+    while (queryUrl != null && queryUrl != 'undefined') {
+
       var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
         method: "GET",
         headers: {
