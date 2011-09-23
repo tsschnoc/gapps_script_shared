@@ -146,12 +146,14 @@ SalesforceService = {
     
     while (queryUrl != null && queryUrl != 'undefined') {
 
-      var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
-        method: "GET",
-        headers: {
-          "Authorization": "OAuth " + this._authinfo.sessionId
-        }
-      });
+      var response = UrlFetchApp.fetch(
+        this._authinfo.restServerUrl + queryUrl, 
+        {
+          method: "GET",
+          headers: {
+            "Authorization": "OAuth " + this._authinfo.sessionId
+          }
+        });
       Logger.log(response.getContentText());
       var queryResult = Utilities.jsonParse(response.getContentText());
       
@@ -170,9 +172,6 @@ SalesforceService = {
       queryUrl = queryResult.nextRecordsUrl;
       Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
     }
-    
-    
-    
     
     return lines;
   },
