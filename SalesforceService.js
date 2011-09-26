@@ -20,6 +20,18 @@ SalesforceService = {
   setUrl : function(url) {
     this._url = url;
   },
+  
+  setAuthDirect: function(serverUrl, sessionId ) {
+    var retParam = {};
+    retParam.sessionId = sessionId;
+    retParam.serverUrl = serverUrl;
+    //retParam.metadataServerUrl =; 
+    retParam.restServerUrl = retParam.serverUrl.split("/")[2];
+    retParam.restServerUrl = retParam.restServerUrl.replace("-api", "");
+    retParam.restServerUrl = "https://" + retParam.restServerUrl;
+    this._authinfo = retParam;      
+  },  
+  
   login: function() {
     try {
       var param = ["urn:login", ["urn:username", this._username],
