@@ -175,8 +175,8 @@ SalesforceService = {
       queryResult.records.forEach(function(record, i) {
         line = [];
         fieldNames.forEach(function(field, j) {
-          line.push(record[field]);
-          SalesforceService.getValueInSobject(record, field);
+          //line.push(record[field]);
+          line.push(SalesforceService.getValueInSobject(record, field));
         });
         //      Logger.log(line);
         lines.push(line);
