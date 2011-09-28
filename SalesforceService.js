@@ -187,13 +187,11 @@ SalesforceService = {
     var lines = [];
     // Render result records into cells
     this.readObjectValues(sf_objectname, fieldNames, where).forEach(function(record, i) {
-      Logger.log('record' + record);
       var line = [];
       fieldNames.forEach(function(field, j) {
         //line.push(record[field]);
         line.push(SalesforceService.getValueInSobject(record, field));
       });
-      //      Logger.log(line);
       lines.push(line);
     });
     return lines;
