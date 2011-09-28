@@ -188,6 +188,7 @@ SalesforceService = {
     // Render result records into cells
 //    this.readObjectValues(sf_objectname, fieldNames, where).forEach(function(record, i) {
     for (record in this.readObjectValues(sf_objectname, fieldNames, where)) {
+      Logger.log('record' + record);
       var line = [];
 //      fieldNames.forEach(function(field, j) {
       for (field in fieldNames) {
