@@ -172,7 +172,7 @@ SalesforceService = {
       var queryResult = Utilities.jsonParse(response.getContentText());
 
       queryResult.records.forEach(function(record, i) {
-        lines.push(record);
+        records.push(record);
       });
       
       queryUrl = queryResult.nextRecordsUrl;
