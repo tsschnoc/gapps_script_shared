@@ -186,16 +186,19 @@ SalesforceService = {
   readObjectValueList: function(sf_objectname, fieldNames, where) {
     var lines = [];
     // Render result records into cells
-    this.readObjectValues(
-    sf_objectname, fieldNames, where).forEach(function(record, i) {
+//    this.readObjectValues(sf_objectname, fieldNames, where).forEach(function(record, i) {
+    for (record : this.readObjectValues(sf_objectname, fieldNames, where)) {
       var line = [];
-      fieldNames.forEach(function(field, j) {
+//      fieldNames.forEach(function(field, j) {
+      for (field : fieldNames) {
         //line.push(record[field]);
         line.push(SalesforceService.getValueInSobject(record, field));
-      });
+//      });
+      }
       //      Logger.log(line);
       lines.push(line);
-    });
+//    });
+    }
     return lines;
   },  
 
