@@ -151,7 +151,7 @@ SalesforceService = {
     sql = sql.substring(0, sql.length - 2);
     Logger.log(sql);
     sql = sql + " from " + sf_objectname + " ";
-    if (where !== null) {
+    if (where != null  && where != 'undefined') {
       sql += ' where ' + where; 
     }
     Logger.log(sql);
