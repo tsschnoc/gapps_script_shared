@@ -130,7 +130,7 @@ SalesforceService = {
     return queryResult.fields;
   },
   
-  getObjectFieldlist: function(sf_objectname) {
+  getObjectFieldList: function(sf_objectname) {
     fieldNames = [];
     this.getObjectFields(sf_objectname).forEach(function(field, i) {
       fieldNames.push(field.name);
