@@ -127,15 +127,16 @@ SalesforceService = {
     
     //Logger.log(response.getContentText());    
     var queryResult = Utilities.jsonParse(response.getContentText());
-    fieldNames = [];
-    queryResult.fields.forEach(function(field, i) {
-//      Logger.log(field.name);
-      fieldNames.push(field.name);
-    });
-    //Logger.log(fieldNames);
-    return fieldNames;
+    return queryResult.fields;
   },
   
+  getObjectFieldlist: function(sf_objectname) {
+    fieldNames = [];
+    this.getObjectFields(sf_objectname).forEach(function(field, i) {
+      fieldNames.push(field.name);
+    });
+    return fieldNames;
+  },  
   
   readObjectValues: function(sf_objectname, fieldNames, where) {
     if (this._authinfo == null) {
