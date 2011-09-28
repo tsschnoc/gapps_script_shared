@@ -156,7 +156,7 @@ SalesforceService = {
     }
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
-    var lines = [];
+    var records = [];
     
     while (queryUrl != null && queryUrl != 'undefined') {
 
@@ -170,11 +170,26 @@ SalesforceService = {
         });
       Logger.log(response.getContentText());
       var queryResult = Utilities.jsonParse(response.getContentText());
-      
-      var line = [];
-      // Render result records into cells
+
       queryResult.records.forEach(function(record, i) {
-        line = [];
+        lines.push(record);
+      });
+      
+      queryUrl = queryResult.nextRecordsUrl;
+      Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
+    }
+    
+    return records;
+  },
+  
+  
+  readObjectValueList: function(sf_objectname, fieldNames, where) {
+      var lines = [];
+      // Render result records into cells
+      this.readObjectValues(
+        sf_objectname, fieldNames, where).forEach(function(record, i) {
+          
+        var line = [];
         fieldNames.forEach(function(field, j) {
           //line.push(record[field]);
           line.push(SalesforceService.getValueInSobject(record, field));
@@ -182,14 +197,12 @@ SalesforceService = {
         //      Logger.log(line);
         lines.push(line);
       });
-      
-      queryUrl = queryResult.nextRecordsUrl;
-      Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
-    }
     
-    return lines;
-  },
+  },  
   
+
+
+
   readObjects: function() {
     if(this._authinfo === null) {
       this.login();
