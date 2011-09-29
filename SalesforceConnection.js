@@ -197,7 +197,7 @@ SalesforceConnection.prototype.readObjects = function() {
 
 SalesforceConnection.prototype.getValueInSobject = 
   function(sobject, fieldNames) {
-  
+  Logger.log(sobject + " " + fieldNames);
   var val = sobject;
   fieldNames.split(".").forEach(function(name, i) {
     val = val[name];
