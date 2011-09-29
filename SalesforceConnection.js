@@ -167,17 +167,6 @@ SalesforceConnection.prototype.readObjectValues =
   return records;
 }
 
-SalesforceConnection.prototype.getValueInSobject = 
-  function(sobject, fieldNames) {
-  Logger.log(sobject + " " + fieldNames);
-  var val = sobject;
-  fieldNames.split(".").forEach(function(name, i) {
-    val = val[name];
-  });
-  return val;
-}
-
-
 SalesforceConnection.prototype.readObjectValueList = 
   function(sf_objectname, fieldNames, where) {
   var lines = [];
@@ -191,7 +180,7 @@ SalesforceConnection.prototype.readObjectValueList =
     for (j in fieldNames) {
       Logger.log(j);
       Logger.log(fieldNames[j]);
-//    Logger.log(getValueInSobject(record, fieldNames[j]));
+      Logger.log(getValueInSobject(record, fieldNames[j]));
 //    line.push(this.getValueInSobject(record, fieldNames[j]));
     }
     /*
@@ -280,6 +269,19 @@ function insertToSObject(sObject, fieldName, value) {
   }
   MergeObjectsRecursive(sObject, val);
 }
+
+
+function getValueInSobject(sobject, fieldNames) {
+  var val = sobject;
+  fieldNames.split(".").forEach(function(name, i) {
+    val = val[name];
+  });
+  return val;
+}
+
+
+
+
 
 function MergeObjectsRecursive(obj1, obj2) {
   for (var p in obj2) {
