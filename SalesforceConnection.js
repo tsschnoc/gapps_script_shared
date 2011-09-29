@@ -166,13 +166,16 @@ SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fie
   // Render result records into cells
   this.readObjectValues(sf_objectname, fieldNames, where).forEach(
     function(record, i) {
+      
     Logger.log(record);
     var line = [];
+    
+    var ich = this;
     fieldNames.forEach(function(field, j) {
-    Logger.log(field);
+      Logger.log(field);
 
 //line.push(record[field]);
-      line.push(this.getValueInSobject(record, field));
+      line.push(ich.getValueInSobject(record, field));
     });
     lines.push(line);
   });
