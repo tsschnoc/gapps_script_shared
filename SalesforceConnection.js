@@ -169,7 +169,6 @@ SalesforceConnection.prototype.readObjectValueList =
   this.readObjectValues(sf_objectname, fieldNames, where).forEach(
     function(record, i) {
       
-    Logger.log(record);
     var line = [];
     
     for (j in fieldNames) {
