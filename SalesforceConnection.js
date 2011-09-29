@@ -148,6 +148,7 @@ SalesforceConnection.prototype.readObjectValues =
     queryResult.records.forEach(function(record, i) {
       records.push(record);
     });
+    Logger.log("!!!!!!!!!!!!!!!!!!!!!!queryResult" + queryResult);
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
