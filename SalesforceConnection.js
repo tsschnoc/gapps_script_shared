@@ -178,23 +178,13 @@ SalesforceConnection.prototype.readObjectValueList =
     var line = [];
     
     for (j in fieldNames) {
-      Logger.log(j);
-      Logger.log(fieldNames[j]);
-      Logger.log(getValueInSobject(record, fieldNames[j]));
-//    line.push(this.getValueInSobject(record, fieldNames[j]));
+      line.push(getValueInSobject(record, fieldNames[j]));
     }
-    /*
-    fieldNames.forEach(function(field, j) {
-      Logger.log(field);
-
-//line.push(record[field]);
-      line.push(ich.getValueInSobject(record, field));
-    });
-    */
     lines.push(line);
   });
   return lines;
 }
+
 SalesforceConnection.prototype.readObjects = function() {
   if (this._authinfo === null) {
     this.login();
