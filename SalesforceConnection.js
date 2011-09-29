@@ -196,6 +196,27 @@ SalesforceConnection.prototype.readObjects = function() {
   return queryResult.sobjects;
 }
 
+SalesforceConnection.prototype.insertSObject = 
+  function(sf_objectname, insertSObject) {
+  if (this._authinfo === null) {
+    this.login();
+  }
+  var queryUrl = this._authinfo.restServerUrl + 
+    "/services/data/v20.0/sobjects/" + encodeURIComponent(sf_objectname) + "/";
+  var payload = JSON.stringify(stmt);
+  Logger.log("payload: \n" + payload);
+  var response = UrlFetchApp.fetch(queryUrl, {
+    method: "POST",
+    headers: {
+      "Authorization": "OAuth " + this._authinfo.sessionId
+    },
+    contentType: "application/json",
+    payload: payload
+  });
+  var queryResult = Utilities.jsonParse(response.getContentText());
+  Logger.log(queryResult);
+}
+
 
 SalesforceConnection.prototype.insertToSf = 
   function(sf_objectname, fieldNames, records) {
@@ -208,17 +229,14 @@ SalesforceConnection.prototype.insertToSf =
   records.forEach(function(record, i) {
     var stmt = {};
     record.forEach(function(value, j) {
-      if (
-      fieldNames[j] == "Id" || fieldNames[j] == "IsDeleted" || fieldNames[j] == "SetupOwnerId" || fieldNames[j] == "CreatedDate" || fieldNames[j] == "CreatedById" || fieldNames[j] == "LastModifiedDate" || fieldNames[j] == "LastModifiedById" || fieldNames[j] == "SystemModstamp") {}
-      else {
-        //          stmt[fieldNames[j]] = value;        
         insertToSObject(stmt, fieldNames[j], value);
-      }
     });
     Logger.log("JSON: " + JSON.stringify(stmt));
     stmts.push(stmt);
   });
-  var queryUrl = this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent(sf_objectname) + "/";
+  var queryUrl = 
+    this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/" 
+      + encodeURIComponent(sf_objectname) + "/";
   var sessionId = this._authinfo.sessionId;
   stmts.forEach(function(stmt, j) {
     var payload = JSON.stringify(stmt);
