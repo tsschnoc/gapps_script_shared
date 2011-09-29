@@ -161,7 +161,19 @@ SalesforceConnection.prototype.readObjectValues =
   return records;
 }
 
-SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fieldNames, where) {
+SalesforceConnection.prototype.getValueInSobject = 
+  function(sobject, fieldNames) {
+  Logger.log(sobject + " " + fieldNames);
+  var val = sobject;
+  fieldNames.split(".").forEach(function(name, i) {
+    val = val[name];
+  });
+  return val;
+}
+
+
+SalesforceConnection.prototype.readObjectValueList = 
+  function(sf_objectname, fieldNames, where) {
   var lines = [];
   // Render result records into cells
   this.readObjectValues(sf_objectname, fieldNames, where).forEach(
@@ -170,8 +182,10 @@ SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fie
     Logger.log(record);
     var line = [];
     
-    var ich = this;
     for (j in fieldNames) {
+      Logger.log(j);
+      Logger.log(fieldNames[j]);
+      Logger.log(this.getValueInSobject(record, fieldNames[j]));
       line.push(this.getValueInSobject(record, fieldNames[j]));
     }
     /*
@@ -203,15 +217,6 @@ SalesforceConnection.prototype.readObjects = function() {
   return queryResult.sobjects;
 }
 
-SalesforceConnection.prototype.getValueInSobject = 
-  function(sobject, fieldNames) {
-  Logger.log(sobject + " " + fieldNames);
-  var val = sobject;
-  fieldNames.split(".").forEach(function(name, i) {
-    val = val[name];
-  });
-  return val;
-}
 
 SalesforceConnection.prototype.insertToSf = 
   function(sf_objectname, fieldNames, records) {
