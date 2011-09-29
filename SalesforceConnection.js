@@ -143,6 +143,7 @@ SalesforceConnection.prototype.readObjectValues =
         "Authorization": "OAuth " + this._authinfo.sessionId
       }
     });
+    
     Logger.log("x1" + response.getContentText());
     var queryResult = Utilities.jsonParse(response.getContentText());
     queryResult.records.forEach(function(record, i) {
