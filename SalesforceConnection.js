@@ -157,6 +157,7 @@ SalesforceConnection.prototype.readObjectValues =
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
+  Logger.log("raus !!!!!!!!!!!" + queryUrl);
   return records;
 }
 SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fieldNames, where) {
