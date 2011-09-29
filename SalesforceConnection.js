@@ -172,7 +172,7 @@ SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fie
     
     var ich = this;
     for (j in fieldNames) {
-      line.push(ich.getValueInSobject(record, fieldNames[j]));
+      line.push(this.getValueInSobject(record, fieldNames[j]));
     }
     /*
     fieldNames.forEach(function(field, j) {
