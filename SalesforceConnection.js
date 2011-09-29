@@ -169,7 +169,9 @@ SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fie
     Logger.log(record);
     var line = [];
     fieldNames.forEach(function(field, j) {
-      //line.push(record[field]);
+    Logger.log(field);
+
+//line.push(record[field]);
       line.push(this.getValueInSobject(record, field));
     });
     lines.push(line);
@@ -192,14 +194,20 @@ SalesforceConnection.prototype.readObjects = function() {
   var queryResult = Utilities.jsonParse(response.getContentText());
   return queryResult.sobjects;
 }
-SalesforceConnection.prototype.getValueInSobject = function(sobject, fieldNames) {
+
+SalesforceConnection.prototype.getValueInSobject = 
+  function(sobject, fieldNames) {
+  
   var val = sobject;
   fieldNames.split(".").forEach(function(name, i) {
     val = val[name];
   });
   return val;
 }
-SalesforceConnection.prototype.insertToSf = function(sf_objectname, fieldNames, records) {
+
+SalesforceConnection.prototype.insertToSf = 
+  function(sf_objectname, fieldNames, records) {
+  
   if (this._authinfo === null) {
     this.login();
   }
