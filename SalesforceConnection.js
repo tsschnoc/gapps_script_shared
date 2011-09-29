@@ -117,7 +117,8 @@ SalesforceConnection.prototype.getObjectFieldList = function(sf_objectname) {
   });
   return fieldNames;
 }
-SalesforceConnection.prototype.readObjectValues: function(sf_objectname, fieldNames, where) {
+SalesforceConnection.prototype.readObjectValues = 
+  function(sf_objectname, fieldNames, where) {
   if (this._authinfo == null) {
     this.login();
   }
