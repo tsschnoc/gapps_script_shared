@@ -14,6 +14,7 @@ SalesforceConnection.prototype.setCredentials =
   this._username = username;
   this._password = password;
 }
+
 SalesforceConnection.prototype.setAuthDirect = 
   function(serverUrl, sessionId) {
   var retParam = {};
@@ -25,6 +26,7 @@ SalesforceConnection.prototype.setAuthDirect =
   retParam.restServerUrl = "https://" + retParam.restServerUrl;
   this._authinfo = retParam;
 }
+
 SalesforceConnection.prototype.login = 
   function() {
   try {
@@ -52,6 +54,7 @@ SalesforceConnection.prototype.login =
     throw new Error('Login not possible (check username, password, url)');
   }
 }
+
 SalesforceConnection.prototype.doPartnerSoapRequest = function(url, body, header) {
   var req = ["soapenv:Envelope",
   {
@@ -81,6 +84,7 @@ SalesforceConnection.prototype.doPartnerSoapRequest = function(url, body, header
   var result = Xml.parse(fetchRes.getContentText(), false);
   return result;
 }
+
 SalesforceConnection.prototype.getObjectFields = function(sf_objectname) {
   if (this._authinfo == null) {
     this.login();
@@ -110,6 +114,7 @@ SalesforceConnection.prototype.getObjectFields = function(sf_objectname) {
   var queryResult = Utilities.jsonParse(response.getContentText());
   return queryResult.fields;
 }
+
 SalesforceConnection.prototype.getObjectFieldList = function(sf_objectname) {
   fieldNames = [];
   this.getObjectFields(sf_objectname).forEach(function(field, i) {
@@ -117,6 +122,7 @@ SalesforceConnection.prototype.getObjectFieldList = function(sf_objectname) {
   });
   return fieldNames;
 }
+
 SalesforceConnection.prototype.readObjectValues = 
   function(sf_objectname, fieldNames, where) {
   if (this._authinfo == null) {
@@ -185,8 +191,8 @@ SalesforceConnection.prototype.readObjectValueList =
     for (j in fieldNames) {
       Logger.log(j);
       Logger.log(fieldNames[j]);
-      Logger.log(getValueInSobject(record, fieldNames[j]));
-      line.push(this.getValueInSobject(record, fieldNames[j]));
+//    Logger.log(getValueInSobject(record, fieldNames[j]));
+//    line.push(this.getValueInSobject(record, fieldNames[j]));
     }
     /*
     fieldNames.forEach(function(field, j) {
