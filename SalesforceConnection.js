@@ -149,6 +149,8 @@ SalesforceConnection.prototype.readObjectValues =
       records.push(record);
     });
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!queryResult" + queryResult);
+    
+    
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
