@@ -263,6 +263,7 @@ SalesforceService = {
     stmts.forEach(function(stmt, j) {
       
       var payload = JSON.stringify(stmt);
+      Logger.log("payload: \n" + payload);
       var response = UrlFetchApp.fetch(queryUrl, {
         method: "POST",
         headers: {
