@@ -135,7 +135,7 @@ SalesforceConnection.prototype.readObjectValues =
   Logger.log(sql);
   var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
   var records = [];
-  while (queryUrl != null && queryUrl != 'undefined') {
+  while (queryUrl !== null && queryUrl != 'undefined') {
     var response = UrlFetchApp.fetch(
     this._authinfo.restServerUrl + queryUrl, {
       method: "GET",
