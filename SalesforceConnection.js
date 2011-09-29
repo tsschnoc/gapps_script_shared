@@ -150,20 +150,15 @@ SalesforceConnection.prototype.readObjectValues =
       }
     });
     
-    Logger.log("x1" + response.getContentText());
     var queryResult = Utilities.jsonParse(response.getContentText());
     queryResult.records.forEach(function(record, i) {
       records.push(record);
     });
     
     
-    Logger.log("!!!!!!!!!!!!!!!!!!!!!!queryResult" + queryResult);
-    
-    
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
-  Logger.log("raus !!!!!!!!!!!" + records);
   return records;
 }
 
