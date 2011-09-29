@@ -157,13 +157,16 @@ SalesforceConnection.prototype.readObjectValues =
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
-  Logger.log("raus !!!!!!!!!!!" + queryUrl);
+  Logger.log("raus !!!!!!!!!!!" + records);
   return records;
 }
+
 SalesforceConnection.prototype.readObjectValueList = function(sf_objectname, fieldNames, where) {
   var lines = [];
   // Render result records into cells
-  this.readObjectValues(sf_objectname, fieldNames, where).forEach(function(record, i) {
+  this.readObjectValues(sf_objectname, fieldNames, where).forEach(
+    function(record, i) {
+    Logger.log(record);
     var line = [];
     fieldNames.forEach(function(field, j) {
       //line.push(record[field]);
