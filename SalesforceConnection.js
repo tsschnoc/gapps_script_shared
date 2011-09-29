@@ -185,7 +185,7 @@ SalesforceConnection.prototype.readObjectValueList =
     for (j in fieldNames) {
       Logger.log(j);
       Logger.log(fieldNames[j]);
-      Logger.log(this.getValueInSobject(record, fieldNames[j]));
+      Logger.log(getValueInSobject(record, fieldNames[j]));
       line.push(this.getValueInSobject(record, fieldNames[j]));
     }
     /*
