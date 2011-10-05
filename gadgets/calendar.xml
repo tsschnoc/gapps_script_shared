@@ -52,7 +52,7 @@
 
         <div id="loading">
           <h3>Loading...</h3>
-          <p><img src="http://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/ajax-loader.gif"></p>
+          <p><img src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/ajax-loader.gif"></p>
         </div>
 
         <div id="approval" style="display: none">
