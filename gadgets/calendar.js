@@ -187,7 +187,7 @@ calendar.insertEntry(feedUri, entry, callback,
 
 
 function readSFData() {
-  var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>thomas.schnocklake.sfdc1@gmail.com</urn:username>        <urn:password>Mantila4oZv6zvHX9PcP5XA71mDE7ywB</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
+  var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>thomas.schnocklake.sfdc1@gmail.com</urn:username>        <urn:password>Mantila5PkeUMFfyd5w5jXIEFbk63ajU</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
   var SOAPAction = "testaction";
   var url = "https://login.salesforce.com/services/Soap/u/20.0";
   makeSOAPRequest(url, SOAPAction, postdata);
@@ -227,9 +227,9 @@ function makeSOAPRequest(url, SOAPAction, postdata) {
 
 
 function callback(obj) {
-/*  console.log(obj);
+  console.log(obj);
   console.log(obj.data);
-  console.log(obj.data.childNodes);
+/*  console.log(obj.data.childNodes);
   console.log(obj.data.childNodes.length);
 */  
   var document = obj.data;
