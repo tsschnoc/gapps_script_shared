@@ -1,5 +1,7 @@
 SalesforceService = {
-  _url : 'https://secure.solve360.com',
+//http://mckoss.com/jscript/object.htm
+
+  _url : null,
   _username : null,
   _password : null,
   _authinfo : null,
@@ -12,13 +14,6 @@ SalesforceService = {
     this._url = url;  
     this._username = username;
     this._password = password;
-  },
-
-  /**
-   * Sets the base url
-   */
-  setUrl : function(url) {
-    this._url = url;
   },
   
   setAuthDirect: function(serverUrl, sessionId ) {

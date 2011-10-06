@@ -23,11 +23,11 @@
 <head>
 <title>Paging Grid Example</title>
  
-<link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-all.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/ext-all.css" />
     <!-- LIBS -->
-   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-base.js"></script>
+   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/ext-base.js"></script>
    <!-- ENDLIBS -->
-    <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-all.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/ext-all.js"></script>
     
 <link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/grid-examples.css" />
  
