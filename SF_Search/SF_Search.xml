@@ -23,16 +23,16 @@
 <head>
 <title>Paging Grid Example</title>
  
-<link rel="stylesheet" type="text/css" href="ext-all.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-all.css" />
     <!-- LIBS -->
-   <script type="text/javascript" src="ext-base.js"></script>
+   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-base.js"></script>
    <!-- ENDLIBS -->
-    <script type="text/javascript" src="ext-all.js"></script>
+    <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/ext-all.js"></script>
     
-<link rel="stylesheet" type="text/css" href="grid-examples.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/grid-examples.css" />
  
 <!-- Common Styles for the examples -->
-<link rel="stylesheet" type="text/css" href="examples.css" />
+<link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/examples.css" />
  
  
  
@@ -50,7 +50,7 @@ background-color:#b0e0e6;
  
 </head>
 <body>
-<script type="text/javascript" src="examples.js"></script>
+<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/examples.js"></script>
  
 <div class="gridd" id="topic-grid"></div>
  
