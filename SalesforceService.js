@@ -1,11 +1,8 @@
 SalesforceService = {
-//http://mckoss.com/jscript/object.htm
-
-  _url : null,
+  _url : 'https://secure.solve360.com',
   _username : null,
   _password : null,
   _authinfo : null,
-
 
   /**
    * Sets the credentials authentication string
@@ -15,18 +12,13 @@ SalesforceService = {
     this._username = username;
     this._password = password;
   },
-  
-  setAuthDirect: function(serverUrl, sessionId ) {
-    var retParam = {};
-    retParam.sessionId = sessionId;
-    retParam.serverUrl = serverUrl;
-    //retParam.metadataServerUrl =; 
-    retParam.restServerUrl = retParam.serverUrl.split("/")[2];
-    retParam.restServerUrl = retParam.restServerUrl.replace("-api", "");
-    retParam.restServerUrl = "https://" + retParam.restServerUrl;
-    this._authinfo = retParam;      
-  },  
-  
+
+  /**
+   * Sets the base url
+   */
+  setUrl : function(url) {
+    this._url = url;
+  },
   login: function() {
     try {
       var param = ["urn:login", ["urn:username", this._username],
@@ -89,7 +81,7 @@ SalesforceService = {
   },
   
   getObjectFields: function(sf_objectname) {
-    if (this._authinfo == null) {
+    if (this._authinfo === null) {
       this.login();  
     }
     
@@ -122,19 +114,18 @@ SalesforceService = {
     
     //Logger.log(response.getContentText());    
     var queryResult = Utilities.jsonParse(response.getContentText());
-    return queryResult.fields;
-  },
-  
-  getObjectFieldList: function(sf_objectname) {
     fieldNames = [];
-    this.getObjectFields(sf_objectname).forEach(function(field, i) {
+    queryResult.fields.forEach(function(field, i) {
+//      Logger.log(field.name);
       fieldNames.push(field.name);
     });
+    //Logger.log(fieldNames);
     return fieldNames;
-  },  
+  },
+  
   
   readObjectValues: function(sf_objectname, fieldNames, where) {
-    if (this._authinfo == null) {
+    if (this._authinfo === null) {
       this.login();  
     }
     
@@ -146,69 +137,42 @@ SalesforceService = {
     sql = sql.substring(0, sql.length - 2);
     Logger.log(sql);
     sql = sql + " from " + sf_objectname + " ";
-    if (where != null  && where != 'undefined') {
+    if (where !== null) {
       sql += ' where ' + where; 
     }
     Logger.log(sql);
     var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
-    var records = [];
-    
-    while (queryUrl != null && queryUrl != 'undefined') {
-
-      var response = UrlFetchApp.fetch(
-        this._authinfo.restServerUrl + queryUrl, 
-        {
-          method: "GET",
-          headers: {
-            "Authorization": "OAuth " + this._authinfo.sessionId
-          }
-        });
+    var lines = [];
+    while (queryUrl !== null) {
+      var response = UrlFetchApp.fetch(this._authinfo.restServerUrl + queryUrl, {
+        method: "GET",
+        headers: {
+          "Authorization": "OAuth " + this._authinfo.sessionId
+        }
+      });
       Logger.log(response.getContentText());
       var queryResult = Utilities.jsonParse(response.getContentText());
-
+      
+      var line = [];
+      // Render result records into cells
       queryResult.records.forEach(function(record, i) {
-        records.push(record);
+        line = [];
+        fieldNames.forEach(function(field, j) {
+          line.push(record[field]);
+          SalesforceService.getValueInSobject(record, field);
+        });
+        //      Logger.log(line);
+        lines.push(line);
       });
       
       queryUrl = queryResult.nextRecordsUrl;
       Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
     }
     
-    return records;
-  },
-  
-  
-  readObjectValueList: function(sf_objectname, fieldNames, where) {
-    var lines = [];
-    // Render result records into cells
-    this.readObjectValues(sf_objectname, fieldNames, where).forEach(function(record, i) {
-      var line = [];
-      fieldNames.forEach(function(field, j) {
-        //line.push(record[field]);
-        line.push(SalesforceService.getValueInSobject(record, field));
-      });
-      lines.push(line);
-    });
+    
+    
+    
     return lines;
-  },  
-
-
-
-  readObjects: function() {
-    if(this._authinfo === null) {
-      this.login();
-    }
-    var queryUrl = "/services/data/v20.0/sobjects/";
-    var response = UrlFetchApp.fetch(
-    this._authinfo.restServerUrl + queryUrl, {
-      method: "GET",
-      headers: {
-        "Authorization": "OAuth " + this._authinfo.sessionId
-      }
-    });
-    Logger.log(response.getContentText());
-    var queryResult = Utilities.jsonParse(response.getContentText());
-    return queryResult.sobjects;
   },
   
   
@@ -258,7 +222,6 @@ SalesforceService = {
     stmts.forEach(function(stmt, j) {
       
       var payload = JSON.stringify(stmt);
-      Logger.log("payload: \n" + payload);
       var response = UrlFetchApp.fetch(queryUrl, {
         method: "POST",
         headers: {

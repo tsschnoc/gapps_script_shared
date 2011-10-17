@@ -3,7 +3,6 @@ AmazonService = {
   _SECRET_ACCESS_KEY : null,
   _authinfo : null,
 
-
   /**
    * Sets the credentials authentication string
    */
@@ -26,12 +25,7 @@ AmazonService = {
     var auth = 'AWS3-HTTPS AWSAccessKeyId=' + this._ACCESS_KEY_ID + 
       ',Algorithm=HMACSHA256,Signature=' + sig;
     Logger.log(auth);
-    
-    
-    //encodeURIComponent(sql)
-   /* 
-    var url = 'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=thomas.schnocklake%40gmail.com&Destination.ToAddresses.member.1=thomas.schnocklake%40parx.com&Message.Subject.Data=Christian%20nerven%20mit%20emails.This%20is%20the%20subject%20line.%20sent%20by%20aws%20ses.%20And%20by%20GAPPS%20Script.&Message.Body.Text.Data=Hello.%20I%20hope%20you%20are%20having%20a%20good%20day.';
-    */
+   
     var url =
       'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=' +    
       encodeURIComponent(sourceAddress) + 
@@ -77,7 +71,7 @@ AmazonService = {
     var list = result.Envelope.Body.ItemSearchResponse.Items.Item;
     var items = [];
     for (var i = 0; i < list.length; i++) {
-      item = new Object();
+      item = {};
       item.Title = list[i].ItemAttributes.Title.getText();
       item.Manufacturer = list[i].ItemAttributes.Manufacturer.getText();
       item.DetailPageURL = list[i].DetailPageURL.getText();
