@@ -23,15 +23,20 @@ GAPPSConnection.prototype.getAuth = function(service) {
   return auth;
 };
 
-GAPPSConnection.prototype.request = function(service, url, method, headers) {
+GAPPSConnection.prototype.request = function(service, url, method, headers, contentType, payload) {
   var auth = this.getAuth(service);
   headers.Authorization = 'GoogleLogin Auth=' + escape(auth);
-  var response = UrlFetchApp.fetch(
-  url, {
+    
+  var additional = {
     method: method,
     headers: headers,
-    contentType: "application/atom+xml charset=UTF-8"
-  });
+    contentType: contentType,
+    payload: payload
+  };
+  
+  
+  var response = UrlFetchApp.fetch(
+  url, additional);
   return response;
 };
 
