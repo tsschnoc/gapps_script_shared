@@ -94,7 +94,29 @@ GAPPSService = {
   
   
   
+    searchDocumentsCpy : function(searchText) {
+    var auth = GAPPSService.getAuth('writely');
+
+    var response = UrlFetchApp.fetch(
+      'https://docs.google.com/feeds/default/private/full?' + 
+      'q=' + searchText + '&alt=json', 
+      {
+      method: 'GET',
+      headers: {
+        Authorization: 'GoogleLogin Auth=' + escape(auth),
+        Accept: "*/*",
+        "GData-Version": "3.0"
+      }
+    });
+    //  Logger.log(response.getContentText());
+    Logger.log(response.getContentText());
+    var result = Utilities.jsonParse(response.getContentText());    
+//    Logger.log(Utilities.jsonParse(response.getContentText()).version);
+//    var result = Xml.parse(response.getContentText(), false);
+    return result.feed.entry;
+  },
   
+
   
   
   
