@@ -50,21 +50,15 @@ GAPPSService = {
   },
   
   searchDocuments : function(searchText) {
-    var auth = GAPPSService.getAuth('writely');
-
-    var response = UrlFetchApp.fetch(
-      'https://docs.google.com/feeds/default/private/full?' + 
-      'q=' + searchText + '&alt=json', 
+    var response = GAPPSService.request(
+      'writely', 
+      'https://docs.google.com/feeds/default/private/full?q=' + searchText + '&alt=json', 
+      'GET', 
       {
-      method: 'GET',
-      headers: {
         Authorization: 'GoogleLogin Auth=' + escape(auth),
         Accept: "*/*",
         "GData-Version": "3.0"
-      },
-      contentType: "application/atom+xml charset=UTF-8"
-    });
-    //  Logger.log(response.getContentText());
+      });
     Logger.log(response.getContentText());
     var result = Utilities.jsonParse(response.getContentText());    
 //    Logger.log(Utilities.jsonParse(response.getContentText()).version);
@@ -72,22 +66,20 @@ GAPPSService = {
     return result.feed.entry;
   },
   
+  
   request : function(service, url, method, headers) {
     var auth = GAPPSService.getAuth(service);
 
+    headers.Authorization = 'GoogleLogin Auth=' + escape(auth);
+    
     var response = UrlFetchApp.fetch(
       url, 
       {
-      method: method,
-      headers: headers,
-      contentType: "application/atom+xml charset=UTF-8"
-    });
-    //  Logger.log(response.getContentText());
-    Logger.log(response.getContentText());
-    var result = Utilities.jsonParse(response.getContentText());    
-//    Logger.log(Utilities.jsonParse(response.getContentText()).version);
-//    var result = Xml.parse(response.getContentText(), false);
-    return result.feed.entry;
+        method: method,
+        headers: headers,
+        contentType: "application/atom+xml charset=UTF-8"
+      });
+    return response;
   },
   
   
