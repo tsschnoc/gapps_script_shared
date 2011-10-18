@@ -72,6 +72,24 @@ GAPPSService = {
     return result.feed.entry;
   },
   
+  request : function(service, url, method, headers) {
+    var auth = GAPPSService.getAuth(service);
+
+    var response = UrlFetchApp.fetch(
+      url, 
+      {
+      method: method,
+      headers: headers,
+      contentType: "application/atom+xml charset=UTF-8"
+    });
+    //  Logger.log(response.getContentText());
+    Logger.log(response.getContentText());
+    var result = Utilities.jsonParse(response.getContentText());    
+//    Logger.log(Utilities.jsonParse(response.getContentText()).version);
+//    var result = Xml.parse(response.getContentText(), false);
+    return result.feed.entry;
+  },
+  
   
   
   
