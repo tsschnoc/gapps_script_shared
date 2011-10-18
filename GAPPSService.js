@@ -55,7 +55,6 @@ GAPPSService = {
       'https://docs.google.com/feeds/default/private/full?q=' + searchText + '&alt=json', 
       'GET', 
       {
-        Authorization: 'GoogleLogin Auth=' + escape(auth),
         Accept: "*/*",
         "GData-Version": "3.0"
       });
