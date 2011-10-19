@@ -34,9 +34,12 @@ GAPPSConnection.prototype.request = function(service, url, method, headers, cont
     payload: payload
   };
   
+  Logger.log(url);
+  Logger.log(additional);
+  Logger.log(contentType);
+  Logger.log(payload);
   
-  var response = UrlFetchApp.fetch(
-  url, additional);
+  var response = UrlFetchApp.fetch(url, additional);
   return response;
 };
 
