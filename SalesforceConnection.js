@@ -172,6 +172,7 @@ Logger.log(record);
     var line = [];
     
     for (var j in fieldNames) {
+Logger.log(fieldNames[j]);      
       line.push(getValueInSobject(record, fieldNames[j]));
     }
     lines.push(line);
