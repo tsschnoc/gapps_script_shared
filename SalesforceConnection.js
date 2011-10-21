@@ -13,7 +13,7 @@ SalesforceConnection.prototype.setCredentials =
   this._url = url;
   this._username = username;
   this._password = password;
-}
+};
 
 SalesforceConnection.prototype.setAuthDirect = 
   function(serverUrl, sessionId) {
@@ -25,7 +25,7 @@ SalesforceConnection.prototype.setAuthDirect =
   retParam.restServerUrl = retParam.restServerUrl.replace("-api", "");
   retParam.restServerUrl = "https://" + retParam.restServerUrl;
   this._authinfo = retParam;
-}
+};
 
 SalesforceConnection.prototype.login = 
   function() {
@@ -53,7 +53,7 @@ SalesforceConnection.prototype.login =
   catch (err) {
     throw new Error('Login not possible (check username, password, url)');
   }
-}
+};
 
 SalesforceConnection.prototype.doPartnerSoapRequest = function(url, body, header) {
   var req = ["soapenv:Envelope",
@@ -83,7 +83,7 @@ SalesforceConnection.prototype.doPartnerSoapRequest = function(url, body, header
   //Logger.log(url);
   var result = Xml.parse(fetchRes.getContentText(), false);
   return result;
-}
+};
 
 SalesforceConnection.prototype.getObjectFields = function(sf_objectname) {
   if (this._authinfo == null) {
@@ -113,7 +113,7 @@ SalesforceConnection.prototype.getObjectFields = function(sf_objectname) {
   //Logger.log(response.getContentText());    
   var queryResult = Utilities.jsonParse(response.getContentText());
   return queryResult.fields;
-}
+};
 
 SalesforceConnection.prototype.getObjectFieldList = function(sf_objectname) {
   fieldNames = [];
@@ -121,7 +121,7 @@ SalesforceConnection.prototype.getObjectFieldList = function(sf_objectname) {
     fieldNames.push(field.name);
   });
   return fieldNames;
-}
+};
 
 SalesforceConnection.prototype.readObjectValues = 
   function(sf_objectname, fieldNames, where) {
@@ -149,7 +149,7 @@ SalesforceConnection.prototype.readObjectValues =
         "Authorization": "OAuth " + this._authinfo.sessionId
       }
     });
-    
+Logger.log(   response.getContentText()); 
     var queryResult = Utilities.jsonParse(response.getContentText());
     queryResult.records.forEach(function(record, i) {
       records.push(record);
@@ -160,7 +160,7 @@ SalesforceConnection.prototype.readObjectValues =
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
   }
   return records;
-}
+};
 
 SalesforceConnection.prototype.readObjectValueList = 
   function(sf_objectname, fieldNames, where) {
@@ -171,13 +171,13 @@ SalesforceConnection.prototype.readObjectValueList =
       
     var line = [];
     
-    for (j in fieldNames) {
+    for (var j in fieldNames) {
       line.push(getValueInSobject(record, fieldNames[j]));
     }
     lines.push(line);
   });
   return lines;
-}
+};
 
 SalesforceConnection.prototype.readObjects = function() {
   if (this._authinfo === null) {
@@ -194,7 +194,7 @@ SalesforceConnection.prototype.readObjects = function() {
   Logger.log(response.getContentText());
   var queryResult = Utilities.jsonParse(response.getContentText());
   return queryResult.sobjects;
-}
+};
 
 SalesforceConnection.prototype.insertSObject = 
   function(sf_objectname, insertSObject) {
@@ -215,7 +215,7 @@ SalesforceConnection.prototype.insertSObject =
   });
   var queryResult = Utilities.jsonParse(response.getContentText());
   Logger.log(queryResult);
-}
+};
 
 
 SalesforceConnection.prototype.insertToSf = 
@@ -235,8 +235,7 @@ SalesforceConnection.prototype.insertToSf =
     stmts.push(stmt);
   });
   var queryUrl = 
-    this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/" 
-      + encodeURIComponent(sf_objectname) + "/";
+    this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/"  + encodeURIComponent(sf_objectname) + "/";
   var sessionId = this._authinfo.sessionId;
   stmts.forEach(function(stmt, j) {
     var payload = JSON.stringify(stmt);
@@ -252,7 +251,7 @@ SalesforceConnection.prototype.insertToSf =
     var queryResult = Utilities.jsonParse(response.getContentText());
     Logger.log(queryResult);
   });
-}
+};
 
 function insertToSObject(sObject, fieldName, value) {
   var name_comp = fieldName.split(".");
