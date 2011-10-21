@@ -254,6 +254,41 @@ SalesforceConnection.prototype.insertToSf =
   });
 };
 
+SalesforceConnection.prototype.updateSfRecord = 
+  function(sf_objectname, fieldNames, records) {
+  
+  if (this._authinfo === null) {
+    this.login();
+  }
+  var stmts = [];
+  Logger.log(fieldNames);
+  records.forEach(function(record, i) {
+    var stmt = {};
+    record.forEach(function(value, j) {
+        insertToSObject(stmt, fieldNames[j], value);
+    });
+    Logger.log("JSON: " + JSON.stringify(stmt));
+    stmts.push(stmt);
+  });
+  var queryUrl = 
+    this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/"  + encodeURIComponent(sf_objectname) + "/";
+  var sessionId = this._authinfo.sessionId;
+  stmts.forEach(function(stmt, j) {
+    var payload = JSON.stringify(stmt);
+    Logger.log("payload: \n" + payload);
+    var response = UrlFetchApp.fetch(queryUrl+stmt.Id, {
+      method: "POST",
+      headers: {
+        "Authorization": "OAuth " + sessionId
+      },
+      contentType: "application/json",
+      payload: payload
+    });
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    Logger.log(queryResult);
+  });
+};
+
 function insertToSObject(sObject, fieldName, value) {
   var name_comp = fieldName.split(".");
   var val = null;
