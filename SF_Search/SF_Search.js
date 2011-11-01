@@ -14,6 +14,8 @@ function callNumber(number) {
   return;
 //'http://10.71.115.221/command.htm?number='
 
+
+
   var to = 'sip:' + number + prefs.getString("c2c_suffix");
   makeCall(prefs.getString("c2c_url"),prefs.getString("c2c_from"), to,prefs.getString("c2c_user"),prefs.getString("c2c_pw"));
 }
