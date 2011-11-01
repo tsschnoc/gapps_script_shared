@@ -14,8 +14,7 @@
   <UserPref name="callTriggerUrl" display_name="callTriggerUrl" datatype="callTriggerUrl"/>
   
   <UserPref name="ShowTypeColumn" display_name="Show Type Column" datatype="string"/>
-  <UserPref name="type_list" display_name="Type Query List" datatype="list" />  
-  
+  <UserPref name="type_list" display_name="Type Query List" datatype="list" />    
 <Content type="html">
 <![CDATA[        
  
@@ -54,7 +53,7 @@ background-color:#b0e0e6;
  
 <div class="gridd" id="topic-grid"></div>
  
-<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/SF_Search/SF_Search.js"></script>
+<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search/SF_Search.js"></script>
 
  
  
