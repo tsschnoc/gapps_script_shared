@@ -62,7 +62,7 @@ AmazonConnection.prototype.sendHtmlMail = function(sourceAddress, toAddress, sub
 
   var url = 'https://email.us-east-1.amazonaws.com/?Action=SendRawEmail&RawMessage.Data='+raw;
   Logger.log(url);
-  var response = UrlFetchApp.fetch(url, {
+/*  var response = UrlFetchApp.fetch(url, {
     method: 'get',
     headers: {
       'X-Amzn-Authorization': auth,
@@ -70,6 +70,19 @@ AmazonConnection.prototype.sendHtmlMail = function(sourceAddress, toAddress, sub
     },
     contentType: "application/x-www-form-urlencoded; charset=UTF-8"
   });
+  */
+  var response = UrlFetchApp.fetch('https://email.us-east-1.amazonaws.com', 
+     {
+       method:'post', 
+       headers : {
+         'X-Amzn-Authorization': auth,
+         Date : timeStamp
+       }, 
+       contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+       payload: "AWSAccessKeyId=" + this._ACCESS_KEY_ID + "&Action=SendRawEmail&RawMessage.Data=" + raw + "&Timestamp=" + timeStamp + ""
+     }   
+    ); 
+  
   Logger.log(response.getContentText());
 };
 
