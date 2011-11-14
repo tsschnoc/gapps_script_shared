@@ -53,7 +53,7 @@ AmazonConnection.prototype.sendHtmlMail = function(sourceAddress, toAddress, sub
   raw += 'To: ' + toAddress + '\n';
   raw += 'Content-Type: text/html; charset=ISO-8859-1\n';
   raw += '\n';
-  raw += body + '\n';
+  raw += body + '\n' + '\n';
   Logger.log(raw);
   raw = Utilities.base64Encode(raw);
   Logger.log(raw);
