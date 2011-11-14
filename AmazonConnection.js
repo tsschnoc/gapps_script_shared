@@ -2,7 +2,6 @@ function AmazonConnection() {
   //http://mckoss.com/jscript/object.htm
   _ACCESS_KEY_ID = null;
   _SECRET_ACCESS_KEY = null;
-  _authinfo = null;
 }
 
 /**
@@ -14,16 +13,54 @@ AmazonConnection.prototype.setCredentials = function(ACCESS_KEY_ID, SECRET_ACCES
 };
 
 AmazonConnection.prototype.sendMail = function(sourceAddress, toAddress, subject, body) {
-  var timeStamp = Utilities.formatDate(
-  new Date(), "GMT", "EEE, dd MMM yyyy HH:mm:ss");
+  var timeStamp = Utilities.formatDate(new Date(), "GMT", "EEE, dd MMM yyyy HH:mm:ss");
   timeStamp = timeStamp + ' GMT';
-  var step1 = Utilities.computeHmacSha256Signature(
-  timeStamp, this._SECRET_ACCESS_KEY);
+  var step1 = Utilities.computeHmacSha256Signature(timeStamp, this._SECRET_ACCESS_KEY);
   var sig = Utilities.base64Encode(step1);
+  
   Logger.log(timeStamp);
   var auth = 'AWS3-HTTPS AWSAccessKeyId=' + this._ACCESS_KEY_ID + ',Algorithm=HMACSHA256,Signature=' + sig;
+  
   Logger.log(auth);
   var url = 'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=' + encodeURIComponent(sourceAddress) + '&Destination.ToAddresses.member.1=' + encodeURIComponent(toAddress) + '&Message.Subject.Data=' + encodeURIComponent(subject) + '&Message.Body.Text.Data=' + encodeURIComponent(body) + '';
+  Logger.log(url);
+  var response = UrlFetchApp.fetch(url, {
+    method: 'get',
+    headers: {
+      'X-Amzn-Authorization': auth,
+      Date: timeStamp
+    },
+    contentType: "application/x-www-form-urlencoded; charset=UTF-8"
+  });
+  Logger.log(response.getContentText());
+};
+
+AmazonConnection.prototype.sendHtmlMail = function(sourceAddress, toAddress, subject, body) {
+  var timeStamp = Utilities.formatDate(new Date(), "GMT", "EEE, dd MMM yyyy HH:mm:ss");
+  timeStamp = timeStamp + ' GMT';
+  var step1 = Utilities.computeHmacSha256Signature(timeStamp, this._SECRET_ACCESS_KEY);
+  var sig = Utilities.base64Encode(step1);
+  
+  Logger.log(timeStamp);
+  var auth = 'AWS3-HTTPS AWSAccessKeyId=' + this._ACCESS_KEY_ID + ',Algorithm=HMACSHA256,Signature=' + sig;
+  
+  Logger.log(auth);
+//  var url = 'https://email.us-east-1.amazonaws.com/?Action=SendEmail&Source=' + encodeURIComponent(sourceAddress) + '&Destination.ToAddresses.member.1=' + encodeURIComponent(toAddress) + '&Message.Subject.Data=' + encodeURIComponent(subject) + '&Message.Body.Text.Data=' + encodeURIComponent(body) + '';
+
+  var raw = '';
+  raw += 'Subject: ' + subject + '\n';
+  raw += 'From: ' + sourceAddress + '\n';
+  raw += 'To: ' + toAddress + '\n';
+  raw += 'Content-Type: text/html; charset=ISO-8859-1\n';
+  raw += '\n';
+  raw += body + '\n';
+  Logger.log(raw);
+  raw = Utilities.base64Encode(raw);
+  Logger.log(raw);
+  raw = encodeURIComponent(raw);
+  Logger.log(raw);
+
+  var url = 'https://email.us-east-1.amazonaws.com/?Action=SendRawEmail&RawMessage.Data='+raw;
   Logger.log(url);
   var response = UrlFetchApp.fetch(url, {
     method: 'get',
