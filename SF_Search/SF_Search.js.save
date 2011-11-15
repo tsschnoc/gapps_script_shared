@@ -563,6 +563,7 @@ return json.substring(0, json.length - 2) + '}';
  
  
  
+
  
 function buildSearchString() {    
 //    var searchExpr = "FIND {**searchfield***} IN Name Fields returning contact(name, id, phone, firstname, lastname), lead(name, id, phone, firstname, lastname),account(id, phone, name)";
