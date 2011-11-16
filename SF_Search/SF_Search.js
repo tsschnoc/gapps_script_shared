@@ -308,7 +308,7 @@ var params = {};
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
     var myData = [];
-    for (i=0;i<obj.data.length;i++)
+    for (i=0;i<obj.data.length;i++)  {
       var record = obj.data[i];
       myData = myData.concat([
         [record.Id, record.attributes.type, record.Name, record]
