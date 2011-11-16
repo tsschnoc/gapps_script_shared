@@ -225,11 +225,13 @@ Ext.onReady(function() {
     var myObject = record.data.json;
     for (var i in myObject) {
       if (i != 'attributes' && i != 'type' && i != 'Id' && i != 'Name') {
-        if (myObject[i].substring(0, 1) == '+') {
-          linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
-        }
-        else {
-          linetwo += i + ': ' + myObject[i] + '<br/> ';
+        if (myObject[i] != null) {}
+          if (myObject[i].substring(0, 1) == '+') {
+            linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
+          }
+          else {
+            linetwo += i + ': ' + myObject[i] + '<br/> ';
+          }
         }
       }
     }
