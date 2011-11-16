@@ -302,7 +302,8 @@ Ext.onReady(function() {
   function restCallback(obj) {
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);  
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
-    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data[0].name);  
+    console.log("!!!!!!!!!!!!!!!!!! data.0 :" + obj.data[0]);  
+    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data[0].name);  
   } 
 
 
