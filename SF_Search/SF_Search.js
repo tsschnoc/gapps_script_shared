@@ -55,7 +55,7 @@ Ext.onReady(function() {
 //    var myObject = eval('(' + record.data.json + ')');
     var myObject = record.data.json;
     for (var i in myObject) {
-      if (i != 'type' && i != 'Id' && i != 'Name') {
+      if (i != 'attributes' && i != 'type' && i != 'Id' && i != 'Name') {
         linetwo += i + ': ' + myObject[i] + ', ';
       }
     }
