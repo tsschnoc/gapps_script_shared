@@ -311,7 +311,7 @@ var params = {};
     for (var i in obj.data) {
       var record = obj.data[i];
       myData = myData.concat([
-        [record.Id, record.type, record.Name, record]
+        [record.Id, record.attributes.type, record.Name, record]
       ]);
       
     }
