@@ -307,15 +307,16 @@ var params = {};
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
-    var records = document.getElementsByTagName("searchRecords");
     var myData = [];
     for (var i : obj.data) {
+      
+    }
 //      var record = obj.data[i];
 
 //      myData = myData.concat([
 //        [record.Id, record.type, record.Name, record]
 //      ]);
-    }
+    
 /*
 store.loadData(myData);
 */
