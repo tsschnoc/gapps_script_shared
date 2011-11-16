@@ -307,7 +307,7 @@ var params = {};
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
-
+/*
     var records = document.getElementsByTagName("searchRecords");
     var myData = [];
     for (var i : obj.data) {
@@ -318,7 +318,7 @@ var params = {};
       ]);
     }
     store.loadData(myData);
-
+*/
 
 
 
