@@ -276,7 +276,12 @@ Ext.onReady(function() {
     else {
       var searchExpr = buildSearchString();
       sf_search(sfurl, token, searchExpr);
+      sf_search_rest(sfurl, token, searchExpr);
     }
+  }
+
+  function sf_search_rest(url, sessionId, queryString) {
+    console.log("!!!!!!!!!!!!!!!!!! SUCHE :" + url + " " + queryString);  
   }
 
   function sf_search(url, sessionId, queryString) {
