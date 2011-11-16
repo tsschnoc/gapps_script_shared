@@ -287,15 +287,18 @@ Ext.onReady(function() {
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent('Account') + "/describe/";
+//    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent('Account') + "/describe/";
+//https://na1.salesforce.com/services/data/v20.0/search/?q=FIND+%7Btest%7D -H "Authorization: OAuth token" -H "X-PrettyPrint:1"
+    var callUrl = restServerUrl + "/services/data/v20.0/search/?q=" + encodeURIComponent('queryString');
 
-        var params = {};
+var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
         params[gadgets.io.RequestParameters.HEADERS] = {
-          "Authorization": "OAuth " + sessionId
+          "Authorization": "OAuth " + sessionId,
+          "X-PrettyPrint": "1"
         };
         gadgets.io.makeRequest(callUrl, restCallback, params);
   }
