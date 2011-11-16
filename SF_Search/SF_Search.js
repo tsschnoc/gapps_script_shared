@@ -56,7 +56,9 @@ Ext.onReady(function() {
     var myObject = record.data.json;
     for (var i in myObject) {
       if (i != 'attributes' && i != 'type' && i != 'Id' && i != 'Name') {
-        linetwo += i + ': ' + myObject[i] + ', ';
+        if (myObject[i] != null) {
+          linetwo += i + ': ' + myObject[i] + ', ';
+        }  
       }
     }
     linetwo = linetwo.substring(0, linetwo.length - 2);
