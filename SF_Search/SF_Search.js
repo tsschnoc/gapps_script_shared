@@ -287,7 +287,22 @@ Ext.onReady(function() {
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
+    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent('Account') + "/describe/";
+
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+        params[gadgets.io.RequestParameters.HEADERS] = {
+          "Authorization": "OAuth " + sessionId
+        };
+        gadgets.io.makeRequest(callUrl, restCallback, params);
   }
+
+  function restCallback(obj) {
+    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj + " " + obj);  
+  } 
+
 
   function sf_search(url, sessionId, queryString) {
     var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>      <urn:SessionHeader>         <urn:sessionId>**sessionId**</urn:sessionId>      </urn:SessionHeader>   </soapenv:Header>   <soapenv:Body>      <urn:search>         <urn:searchString>**queryString**</urn:searchString>      </urn:search>   </soapenv:Body></soapenv:Envelope>";
