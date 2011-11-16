@@ -229,7 +229,8 @@ Ext.onReady(function() {
       if (i != 'attributes' && i != 'type' && i != 'Id' && i != 'Name') {
         if (myObject[i] != null) {
           if (myObject[i].substring(0, 1) == '+') {
-            linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
+            linetwo += i + ': ' + '<span onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \">' + myObject[i] + '</span><br/> ';
+//            linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
           }
           else {
             linetwo += i + ': ' + myObject[i] + '<br/> ';
