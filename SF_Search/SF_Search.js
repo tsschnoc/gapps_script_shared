@@ -302,10 +302,26 @@ var params = {};
         };
         gadgets.io.makeRequest(callUrl, restCallback, params);
   }
-
+ 
   function restCallback(obj) {
-    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);  
-    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
+    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
+//    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
+
+
+    var records = document.getElementsByTagName("searchRecords");
+    var myData = [];
+    for (var i : obj.data) {
+      var record = obj.data[i];
+
+      myData = myData.concat([
+        [record.Id, record.type, record.Name, record]
+      ]);
+    }
+    store.loadData(myData);
+
+
+
+
   } 
 
 
@@ -368,7 +384,7 @@ var params = {};
         }
         //console.log(sfportalurl);
         var searchExpr = buildSearchString();
-        sf_search(sfurl, token, searchExpr);
+        sf_search_rest(sfurl, token, searchExpr);
       }
       else if (document.getElementsByTagName("searchResponse").length > 0) {
         console.log("searchResponse");
