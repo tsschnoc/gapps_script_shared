@@ -308,7 +308,7 @@ var params = {};
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
     var myData = [];
-    for (var i : obj.data) {
+    for (var i in obj.data) {
       
     }
 //      var record = obj.data[i];
