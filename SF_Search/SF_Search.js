@@ -290,7 +290,7 @@ Ext.onReady(function() {
 //    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent('Account') + "/describe/";
 //https://na1.salesforce.com/services/data/v20.0/search/?q=FIND+%7Btest%7D -H "Authorization: OAuth token" -H "X-PrettyPrint:1"
     var callUrl = restServerUrl + "/services/data/v20.0/search/?q=" + encodeURIComponent('queryString');
-
+console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
 var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
