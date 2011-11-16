@@ -308,14 +308,13 @@ var params = {};
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
     var myData = [];
-    for (var i in obj.data) {
+    for (i=0;i<=5;obj.data.length)
       var record = obj.data[i];
       myData = myData.concat([
         [record.Id, record.attributes.type, record.Name, record]
       ]);
       
     }
-    
 
     store.loadData(myData);
 
