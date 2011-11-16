@@ -282,6 +282,11 @@ Ext.onReady(function() {
 
   function sf_search_rest(url, sessionId, queryString) {
     console.log("!!!!!!!!!!!!!!!!!! SUCHE :" + url + " " + queryString);  
+    var restServerUrl = url.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
   }
 
   function sf_search(url, sessionId, queryString) {
