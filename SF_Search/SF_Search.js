@@ -221,9 +221,10 @@ Ext.onReady(function() {
 
   function renderDetail(record) {
     var linetwo = '';
-    var myObject = eval('(' + record.data.json + ')');
+//    var myObject = eval('(' + record.data.json + ')');
+    var myObject = record.data.json;
     for (var i in myObject) {
-      if (i != 'type' && i != 'Id' && i != 'Name') {
+      if (i != 'attributes' && i != 'type' && i != 'Id' && i != 'Name') {
         if (myObject[i].substring(0, 1) == '+') {
           linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
         }
