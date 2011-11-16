@@ -35,9 +35,15 @@ function response(obj) {
   console.log(obj);
   console.log(obj.data);
 };
+
+
+
+
+
 ////////////////////////////
 Ext.onReady(function() {
-  // create the Data Store
+
+// create the Data Store
   var id = 1;
   var token = null;
   var sfurl = null;
@@ -51,7 +57,7 @@ Ext.onReady(function() {
   function render(value, p, record) {
     var linetwo = '';
     var myObject = eval('(' + record.data.json + ')');
-    for (i in myObject) {
+    for (var i in myObject) {
       if (i != 'type' && i != 'Id' && i != 'Name') {
         linetwo += i + ': ' + myObject[i] + ', ';
       }
@@ -59,14 +65,14 @@ Ext.onReady(function() {
     linetwo = linetwo.substring(0, linetwo.length - 2);
     if (record.data.type == 'Zugangsdaten__c') {
       var fhtml = "<form action=\"***sfurl***\" METHOD=\"POST\" name=\"sfdc\"    target=\"_blank\"        >" + "<input type=\"hidden\" name=\"un\" runat=\"server\" id=\"username\" value=\"***username***\">" + "<input type=\"hidden\" name=\"pw\" runat=\"server\" id=\"token\" value=\"***password***\">" + "<input type=\"hidden\" name=\"startURL\" runat=\"server\" id=\"startURL\">" + "<input type=\"hidden\" name=\"logoutURL\" runat=\"server\" id=\"logoutURL\">" + "<input type=\"hidden\" name=\"ssoStartPage\" runat=\"server\" id=\"ssoStartPage\">" + "<input type=\"hidden\" name=\"jse\" value=\"0\">" + "<input type=\"hidden\" name=\"rememberUn\" value=\"1\">" + "<input type=\"submit\" value=\"Login\">" + "</form>";
-      if (myObject["Typ__c"] == 'Salesforce Sandbox') {
+      if (myObject.Typ__c == 'Salesforce Sandbox') {
         fhtml = fhtml.replace("***sfurl***", "https://test.salesforce.com/login.jsp");
       }
       else {
         fhtml = fhtml.replace("***sfurl***", "https://www.salesforce.com/login.jsp");
       }
       fhtml = fhtml.replace("***username***", record.data.name);
-      fhtml = fhtml.replace("***password***", myObject["Password__c"]);
+      fhtml = fhtml.replace("***password***", myObject.Password__c);
       linetwo += fhtml;
     }
     return String.format('<b><a href="{4}/{2}" target="_blank">{1}</a></b><br/>{5}', value, record.data.name, record.id, record.data.type, sfportalurl, linetwo);
@@ -96,7 +102,6 @@ Ext.onReady(function() {
         searchfield.setValue('');
       }
       else {
-        //console.log('render!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
         var detailPanel = Ext.getCmp('detailPanel');
         detailPanel.collapse();
         readSFData();
@@ -107,7 +112,7 @@ Ext.onReady(function() {
   function callNumber(number) {
     var prefs = new gadgets.Prefs();
     if (prefs.getString("callTriggerUrl") == "callto") {
-      var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
+//      var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
       var callto = 'phoner://' + escape(number).replace('+', '00');
       location.href = callto;
     }
@@ -118,23 +123,6 @@ Ext.onReady(function() {
       });
     }
     return;
-/*
- var theFrame = Ext.getBody().createChild({
-       tag: 'iframe',
-       src: 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+','%2B')
- });
-
-
-Ext.Ajax.request({
-   url: 'http://10.71.115.221/command.htm?number=0041788223356'
-});
-
-
-  var prefs = new gadgets.Prefs();
-  var to = 'sip:' + number + prefs.getString("c2c_suffix");
-  makeCall(prefs.getString("c2c_url"),prefs.getString("c2c_from"), to,prefs.getString("c2c_user"),prefs.getString("c2c_pw"));
- 
- */
   }
 
   function makeCall(url, from, to, user, password) {
@@ -154,7 +142,8 @@ Ext.Ajax.request({
   function response(obj) {
     console.log(obj);
     console.log(obj.data);
-  };
+  }
+  
   //    searchfield.render('searchfield');
   var grid = new Ext.grid.GridPanel({
     sm: new Ext.grid.RowSelectionModel({
@@ -224,12 +213,6 @@ Ext.Ajax.request({
   var bookTplMarkup = ['{Text}'];
   var bookTpl = new Ext.Template(bookTplMarkup);
   //////////////////******************************************************
-  //////////////////******************************************************
-  //////////////////******************************************************
-  //////////////////******************************************************
-  //////////////////******************************************************
-  //////////////////******************************************************
-  //////////////////******************************************************
   grid.getSelectionModel().on('rowselect', function(sm, rowIdx, r) {
     var detailPanel = Ext.getCmp('detailPanel');
     var text = renderDetail(r);
@@ -242,7 +225,7 @@ Ext.Ajax.request({
   function renderDetail(record) {
     var linetwo = '';
     var myObject = eval('(' + record.data.json + ')');
-    for (i in myObject) {
+    for (var i in myObject) {
       if (i != 'type' && i != 'Id' && i != 'Name') {
         if (myObject[i].substring(0, 1) == '+') {
           linetwo += i + ': ' + '<INPUT type=\"button\" value=\"' + myObject[i] + '\" onClick=\"javascript:callNumber(\'' + myObject[i].replace(/\s+/g, '') + '\')  \"><br/> ';
@@ -255,14 +238,14 @@ Ext.Ajax.request({
     linetwo = linetwo.substring(0, linetwo.length - 2);
     if (record.data.type == 'Zugangsdaten__c') {
       var fhtml = "<form action=\"***sfurl***\" METHOD=\"POST\" name=\"sfdc\"    target=\"_blank\"        >" + "<input type=\"hidden\" name=\"un\" runat=\"server\" id=\"username\" value=\"***username***\">" + "<input type=\"hidden\" name=\"pw\" runat=\"server\" id=\"token\" value=\"***password***\">" + "<input type=\"hidden\" name=\"startURL\" runat=\"server\" id=\"startURL\">" + "<input type=\"hidden\" name=\"logoutURL\" runat=\"server\" id=\"logoutURL\">" + "<input type=\"hidden\" name=\"ssoStartPage\" runat=\"server\" id=\"ssoStartPage\">" + "<input type=\"hidden\" name=\"jse\" value=\"0\">" + "<input type=\"hidden\" name=\"rememberUn\" value=\"1\">" + "<input type=\"submit\" value=\"Login\">" + "</form>";
-      if (myObject["Typ__c"] == 'Salesforce Sandbox') {
+      if (myObject.Typ__c == 'Salesforce Sandbox') {
         fhtml = fhtml.replace("***sfurl***", "https://test.salesforce.com/login.jsp");
       }
       else {
         fhtml = fhtml.replace("***sfurl***", "https://www.salesforce.com/login.jsp");
       }
       fhtml = fhtml.replace("***username***", record.data.name);
-      fhtml = fhtml.replace("***password***", myObject["Password__c"]);
+      fhtml = fhtml.replace("***password***", myObject.Password__c);
       linetwo += fhtml;
     }
     return String.format('<div style="font-size: smaller"><b><a href="{4}/{2}" target="_blank">{1}</a></b><br/>{5}<div>', 'nix', record.data.name, record.id, record.data.type, sfportalurl, linetwo);
@@ -273,6 +256,10 @@ Ext.Ajax.request({
     [id, 'Account', 'Schnocklake, Inc.']
   ];
   //   readSFData();
+
+
+
+
 
   function readSFData() {
     if (token == null) {
@@ -405,15 +392,9 @@ Ext.Ajax.request({
     return searchExpr;
   }
 });
-/*
-{  "Username": "tusername@example.com",  "Password": "passwortoken",  "Loginurl": "https://login.salesforce.com/services/Soap/u/20.0",  "type_list": [ "account(id, phone, name, site)", "contact(name, id, phone, firstname, lastname)", "lead(name, id, phone, firstname, lastname)" ]}
- 
-*/
+
 
 function initProps(prefs_json) {
-/*
-var prefs_json = '{  \"Username\": \"333333333@333.com\",  \"Password\": \"*******************\",  \"Loginurl\": \"https://login.salesforce.com/services/Soap/u/20.0\",  \"type_list\": [ \"account(id, phone, name, site)\", \"contact(name, id, phone, firstname, lastname)\", \"lead(name, id, phone, firstname, lastname)\" ]}';
-*/
   var jPrefs = eval('(' + prefs_json + ')');
   var prefs = new gadgets.Prefs();
   prefs.set("Username", jPrefs.Username);
