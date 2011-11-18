@@ -138,7 +138,7 @@ SalesforceConnection.prototype.readObjectValues =
   if (where != null && where != 'undefined') {
     sql += ' where ' + where;
   }
-  Logger.log(sql);
+  Logger.log('SQL to execute:   ' + sql);
   var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(sql);
   var records = [];
   while (queryUrl != null && queryUrl != 'undefined') {
