@@ -149,12 +149,11 @@ SalesforceConnection.prototype.readObjectValues =
         "Authorization": "OAuth " + this._authinfo.sessionId
       }
     });
-Logger.log(   response.getContentText()); 
+//Logger.log(   response.getContentText()); 
     var queryResult = Utilities.jsonParse(response.getContentText());
     queryResult.records.forEach(function(record, i) {
       records.push(record);
-    });
-    
+    });    
     
     queryUrl = queryResult.nextRecordsUrl;
     Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
@@ -168,11 +167,11 @@ SalesforceConnection.prototype.readObjectValueList =
   // Render result records into cells
   this.readObjectValues(sf_objectname, fieldNames, where).forEach(
     function(record, i) {
-Logger.log(record);      
+//Logger.log(record);      
     var line = [];
     
     for (var j in fieldNames) {
-Logger.log(fieldNames[j]);      
+//Logger.log(fieldNames[j]);      
       line.push(getValueInSobject(record, fieldNames[j]));
     }
     lines.push(line);
