@@ -303,13 +303,19 @@ var params = {};
           "Authorization": "OAuth " + sessionId,
           "X-PrettyPrint": "1"
         };
-        gadgets.io.makeRequest(callUrl, restCallback, params);
+//        gadgets.io.makeRequest(callUrl, restCallback, params);
         
         params.callUrl = callUrl;
         var sendstring = JSON.stringify(params);
         console.log("!!!!!!!!!!!!!!!!!!£££££££££££££££ sendstring :" + sendstring + " ");  
-        
-        
+
+
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
+        gadgets.io.makeRequest(callUrl, restCallback, params);
   }
   
  
