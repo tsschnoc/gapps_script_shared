@@ -316,6 +316,7 @@ var params = {};
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
       params.responseId={"Id":"hallo"};
+      
         gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
   }
   
