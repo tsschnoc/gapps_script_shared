@@ -329,7 +329,7 @@ var params = {};
 
     
     var myData = [];
-    for (i=0;i<obj.data.response.length;i++)  {
+    for (i=0;i<obj.data.response[0].length;i++)  {
       var record = obj.data.response[0][i];
       myData = myData.concat([
         [record.Id, record.attributes.type, record.Name, record]
