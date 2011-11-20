@@ -40,6 +40,10 @@ function response(obj) {
 Ext.onReady(function() {
 
 // create the Data Store
+
+  var lastSentRequestId = 1;
+  var lastReceivedRequestId = 0;
+
   var id = 1;
   var token = null;
   var sfurl = null;
@@ -305,7 +309,12 @@ var params = {};
         };
 //        gadgets.io.makeRequest(callUrl, restCallback, params);
       params.responseId={};
-      params.responseId.Id="hallo";
+      lastSentRequestId = lastSentRequestId + 1;
+      params.responseId.Id=lastSentRequestId;
+        
+    
+       
+
         
         params.callUrl = callUrl;
         var sendstring = JSON.stringify(params);
@@ -324,21 +333,25 @@ var params = {};
  
   function restCallback(obj) {
     console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.responseId);   
+    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.lastReceivedRequestId);   
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
+
+    if (obj.responseId.Id >lastReceivedRequestId) {
     
-    var myData = [];
-    for (i=0;i<obj.data.response.length;i++)  {
-      var record = obj.data.response[i];
-      myData = myData.concat([
-        [record.Id, record.attributes.type, record.Name, record]
-      ]);
-      
+      var myData = [];
+      for (i=0;i<obj.data.response.length;i++)  {
+        var record = obj.data.response[i];
+        myData = myData.concat([
+          [record.Id, record.attributes.type, record.Name, record]
+        ]);
+        
+      }
+  
+      store.loadData(myData);
+      lastReceivedRequestId = obj.responseId.Id;
     }
-
-    store.loadData(myData);
-
 
 
 
