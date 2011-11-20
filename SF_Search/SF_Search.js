@@ -322,16 +322,15 @@ var params = {};
   }
   
  
-  function restCallback(objX) {
-    console.log("!!!!!!!!!!!!!!!!!! responseId :" + objX.responseId);   
-    console.log("!!!!!!!!!!!!!!!!!! callback :" + objX);   
+  function restCallback(obj) {
+    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.responseId);   
+    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
-    var obj = objX.response;
     
     var myData = [];
-    for (i=0;i<obj.data.length;i++)  {
-      var record = obj.data[i];
+    for (i=0;i<obj.data.response.length;i++)  {
+      var record = obj.data.response[i];
       myData = myData.concat([
         [record.Id, record.attributes.type, record.Name, record]
       ]);
