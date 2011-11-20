@@ -288,7 +288,7 @@ Ext.onReady(function() {
   }
 
   function sf_search_rest(url, sessionId, queryString) {
-    console.log("!!!!!!!!!!!!!!!!!! SUCHE :" + url + " " + queryString);  
+//    console.log("!!!!!!!!!!!!!!!!!! SUCHE :" + url + " " + queryString);  
     var restServerUrl = url.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -297,7 +297,7 @@ Ext.onReady(function() {
 //    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/" + encodeURIComponent('Account') + "/describe/";
 //https://na1.salesforce.com/services/data/v20.0/search/?q=FIND+%7Btest%7D -H "Authorization: OAuth token" -H "X-PrettyPrint:1"
     var callUrl = restServerUrl + "/services/data/v20.0/search/?q=" + encodeURIComponent(queryString);
-console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
 var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
         //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
@@ -325,7 +325,7 @@ var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-      params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
+        params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
       
 //        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
         gadgets.io.makeRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
@@ -333,9 +333,9 @@ var params = {};
   
  
   function restCallback(obj) {
-    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
-    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
-    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
+//    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
+//    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
+//    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
 
