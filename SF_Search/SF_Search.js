@@ -311,11 +311,11 @@ var params = {};
 
 
         var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
-        gadgets.io.makeRequest(callUrl, restCallback, params);
+        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
   }
   
  
