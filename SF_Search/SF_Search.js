@@ -304,7 +304,14 @@ var params = {};
           "X-PrettyPrint": "1"
         };
         gadgets.io.makeRequest(callUrl, restCallback, params);
+        
+        params.callUrl = callUrl;
+        var sendstring = JSON.stringify(params);
+        console.log("!!!!!!!!!!!!!!!!!!£££££££££££££££ sendstring :" + sendstring + " ");  
+        
+        
   }
+  
  
   function restCallback(obj) {
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
