@@ -332,13 +332,13 @@ var params = {};
   
  
   function restCallback(obj) {
-    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.responseId);   
-    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.lastReceivedRequestId);   
-    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj);   
+    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
+    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
+    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
 
-    if (obj.responseId.Id >lastReceivedRequestId) {
+    if (obj.data.responseId.Id >lastReceivedRequestId) {
     
       var myData = [];
       for (i=0;i<obj.data.response.length;i++)  {
@@ -350,7 +350,7 @@ var params = {};
       }
   
       store.loadData(myData);
-      lastReceivedRequestId = obj.responseId.Id;
+      lastReceivedRequestId = obj.data.responseId.Id;
     }
 
 
