@@ -312,13 +312,11 @@ var params = {};
       lastSentRequestId = lastSentRequestId + 1;
       params.responseId.Id=lastSentRequestId;
         
-    
-       
-
+           
         
         params.callUrl = callUrl;
         var sendstring = JSON.stringify(params);
-        console.log("!!!!!!!!!!!!!!!!!!£££££££££££££££ sendstring :" + sendstring + " ");  
+//        console.log("!!!!!!!!!!!!!!!!!!£££££££££££££££ sendstring :" + sendstring + " ");  
 
 
         var params = {};
