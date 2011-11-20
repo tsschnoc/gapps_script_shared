@@ -327,7 +327,8 @@ var params = {};
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
       
-        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
+//        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
+        gadgets.io.makeRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
   }
   
  
