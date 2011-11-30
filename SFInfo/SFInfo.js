@@ -11,4 +11,4 @@ for (var match in matches) {
   }
 }
 document.body.appendChild(matchList);
-gadgets.window.adjustHeight(100);
+gadgets.window.adjustHeight(300);
