@@ -64,7 +64,7 @@ $("#droppable2").droppable({
       readSFData();
     });
 
-  readSFData();
+//  readSFData();
 
 
   });
