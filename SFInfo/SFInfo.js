@@ -24,13 +24,14 @@ gadgets.window.adjustHeight(200);
 google.load("jquery", "1.4.2");
 _IG_RegisterOnloadHandler(function() {
   // Put Jquery here
-  
+  var username;
+  var password;
   
   
   $(document).ready(function() {
     $("#GoBtn").click(function() {
-      var username = $("#username").val();
-      var password = $("#password").val();
+      username = $("#username").val();
+      password = $("#password").val();
       alert("jQuery works, you entered- " + sender_email + username + password);
     });
 
