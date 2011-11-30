@@ -53,13 +53,17 @@
 
 </style>
 
+<div class="credentials">
+    <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+    <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+    <input type=button id="GoBtn" value=" Go " name=" Go "> 
+</div>
 
 <div class="demo">
 
-<h3 class="docs">Feedback on hover:</h3>
   
 <div id="draggable" class="ui-widget-content">
-	<p>Drag me to my target</p>
+	<p>Mail, Drag me</p>
 </div>
 
 <div id="droppable" class="ui-widget-header">
@@ -70,15 +74,6 @@
 
 
 
-<div class="demo-description">
-<p>Change the droppable's appearance on hover, or when the droppable is active (an acceptable draggable is dropped on it).  Use the <code>hoverClass</code> or <code>activeClass</code> options to specify respective classes.</p>
-</div><!-- End demo-description -->
-
-
-
-    <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
-    <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-    <input type=button id="GoBtn" value=" Go " name=" Go "> 
           
     <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
