@@ -1,5 +1,10 @@
+var lastSentRequestId = 1;
+var lastReceivedRequestId = 0;
+
+var id = 1;
 var token = null;
-var sfurl = '';
+var sfurl = null;
+var sfportalurl = null;
 
 var matches = google.contentmatch.getContentMatches();
 var matchList = document.createElement('UL');
