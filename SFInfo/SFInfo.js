@@ -11,6 +11,16 @@ var matchList = document.createElement('UL');
 var listItem;
 var extractedText;
 var sender_email = '';
+
+google.load("jquery", "1.4.2");
+$(document).ready(function() {
+
+  $("#GoBtn").click(function(){
+      var mypostcode = $("#POSTCODE").val()
+      alert("jQuery works, you entered- " + mypostcode);
+  });
+  
+  
 for (var match in matches) {
   for (var key in matches[match]) {
     if (key=='sender_email') {
@@ -23,24 +33,15 @@ for (var match in matches) {
     matchList.appendChild(listItem);
 */    
   }
+  readSFData();
 }
 document.body.appendChild(matchList);
 gadgets.window.adjustHeight(20);
+  
+  
+  
+});
 
-
-var prefs = new gadgets.Prefs();
-      postdata = postdata.replace("**username**", prefs.getString("Username"));
-      postdata = postdata.replace("**password**", prefs.getString("Password"));
-      var SOAPAction = "testaction";
-      var url = "https://login.salesforce.com/services/Soap/u/20.0";
-      url = prefs.getString("Loginurl");
-      //  makeSOAPRequest(url, SOAPAction, postdata);
-      (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
-
-
-
-
-readSFData();
 
   function readSFData() {
     if (token == null) {

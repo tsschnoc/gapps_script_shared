@@ -30,11 +30,20 @@
 
   </ModulePrefs>
 
+
+
   <!-- Define the content type and display location. The settings
    "html" and "card" are required for all Gmail contextual gadgets. -->
   <Content type="html" view="card">
     <![CDATA[
-      <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SFInfo/SFInfo.js"></script>    
+
+
+<input type=text maxlength=40 name="POSTCODE" id="POSTCODE" style="width:100px;"> 
+<input type=button id="GoBtn" value=" Go " name=" Go "> 
+          
+<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+
+<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SFInfo/SFInfo.js"></script>    
     ]]>
   </Content>
 </Module>
