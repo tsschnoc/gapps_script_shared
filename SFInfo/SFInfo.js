@@ -57,7 +57,7 @@ $(".droppable").droppable({
       readSFData();
     });
 
-//  readSFData();
+  readSFData();
 
 
   });
@@ -120,10 +120,20 @@ for (var i=0;i<obj.data.length;i++)  {
   var record = obj.data[i];
   console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
   listItem = document.createElement('LI');
+  div = document.createElement('div');
+  
   extractedText = document.createTextNode(record.Name);   
-  listItem.appendChild(extractedText);
+  div.appendChild(extractedText);
+  listItem.appendChild(div);
   matchList.appendChild(listItem);
   gadgets.window.adjustHeight(200);
+  
+/*
+<div class="droppable ui-widget-header ui-droppable ui-state-highlight">
+  <p>Dropped!</p>
+</div>  
+  */
+  
 }
   } 
   
