@@ -45,6 +45,11 @@
 <style type="text/css"> 
   #draggable, #draggable2 { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
 	#droppable, #droppable2 { width: 120px; height: 120px; padding: 0.5em; float: left; margin: 10px; }
+    
+  .ui-widget-header { border: 1px solid #E78F08;background: #F6A828; color: white; font-weight: bold; }
+      
+  .ui-widget-content { border: 1px solid #DDD; background: #EEE ;color: #333;}    
+  
 </style>
 
 
