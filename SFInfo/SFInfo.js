@@ -11,16 +11,6 @@ var matchList = document.createElement('UL');
 var listItem;
 var extractedText;
 var sender_email = '';
-
-google.load("jquery", "1.4.2");
-$(document).ready(function() {
-
-  $("#GoBtn").click(function(){
-      var mypostcode = $("#POSTCODE").val()
-      alert("jQuery works, you entered- " + mypostcode);
-  });
-  
-  
 for (var match in matches) {
   for (var key in matches[match]) {
     if (key=='sender_email') {
@@ -33,15 +23,21 @@ for (var match in matches) {
     matchList.appendChild(listItem);
 */    
   }
-  readSFData();
 }
 document.body.appendChild(matchList);
 gadgets.window.adjustHeight(20);
-  
-  
-  
-});
 
+google.load("jquery", "1.4.2");
+_IG_RegisterOnloadHandler(function() {
+  // Put Jquery here
+  $(document).ready(function() {
+    $("#GoBtn").click(function() {
+      var mypostcode = $("#POSTCODE").val()
+      alert("jQuery works, you entered- " + mypostcode);
+    })
+  });
+});
+//readSFData();
 
   function readSFData() {
     if (token == null) {
