@@ -62,11 +62,11 @@
 <div class="demo">
 
   
-<div class="draggable, ui-widget-content">
+<div class="draggable ui-widget-content">
 	<p>Mail, Drag me</p>
 </div>
 
-<div class="droppable, ui-widget-header">
+<div class="droppable ui-widget-header">
 	<p>Drop here</p>
 </div>
 
