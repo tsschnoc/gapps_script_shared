@@ -1,43 +1,59 @@
-<?xml version="1.0" encoding="UTF-8"?> 
-<Module> 
-  <ModulePrefs title="Salesforce connectLocl3"
-    description="SFInfo"
-    height="30"
-    author="Thomas T aus Z in S geb in R bei B"
+<?xml version="1.0" encoding="UTF-8"?>
+<Module>
+  <ModulePrefs title="SFInfo"
+    description="Matches and echoes 'Hello World' string in emails"
+    height="20"
+    author="Sarah M and Walter Q"
     author_email="..."
-    author_location="Mountain View, CA"> 
- 
-    <!-- Declare feature dependencies. --> 
- 
-    <!-- This one is not specific to Gmail contextual gadgets. --> 
-    <Require feature="dynamic-height"/> 
-    <Require feature="locked-domain"/>
- 
+    author_location="Mountain View, CA">
+
+    <!-- Declare feature dependencies. -->
+
+    <!-- This one is not specific to Gmail contextual gadgets. -->
+    <Require feature="dynamic-height"/>
+
     <!-- The next feature, Caja, is optional, and is supported for
      use only within test domains. Uncomment the tag only for
-     non-production gadgets. --> 
-    <!-- <Require feature="caja"/> --> 
- 
+     non-production gadgets. -->
+    <!-- <Require feature="caja"/> -->
+
     <!-- The next feature, google.contentmatch, is required for all
      Gmail contextual gadgets.
      <Param> - specify one or more comma-separated extractor IDs in
      a param named "extractors". This line is overridden by the extractor ID
-     in the manifest, but is still expected to be present. --> 
-    <Require feature="google.contentmatch"> 
-      <Param name="extractors"> 
+     in the manifest, but is still expected to be present. -->
+    <Require feature="google.contentmatch">
+      <Param name="extractors">
         google.com:HelloWorld
-      </Param> 
-    </Require>  
-  </ModulePrefs> 
-  <Content type="html" view="card"> 
+      </Param>
+    </Require>
+
+  </ModulePrefs>
+
+  <!-- Define the content type and display location. The settings
+   "html" and "card" are required for all Gmail contextual gadgets. -->
+  <Content type="html" view="card">
     <![CDATA[
-<html> 
-<head> 
-<title>hallo welt</title> 
-<body>
-hallo welt
-</body> 
-</html>     
+      <script type="text/javascript">
+
+        <!-- Fetch the array of content matches. -->
+        matches = google.contentmatch.getContentMatches();
+        var matchList = document.createElement('UL');
+        var listItem;
+        var extractedText;
+
+        <!-- Iterate through the array and display output for each match. -->
+        for (var match in matches) {
+          for (var key in matches[match]) {
+            listItem = document.createElement('LI');
+            extractedText = document.createTextNode(key + ": " + matches[match][key]);
+            listItem.appendChild(extractedText);
+            matchList.appendChild(listItem);
+          }
+        }
+        document.body.appendChild(matchList);
+        gadgets.window.adjustHeight(100);
+      </script>
     ]]>
-  </Content> 
+  </Content>
 </Module>
