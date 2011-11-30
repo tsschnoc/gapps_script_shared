@@ -28,7 +28,7 @@ gadgets.window.adjustHeight(300);
 
 
 
-readSFData();
+//readSFData();
 
   function readSFData() {
     if (token == null) {
