@@ -30,6 +30,27 @@ _IG_RegisterOnloadHandler(function() {
   
   
   $(document).ready(function() {
+
+
+///////////
+$("#draggable").draggable();
+$("#droppable").droppable({
+  hoverClass: "ui-state-active",
+  drop: function(event, ui) {
+    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
+  }
+});
+$("#draggable2").draggable();
+$("#droppable2").droppable({
+  accept: "#draggable2",
+  activeClass: "ui-state-hover",
+  drop: function(event, ui) {
+    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
+  }
+});
+/////////////
+
+
     $("#GoBtn").click(function() {
       username = $("#username").val();
       password = $("#password").val();

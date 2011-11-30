@@ -42,6 +42,45 @@
   <Content type="html" view="card">
     <![CDATA[
 
+<style>
+  #draggable, #draggable2 { width: 90px; height: 90px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+	#droppable, #droppable2 { width: 120px; height: 120px; padding: 0.5em; float: left; margin: 10px; }
+    
+</style>
+
+
+<div class="demo">
+
+<h3 class="docs">Feedback on hover:</h3>
+  
+<div id="draggable" class="ui-widget-content">
+	<p>Drag me to my target</p>
+</div>
+
+<div id="droppable" class="ui-widget-header">
+	<p>Drop here</p>
+</div>
+
+<h3 class="docs">Feedback on activating draggable:</h3>
+
+<div id="draggable2" class="ui-widget-content">
+	<p>Drag me to my target</p>
+</div>
+
+<div id="droppable2" class="ui-widget-header">
+	<p>Drop here</p>
+</div>
+
+</div><!-- End demo -->
+
+
+
+<div class="demo-description">
+<p>Change the droppable's appearance on hover, or when the droppable is active (an acceptable draggable is dropped on it).  Use the <code>hoverClass</code> or <code>activeClass</code> options to specify respective classes.</p>
+</div><!-- End demo-description -->
+
+
+
     <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
     <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
     <input type=button id="GoBtn" value=" Go " name=" Go "> 
