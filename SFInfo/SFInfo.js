@@ -16,12 +16,6 @@ for (var match in matches) {
     if (key=='sender_email') {
       sender_email = matches[match][key];
     }
-/*
-    listItem = document.createElement('LI');
-    extractedText = document.createTextNode(key + ": " + matches[match][key]);
-    listItem.appendChild(extractedText);
-    matchList.appendChild(listItem);
-*/    
   }
 }
 document.body.appendChild(matchList);
@@ -30,16 +24,18 @@ gadgets.window.adjustHeight(20);
 google.load("jquery", "1.4.2");
 _IG_RegisterOnloadHandler(function() {
   // Put Jquery here
+  
+  
+  
   $(document).ready(function() {
     $("#GoBtn").click(function() {
       var mypostcode = $("#POSTCODE").val()
-      alert("jQuery works, you entered- " + mypostcode);
+      alert("jQuery works, you entered- " + sender_email);
     })
   });
   
   readSFData();
 });
-//readSFData();
 
   function readSFData() {
     if (token == null) {
@@ -47,10 +43,6 @@ _IG_RegisterOnloadHandler(function() {
       var prefs = new gadgets.Prefs();
       console.log("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));   
       if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
-        // <form name="testform1" id="testform" onSubmit="return validate(this,var_1)" action="beispiel.htm">
-        var form = document.createElement('form');
-        form.createAttribute("onSubmit").nodeValue = "readSFData();";
-        
         return;
       }
       
@@ -88,35 +80,10 @@ var params = {};
           "X-PrettyPrint": "1"
         };
         gadgets.io.makeRequest(callUrl, restCallback, params);
-/*      params.responseId={};
-      lastSentRequestId = lastSentRequestId + 1;
-      params.responseId.Id=lastSentRequestId;
-        
-           
-        
-        params.callUrl = callUrl;
-        var sendstring = JSON.stringify(params);
-//        console.log("!!!!!!!!!!!!!!!!!!£££££££££££££££ sendstring :" + sendstring + " ");  
-
-
-        var params = {};
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        //params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
-      
-//        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
-        gadgets.io.makeRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
-*/        
   }
   
  
   function restCallback(obj) {
-//    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
-//    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
-//    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
-//    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
-
 console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
 
 var listItem;
@@ -131,30 +98,6 @@ for (var i=0;i<obj.data.length;i++)  {
   matchList.appendChild(listItem);
   gadgets.window.adjustHeight(200);
 }
-//https://mail.google.com/mail/u/0/?nogadgetcache=1&shva=1#inbox/133f5399df57a25f
-/*
-
-    if (obj.data.responseId.Id >lastReceivedRequestId) {
-    
-      var myData = [];
-      for (i=0;i<obj.data.response.length;i++)  {
-        var record = obj.data.response[i];
-        myData = myData.concat([
-          [record.Id, record.attributes.type, record.Name, record]
-        ]);
-        
-      }
-  
-      lastReceivedRequestId = obj.data.responseId.Id;
-
-
-
-
-
-    }
-*/
-
-
   } 
   
   
