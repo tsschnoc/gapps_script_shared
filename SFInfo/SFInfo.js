@@ -98,6 +98,12 @@ var params = {};
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
 console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
+
+for (var i=0;i<obj.data.length;i++)  {
+  var record = obj.data[i];
+console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
+}
+
 /*
 
     if (obj.data.responseId.Id >lastReceivedRequestId) {
