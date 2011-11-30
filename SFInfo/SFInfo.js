@@ -10,16 +10,23 @@ var matches = google.contentmatch.getContentMatches();
 var matchList = document.createElement('UL');
 var listItem;
 var extractedText;
+var sender_email = '';
 for (var match in matches) {
   for (var key in matches[match]) {
     listItem = document.createElement('LI');
     extractedText = document.createTextNode(key + ": " + matches[match][key]);
+    if (key=='sender_email') {
+      sender_email = matches[match][key];
+    }
     listItem.appendChild(extractedText);
     matchList.appendChild(listItem);
   }
 }
 document.body.appendChild(matchList);
 gadgets.window.adjustHeight(300);
+
+
+
 
 readSFData();
 
@@ -38,7 +45,7 @@ readSFData();
     else {
       var searchExpr = buildSearchString();
 //      sf_search(sfurl, token, searchExpr);
-      sf_search_rest(sfurl, token, "FIND {schnocklake}");
+      sf_search_rest(sfurl, token, "FIND { " + sender_email + " }");
     }
   }
 
@@ -149,7 +156,7 @@ var params = {};
         token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
         
-        sf_search_rest(sfurl, token, "FIND {schnocklake}");
+        sf_search_rest(sfurl, token, "FIND { " + sender_email + " }");
       }
     };
   }
