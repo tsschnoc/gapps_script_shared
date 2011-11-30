@@ -16,7 +16,7 @@ for (var match in matches) {
 document.body.appendChild(matchList);
 gadgets.window.adjustHeight(300);
 
-
+readSFData();
 
   function readSFData() {
     if (token == null) {
