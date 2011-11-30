@@ -28,6 +28,16 @@ document.body.appendChild(matchList);
 gadgets.window.adjustHeight(20);
 
 
+var prefs = new gadgets.Prefs();
+      postdata = postdata.replace("**username**", prefs.getString("Username"));
+      postdata = postdata.replace("**password**", prefs.getString("Password"));
+      var SOAPAction = "testaction";
+      var url = "https://login.salesforce.com/services/Soap/u/20.0";
+      url = prefs.getString("Loginurl");
+      //  makeSOAPRequest(url, SOAPAction, postdata);
+      (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
+
+
 
 
 readSFData();
@@ -35,12 +45,21 @@ readSFData();
   function readSFData() {
     if (token == null) {
       var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
-//      var prefs = new gadgets.Prefs();
-      postdata = postdata.replace("**username**", "thomas.schnocklake@parx.com");
-      postdata = postdata.replace("**password**", "Mantila110577ts1BwkT4u3YO7lKUlztmD9kcEcp");
+      var prefs = new gadgets.Prefs();
+      
+      if (prefs.getString("Username") == null) {
+        // <form name="testform1" id="testform" onSubmit="return validate(this,var_1)" action="beispiel.htm">
+        var form = document.createElement('form');
+        form.createAttribute("onSubmit").nodeValue = "readSFData();";
+        
+        return;
+      }
+      
+      postdata = postdata.replace("**username**", prefs.getString("Username"));
+      postdata = postdata.replace("**password**", prefs.getString("Password"));
       var SOAPAction = "testaction";
       var url = "https://login.salesforce.com/services/Soap/u/20.0";
-//      url = prefs.getString("Loginurl");
+      url = prefs.getString("Loginurl");
       //  makeSOAPRequest(url, SOAPAction, postdata);
       (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
     }
