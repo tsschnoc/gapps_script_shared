@@ -27,6 +27,7 @@ gadgets.window.adjustHeight(300);
 
 
 
+
 readSFData();
 
   function readSFData() {
@@ -98,9 +99,17 @@ var params = {};
 
 console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
 
+var matchList = document.getElementsByName('UL');
+var listItem;
+var extractedText;
+
 for (var i=0;i<obj.data.length;i++)  {
   var record = obj.data[i];
-console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
+  console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
+  listItem = document.createElement('LI');
+  extractedText = document.createTextNode(record.Name);   
+  listItem.appendChild(extractedText);
+  matchList.appendChild(listItem);
 }
 
 /*
