@@ -38,7 +38,7 @@ readSFData();
     else {
       var searchExpr = buildSearchString();
 //      sf_search(sfurl, token, searchExpr);
-      sf_search_rest(sfurl, token, searchExpr);
+      sf_search_rest(sfurl, token, "schnocklake");
     }
   }
 
