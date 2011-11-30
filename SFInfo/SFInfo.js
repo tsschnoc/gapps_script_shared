@@ -62,7 +62,7 @@ _IG_RegisterOnloadHandler(function() {
       postdata = postdata.replace("**password**", prefs.getString("Password"));
       var SOAPAction = "testaction";
       var url = "https://login.salesforce.com/services/Soap/u/20.0";
-      url = prefs.getString("Loginurl");
+//      url = prefs.getString("Loginurl");
       //  makeSOAPRequest(url, SOAPAction, postdata);
       (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
     }
