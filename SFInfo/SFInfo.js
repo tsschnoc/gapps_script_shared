@@ -25,7 +25,7 @@ for (var match in matches) {
   }
 }
 document.body.appendChild(matchList);
-gadgets.window.adjustHeight(300);
+gadgets.window.adjustHeight(20);
 
 
 
@@ -111,6 +111,8 @@ for (var i=0;i<obj.data.length;i++)  {
   extractedText = document.createTextNode(record.Name);   
   listItem.appendChild(extractedText);
   matchList.appendChild(listItem);
+  gadgets.window.adjustHeight(20);
+  
 }
 //https://mail.google.com/mail/u/0/?nogadgetcache=1&shva=1#inbox/133f5399df57a25f
 /*
