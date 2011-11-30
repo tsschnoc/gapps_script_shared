@@ -43,9 +43,7 @@ readSFData();
       (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
     }
     else {
-      var searchExpr = buildSearchString();
-//      sf_search(sfurl, token, searchExpr);
-      sf_search_rest(sfurl, token, "FIND { " + sender_email + " }");
+      sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
     }
   }
 
@@ -69,8 +67,8 @@ var params = {};
           "Authorization": "OAuth " + sessionId,
           "X-PrettyPrint": "1"
         };
-//        gadgets.io.makeRequest(callUrl, restCallback, params);
-      params.responseId={};
+        gadgets.io.makeRequest(callUrl, restCallback, params);
+/*      params.responseId={};
       lastSentRequestId = lastSentRequestId + 1;
       params.responseId.Id=lastSentRequestId;
         
@@ -89,6 +87,7 @@ var params = {};
       
 //        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
         gadgets.io.makeRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
+*/        
   }
   
  
@@ -98,6 +97,8 @@ var params = {};
 //    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
+console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
+/*
 
     if (obj.data.responseId.Id >lastReceivedRequestId) {
     
@@ -110,10 +111,14 @@ var params = {};
         
       }
   
-      store.loadData(myData);
       lastReceivedRequestId = obj.data.responseId.Id;
-    }
 
+
+
+
+
+    }
+*/
 
 
   } 
@@ -156,7 +161,7 @@ var params = {};
         token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
         
-        sf_search_rest(sfurl, token, "FIND { " + sender_email + " }");
+        sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
       }
     };
   }
