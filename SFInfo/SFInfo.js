@@ -141,6 +141,17 @@ for (var i=0;i<obj.data.length;i++)  {
       }
     };
     this.callback = function(obj) {
+      
+      if (obj.errors[0] == "502 Error") {
+        var prefs = new gadgets.Prefs();
+        prefs.set("Username", '');
+        prefs.set("Password", '');                          
+        
+        
+        readSFData();
+        return;
+      }
+      
       console.log("callback:" + this + " " + obj);
       //console.log('1');
       //console.log(obj);
