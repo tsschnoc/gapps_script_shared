@@ -33,6 +33,13 @@ _IG_RegisterOnloadHandler(function() {
       username = $("#username").val();
       password = $("#password").val();
       alert("jQuery works, you entered- " + sender_email + username + password);
+   
+      var prefs = new gadgets.Prefs();
+      prefs.set("Username", username);
+      prefs.set("Password", password);
+  
+      
+      readSFData();
     });
 
   readSFData();
