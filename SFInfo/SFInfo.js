@@ -19,7 +19,7 @@ for (var match in matches) {
   }
 }
 document.body.appendChild(matchList);
-gadgets.window.adjustHeight(20);
+gadgets.window.adjustHeight(200);
 
 google.load("jquery", "1.4.2");
 _IG_RegisterOnloadHandler(function() {
@@ -29,12 +29,16 @@ _IG_RegisterOnloadHandler(function() {
   
   $(document).ready(function() {
     $("#GoBtn").click(function() {
-      var mypostcode = $("#POSTCODE").val()
-      alert("jQuery works, you entered- " + sender_email);
-    })
+      var username = $("#username").val();
+      var password = $("#password").val();
+      alert("jQuery works, you entered- " + sender_email + username + password);
+    });
+
+  readSFData();
+
+
   });
   
-  readSFData();
 });
 
   function readSFData() {

@@ -37,13 +37,14 @@
   <Content type="html" view="card">
     <![CDATA[
 
-
-<input type=text maxlength=40 name="POSTCODE" id="POSTCODE" style="width:100px;"> 
-<input type=button id="GoBtn" value=" Go " name=" Go "> 
+    <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+    <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+    <input type=button id="GoBtn" value=" Go " name=" Go "> 
           
-<script type="text/javascript" src="http://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="http://www.google.com/jsapi"></script>
 
-<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SFInfo/SFInfo.js"></script>    
+    <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SFInfo/SFInfo.js"></script>    
+    
     ]]>
   </Content>
 </Module>
