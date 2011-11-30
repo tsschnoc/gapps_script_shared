@@ -36,6 +36,8 @@ _IG_RegisterOnloadHandler(function() {
       alert("jQuery works, you entered- " + mypostcode);
     })
   });
+  
+  readSFData();
 });
 //readSFData();
 
