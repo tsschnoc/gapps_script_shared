@@ -49,7 +49,8 @@
   .ui-widget-header { border: 1px solid #E78F08;background: #F6A828; color: white; font-weight: bold; }
       
   .ui-widget-content { border: 1px solid #DDD; background: #EEE ;color: #333;}    
-  
+  .ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fbd850; background: #ffffff; font-weight: bold; color: #eb8f00; outline: none; }
+
 </style>
 
 
