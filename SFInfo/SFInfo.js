@@ -13,13 +13,15 @@ var extractedText;
 var sender_email = '';
 for (var match in matches) {
   for (var key in matches[match]) {
-    listItem = document.createElement('LI');
-    extractedText = document.createTextNode(key + ": " + matches[match][key]);
     if (key=='sender_email') {
       sender_email = matches[match][key];
     }
+/*
+    listItem = document.createElement('LI');
+    extractedText = document.createTextNode(key + ": " + matches[match][key]);
     listItem.appendChild(extractedText);
     matchList.appendChild(listItem);
+*/    
   }
 }
 document.body.appendChild(matchList);
