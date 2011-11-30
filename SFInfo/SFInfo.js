@@ -21,8 +21,8 @@ for (var match in matches) {
 document.body.appendChild(matchList);
 gadgets.window.adjustHeight(200);
 
-google.load("jquery");
-google.load("jqueryui");
+google.load("jquery", "1");
+google.load("jqueryui", "1");
 _IG_RegisterOnloadHandler(function() {
   // Put Jquery here
   var username;
