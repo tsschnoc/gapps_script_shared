@@ -99,7 +99,6 @@ var params = {};
 
 console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
 
-var matchList = document.getElementsByName('UL');
 var listItem;
 var extractedText;
 
@@ -111,7 +110,7 @@ for (var i=0;i<obj.data.length;i++)  {
   listItem.appendChild(extractedText);
   matchList.appendChild(listItem);
 }
-
+//https://mail.google.com/mail/u/0/?nogadgetcache=1&shva=1#inbox/133f5399df57a25f
 /*
 
     if (obj.data.responseId.Id >lastReceivedRequestId) {
