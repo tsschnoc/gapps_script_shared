@@ -45,7 +45,7 @@ _IG_RegisterOnloadHandler(function() {
     if (token == null) {
       var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
       var prefs = new gadgets.Prefs();
-      
+      console.log("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));   
       if (prefs == null || prefs.getString("Username") == null) {
         // <form name="testform1" id="testform" onSubmit="return validate(this,var_1)" action="beispiel.htm">
         var form = document.createElement('form');
