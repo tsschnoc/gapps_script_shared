@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+<Module> 
+  <ModulePrefs title="Salesforce connectLocl3"
+    description="SFInfo"
+    height="30"
+    author="Thomas T aus Z in S geb in R bei B"
+    author_email="..."
+    author_location="Mountain View, CA"> 
+ 
+    <!-- Declare feature dependencies. --> 
+ 
+    <!-- This one is not specific to Gmail contextual gadgets. --> 
+    <Require feature="dynamic-height"/> 
+    <Require feature="locked-domain"/>
+ 
+    <!-- The next feature, Caja, is optional, and is supported for
+     use only within test domains. Uncomment the tag only for
+     non-production gadgets. --> 
+    <!-- <Require feature="caja"/> --> 
+ 
+    <!-- The next feature, google.contentmatch, is required for all
+     Gmail contextual gadgets.
+     <Param> - specify one or more comma-separated extractor IDs in
+     a param named "extractors". This line is overridden by the extractor ID
+     in the manifest, but is still expected to be present. --> 
+    <Require feature="google.contentmatch"> 
+      <Param name="extractors"> 
+        google.com:HelloWorld
+      </Param> 
+    </Require>  
+  </ModulePrefs> 
+  <Content type="html" view="card"> 
+    <![CDATA[
+<html> 
+<head> 
+<title>hallo welt</title> 
+<body>
+hallo welt
+</body> 
+</html>     
+    ]]>
+  </Content> 
+</Module>
