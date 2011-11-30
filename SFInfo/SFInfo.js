@@ -38,7 +38,7 @@ readSFData();
     else {
       var searchExpr = buildSearchString();
 //      sf_search(sfurl, token, searchExpr);
-      sf_search_rest(sfurl, token, "schnocklake");
+      sf_search_rest(sfurl, token, "FIND {schnocklake}");
     }
   }
 
@@ -149,7 +149,7 @@ var params = {};
         token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
         
-        sf_search_rest(sfurl, token, "schnocklake");
+        sf_search_rest(sfurl, token, "FIND {schnocklake}");
       }
     };
   }
