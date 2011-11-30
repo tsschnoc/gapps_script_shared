@@ -2,7 +2,7 @@
 <Module>
   <ModulePrefs title="SFInfo"
     description="Matches and echoes 'Hello World' string in emails"
-    height="20"
+    height="200"
     author="Sarah M and Walter Q"
     author_email="..."
     author_location="Mountain View, CA">
