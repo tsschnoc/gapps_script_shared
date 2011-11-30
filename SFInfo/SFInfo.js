@@ -40,14 +40,6 @@ $("#droppable").droppable({
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
   }
 });
-$("#draggable2").draggable();
-$("#droppable2").droppable({
-  accept: "#draggable2",
-  activeClass: "ui-state-hover",
-  drop: function(event, ui) {
-    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
-  }
-});
 /////////////
 
 

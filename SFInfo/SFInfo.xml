@@ -66,16 +66,6 @@
 	<p>Drop here</p>
 </div>
 
-<h3 class="docs">Feedback on activating draggable:</h3>
-
-<div id="draggable2" class="ui-widget-content">
-	<p>Drag me to my target</p>
-</div>
-
-<div id="droppable2" class="ui-widget-header">
-	<p>Drop here</p>
-</div>
-
 </div><!-- End demo -->
 
 
