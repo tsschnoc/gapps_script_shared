@@ -28,7 +28,7 @@
       </Param>
     </Require>
     <Require feature="setprefs"/>
-    
+    <Require feature="minimessage"/>
 
   </ModulePrefs>
   <UserPref name="Username" display_name="SF Username" datatype="string"/>

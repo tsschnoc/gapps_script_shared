@@ -39,7 +39,9 @@ $(".droppable").droppable({
   drop: function(event, ui) {
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
 gadgets.window.adjustHeight(50);    
-    alert($(this));
+var msg = new gadgets.MiniMessage(__MODULE_ID__);
+msg.createDismissibleMessage("Please close me when you're done reading me.");
+//    alert($(this));
   }
 });
 /////////////
