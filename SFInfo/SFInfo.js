@@ -68,7 +68,7 @@ var xxxxx= $(this);
 
 
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.id" + $(this).Id);
+    msg.createDismissibleMessage("Please close me when you're done reading me.id" + $(this).id);
 //    sf_attach_rest(url, sessionId, id)
   }
 });
