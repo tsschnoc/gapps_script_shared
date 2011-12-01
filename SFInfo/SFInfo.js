@@ -168,10 +168,10 @@ for (var i=0;i<obj.data.length;i++)  {
         console.log(i + record[i]);
         div2 = document.createElement('div');
         div2.className = "phone";
-        
+        /*
         div2.style.display = "inline";
         div2.style.background = "lightgray";
-        
+        */
         div2.appendChild(document.createTextNode(record[i]));
         div.appendChild(div2);
       }
