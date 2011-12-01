@@ -88,7 +88,9 @@ $(".droppable").droppable({
   }
 });
 $('.phone').click(function() {
-  alert('Handler for .click() called.');
+  console.log('Handler for .click() called.');
+  console.log($(this)[0].innerText);
+  callNumber($(this)[0].innerText);
 });
 
 /////////////
