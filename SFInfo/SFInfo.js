@@ -38,6 +38,7 @@ $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
+gadgets.window.adjustHeight(50);    
     alert($(this));
   }
 });
@@ -121,6 +122,8 @@ for (var i=0;i<obj.data.length;i++)  {
   console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
   listItem = document.createElement('LI');
   div = document.createElement('div');
+  
+ // "droppable ui-widget-header ui-droppable";
   
   extractedText = document.createTextNode(record.Name);   
   div.appendChild(extractedText);
