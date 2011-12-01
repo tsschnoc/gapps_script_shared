@@ -163,6 +163,7 @@ for (var i=0;i<obj.data.length;i++)  {
       if (record[i] != null) {
         console.log(i + record[i]);
         div2 = document.createElement('div');
+        div2.style.display = "inline";
         div2.appendChild(document.createTextNode(record[i]));
         div.appendChild(div2);
       }
