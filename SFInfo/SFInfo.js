@@ -31,7 +31,8 @@ _IG_RegisterOnloadHandler(function() {
   
   $(document).ready(function() {
 
-
+dnd_init();
+/*
 ///////////
 $(".draggable").draggable();
 $(".droppable").droppable({
@@ -45,7 +46,7 @@ $(".droppable").droppable({
   }
 });
 /////////////
-
+*/
 
     $("#GoBtn").click(function() {
       username = $("#username").val();
@@ -69,6 +70,8 @@ $(".droppable").droppable({
 
 
   function dnd_init() {
+///////////
+$(".draggable").draggable();
 $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
@@ -79,6 +82,7 @@ $(".droppable").droppable({
     msg.createDismissibleMessage("Please close me when you're done reading me.");
   }
 });
+/////////////
 }
 
 
@@ -157,7 +161,8 @@ for (var i=0;i<obj.data.length;i++)  {
   
 }
 
-
+dnd_init();
+/*
 $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
@@ -168,7 +173,7 @@ $(".droppable").droppable({
     msg.createDismissibleMessage("Please close me when you're done reading me.");
   }
 });
-
+*/
   } 
   
   
