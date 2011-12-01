@@ -64,7 +64,8 @@ $(".droppable").droppable({
 //    gadgets.window.adjustHeight(50);    
 //    var msg = new gadgets.MiniMessage(__MODULE_ID__);
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.");
+    msg.createDismissibleMessage("Please close me when you're done reading me.id" + $(this).Id);
+//    sf_attach_rest(url, sessionId, id)
   }
 });
 /////////////
@@ -204,3 +205,39 @@ dnd_init();
     };
   }
 
+
+/*
+
+
+  function sf_attach_rest(url, sessionId, id) {
+    var restServerUrl = url.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    
+    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/Task/";
+    
+    var task = {};
+//    task.AccountId = '';
+    task.Description = 'testitest';
+    task.Subject = 'testitestsubject';
+    task.WhoId = id;
+   
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.POST_DATA] = JSON.stringify(task);
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + sessionId,
+      "ACCEPT ": "JSON",
+      "X-PrettyPrint": "1",
+      "Content-Type": "application/json"
+    };
+    gadgets.io.makeRequest(callUrl, sf_attach_rest_callback, params);
+  }
+  
+ 
+  function sf_attach_rest_callback(obj) {
+console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
+  }
+*/
