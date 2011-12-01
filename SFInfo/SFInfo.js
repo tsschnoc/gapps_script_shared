@@ -142,6 +142,7 @@ console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);
 
 var listItem;
 var extractedText;
+var div2;
 
 for (var i=0;i<obj.data.length;i++)  {
   var record = obj.data[i];
@@ -151,10 +152,17 @@ for (var i=0;i<obj.data.length;i++)  {
   div.className = "droppable ui-widget-header ui-droppable";
   div.id = record.Id;
   
- // "droppable ui-widget-header ui-droppable";
+  div2 = document.createElement('div');
+  div2.appendChild(document.createTextNode(record.Name));
+  div.appendChild(div2);
+//  div2.className = "droppable ui-widget-header ui-droppable";
+//  div2.id = record.Id;
   
-  extractedText = document.createTextNode(record.Name);   
-  div.appendChild(extractedText);
+  
+//  extractedText = document.createTextNode(record.Name);   
+//  div2.appendChild(extractedText);
+//  div.appendChild(div2);
+  
   listItem.appendChild(div);
   matchList.appendChild(listItem);
   gadgets.window.adjustHeight(200);
@@ -224,6 +232,12 @@ dnd_init();
     };
   }
 
+
+function callNumber(number) {
+  //var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
+  var callto = 'phoner://' + escape(number).replace('+', '00');
+  location.href = callto;
+}
 
 
   function sf_attach_rest(url, sessionId, id) {
