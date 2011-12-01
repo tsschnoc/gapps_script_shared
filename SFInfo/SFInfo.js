@@ -11,6 +11,9 @@ var matchList = document.createElement('UL');
 var listItem;
 var extractedText;
 var sender_email = '';
+var subject = '';
+var email_body = '';
+
 for (var match in matches) {
   for (var key in matches[match]) {
     
@@ -18,6 +21,12 @@ for (var match in matches) {
     console.log("!!!!!!!!!!!!!!!!!! key/value :" + key + "/" + matches[match][key]);
     if (key=='sender_email') {
       sender_email = matches[match][key];
+    }
+    if (key=='subject') {
+      subject = matches[match][key];
+    }
+    if (key=='email_body') {
+      email_body = matches[match][key];
     }
   }
 }
@@ -224,11 +233,11 @@ dnd_init();
     
     var task = {};
 //    task.AccountId = '';
-    task.Description = 'testitest';
-    task.Subject = 'testitestsubject';
+    task.Description = email_body;
+    task.Subject = subject;
     task.WhoId = id;
     task.Status = 'Abgeschlossen';
-   
+
     
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
