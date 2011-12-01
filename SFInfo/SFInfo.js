@@ -38,8 +38,10 @@ $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
-    miniMessage();
-//    alert($(this));
+//    gadgets.window.adjustHeight(50);    
+//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+    var msg = new gadgets.MiniMessage();
+    msg.createDismissibleMessage("Please close me when you're done reading me.");
   }
 });
 /////////////
@@ -64,13 +66,6 @@ $(".droppable").droppable({
   });
   
 });
-
-  function miniMessage() {
-    gadgets.window.adjustHeight(50);    
-//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
-    var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.");
-  }  
 
   function readSFData() {
     if (token == null) {
@@ -129,6 +124,7 @@ for (var i=0;i<obj.data.length;i++)  {
   console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
   listItem = document.createElement('LI');
   div = document.createElement('div');
+  div['class'] = "droppable ui-widget-header ui-droppable";
   
  // "droppable ui-widget-header ui-droppable";
   
