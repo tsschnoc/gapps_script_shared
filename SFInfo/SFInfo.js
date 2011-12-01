@@ -76,11 +76,9 @@ $(".droppable").droppable({
 //    gadgets.window.adjustHeight(50);    
 //    var msg = new gadgets.MiniMessage(__MODULE_ID__);
 
-var xxxxx= $(this);
-
 
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Attach to " + $(this)[0].name + " " + $(this)[0].id);
+    msg.createDismissibleMessage("Attach to " + $(this)[0].id);
     sf_attach_rest(sfurl, token,$(this)[0].id)
   }
 });
@@ -254,9 +252,9 @@ dnd_init();
   
  
   function sf_attach_rest_callback(obj) {
-console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
+    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Attached: Id  " + obj.data[0].Id);
+    msg.createDismissibleMessage("Attached: Id  " + obj.data.Id);
     
 
   }
