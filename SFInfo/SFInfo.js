@@ -165,7 +165,7 @@ for (var i=0;i<obj.data.length;i++)  {
   div.appendChild(div2);
 
   for (var i in record) {
-    if (i.indexOf("Phone") >= 0) {
+    if (i.indexOf("Phone") >= 0 || i.indexOf("Telefon") >= 0) {
       if (record[i] != null) {
         console.log(i + record[i]);
         div2 = document.createElement('div');
