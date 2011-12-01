@@ -13,6 +13,9 @@ var extractedText;
 var sender_email = '';
 for (var match in matches) {
   for (var key in matches[match]) {
+    
+    
+    console.log("!!!!!!!!!!!!!!!!!! key/value :" + key + "/" + matches[match][key]);
     if (key=='sender_email') {
       sender_email = matches[match][key];
     }
