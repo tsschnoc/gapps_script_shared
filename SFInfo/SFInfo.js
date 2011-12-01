@@ -63,6 +63,10 @@ $(".droppable").droppable({
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
 //    gadgets.window.adjustHeight(50);    
 //    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+
+var xxxxx= $(this);
+
+
     var msg = new gadgets.MiniMessage();
     msg.createDismissibleMessage("Please close me when you're done reading me.id" + $(this).Id);
 //    sf_attach_rest(url, sessionId, id)
