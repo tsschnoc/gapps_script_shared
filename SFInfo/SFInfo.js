@@ -13,6 +13,7 @@ var extractedText;
 var sender_email = '';
 var subject = '';
 var email_body = '';
+var message_id = '';
 
 for (var match in matches) {
   for (var key in matches[match]) {
@@ -28,6 +29,10 @@ for (var match in matches) {
     if (key=='email_body') {
       email_body = matches[match][key];
     }
+    if (key=='message_id') {
+      message_id = matches[match][key];
+    }
+    
   }
 }
 document.body.appendChild(matchList);
@@ -221,7 +226,6 @@ dnd_init();
 
 
 
-
   function sf_attach_rest(url, sessionId, id) {
     var restServerUrl = url.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
@@ -231,12 +235,12 @@ dnd_init();
     
     var task = {};
 //    task.AccountId = '';
-    task.Description = email_body;
+    task.Description = email_body + '</BR>message_id:' + message_id ;
     task.Subject = subject;
     task.WhoId = id;
     task.Status = 'Abgeschlossen';
 
-    
+  
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
