@@ -172,6 +172,7 @@ for (var i=0;i<obj.data.length;i++)  {
         div2.style.display = "inline";
         div2.style.background = "lightgray";
         */
+        
         div2.appendChild(document.createTextNode(record[i]));
         div.appendChild(div2);
       }
