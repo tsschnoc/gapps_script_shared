@@ -33,6 +33,7 @@ _IG_RegisterOnloadHandler(function() {
 
 
 ///////////
+$(".draggable").draggable();
 $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
@@ -68,6 +69,16 @@ $(".droppable").droppable({
 
 
   function dnd_init() {
+$(".droppable").droppable({
+  hoverClass: "ui-state-active",
+  drop: function(event, ui) {
+    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
+//    gadgets.window.adjustHeight(50);    
+//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+    var msg = new gadgets.MiniMessage();
+    msg.createDismissibleMessage("Please close me when you're done reading me.");
+  }
+});
 }
 
 
@@ -145,6 +156,8 @@ for (var i=0;i<obj.data.length;i++)  {
   */
   
 }
+
+
 $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
@@ -155,6 +168,7 @@ $(".droppable").droppable({
     msg.createDismissibleMessage("Please close me when you're done reading me.");
   }
 });
+
   } 
   
   
