@@ -224,6 +224,7 @@ dnd_init();
     task.Description = 'testitest';
     task.Subject = 'testitestsubject';
     task.WhoId = id;
+    task.Status = 'Abgeschlossen';
    
     
     var params = {};
