@@ -80,7 +80,7 @@ var xxxxx= $(this);
 
 
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.id" + $(this)[0].id);
+    msg.createDismissibleMessage("Attach to " + $(this)[0].name + " " + $(this)[0].id);
     sf_attach_rest(sfurl, token,$(this)[0].id)
   }
 });
@@ -255,4 +255,8 @@ dnd_init();
  
   function sf_attach_rest_callback(obj) {
 console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
+    var msg = new gadgets.MiniMessage();
+    msg.createDismissibleMessage("Attached: Id  " + obj.data[0].Id);
+    
+
   }
