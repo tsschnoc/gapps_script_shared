@@ -254,7 +254,7 @@ dnd_init();
   function sf_attach_rest_callback(obj) {
     console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);  
     var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Attached: Id  " + obj.data.Id);
+    msg.createDismissibleMessage("Attached: Id  " + obj.data.id);
     
 
   }
