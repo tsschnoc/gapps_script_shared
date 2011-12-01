@@ -67,7 +67,8 @@ $(".droppable").droppable({
 
   function miniMessage() {
     gadgets.window.adjustHeight(50);    
-    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+    var msg = new gadgets.MiniMessage();
     msg.createDismissibleMessage("Please close me when you're done reading me.");
   }  
 
