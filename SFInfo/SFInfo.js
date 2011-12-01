@@ -32,21 +32,6 @@ _IG_RegisterOnloadHandler(function() {
   $(document).ready(function() {
 
 dnd_init();
-/*
-///////////
-$(".draggable").draggable();
-$(".droppable").droppable({
-  hoverClass: "ui-state-active",
-  drop: function(event, ui) {
-    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
-//    gadgets.window.adjustHeight(50);    
-//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
-    var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.");
-  }
-});
-/////////////
-*/
 
     $("#GoBtn").click(function() {
       username = $("#username").val();
@@ -144,6 +129,7 @@ for (var i=0;i<obj.data.length;i++)  {
   listItem = document.createElement('LI');
   div = document.createElement('div');
   div.className = "droppable ui-widget-header ui-droppable";
+  div.id = record.Id;
   
  // "droppable ui-widget-header ui-droppable";
   
@@ -162,18 +148,6 @@ for (var i=0;i<obj.data.length;i++)  {
 }
 
 dnd_init();
-/*
-$(".droppable").droppable({
-  hoverClass: "ui-state-active",
-  drop: function(event, ui) {
-    $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
-//    gadgets.window.adjustHeight(50);    
-//    var msg = new gadgets.MiniMessage(__MODULE_ID__);
-    var msg = new gadgets.MiniMessage();
-    msg.createDismissibleMessage("Please close me when you're done reading me.");
-  }
-});
-*/
   } 
   
   
