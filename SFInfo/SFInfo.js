@@ -124,7 +124,7 @@ for (var i=0;i<obj.data.length;i++)  {
   console.log("!!!!!!!!!!!!!!!!!! record :" + record);    
   listItem = document.createElement('LI');
   div = document.createElement('div');
-  div['class'] = "droppable ui-widget-header ui-droppable";
+  div.className = "droppable ui-widget-header ui-droppable";
   
  // "droppable ui-widget-header ui-droppable";
   
