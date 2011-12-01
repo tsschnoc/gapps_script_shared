@@ -155,6 +155,17 @@ for (var i=0;i<obj.data.length;i++)  {
   div2 = document.createElement('div');
   div2.appendChild(document.createTextNode(record.Name));
   div.appendChild(div2);
+
+  for (var i in record) {
+    if (i.indexOf("Phone") >= 0) {
+      if (record[i] != null) {
+        console.log(i + record[i]);
+        div2 = document.createElement('div');
+        div2.appendChild(document.createTextNode(record[i]));
+        div.appendChild(div2);
+      }
+    }
+  }
 //  div2.className = "droppable ui-widget-header ui-droppable";
 //  div2.id = record.Id;
   
