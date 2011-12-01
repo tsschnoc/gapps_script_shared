@@ -38,9 +38,7 @@ $(".droppable").droppable({
   hoverClass: "ui-state-active",
   drop: function(event, ui) {
     $(this).addClass("ui-state-highlight").find("p").html("Dropped!");
-gadgets.window.adjustHeight(50);    
-var msg = new gadgets.MiniMessage(__MODULE_ID__);
-msg.createDismissibleMessage("Please close me when you're done reading me.");
+    miniMessage();
 //    alert($(this));
   }
 });
@@ -66,6 +64,12 @@ msg.createDismissibleMessage("Please close me when you're done reading me.");
   });
   
 });
+
+  function miniMessage() {
+    gadgets.window.adjustHeight(50);    
+    var msg = new gadgets.MiniMessage(__MODULE_ID__);
+    msg.createDismissibleMessage("Please close me when you're done reading me.");
+  }  
 
   function readSFData() {
     if (token == null) {
