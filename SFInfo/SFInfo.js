@@ -154,7 +154,7 @@ for (var i=0;i<obj.data.length;i++)  {
   div.id = record.Id;
   
   div2 = document.createElement('div');
-  div2.style = "display: inline;";
+  div2.style.display = "inline";
   div2.appendChild(document.createTextNode(record.Name));
   div.appendChild(div2);
 
