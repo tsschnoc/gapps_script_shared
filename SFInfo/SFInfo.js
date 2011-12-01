@@ -150,9 +150,11 @@ for (var i=0;i<obj.data.length;i++)  {
   listItem = document.createElement('LI');
   div = document.createElement('div');
   div.className = "droppable ui-widget-header ui-droppable";
+  
   div.id = record.Id;
   
   div2 = document.createElement('div');
+  div2.style = "display: inline;";
   div2.appendChild(document.createTextNode(record.Name));
   div.appendChild(div2);
 
