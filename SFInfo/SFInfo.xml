@@ -43,9 +43,9 @@
     <![CDATA[
 
 <style type="text/css"> 
-  .draggable { width: 90px; height: 30px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-  .droppable { width: 400px; height: 40px; padding: 0.5em; float: left; margin: 10px; }
-  .phone { display: inline; background: lightgray; }
+  .draggable { width: 50px; height: 20px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
+  .droppable { width: 1000px; height: 30px; padding: 0.5em; float: left; margin: 10px; }
+  .phone { display: inline; background: lightgray; margin-left: 10px;}
     
   .ui-widget-header { border: 1px solid #E78F08;background: #F6A828; color: white; font-weight: bold; }
       
