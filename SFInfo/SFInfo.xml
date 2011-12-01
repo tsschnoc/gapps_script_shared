@@ -63,13 +63,8 @@
 
   
 <div class="draggable ui-widget-content">
-	<p>Mail, Drag me</p>
+	<p>eMail</p>
 </div>
-
-<div class="droppable ui-widget-header">
-	<p>Drop here</p>
-</div>
-
 </div><!-- End demo -->
 
 
