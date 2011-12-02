@@ -259,6 +259,8 @@ dnd_init();
         token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
         
+        $(".credentials").addClass("invisible");
+        
         sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
       }
     };

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Module>
   <ModulePrefs title="SFInfo"
-    description="Matches and echoes 'Hello World' string in emails"
+    description="Look up Accounts, Contacts, Opps in Salesforce and attach the email by 'Drag and Drop' to them"
     height="200"
-    author="Sarah M and Walter Q"
+    author="Thomas"
     author_email="..."
-    author_location="Mountain View, CA">
+    author_location="Zuhause">
 
     <!-- Declare feature dependencies. -->
 
@@ -52,6 +52,7 @@
   .ui-widget-content { border: 1px solid #DDD; background: #EEE ;color: #333;}    
   .ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fbd850; background: #ffffff; font-weight: bold; color: #eb8f00; outline: none; }
 
+  .invisible { display: none; }
 </style>
 
 <div class="credentials">
