@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ApplicationManifest xmlns="http://schemas.google.com/ApplicationManifest/2009">
+      <Name>SFInfo</Name>
+      <Description>SFInfo</Description>
+      <Support>
+            <Link rel="support" href="http://bart.peerpong.net:8081/google/support" />
+            <Link rel="deletion-policy" href="http://bart.peerpong.net:8081/google/deletion-policy" />
+
+      </Support>
+
+
+
+
+  <Extension id="navLink" type="link">
+    <Name>Salesforce Connect</Name>
+    <Url>http://gappsimap.elasticbeanstalk.com/Entry?from=google&amp;domain=${DOMAIN_NAME}</Url>
+    <!-- This app also uses the Calendar API -->
+    <Scope ref="scope_mail"/>
+    <Scope ref="scope_docs"/>
+  </Extension>
+
+  <Scope id="scope_mail">
+		<Url>https://mail.google.com/</Url>
+		<Reason>This application use Gmail IMAP/SMTP Access.</Reason>
+	</Scope>
+
+	<Scope id="scope_docs">
+		<Url>https://docs.google.com/feeds/</Url>
+		<Reason>This application use Google Docs Access.</Reason>
+	</Scope>
+
+
+
+
+      <Extension id="from" type="contextExtractor">
+            <Name>Sender Email</Name>
+            <Url>google.com:SenderEmailExtractor</Url>
+            <Triggers ref="ZohoProjectsGCG"/>
+            <Scope ref="emailFrom"/>
+            <Container name="mail"/>
+      </Extension>
+      <Scope id="emailFrom">
+            <Url>tag:google.com,2010:auth/contextual/extractor/FROM_ADDRESS</Url>
+            <Reason>This application searches the From</Reason>
+      </Scope>
+
+      <Extension id="tocc" type="contextExtractor">
+            <Name>Recepient Email</Name>
+            <Url>google.com:RecipientEmailExtractor</Url>
+            <Triggers ref="ZohoProjectsGCG"/>
+            <Scope ref="emailTo"/>
+            <Scope ref="emailCc"/>
+            <Container name="mail"/>
+      </Extension>
+      <Scope id="emailTo">
+            <Url>tag:google.com,2010:auth/contextual/extractor/TO_ADDRESS</Url>
+            <Reason>This application searches the To</Reason>
+      </Scope>
+      <Scope id="emailCc">
+            <Url>tag:google.com,2010:auth/contextual/extractor/CC_EMAIL</Url>
+            <Reason>This application searches the Cc</Reason>
+      </Scope>
+
+      <Extension id="subject" type="contextExtractor">
+            <Name>Mail Subject</Name>
+            <Url>google.com:SubjectExtractor</Url>
+            <Triggers ref="ZohoProjectsGCG"/>
+            <Scope ref="emailSubject"/>
+            <Container name="mail"/>
+      </Extension>
+      <Scope id="emailSubject">
+            <Url>tag:google.com,2010:auth/contextual/extractor/SUBJECT</Url>
+            <Reason>This application searches the Subject</Reason>
+      </Scope>
+
+      <Extension id="body" type="contextExtractor">
+            <Name>Mail Content</Name>
+            <Url>google.com:EmailBodyExtractor</Url>
+            <Triggers ref="ZohoProjectsGCG"/>
+            <Scope ref="emailBody"/>
+            <Container name="mail"/>
+      </Extension>
+      <Scope id="emailBody">
+            <Url>tag:google.com,2010:auth/contextual/extractor/BODY</Url>
+            <Reason>This application searches the Body</Reason>
+      </Scope>
+
+
+
+      <Extension id="id" type="contextExtractor">
+            <Name>Mail Id</Name>
+            <Url>google.com:MessageIDExtractor</Url>
+            <Triggers ref="ZohoProjectsGCG"/>
+            <Scope ref="emailId"/>
+            <Container name="mail"/>
+      </Extension>
+      <Scope id="emailId">
+            <Url>tag:google.com,2010:auth/contextual/extractor/MESSAGE_ID</Url>
+            <Reason>This application searches the email id</Reason>
+      </Scope>
+
+
+      <Extension id="ZohoProjectsGCG" type="gadget">
+            <Name>Zoho Projects Gmail Contextual gadget</Name>
+
+<Url>https://raw.github.com/tsschnoc/gapps_script_shared/master/SFInfo/SFInfo.xml</Url>
+            <Container name="mail"/>
+      </Extension>
+</ApplicationManifest>
