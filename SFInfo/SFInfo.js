@@ -161,7 +161,13 @@ for (var i=0;i<obj.data.length;i++)  {
   
   div2 = document.createElement('div');
   div2.style.display = "inline";
-  div2.appendChild(document.createTextNode(record.Name));
+  
+  var a = document.createElement('A');
+  a.href = 'https://parxch.my.salesforce.com/a0n20000000ctlIAAQ'
+  
+  a.appendChild(document.createTextNode(record.Name));
+  
+  div2.appendChild(a);
   div.appendChild(div2);
 
   for (var i in record) {
