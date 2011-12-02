@@ -164,6 +164,7 @@ for (var i=0;i<obj.data.length;i++)  {
   
   var a = document.createElement('A');
   a.href = 'https://parxch.my.salesforce.com/a0n20000000ctlIAAQ'
+  a.target = "_blank";
   
   a.appendChild(document.createTextNode(record.Name));
   
