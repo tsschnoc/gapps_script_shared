@@ -163,7 +163,7 @@ for (var i=0;i<obj.data.length;i++)  {
   div2.style.display = "inline";
   
   var a = document.createElement('A');
-  a.href = 'https://parxch.my.salesforce.com/a0n20000000ctlIAAQ'
+  a.href = 'https://parxch.my.salesforce.com/' + record.Id;
   a.target = "_blank";
   
   a.appendChild(document.createTextNode(record.Name));
