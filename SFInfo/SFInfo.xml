@@ -56,9 +56,9 @@
 </style>
 
 <div class="credentials">
-    <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
-    <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-    <input type=button id="GoBtn" value=" Go " name=" Go "> 
+    SF-Username:<input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+    PasswordToken<input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+    <input type=button id="GoBtn" value=" Login " name=" Login "> 
 </div>
 
 <div class="demo">
