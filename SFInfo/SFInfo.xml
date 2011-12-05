@@ -19,7 +19,7 @@
 
     <!-- This one is not specific to Gmail contextual gadgets. -->
     <Require feature="dynamic-height"/>
-
+    <Require feature="locked-domain"/>
     <!-- The next feature, Caja, is optional, and is supported for
      use only within test domains. Uncomment the tag only for
      non-production gadgets. -->
