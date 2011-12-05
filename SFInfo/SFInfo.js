@@ -94,10 +94,10 @@ function showOneSection(toshow) {
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
       url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
 
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
-      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+//      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
       params[gadgets.io.RequestParameters.HEADERS] = {
           "X-PrettyPrint": "1",
