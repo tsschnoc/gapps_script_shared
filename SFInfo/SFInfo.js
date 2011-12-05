@@ -94,7 +94,7 @@ function showOneSection(toshow) {
       var params = {};
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
       url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
-      
+
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
@@ -105,6 +105,11 @@ function showOneSection(toshow) {
           "GData-Version": "3.0"
         };
         
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";      
+      var postdata = "\x3Centry xmlns=\"http:\x2F\x2Fwww.w3.org\x2F2005\x2FAtom\" xmlns:gsx=\"http:\x2F\x2Fschemas.google.com\x2Fspreadsheets\x2F2006\x2Fextended\"\x3E\n  \x3Cgsx:name\x3E1\x3C\x2Fgsx:name\x3E\n  \x3Cgsx:id\x3E1\x3C\x2Fgsx:id\x3E  \n\x3C\x2Fentry\x3E";
+      console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);  
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
         
       gadgets.io.makeRequest(url, function (response) {
         console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
@@ -213,6 +218,7 @@ var params = {};
           "Authorization": "OAuth " + sessionId,
           "X-PrettyPrint": "1"
         };
+        
         gadgets.io.makeRequest(callUrl, restCallback, params);
   }
   
