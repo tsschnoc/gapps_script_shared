@@ -85,7 +85,7 @@ fetchData();
 
       gadgets.io.makeRequest(url, function (response) {
         console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
-      });
+      }, params);
     }
 
 
