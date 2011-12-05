@@ -63,12 +63,30 @@ dnd_init();
       readSFData();
     });
 
-  readSFData();
-
+//  readSFData();
+fetchData();
 
   });
   
 });
+
+
+
+
+
+    function fetchData() {
+      var params = {};
+      url = "http://www.google.com/m8/feeds/contacts/default/base?alt=json";
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+
+      gadgets.io.makeRequest(url, function (response) {
+      });
+    }
+
 
 
   function dnd_init() {

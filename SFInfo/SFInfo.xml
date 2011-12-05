@@ -7,6 +7,14 @@
     author_email="..."
     author_location="Zuhause">
 
+    <OAuth>
+      <Service name="google">
+        <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+        <Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/" method="GET" />
+        <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+      </Service>
+    </OAuth>
+    
     <!-- Declare feature dependencies. -->
 
     <!-- This one is not specific to Gmail contextual gadgets. -->
