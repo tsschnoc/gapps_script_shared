@@ -89,8 +89,7 @@ function showOneSection(toshow) {
     }
 
 
-
-    function fetchData() {
+     function postData() {
       var params = {};
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
       url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
@@ -111,6 +110,28 @@ function showOneSection(toshow) {
       console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);  
       params[gadgets.io.RequestParameters.POST_DATA] = postdata;
         
+      gadgets.io.makeRequest(url, function (response) {
+        console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
+      }, params);
+    
+    }   
+
+
+    function fetchData() {
+      var params = {};
+      var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
+      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
+
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+          "X-PrettyPrint": "1",
+          "GData-Version": "3.0"
+        };
+                
       gadgets.io.makeRequest(url, function (response) {
         console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
         if (response.oauthApprovalUrl) {
@@ -135,7 +156,7 @@ function showOneSection(toshow) {
           showOneSection('approval');
         } else if (response.data) {
             showOneSection('main');
-            showResults(response.data);
+            postData();
         } else {
             // The response.oauthError and response.oauthErrorText values may help debug
             // problems with your gadget.
