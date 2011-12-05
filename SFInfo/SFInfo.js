@@ -90,13 +90,18 @@ function showOneSection(toshow) {
 
     function fetchData() {
       var params = {};
-      url = "http://www.google.com/m8/feeds/contacts/default/base?alt=json";
+      var url = "https://spreadsheets.google.com/feeds/spreadsheets/private/full";
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
       params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-
+      params[gadgets.io.RequestParameters.HEADERS] = {
+          "X-PrettyPrint": "1",
+          "GData-Version": "3.0"
+        };
+        
+        
       gadgets.io.makeRequest(url, function (response) {
         console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
         if (response.oauthApprovalUrl) {
