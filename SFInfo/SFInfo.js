@@ -90,7 +90,7 @@ function showOneSection(toshow) {
 
     function fetchData() {
       var params = {};
-      var url = "https://spreadsheets.google.com/feeds/spreadsheets/private/full";
+      var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
