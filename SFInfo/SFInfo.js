@@ -104,9 +104,9 @@ fetchData();
           personalize.onclick = popup.createOpenerOnClick();
           var approvaldone = document.getElementById('approvaldone');
           approvaldone.onclick = popup.createApprovedOnClick();
-          showOneSection('approval');
+//          showOneSection('approval');
         } else if (response.data) {
-            showOneSection('main');
+//            showOneSection('main');
             showResults(response.data);
         } else {
             // The response.oauthError and response.oauthErrorText values may help debug
