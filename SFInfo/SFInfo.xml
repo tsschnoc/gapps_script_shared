@@ -77,6 +77,24 @@
 </div>
 </div><!-- End demo -->
 
+ <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
+
+
+<!--oauth    -->
+
+  <div id="main" style="display: none">
+  </div>
+
+  <div id="approval" style="display: none">
+    <img src="http://gadget-doc-examples.googlecode.com/svn/trunk/images/new.gif">
+    <a href="#" id="personalize">Personalize this gadget</a>
+  </div>
+
+  <div id="waiting" style="display: none">
+    Please click
+    <a href="#" id="approvaldone">I've approved access</a>
+    once you've approved access to your data.
+  </div>
 
 
           

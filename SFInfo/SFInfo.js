@@ -85,6 +85,38 @@ fetchData();
 
       gadgets.io.makeRequest(url, function (response) {
         console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
+        if (response.oauthApprovalUrl) {
+          // Create the popup handler. The onOpen function is called when the user
+          // opens the popup window. The onClose function is called when the popup
+          // window is closed.
+          var popup = shindig.oauth.popup({
+            destination: response.oauthApprovalUrl,
+            windowOptions: null,
+            onOpen: function() { showOneSection('waiting'); },
+            onClose: function() { fetchData(); }
+          });
+          // Use the popup handler to attach onclick handlers to UI elements.  The
+          // createOpenerOnClick() function returns an onclick handler to open the
+          // popup window.  The createApprovedOnClick function returns an onclick
+          // handler that will close the popup window and attempt to fetch the user's
+          // data again.
+          var personalize = document.getElementById('personalize');
+          personalize.onclick = popup.createOpenerOnClick();
+          var approvaldone = document.getElementById('approvaldone');
+          approvaldone.onclick = popup.createApprovedOnClick();
+          showOneSection('approval');
+        } else if (response.data) {
+            showOneSection('main');
+            showResults(response.data);
+        } else {
+            // The response.oauthError and response.oauthErrorText values may help debug
+            // problems with your gadget.
+            var main = document.getElementById('main');
+            var err = document.createTextNode('OAuth error: ' +
+              response.oauthError + ': ' + response.oauthErrorText);
+            main.appendChild(err);
+            showOneSection('main');
+        }
       }, params);
     }
 
