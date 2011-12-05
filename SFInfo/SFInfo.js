@@ -51,8 +51,8 @@ _IG_RegisterOnloadHandler(function() {
 dnd_init();
 
     $("#GoBtn").click(function() {
-      fetchData();
-      return;
+//      fetchData();
+//      return;
       username = $("#username").val();
       password = $("#password").val();
       alert("jQuery works, you entered- " + sender_email + username + password);
@@ -65,7 +65,7 @@ dnd_init();
       readSFData();
     });
 
-//  readSFData();
+  readSFData();
 //fetchData();
 
   });
