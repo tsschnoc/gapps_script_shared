@@ -51,6 +51,8 @@ _IG_RegisterOnloadHandler(function() {
 dnd_init();
 
     $("#GoBtn").click(function() {
+      fetchData();
+      return;
       username = $("#username").val();
       password = $("#password").val();
       alert("jQuery works, you entered- " + sender_email + username + password);
@@ -64,7 +66,7 @@ dnd_init();
     });
 
 //  readSFData();
-fetchData();
+//fetchData();
 
   });
   
@@ -91,6 +93,8 @@ function showOneSection(toshow) {
     function fetchData() {
       var params = {};
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
+      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
+      
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
