@@ -248,7 +248,7 @@ SalesforceConnection.prototype.insertToSf =
       method: "POST",
       headers: {
         "Authorization": "OAuth " + sessionId,
-        "ContentType": "application/json; charset=utf-8"
+        "Content-Type": "application/json; charset=utf-8"
       },
       contentType: "application/json; charset=utf-8",
       payload: payload
