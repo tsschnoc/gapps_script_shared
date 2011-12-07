@@ -240,11 +240,13 @@ SalesforceConnection.prototype.insertToSf =
   var sessionId = this._authinfo.sessionId;
   stmts.forEach(function(stmt, j) {
     var payload = JSON.stringify(stmt);
-    Logger.log("queryUrl: \n" + queryUrl);
+queryUrl='http://preview.parxwerk.ch:9292/dfdf';
+Logger.log("queryUrl: \n" + queryUrl);
     Logger.log("Authorization: \n" + "OAuth " + sessionId);
     Logger.log("ContentType: \n" + "application/json; charset=utf-8");
     Logger.log("payload: \n" + payload);
-    var response = UrlFetchApp.fetch(queryUrl, {
+    var response = UrlFetchApp.fetch(queryUrl,
+    {
       method: "POST",
       headers: {
         "Authorization": "OAuth " + sessionId,
