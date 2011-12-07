@@ -239,10 +239,12 @@ SalesforceConnection.prototype.insertToSf =
     this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/"  + encodeURIComponent(sf_objectname) + "/";
   var sessionId = this._authinfo.sessionId;
   stmts.forEach(function(stmt, j) {
+    var ct = "application/json;charset=ISO-8859-1";
+Logger.log("ct: \n" + ct);
     var payload = JSON.stringify(stmt);
 Logger.log("queryUrl: \n" + queryUrl);
-queryUrl='http://preview.parxwerk.ch:9292/dfdf';
-Logger.log("queryUrl: \n" + queryUrl);
+//queryUrl='http://preview.parxwerk.ch:9292/dfdf';
+//Logger.log("queryUrl: \n" + queryUrl);
     Logger.log("Authorization: \n" + "OAuth " + sessionId);
     Logger.log("ContentType: \n" + "application/json; charset=utf-8");
     Logger.log("payload: \n" + payload);
@@ -251,9 +253,9 @@ Logger.log("queryUrl: \n" + queryUrl);
       method: "POST",
       headers: {
         "Authorization": "OAuth " + sessionId,
-        "Content-Type": "application/json; charset=utf-8"
+        "Content-Type": ct
       },
-      contentType: "application/json; charset=utf-8",
+      contentType: ct,
       payload: payload
     });
     var queryResult = Utilities.jsonParse(response.getContentText());
