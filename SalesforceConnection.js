@@ -240,6 +240,9 @@ SalesforceConnection.prototype.insertToSf =
   var sessionId = this._authinfo.sessionId;
   stmts.forEach(function(stmt, j) {
     var payload = JSON.stringify(stmt);
+    Logger.log("queryUrl: \n" + queryUrl);
+    Logger.log("Authorization: \n" + "OAuth " + sessionId);
+    Logger.log("ContentType: \n" + "application/json; charset=utf-8");
     Logger.log("payload: \n" + payload);
     var response = UrlFetchApp.fetch(queryUrl, {
       method: "POST",
@@ -247,7 +250,7 @@ SalesforceConnection.prototype.insertToSf =
         "Authorization": "OAuth " + sessionId,
         "ContentType": "application/json; charset=utf-8"
       },
-      contentType: "application/json",
+      contentType: "application/json; charset=utf-8",
       payload: payload
     });
     var queryResult = Utilities.jsonParse(response.getContentText());
