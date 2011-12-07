@@ -230,7 +230,7 @@ SalesforceConnection.prototype.insertToSf =
   records.forEach(function(record, i) {
     var stmt = {};
     record.forEach(function(value, j) {
-        insertToSObject(stmt, fieldNames[j], value);
+        insertToSObject(stmt, fieldNames[j], encodeURIComponent(value));
     });
     Logger.log("JSON: " + JSON.stringify(stmt));
     stmts.push(stmt);
@@ -274,7 +274,7 @@ SalesforceConnection.prototype.updateSfRecord =
   records.forEach(function(record, i) {
     var stmt = {};
     record.forEach(function(value, j) {
-        insertToSObject(stmt, fieldNames[j], encodeURIComponent(stringvalue));
+        insertToSObject(stmt, fieldNames[j], stringvalue);
     });
     Logger.log("JSON: " + JSON.stringify(stmt));
     stmts.push(stmt);
