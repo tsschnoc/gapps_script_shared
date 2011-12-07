@@ -230,7 +230,7 @@ SalesforceConnection.prototype.insertToSf =
   records.forEach(function(record, i) {
     var stmt = {};
     record.forEach(function(value, j) {
-        insertToSObject(stmt, fieldNames[j], encodeURIComponent(value));
+        insertToSObject(stmt, fieldNames[j], value);
     });
     Logger.log("JSON: " + JSON.stringify(stmt));
     stmts.push(stmt);
