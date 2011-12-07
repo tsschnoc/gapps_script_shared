@@ -209,7 +209,7 @@ SalesforceConnection.prototype.insertSObject =
     method: "POST",
     headers: {
       "Authorization": "OAuth " + this._authinfo.sessionId,
-      "ContentType", "application/json; charset=utf-8"
+      "ContentType": "application/json; charset=utf-8"
     },
     contentType: "application/json",
     payload: payload
