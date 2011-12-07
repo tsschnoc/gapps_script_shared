@@ -208,7 +208,8 @@ SalesforceConnection.prototype.insertSObject =
   var response = UrlFetchApp.fetch(queryUrl, {
     method: "POST",
     headers: {
-      "Authorization": "OAuth " + this._authinfo.sessionId
+      "Authorization": "OAuth " + this._authinfo.sessionId,
+      "ContentType", "application/json; charset=utf-8"
     },
     contentType: "application/json",
     payload: payload
