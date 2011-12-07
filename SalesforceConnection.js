@@ -211,7 +211,7 @@ SalesforceConnection.prototype.insertSObject =
       "Authorization": "OAuth " + this._authinfo.sessionId,
       "ContentType": "application/json; charset=utf-8"
     },
-    contentType: "application/json",
+    contentType: "application/json; charset=utf-8",
     payload: payload
   });
   var queryResult = Utilities.jsonParse(response.getContentText());
