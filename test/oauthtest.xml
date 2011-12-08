@@ -127,6 +127,11 @@ sfConsumerSecret
       params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 
+      params[gadgets.io.RequestParameters.OAUTH_REQUEST_TOKEN] = "3MVG9Iu66FKeHhIMIOmuo4EIYRtTZwc0tgo8vVpABgYWM75jFukCHQKz7EcGAXWw0X3fjDU.ldw.8SXRNParn";
+      params[gadgets.io.RequestParameters.OAUTH_REQUEST_TOKEN_SECRET] = "6752532302010077205";
+      
+      
+
       gadgets.io.makeRequest(url, function (response) {
         if (response.oauthApprovalUrl) {
           // Create the popup handler. The onOpen function is called when the user
