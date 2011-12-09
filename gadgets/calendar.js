@@ -105,7 +105,7 @@
       
       var sfid = $('#Project').val();
       
-      var optname = $('option[value|="'sfid'"]').text();
+      var optname = $('option[value|="' + sfid + '"]').text();
 
 
       entry.setTitle(google.gdata.atom.Text.create(optname));
