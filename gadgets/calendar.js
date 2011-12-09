@@ -102,15 +102,29 @@
       // Create an instance of CalendarEventEntry representing the new event
       var entry = new google.gdata.calendar.CalendarEventEntry();
       // Set the title of the event
-      entry.setTitle(google.gdata.atom.Text.create('JS-Client: insert event:olliiii'));
+      
+      var sfid = $('#Project').val();
+      
+      var optname = $('option[value|="'sfid'"]').text();
+
+
+      entry.setTitle(google.gdata.atom.Text.create(optname));
       entry.setContent(google.gdata.atom.Text.create('#' + $('#Project').val()));
-      
+
+
       var extendedProp = new google.gdata.ExtendedProperty();
-      extendedProp.setName('myexpropname');
+      extendedProp.setName('sfid');
       extendedProp.setRealm('shared');
-      extendedProp.setValue('myexpropnamevalue');
+      extendedProp.setValue(sfid);
+
+      var extendedProp1 = new google.gdata.ExtendedProperty();
+      extendedProp1.setName('optname');
+      extendedProp1.setRealm('shared');
+      extendedProp1.setValue(optname);
       
-      entry.setExtendedProperties([extendedProp]);
+
+      
+      entry.setExtendedProperties([extendedProp,extendedProp1]);
       // Create a When object that will be attached to the event
       var when = new google.gdata.When();
       // Set the start and end time of the When object
