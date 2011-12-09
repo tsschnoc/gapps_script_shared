@@ -107,6 +107,7 @@
       
       var extendedProp = new google.gdata.ExtendedProperty();
       extendedProp.setName('myexpropname');
+      extendedProp.setRealm('shared');
       extendedProp.setValue('myexpropnamevalue');
       
       entry.setExtendedProperties([extendedProp]);
