@@ -318,16 +318,17 @@
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = restServerUrl + "/data/v20.0/sobjects/TimeCard__c/";
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     
     var ticket  = {};
-    ticket.Case__c = 'sdf';
+    ticket.Case__c = '500G0000008y77I';
+    ticket.Description__c = 'vom gadget';
 
     
     var params = {};
-    params[gadgets.io.RequestParameters.METHOD] = "PATCH";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     params[gadgets.io.RequestParameters.POST_DATA] = JSON.stringify(ticket);
     params[gadgets.io.RequestParameters.HEADERS] = {
