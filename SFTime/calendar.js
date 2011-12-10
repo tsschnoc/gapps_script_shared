@@ -321,26 +321,23 @@
     var callUrl = restServerUrl + "/services/data/v20.0/query/?q=" + encodeURIComponent(queryString);
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
+    
+    var ticket  = {};
+    ticket.Case__c = 'sdf';
+
+    
     var params = {};
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PATCH;
+    params[gadgets.io.RequestParameters.METHOD] = "PATCH";
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.POST_DATA] = JSON.stringify(ticket);
     params[gadgets.io.RequestParameters.HEADERS] = {
       "Authorization": "OAuth " + token,
       "X-PrettyPrint": "1"
     };
         
     var callback = function(obj) {        
-      $('select.Case').empty();
-      for (var i=0;i<obj.data.records.length;i++)  {
-        var record = obj.data.records[i];
-        var option = $('<option />').attr({
-          value: record.Id
-        });
-        option.html(record.Description!==null ? record.Description : record.CaseNumber);
-        console.log(option);
-        $('select.Case').append(option);
-      }
+      console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
+      
     };
         
         
