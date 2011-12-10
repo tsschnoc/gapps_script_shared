@@ -10,6 +10,9 @@
   </OAuth> 
   <Optional feature="google.calendar-0.5.read" /> 
   <Require feature="dynamic-height"/>
+  <Require feature="setprefs"/>
+  <Require feature="minimessage"/>
+  
 </ModulePrefs> 
 
 <Content type="html">
