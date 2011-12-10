@@ -297,7 +297,7 @@
         var option = $('<option />').attr({
           value: record.Id
         });
-        option.html(record.Description);
+        option.html(record.Description!==null ? record.Description : record.CaseNumber);
         console.log(option);
         $('select.Case').append(option);
       }
