@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<Module> <ModulePrefs title="Google Calendar Advanced Printing"
-  author="Nick Spacek nick.spacek@gmail.com" height="385">
-<OAuth> <Service name="google"> <Access
-  url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
-<Request
-  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/calendar/feeds/"
-  method="GET" /> <Authorization
-  url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
-</Service> </OAuth> <Optional feature="google.calendar-0.5.read" /> <Require feature="dynamic-height"/></ModulePrefs> <Content type="html">
+<Module> 
+  <ModulePrefs title="Google Calendar Advanced Printing" author="Nick Spacek nick.spacek@gmail.com" height="385">
+  <OAuth> 
+    <Service name="google"> 
+      <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+      <Request  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/calendar/feeds/" method="GET" /> 
+      <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+    </Service> 
+  </OAuth> 
+  <Optional feature="google.calendar-0.5.read" /> 
+  <Require feature="dynamic-height"/>
+</ModulePrefs> 
+
+<Content type="html">
 <![CDATA[
     <html>
       <head>
@@ -35,7 +40,7 @@
             <form action="http://www.google.com/calendar/printable">
               <ul class="calendars"></ul>
 
-         <div>
+              <div>
                 <label for="Project">Project</label>
                 <select id="Project" name="Project" class="Project">
                   <option value="Nixtun">Nixtun</option>

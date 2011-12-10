@@ -19,7 +19,6 @@ GAPPSConnection.prototype.getAuth = function(service) {
   });
   var auth = response.getContentText();
   auth = auth.substring(auth.indexOf('Auth=') + 5, auth.length - 1);
-  Logger.log(auth);
   return auth;
 };
 
@@ -33,12 +32,7 @@ GAPPSConnection.prototype.request = function(service, url, method, headers, cont
     contentType: contentType,
     payload: payload
   };
-  
-  Logger.log(url);
-  Logger.log(additional);
-  Logger.log(contentType);
-  Logger.log(payload);
-  
+    
   var response = UrlFetchApp.fetch(url, additional);
   return response;
 };
@@ -60,7 +54,6 @@ GAPPSConnection.prototype.getSignature = function(email) {
     contentType: "application/atom+xml charset=UTF-8"
   });
   //  Logger.log(response.getContentText());
-  Logger.log(response.getContentText());
   var result = Utilities.jsonParse(response.getContentText());
   //    Logger.log(Utilities.jsonParse(response.getContentText()).version);
   //    var result = Xml.parse(response.getContentText(), false);
@@ -72,7 +65,6 @@ GAPPSConnection.prototype.searchDocuments = function(searchText) {
     Accept: "*/*",
     "GData-Version": "3.0"
   });
-  Logger.log(response.getContentText());
   var result = Utilities.jsonParse(response.getContentText());
   //    Logger.log(Utilities.jsonParse(response.getContentText()).version);
   //    var result = Xml.parse(response.getContentText(), false);

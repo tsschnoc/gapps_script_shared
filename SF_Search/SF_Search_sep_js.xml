@@ -22,15 +22,10 @@
 <head>
 <title>Paging Grid Example</title>
  
+<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/adapter/ext/ext-base.js"></script>
+<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/resources/css/ext-all.css" />
-    <!-- LIBS -->
-   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/adapter/ext/ext-base.js"></script>
-   <!-- ENDLIBS -->
-    <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/ext-all.js"></script>
-    
 <link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/examples/grid/grid-examples.css" />
- 
-<!-- Common Styles for the examples -->
 <link rel="stylesheet" type="text/css" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/ext/examples/shared/examples.css" />
  
  

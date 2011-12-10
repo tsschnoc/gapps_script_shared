@@ -19,15 +19,15 @@
     <Scope ref="scope_docs"/>
   </Extension>
 
-  <Scope id="scope_mail">
-		<Url>https://mail.google.com/</Url>
-		<Reason>This application use Gmail IMAP/SMTP Access.</Reason>
-	</Scope>
-
-	<Scope id="scope_docs">
-		<Url>https://docs.google.com/feeds/</Url>
-		<Reason>This application use Google Docs Access.</Reason>
-	</Scope>
+      <Scope id="scope_mail">
+    		<Url>https://mail.google.com/</Url>
+    		<Reason>This application use Gmail IMAP/SMTP Access.</Reason>
+    	</Scope>
+    
+    	<Scope id="scope_docs">
+    		<Url>https://docs.google.com/feeds/</Url>
+    		<Reason>This application use Google Docs Access.</Reason>
+    	</Scope>
 
 
 
@@ -37,11 +37,16 @@
             <Url>google.com:SenderEmailExtractor</Url>
             <Triggers ref="ZohoProjectsGCG"/>
             <Scope ref="emailFrom"/>
+            <Scope ref="emailFromPersonal"/>
             <Container name="mail"/>
       </Extension>
       <Scope id="emailFrom">
             <Url>tag:google.com,2010:auth/contextual/extractor/FROM_ADDRESS</Url>
             <Reason>This application searches the From</Reason>
+      </Scope>
+      <Scope id="emailFromPersonal">
+            <Url>tag:google.com,2010:auth/contextual/extractor/FROM_PERSONAL</Url>
+            <Reason>This application searches the From FROM_PERSONAL</Reason>
       </Scope>
 
       <Extension id="tocc" type="contextExtractor">
