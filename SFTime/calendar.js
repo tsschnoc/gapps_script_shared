@@ -60,7 +60,7 @@
         else if (response.feed) {
             showOnly('main');
             if (current_event == null) {
-              $('#main').get(0).style.display = 'none';
+              $('#dialog').style.display = 'none';
             }
 
 /*
