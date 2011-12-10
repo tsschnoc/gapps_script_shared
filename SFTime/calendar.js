@@ -17,7 +17,7 @@
       calendar = new google.gdata.calendar.CalendarService('goocal-print');
       calendar.useOAuth('google');
       fetchData();
-      readSFData();
+//      readSFData();
     });
     $('.hasDatepicker').datepicker();
     $('.generate').click(function(e) {
@@ -60,8 +60,12 @@
         else if (response.feed) {
             showOnly('main');
             if (current_event == null) {
-              $('#dialog').style.display = 'none';
+              $('#dialog')[0].style.display = 'none';
             }
+
+
+
+
 
 /*
           calendar.getSettingsEntry('http://www.google.com/calendar/feeds/default/settings/' + google.gdata.calendar.SettingsProperty.NAME_TIMEZONE, function(r) {
