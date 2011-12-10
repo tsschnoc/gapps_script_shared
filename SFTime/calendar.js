@@ -318,7 +318,7 @@
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ";
+    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     
