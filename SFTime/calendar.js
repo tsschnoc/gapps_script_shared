@@ -58,6 +58,12 @@
           showOnly('approval');
         }
         else if (response.feed) {
+            showOnly('main');
+            if (current_event == null) {
+              $('#main').get(0).style.display = 'none';
+            }
+
+/*
           calendar.getSettingsEntry('http://www.google.com/calendar/feeds/default/settings/' + google.gdata.calendar.SettingsProperty.NAME_TIMEZONE, function(r) {
             showResults(response, r.entry.getSettingsProperty().getValue());
             showOnly('main');
@@ -67,7 +73,8 @@
           }, function() {
             console.dir(arguments);
           });
-        }
+*/
+      }
         else {
           if (console && console.debug) {
             console.debug(response.stack);
