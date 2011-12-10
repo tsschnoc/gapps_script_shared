@@ -3,6 +3,9 @@
   var debug_html = "debug";
   var current_event = null;
 
+  var token = null;
+  var sfurl = null;
+
 
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
 
@@ -62,22 +65,8 @@
             if (current_event == null) {
               $('#dialog')[0].style.display = 'none';
             }
+            readSFData();
 
-
-
-
-
-/*
-          calendar.getSettingsEntry('http://www.google.com/calendar/feeds/default/settings/' + google.gdata.calendar.SettingsProperty.NAME_TIMEZONE, function(r) {
-            showResults(response, r.entry.getSettingsProperty().getValue());
-            showOnly('main');
-            if (current_event == null) {
-              $('#main').get(0).style.display = 'none';
-            }
-          }, function() {
-            console.dir(arguments);
-          });
-*/
       }
         else {
           if (console && console.debug) {
@@ -179,38 +168,98 @@
         calendar.insertEntry(feedUri, entry, callback, handleError, google.gdata.calendar.CalendarEventEntry);
   }
 
+
+
+
+
+
+
   function readSFData() {
-    var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>thomas.schnocklake.sfdc1@gmail.com</urn:username>        <urn:password>Mantila5PkeUMFfyd5w5jXIEFbk63ajU</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
-    var SOAPAction = "testaction";
-    var url = "https://login.salesforce.com/services/Soap/u/20.0";
-    makeSOAPRequest(url, SOAPAction, postdata);
-  }
-
-  function query1(url, sessionId, queryString) {
-    var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>      <urn:SessionHeader>         <urn:sessionId>**sessionId**</urn:sessionId>      </urn:SessionHeader>   </soapenv:Header>   <soapenv:Body>      <urn:query>         <urn:queryString>**queryString**</urn:queryString>      </urn:query>   </soapenv:Body></soapenv:Envelope>";
-    var SOAPAction = "testaction";
-    postdata = postdata.replace("**sessionId**", sessionId);
-    postdata = postdata.replace("**queryString**", queryString);
-    console.debug(postdata);
-    makeSOAPRequest(url, SOAPAction, postdata);
-  }
-
-  function makeSOAPRequest(url, SOAPAction, postdata) {
-    try {
-      var params = {};
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-      params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction": SOAPAction,
-        "Content-Type": "text/xml;charset=UTF-8"
-      };
-      gadgets.io.makeRequest(url, callback, params);
+    if (token == null) {
+      var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
+      var prefs = new gadgets.Prefs();
+      console.log("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));   
+      if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
+        return;
+      }
+      
+      postdata = postdata.replace("**username**", prefs.getString("Username"));
+      postdata = postdata.replace("**password**", prefs.getString("Password"));
+      var SOAPAction = "testaction";
+      var url = "https://login.salesforce.com/services/Soap/u/20.0";
+//      url = prefs.getString("Loginurl");
+      //  makeSOAPRequest(url, SOAPAction, postdata);
+      (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
     }
-    catch (e) {
-      console.debug(e);
+    else {
+//      sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
     }
   }
+
+  function SOAPRequest(url, SOAPAction, postdata, number) {
+    this.number = number;
+    this.url = url;
+    this.SOAPAction = SOAPAction;
+    this.postdata = postdata;
+    this.request = function() {
+      try {
+        console.log('SOAPAction: ' + this.SOAPAction);
+        console.log('url : ' + this.url);
+        console.log('postdata : ' + this.postdata);
+        console.log('number : ' + this.number);
+        var params = {};
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+        params[gadgets.io.RequestParameters.HEADERS] = {
+          "SOAPAction": SOAPAction,
+          "Content-Type": "text/xml;charset=UTF-8"
+        };
+        gadgets.io.makeRequest(url, this.callback, params);
+      }
+      catch (e) {
+        //console.debug(e);
+      }
+    };
+    this.callback = function(obj) {
+      
+      if (obj.errors[0] == "502 Error") {
+        var prefs = new gadgets.Prefs();
+        prefs.set("Username", '');
+        prefs.set("Password", '');                          
+        
+        
+        readSFData();
+        return;
+      }
+      
+      console.log("callback:" + this + " " + obj);
+      //console.log('1');
+      //console.log(obj);
+      var document = obj.data;
+      //console.log(obj.data);
+      if (document.getElementsByTagName("loginResponse").length > 0) {
+        token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
+        sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
+        
+        $(".credentials").addClass("invisible");
+        
+//        sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
+      }
+    };
+  }
+
+
+
+
+
+
+
+
+
+
+
+
 
   function callback(obj) {
     console.log(obj);
@@ -250,33 +299,5 @@
     }
   }
 
-  function showResults(feedRoot, timezone) {
-    var feed = feedRoot.feed;
-    var entries = feed.entry && feed.entry.length ? feed.entry : [];
-    $('ul.calendars').empty();
-/*
-                      $.each( entries, function () {
-                        var id = unescape( this.id.$t.substring(
-                          this.id.$t.lastIndexOf( '/' ) + 1
-                        ) );
-          
-                        var li = $( '<li />' )
-                          .append(
-                            $( '<input type="checkbox" />' ).attr( {
-                              name: 'src',
-                              value: id,
-                              id: 'cb_' + id,
-                              checked: 'checked'
-                            } ) )
-                          .append(
-                            $( '<label />' )
-                              .attr( 'for', 'cb_' + id )
-                              .html( this.title.$t )
-                          );
-                        $( 'ul.calendars' ).append( li );
-                      } );
-          */
-    $('input[name=ctz]').val(timezone);
-  }
   gadgets.util.registerOnLoadHandler(initGadget);
 })(jQuery);
