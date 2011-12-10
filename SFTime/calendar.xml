@@ -14,6 +14,10 @@
   <Require feature="minimessage"/>
   <Require feature="locked-domain"/>  
 </ModulePrefs> 
+  <UserPref name="Username" display_name="SF Username" datatype="string"/>
+  <UserPref name="Password" display_name="SF Password" datatype="string"/>  
+  <UserPref name="Loginurl" display_name="SF Login URL" datatype="string"/>
+
 
 <Content type="html">
 <![CDATA[
