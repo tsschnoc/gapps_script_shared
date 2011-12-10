@@ -12,7 +12,6 @@
   <Require feature="dynamic-height"/>
 </ModulePrefs> 
 
-
 <Content type="html">
 <![CDATA[
     <html>
@@ -37,15 +36,11 @@
         <div id="errors" style="display: none"></div>
 
         <div id="main" style="display:none">
-          <div id="printdialog">
-            <form action="http://www.google.com/calendar/printable">
-              <ul class="calendars"></ul>
-
+          <div id="dialog">
+            <form>
               <div>
-                <label for="Project">Project</label>
-                <select id="Project" name="Project" class="Project">
-                  <option value="Nixtun">Nixtun</option>
-                  <option value="Schlafen">Schlafen</option>
+                <label for="Case">Case</label>
+                <select id="Case" name="Case" class="Case">
                 </select>
               </div>
 

@@ -22,7 +22,7 @@
       console.debug('generate Button pressed');
       console.debug(current_event.timezone);
       //            fetttttch();
-      console.debug($('#Project').val());
+      console.debug($('#Case').val());
       createEvent();
       return false;
     });
@@ -103,13 +103,13 @@
       var entry = new google.gdata.calendar.CalendarEventEntry();
       // Set the title of the event
       
-      var sfid = $('#Project').val();
+      var sfid = $('#Case').val();
       
       var optname = $('option[value|="' + sfid + '"]').text();
 
 
       entry.setTitle(google.gdata.atom.Text.create(optname));
-      entry.setContent(google.gdata.atom.Text.create('#' + $('#Project').val()));
+      entry.setContent(google.gdata.atom.Text.create('#' + $('#Case').val()));
 
 
       var extendedProp = new google.gdata.ExtendedProperty();
@@ -218,7 +218,7 @@
     else if (document.getElementsByTagName("queryResponse").length > 0) {
       console.log(document);
       var records = document.getElementsByTagName("records");
-      $('select.Project').empty();
+      $('select.Case').empty();
       for (var i = 0, len = records.length; record = records[i], i < len; i++) {
         console.log(record);
         console.log(record.getElementsByTagName("Name")[0].firstChild.nodeValue);
@@ -231,7 +231,7 @@
         });
         option.html(accountname);
         console.log(option);
-        $('select.Project').append(option);
+        $('select.Case').append(option);
       }
     }
   }
