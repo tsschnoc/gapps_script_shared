@@ -333,7 +333,11 @@
     params[gadgets.io.RequestParameters.POST_DATA] = JSON.stringify(ticket);
     params[gadgets.io.RequestParameters.HEADERS] = {
       "Authorization": "OAuth " + token,
-      "X-PrettyPrint": "1"
+      "X-PrettyPrint": "1",
+      "ACCEPT ": "JSON",
+      "X-PrettyPrint": "1",
+      "Content-Type": "application/json"
+      
     };
         
     var callback = function(obj) {        
