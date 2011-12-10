@@ -41,6 +41,8 @@
       var prefs = new gadgets.Prefs();
       prefs.set("Username", username);
       prefs.set("Password", password);
+      readSFData();
+
     });
 
     
