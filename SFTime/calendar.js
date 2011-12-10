@@ -102,6 +102,7 @@
         $('#dialog').get(0).style.display = 'block';
       }
       gadgets.window.adjustHeight();
+      sf_search_rest();
     }
     else {
       current_event = null;
