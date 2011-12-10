@@ -292,8 +292,8 @@
         
     var callback = function(obj) {        
       $('select.Case').empty();
-      for (var i=0;i<obj.data.length;i++)  {
-        var record = obj.data[i];
+      for (var i=0;i<obj.data.records.length;i++)  {
+        var record = obj.data.records[i];
         var option = $('<option />').attr({
           value: record.Id
         });
