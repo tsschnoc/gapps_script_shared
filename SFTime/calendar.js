@@ -318,12 +318,12 @@
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/TimeCard__c/";
+    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ";
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     
     var ticket  = {};
-    ticket.Id = 'a03G0000005fhqDIAQ'
+//    ticket.Id = 'a03G0000005fhqDIAQ';
     ticket.Case__c = '500G0000008y77I';
     ticket.Description__c = 'vom gadget';
     ticket.Date__c = '2011-12-09';
