@@ -99,13 +99,13 @@
       current_event = e;
       console.debug(gadgets.json.stringify(e));
       if (current_event != null) {
-        $('#main').get(0).style.display = 'block';
+        $('#dialog').get(0).style.display = 'block';
       }
       gadgets.window.adjustHeight();
     }
     else {
       current_event = null;
-      $('#main').get(0).style.display = 'none';
+      $('#dialog').get(0).style.display = 'none';
       console.debug("kein event");
       gadgets.window.adjustHeight();
     }
