@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module> 
-  <ModulePrefs title="Google Calendar Advanced Printing" author="Nick Spacek nick.spacek@gmail.com" height="385">
+  <ModulePrefs title="Google Calendar SF Timetracking" author="Fred.vom.Jupiter@parx.com" height="385">
   <OAuth> 
     <Service name="google"> 
       <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
@@ -42,6 +42,9 @@
                 <label for="Case">Case</label>
                 <select id="Case" name="Case" class="Case">
                 </select>
+              </div>
+              <div>
+                <input type="text" name="Description" /> 
               </div>
 
               <input type="hidden" name="ctz" />

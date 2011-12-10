@@ -3,6 +3,9 @@
   var debug_html = "debug";
   var current_event = null;
 
+
+// https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
+
   function initGadget() {
     google.calendar.read.subscribeToEvents(subscribeEventsCallback);
     $.ui.dialog.defaults.bgiframe = true;
