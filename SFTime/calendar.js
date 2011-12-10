@@ -29,7 +29,11 @@
       console.debug(current_event.timezone);
       //            fetttttch();
       console.debug($('#Case').val());
-      createEvent();
+      
+      
+      sf_upsertTimeTicket();
+      
+//      createEvent();
       return false;
     });
     
@@ -102,7 +106,7 @@
         $('#dialog').get(0).style.display = 'block';
       }
       gadgets.window.adjustHeight();
-      sf_search_rest();
+      sf_queryCases();
     }
     else {
       current_event = null;
@@ -207,7 +211,7 @@
       (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
     }
     else {
-//      sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
+//      sf_queryCases(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
     }
   }
 
@@ -259,7 +263,7 @@
         
         $(".credentials").addClass("invisible");
         
-//        sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
+//        sf_queryCases(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
       }
     };
   }
@@ -271,7 +275,7 @@
 
 
 
-  function sf_search_rest() {
+  function sf_queryCases() {
     var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
@@ -307,6 +311,42 @@
     gadgets.io.makeRequest(callUrl, callback, params);
   }
   
+  function sf_upsertTimeTicket() {
+    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v20.0/query/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PATCH;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      $('select.Case').empty();
+      for (var i=0;i<obj.data.records.length;i++)  {
+        var record = obj.data.records[i];
+        var option = $('<option />').attr({
+          value: record.Id
+        });
+        option.html(record.Description!==null ? record.Description : record.CaseNumber);
+        console.log(option);
+        $('select.Case').append(option);
+      }
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
+  
  
 
 
@@ -316,43 +356,6 @@
 
 
 
-  function callback(obj) {
-    console.log(obj);
-    console.log(obj.data);
-/*  console.log(obj.data.childNodes);
-            console.log(obj.data.childNodes.length);
-          */
-    var document = obj.data;
-/*  console.log(document);
-            console.log(document.getElementsByTagName("sessionId")[0]);
-            console.log(document.getElementsByTagName("sessionId")[0].firstChild.nodeValue);
-            
-          */
-    if (document.getElementsByTagName("loginResponse").length > 0) {
-      var sessionId = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
-      var serverUrl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
-      query1(serverUrl, sessionId, "Select Id, Name FROM Account limit 10");
-    }
-    else if (document.getElementsByTagName("queryResponse").length > 0) {
-      console.log(document);
-      var records = document.getElementsByTagName("records");
-      $('select.Case').empty();
-      for (var i = 0, len = records.length; record = records[i], i < len; i++) {
-        console.log(record);
-        console.log(record.getElementsByTagName("Name")[0].firstChild.nodeValue);
-        var accountname = record.getElementsByTagName("Name")[0].firstChild.nodeValue;
-        var accountid = record.getElementsByTagName("Id")[0].firstChild.nodeValue;
-        //////////////////////////////////////////////      
-        //<option value="Nixtun">Nixtun</option>      
-        var option = $('<option />').attr({
-          value: accountid
-        });
-        option.html(accountname);
-        console.log(option);
-        $('select.Case').append(option);
-      }
-    }
-  }
 
   gadgets.util.registerOnLoadHandler(initGadget);
 })(jQuery);
