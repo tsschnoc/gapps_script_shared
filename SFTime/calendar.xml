@@ -12,7 +12,7 @@
   <Require feature="dynamic-height"/>
   <Require feature="setprefs"/>
   <Require feature="minimessage"/>
-  
+  <Require feature="locked-domain"/>  
 </ModulePrefs> 
 
 <Content type="html">
