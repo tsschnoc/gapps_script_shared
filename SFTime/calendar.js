@@ -8,6 +8,7 @@
 
 
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
+// https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 
   function initGadget() {
     google.calendar.read.subscribeToEvents(subscribeEventsCallback);
@@ -205,7 +206,7 @@
       postdata = postdata.replace("**username**", prefs.getString("Username"));
       postdata = postdata.replace("**password**", prefs.getString("Password"));
       var SOAPAction = "testaction";
-      var url = "https://login.salesforce.com/services/Soap/u/20.0";
+      var url = "https://login.salesforce.com/services/Soap/u/23.0";
 //      url = prefs.getString("Loginurl");
       //  makeSOAPRequest(url, SOAPAction, postdata);
       (new SOAPRequest(url, SOAPAction, postdata, 1)).request();
@@ -282,7 +283,7 @@
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
@@ -318,7 +319,7 @@
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v20.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
+    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     
