@@ -324,10 +324,10 @@
     
     var ticket  = {};
 //    ticket.Id = 'a03G0000005fhqDIAQ';
-    ticket.Case__c = '500G0000008y77I';
-    ticket.Description__c = 'vom gadget';
-    ticket.Date__c = '2011-12-09';
-    ticket.TimeStart__c = '0800';
+//    ticket.Case__c = '500G0000008y77I';
+    ticket.Description__c = 'vom gadget _update';
+//    ticket.Date__c = '2011-12-09';
+//    ticket.TimeStart__c = '0800';
 
     
     var params = {};
