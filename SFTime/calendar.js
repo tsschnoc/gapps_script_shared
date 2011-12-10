@@ -272,7 +272,7 @@
 
 
   function sf_search_rest() {
-    var queryString = "Select Id, Name from Case";
+    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -297,7 +297,7 @@
         var option = $('<option />').attr({
           value: record.Id
         });
-        option.html(record.Name);
+        option.html(record.Description);
         console.log(option);
         $('select.Case').append(option);
       }
