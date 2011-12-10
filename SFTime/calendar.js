@@ -270,6 +270,46 @@
 
 
 
+  function sf_search_rest() {
+    var queryString = "Select Id, Name from Case";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v20.0/query/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      $('select.Case').empty();
+      for (var i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
+        var option = $('<option />').attr({
+          value: record.Id
+        });
+        option.html(record.Name);
+        console.log(option);
+        $('select.Case').append(option);
+      }
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
+  
+ 
+
+
+
 
 
 
