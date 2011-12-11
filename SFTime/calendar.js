@@ -109,7 +109,7 @@
       if (current_event != null) {
         $('#dialog').get(0).style.display = 'block';
       }
-      $('#Description').get(0).val('');
+//      $('#Description').get(0).val('');
       gadgets.window.adjustHeight();
       sf_queryCases();
     }
