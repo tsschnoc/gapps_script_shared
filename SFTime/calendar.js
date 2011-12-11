@@ -330,8 +330,8 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
 //    ticket.Id = 'a03G0000005fhqDIAQ';
     ticket.Case__c = caseId;
     ticket.Description__c = $('#Description').val();
-//    ticket.Date__c = '2011-12-09';
-//    ticket.TimeStart__c = '0800';
+    ticket.Date__c = '2011-12-09';
+    ticket.TimeStart__c = '0800';
 
     
     var params = {};
