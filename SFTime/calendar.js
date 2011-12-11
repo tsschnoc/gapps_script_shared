@@ -31,8 +31,11 @@
       //            fetttttch();
       console.debug($('#Case').val());
       
-      
-      sf_upsertTimeTicket();
+
+      var caseId = $('#Case').val();    
+      var caseDesc = $('option[value|="' + caseId + '"]').text();
+
+      sf_upsertTimeTicket(caseId, caseDesc);
       
 //      createEvent();
       return false;
@@ -312,21 +315,21 @@
     gadgets.io.makeRequest(callUrl, callback, params);
   }
   
-  function sf_upsertTimeTicket() {
-    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
+  function sf_upsertTimeTicket(caseId, caseDesc) {
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
-    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+//    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
-//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+//    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
+    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/";
+console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     
     var ticket  = {};
 //    ticket.Id = 'a03G0000005fhqDIAQ';
-//    ticket.Case__c = '500G0000008y77I';
-    ticket.Description__c = 'vom gadget _update';
+    ticket.Case__c = caseId;
+    ticket.Description__c = $('#Description').val();
 //    ticket.Date__c = '2011-12-09';
 //    ticket.TimeStart__c = '0800';
 
