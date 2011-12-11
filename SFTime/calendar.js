@@ -339,7 +339,7 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     ticket.Case__c = caseId;
     ticket.Description__c = $('#Description').val();
     ticket.Date__c = startDate;
-    ticket.TimeStart__c = '0800';
+    ticket.TimeStart__c = ((current_event.endTime.hour < 10) ? '0' + current_event.endTime.hour : current_event.endTime.hour) + '' + ((current_event.endTime.minute < 10) ? '0' + current_event.endTime.minute : current_event.endTime.minute);
 
     
     var params = {};
@@ -357,6 +357,10 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
         
     var callback = function(obj) {        
       console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
+        google.calendar.refreshEvents();
+        console.debug('events refreshed!');
+        google.calendar.showDate(2009, 12, 31);
+        google.calendar.showDate(current_event.startTime.year, current_event.startTime.month, current_event.startTime.date);
       
     };
         
