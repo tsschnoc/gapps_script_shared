@@ -12,7 +12,7 @@
 
   function initGadget() {
     google.calendar.read.subscribeToEvents(subscribeEventsCallback);
-    $.ui.dialog.defaults.bgiframe = true;
+//    $.ui.dialog.defaults.bgiframe = true;
     $.datepicker.setDefaults({
       dateFormat: 'yymmdd'
     });
