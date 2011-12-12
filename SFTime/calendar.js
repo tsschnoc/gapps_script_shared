@@ -314,7 +314,7 @@
 //    var searchTerm;
 ////////////////////////////////////
   function sf_searchCases() {
-    var queryString = "FIND {" + searchTerm +"}";
+    var queryString = "FIND {" + searchTerm.term +"}";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
