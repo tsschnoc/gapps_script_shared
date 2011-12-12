@@ -314,7 +314,7 @@
 //    var searchTerm;
 ////////////////////////////////////
   function sf_searchCases() {
-    var queryString = "FIND {" + searchTerm.term +"}";
+    var queryString = "FIND {" + searchTerm.term +"} RETURNING Case(Id, Description, CaseNumber)  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -333,18 +333,15 @@
     };
         
     var callback = function(obj) {        
-      $('select.Case').empty();
-      for (var i=0;i<obj.data.records.length;i++)  {
-        var record = obj.data.records[i];
-        var option = $('<option />').attr({
-          value: record.Id
-        });
-        option.html(record.Description!==null ? record.Description : record.CaseNumber);
-        console.log(option);
-        $('select.Case').append(option);
+      var arr = [];
+      for (var i=0;i<obj.data..length;i++)  {
+        var record = obj.data[i];
+        
+        arr.push({label:record.CaseNumber, value:record.Id});
       }
       
-      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      responseFunc(arr);
     };
         
         
