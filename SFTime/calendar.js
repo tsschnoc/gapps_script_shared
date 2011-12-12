@@ -5,6 +5,8 @@
 
   var token = null;
   var sfurl = null;
+    var responseFunc;
+    var searchTerm;
 
 
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
@@ -35,16 +37,14 @@
       var caseId = $('#Case').val();    
       var caseDesc = $('option[value|="' + caseId + '"]').text();
 
-      //sf_upsertTimeTicket(caseId, caseDesc);
-      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      sf_upsertTimeTicket(caseId, caseDesc);
+      //responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
 //      createEvent();
       return false;
     });
     
     
 /////////////////////////////////////////////    
-    var responseFunc;
-    var searchTerm;
    
     function log( message ) {
   		$( "<div/>" ).text( message ).prependTo( "#log" );
@@ -55,7 +55,7 @@
 			source: function( request, response ) {
 				responseFunc = response;
         searchTerm = request;
-        
+        sf_searchCases();        
 			},
 			minLength: 2,
 			select: function( event, ui ) {
@@ -308,7 +308,48 @@
   }
 
 
-
+////////////////////////////////////
+////////////////////////////////////
+//    var responseFunc;
+//    var searchTerm;
+////////////////////////////////////
+  function sf_searchCases() {
+    var queryString = "FIND {" + searchTerm +"}";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      $('select.Case').empty();
+      for (var i=0;i<obj.data.records.length;i++)  {
+        var record = obj.data.records[i];
+        var option = $('<option />').attr({
+          value: record.Id
+        });
+        option.html(record.Description!==null ? record.Description : record.CaseNumber);
+        console.log(option);
+        $('select.Case').append(option);
+      }
+      
+      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
 
 
 
