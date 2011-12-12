@@ -334,7 +334,7 @@
         
     var callback = function(obj) {        
       var arr = [];
-      for (var i=0;i<obj.data..length;i++)  {
+      for (var i=0;i<obj.data.length;i++)  {
         var record = obj.data[i];
         
         arr.push({label:record.CaseNumber, value:record.Id});
