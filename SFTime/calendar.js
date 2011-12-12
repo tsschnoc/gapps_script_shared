@@ -364,10 +364,7 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
               console.log("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);  
 
         setTimeout(refreshCode,2000);
-/*        console.debug('events refreshed!');
-        google.calendar.showDate(2009, 12, 31);
-        google.calendar.showDate(current_event.startTime.year, current_event.startTime.month, current_event.startTime.date);
-  */    
+        setTimeout(refreshCode,5000);
     };
         
         
