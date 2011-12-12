@@ -24,8 +24,8 @@
     <html>
       <head>
         <script src="https://www.google.com/jsapi"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.0/jquery.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
         <script type="text/javascript" src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/popup.js"></script>
         <style type="text/css">
           #main {
@@ -38,6 +38,12 @@
             padding: 0;
           }
           .invisible { display: none; }
+          
+          
+          
+.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+  #city { width: 25em; }          
+          
           
         </style>
       </head>
@@ -61,6 +67,22 @@
               <div>
                 <input type="text" name="Description" id="Description" /> 
               </div>
+
+
+<div class="demo">
+
+<div class="ui-widget">
+  <label for="city">Your city: </label>
+	<input id="city" />
+	Powered by <a href="http://geonames.org">geonames.org</a>
+</div>
+
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+	Result:
+	<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+
+</div><!-- End demo -->
 
               <input type="hidden" name="ctz" />
               <button class="generate">Save Event</button>
