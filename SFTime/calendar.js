@@ -340,8 +340,8 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     ticket.Case__c = caseId;
     ticket.Description__c = $('#Description').val();
     ticket.Date__c = startDate;
-    ticket.TimeStart__c = ((current_event.endTime.hour < 10) ? '0' + current_event.endTime.hour : current_event.endTime.hour) + '' + ((current_event.endTime.minute < 10) ? '0' + current_event.endTime.minute : current_event.endTime.minute);
-
+    ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
+    ticket.HoursWorked__c = (( current_event.endTime.hour * 60 + current_event.endTime.minute  ) - ( current_event.startTime.hour * 60  + current_event.startTime.minute )) / 60;
     
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
