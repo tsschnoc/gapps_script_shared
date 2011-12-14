@@ -333,6 +333,10 @@
     };
         
     var callback = function(obj) {        
+      if (obj.data == null) {
+        responseFunc([]);
+        return;
+      }
       var arr = [];
       for (var i=0;i<obj.data.length;i++)  {
         var record = obj.data[i];

@@ -37,6 +37,10 @@
             margin: 0;
             padding: 0;
           }
+          .ui-menu-item a {
+color: red ! important;
+font-size: small;
+}
           .invisible { display: none; }
           
           
