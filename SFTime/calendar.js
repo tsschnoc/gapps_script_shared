@@ -314,7 +314,7 @@
 //    var searchTerm;
 ////////////////////////////////////
   function sf_searchCases() {
-    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Case(Id, Description, CaseNumber)  ";
+    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -337,7 +337,7 @@
       for (var i=0;i<obj.data.length;i++)  {
         var record = obj.data[i];
         
-        arr.push({label:record.CaseNumber, value:record.Id});
+        arr.push({label:record.Subject, value:record.Id});
       }
       
 //      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
