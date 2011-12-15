@@ -52,12 +52,12 @@
 		}
 
 		$( "#city" ).autocomplete({
-      max-height: 100px;
-  	  overflow-y: auto;
+      max-height: 100px,
+  	  overflow-y: auto,
 		  /* prevent horizontal scrollbar */
-		  overflow-x: hidden;
+		  overflow-x: hidden,
 		  /* add padding to account for vertical scrollbar */
-		  padding-right: 20px;      
+		  padding-right: 20px,      
       
 			source: function( request, response ) {
 				responseFunc = response;
