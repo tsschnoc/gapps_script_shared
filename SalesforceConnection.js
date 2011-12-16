@@ -243,7 +243,7 @@ SalesforceConnection.prototype.insertToSf =
 Logger.log("ct: \n" + ct);
     var payload = JSON.stringify(stmt);
 Logger.log("queryUrl: \n" + queryUrl);
-//queryUrl='http://preview.parxwerk.ch:9292/dfdf';
+queryUrl='http://preview.parxwerk.ch:9292/testtesttest';
 //Logger.log("queryUrl: \n" + queryUrl);
     Logger.log("Authorization: \n" + "OAuth " + sessionId);
     Logger.log("ContentType: \n" + "application/json; charset=utf-8");
