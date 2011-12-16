@@ -136,6 +136,9 @@
   }
 
   function subscribeEventsCallback(e) {
+    
+    google.calendar.read.refreshEvents();
+    
     var html = 'No event';
     if (e) {
       current_event = e;
