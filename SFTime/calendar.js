@@ -137,7 +137,7 @@
 
   function subscribeEventsCallback(e) {
     
-    google.calendar.refreshEvents();
+    google.calendar.showDate(2011, 12, 12);
     
     var html = 'No event';
     if (e) {
