@@ -13,6 +13,10 @@
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 
   function initGadget() {
+    console.debug('bubblemain}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}££££££££££££££££££££££££££££££');
+    console.debug($(".bubblemain")    );
+    
+    
     google.calendar.read.subscribeToEvents(subscribeEventsCallback);
 //    $.ui.dialog.defaults.bgiframe = true;
     $.datepicker.setDefaults({
