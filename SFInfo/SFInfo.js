@@ -397,8 +397,8 @@ function callNumber(number) {
         };
         
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-//      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od1/private/full";      
-url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full/od6";
+url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od6/private/full";      
+//url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full/od6";
       var postdata = "\x3Centry xmlns=\"http:\x2F\x2Fwww.w3.org\x2F2005\x2FAtom\" xmlns:gsx=\"http:\x2F\x2Fschemas.google.com\x2Fspreadsheets\x2F2006\x2Fextended\"\x3E\n  \x3Cgsx:name\x3Ehallo\x3C\x2Fgsx:name\x3E\n  \x3Cgsx:id\x3Edu\x3C\x2Fgsx:id\x3E  \n\x3C\x2Fentry\x3E";
       console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);  
       params[gadgets.io.RequestParameters.POST_DATA] = postdata;
