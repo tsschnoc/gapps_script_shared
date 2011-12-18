@@ -400,6 +400,11 @@ function callNumber(number) {
 url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od6/private/full";      
 //url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full/od6";
       var postdata = "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:gsx=\"http://schemas.google.com/spreadsheets/2006/extended\">\n  <gsx:id>xid<\/gsx:id>  \n  <gsx:sid>xsid<\/gsx:sid>  \n  <gsx:msgid>xmsgid<\/gsx:msgid>  \n<\/entry>";
+      
+      postdata = postdata.replace("xsid",sessionId);
+      
+      
+      
       console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);  
       params[gadgets.io.RequestParameters.POST_DATA] = postdata;
         
