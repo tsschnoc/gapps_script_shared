@@ -379,7 +379,7 @@ function callNumber(number) {
 
 
 
-     function sf_attach_rest() {
+     function sf_attach_rest(url, sessionId, id) {
       var params = {};
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full?alt=json";
       //url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od4/private/full?alt=json";
