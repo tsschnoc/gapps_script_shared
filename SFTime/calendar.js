@@ -135,10 +135,9 @@
     calendar.getAllCalendarsFeed('http://www.google.com/calendar/feeds/default/allcalendars/full', callback, callback);
   }
 
-  function subscribeEventsCallback(e) {
-    
-    google.calendar.showDate(2011, 12, 5);
-    google.calendar.showDate(2011, 12, 12);
+  function subscribeEventsCallback(e) {    
+//    google.calendar.showDate(2011, 12, 5);
+//    google.calendar.showDate(2011, 12, 12);
     
     var html = 'No event';
     if (e) {
