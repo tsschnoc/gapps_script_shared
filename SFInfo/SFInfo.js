@@ -384,8 +384,8 @@ function callNumber(number) {
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full?alt=json";
       //url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od4/private/full?alt=json";
 
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-//      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
+//      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
       params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
       params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
 //      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
