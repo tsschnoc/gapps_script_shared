@@ -402,6 +402,8 @@ url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb
       var postdata = "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:gsx=\"http://schemas.google.com/spreadsheets/2006/extended\">\n  <gsx:id>xid<\/gsx:id>  \n  <gsx:sid>xsid<\/gsx:sid>  \n  <gsx:msgid>xmsgid<\/gsx:msgid>  \n<\/entry>";
       
       postdata = postdata.replace("xsid",sessionId);
+      postdata = postdata.replace("xmsgid",message_id);
+      postdata = postdata.replace("xid",id);
       
       
       
