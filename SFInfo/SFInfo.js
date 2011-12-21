@@ -379,7 +379,7 @@ function callNumber(number) {
 
 
 
-     function sf_attach_restSpread(url, sessionId, parentid, msg_id) {
+     function sf_attach_restSpread(sfurl, sessionId, parentid, msg_id) {
       var params = {};
       var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/private/full?alt=json";
       //url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od4/private/full?alt=json";
@@ -402,7 +402,7 @@ url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb
       var postdata = "<entry xmlns=\"http://www.w3.org/2005/Atom\" xmlns:gsx=\"http://schemas.google.com/spreadsheets/2006/extended\">\n  <gsx:id>xid<\/gsx:id>  \n  <gsx:sid>xsid<\/gsx:sid>  \n  <gsx:msgid>xmsgid<\/gsx:msgid><gsx:url>xurl<\/gsx:url>  \n<\/entry>";
       
       postdata = postdata.replace("xsid",sessionId);
-      postdata = postdata.replace("xurl",url);
+      postdata = postdata.replace("xurl",sfurl);
       postdata = postdata.replace("xmsgid",msg_id);
       postdata = postdata.replace("xid",parentid);
       
