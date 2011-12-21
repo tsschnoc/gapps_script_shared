@@ -198,7 +198,7 @@ SalesforceConnection.prototype.readObjects = function() {
 
 SalesforceConnection.prototype.insertSObject = 
   function(sf_objectname, insertSObject) {
-  if (this._authinfo === null) {
+  if (this._authinfo == null) {
     this.login();
   }
   var queryUrl = this._authinfo.restServerUrl + 
@@ -222,7 +222,7 @@ SalesforceConnection.prototype.insertSObject =
 SalesforceConnection.prototype.insertToSf = 
   function(sf_objectname, fieldNames, records) {
   
-  if (this._authinfo === null) {
+  if (this._authinfo == null) {
     this.login();
   }
   var stmts = [];
@@ -266,7 +266,7 @@ Logger.log("queryUrl: \n" + queryUrl);
 SalesforceConnection.prototype.updateSfRecord = 
   function(sf_objectname, fieldNames, records) {
   
-  if (this._authinfo === null) {
+  if (this._authinfo == null) {
     this.login();
   }
   var stmts = [];
