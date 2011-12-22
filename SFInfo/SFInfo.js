@@ -83,9 +83,14 @@ dnd_init();
 			},
 			minLength: 2,
 			select: function( event, ui ) {
-				alert( ui.item ?
+/*				alert( ui.item ?
 					"Selected: " + ui.item.label :
 					"Nothing selected, input was " + this.value);
+*/          
+        if (ui.item != null) {
+          sf_attach_rest(sfurl, token,ui.item.value);
+        }
+                  
 			},
 			open: function() {
 				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
