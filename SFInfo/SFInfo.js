@@ -6,6 +6,11 @@ var token = null;
 var sfurl = null;
 var sfportalurl = null;
 
+
+    var responseFunc;
+    var searchTerm;
+
+
 var matches = google.contentmatch.getContentMatches();
 var matchList = document.createElement('UL');
 var listItem;
@@ -46,8 +51,6 @@ _IG_RegisterOnloadHandler(function() {
   var password;
   
   
-    var responseFunc;
-    var searchTerm;
   
   
   $(document).ready(function() {
