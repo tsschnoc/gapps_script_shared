@@ -55,7 +55,7 @@ dnd_init();
 //      return;
       username = $("#username").val();
       password = $("#password").val();
-      alert("jQuery works, you entered- " + sender_email + username + password);
+//      alert("jQuery works, you entered- " + sender_email + username + password);
    
       var prefs = new gadgets.Prefs();
       prefs.set("Username", username);
@@ -88,35 +88,6 @@ function showOneSection(toshow) {
         }
       }
     }
-
-
-     function postData() {
-      var params = {};
-      var url = "https://spreadsheets.google.com/feeds/worksheets/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/private/full?alt=json";
-      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full?alt=json";
-
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
-      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
-      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
-//      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-      params[gadgets.io.RequestParameters.HEADERS] = {
-          "X-PrettyPrint": "1",
-          "GData-Version": "3.0",
-          "Content-Type": "application/atom+xml"
-        };
-        
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-      url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdGUxMVRfTmZHMVcwd0RqZUZnU1E3SHc/od4/private/full";      
-      var postdata = "\x3Centry xmlns=\"http:\x2F\x2Fwww.w3.org\x2F2005\x2FAtom\" xmlns:gsx=\"http:\x2F\x2Fschemas.google.com\x2Fspreadsheets\x2F2006\x2Fextended\"\x3E\n  \x3Cgsx:name\x3Ehallo\x3C\x2Fgsx:name\x3E\n  \x3Cgsx:id\x3Edu\x3C\x2Fgsx:id\x3E  \n\x3C\x2Fentry\x3E";
-      console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);  
-      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-        
-      gadgets.io.makeRequest(url, function (response) {
-        console.log("!!!!!!!!!!!!!!!!!! response :" + response);  
-      }, params);
-    
-    }   
 
 
     function fetchData() {

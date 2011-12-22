@@ -61,6 +61,22 @@
   .ui-state-active, .ui-widget-content .ui-state-active { border: 1px solid #fbd850; background: #ffffff; font-weight: bold; color: #eb8f00; outline: none; }
 
   .invisible { display: none; }
+  
+  
+
+.ui-autocomplete {
+    max-height: 100px;
+  	overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+width: 150px ! important;
+font-size: 8px;
+}  
+  
+  
+  
 </style>
 
 <div class="credentials">
@@ -75,6 +91,22 @@
 <div class="draggable ui-widget-content">
 	eMail
 </div>
+</div><!-- End demo -->
+
+
+<div class="demo">
+
+<div class="ui-widget">
+  <label for="city">Your city: </label>
+  <input id="city" />
+	Powered by <a href="http://geonames.org">geonames.org</a>
+</div>
+
+<div class="ui-widget" style="margin-top:2em; font-family:Arial">
+	Result:
+	<div id="log" style="height: 200px; width: 300px; overflow: auto;" class="ui-widget-content"></div>
+</div>
+
 </div><!-- End demo -->
 
  <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
