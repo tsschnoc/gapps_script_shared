@@ -46,6 +46,10 @@ _IG_RegisterOnloadHandler(function() {
   var password;
   
   
+    var responseFunc;
+    var searchTerm;
+  
+  
   $(document).ready(function() {
 
 dnd_init();
@@ -64,6 +68,30 @@ dnd_init();
       
       readSFData();
     });
+    
+    
+    
+////////////////////////    
+  	$( "#city" ).autocomplete({
+			source: function( request, response ) {
+				responseFunc = response;
+        searchTerm = request;
+        sf_searchCases();        
+			},
+			minLength: 2,
+			select: function( event, ui ) {
+				log( ui.item ?
+					"Selected: " + ui.item.label :
+					"Nothing selected, input was " + this.value);
+			},
+			open: function() {
+				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+			},
+			close: function() {
+				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
+			}
+		});
+////////////////    
 
   readSFData();
   
@@ -74,6 +102,50 @@ dnd_init();
 });
 
 
+
+
+////////////////////////////////////
+  function sf_searchCases() {
+    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      if (obj.data == null) {
+        responseFunc([]);
+        return;
+      }
+      var arr = [];
+      for (var i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
+        
+        arr.push({label:record.Subject, value:record.Id});
+      }
+      
+//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      responseFunc(arr);
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
+
+
+//////////////////////////////
 
 
 function showOneSection(toshow) {
