@@ -83,7 +83,7 @@ dnd_init();
 			},
 			minLength: 2,
 			select: function( event, ui ) {
-				log( ui.item ?
+				alert( ui.item ?
 					"Selected: " + ui.item.label :
 					"Nothing selected, input was " + this.value);
 			},
