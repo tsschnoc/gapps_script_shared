@@ -78,7 +78,10 @@ dnd_init();
 
   $( "#attachbutton" ).button();
   $( "#attachbutton" ).button( "disable" );
-//  $( "#attachbutton" ).click(function() { alert("hallo"); return false; });
+  $( "#attachbutton" ).click(function() { 
+    alert($( "#contactsearch" ).val());
+    alert($( 'select.Opp') ).val());
+  });
 
   $( "#contactsearch" ).autocomplete({
 			source: function( request, response ) {
@@ -94,6 +97,7 @@ dnd_init();
 */          
         if (ui.item != null) {
 //          sf_attach_rest(sfurl, token,ui.item.value);
+          $( "#attachbutton" ).button( "enable" );
           sf_queryOpps(ui.item.record);
           $( "#contactsearch" ).val( ui.item.label );    
           return false;
