@@ -117,7 +117,7 @@ dnd_init();
 				.appendTo( ul );
 		};
 
-  $( "#contactsearch" ).autocomplete( "search", "thomas.schnocklake@parx.com");    
+//  $( "#contactsearch" ).autocomplete( "search", "thomas.schnocklake@parx.com");    
 ////////////////    
 
   readSFData();
