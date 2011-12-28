@@ -80,7 +80,7 @@ dnd_init();
   $( "#attachbutton" ).button( "disable" );
   $( "#attachbutton" ).click(function() { 
     alert($( "#contactsearch" ).val());
-    alert($( 'select.Opp') ).val());
+    alert($( 'select.Opp').val());
   });
 
   $( "#contactsearch" ).autocomplete({
