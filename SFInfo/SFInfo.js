@@ -201,19 +201,16 @@ dnd_init();
     };
         
     var callback = function(obj) {        
-      if (obj.data == null) {
-        responseFunc([]);
-        return;
+      $('select.Case').empty();
+      for (var i=0;i<obj.data.records.length;i++)  {
+        var record = obj.data.records[i];
+        var option = $('<option />').attr({
+          value: record.Id
+        });
+        option.html(record.Name);
+        console.log(option);
+        $('select.Case').append(option);
       }
-      var arr = [];
-      for (var i=0;i<obj.data.length;i++)  {
-        var record = obj.data[i];
-        
-        arr.push({label:record.Name, value:record.Id, record:record});
-      }
-      
-//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
-      responseFunc(arr);
     };
         
         
