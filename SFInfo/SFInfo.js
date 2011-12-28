@@ -106,7 +106,7 @@ dnd_init();
 		}).data( "autocomplete" )._renderItem = function( ul, item ) {
   		return $( "<li></li>" )
 				.data( "item.autocomplete", item )
-				.append( "<a>" + item.label + "<br>" + "test" + "</a>" )
+				.append( "<a>" + item.label + "<br>" + item.AccName + "</a>" )
 				.appendTo( ul );
 		};
 ////////////////    
@@ -124,7 +124,7 @@ dnd_init();
 
 ////////////////////////////////////
   function sf_searchCases() {
-    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Contact(Id, Name)  ";
+    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Contact(Id, Name, Account.Name)  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -151,7 +151,7 @@ dnd_init();
       for (var i=0;i<obj.data.length;i++)  {
         var record = obj.data[i];
         
-        arr.push({label:record.Name, value:record.Id});
+        arr.push({label:record.Name, value:record.Id, AccName:record.Account.Name});
       }
       
 //      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
