@@ -575,7 +575,7 @@ url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb
     task.Status = 'Abgeschlossen';
     
     if (whatid != null) {
-      task.What = whatid;
+      task.WhatId = whatid;
     }
 
   
