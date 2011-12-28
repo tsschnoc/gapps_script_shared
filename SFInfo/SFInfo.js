@@ -75,7 +75,7 @@ dnd_init();
     
     
 ////////////////////////    
-  	$( "#city" ).autocomplete({
+  	$( "#contactsearch" ).autocomplete({
 			source: function( request, response ) {
 				responseFunc = response;
         searchTerm = request;
@@ -89,12 +89,12 @@ dnd_init();
 */          
         if (ui.item != null) {
           sf_attach_rest(sfurl, token,ui.item.value);
-          $( "#city" ).val( ui.item.label );    
+          $( "#contactsearch" ).val( ui.item.label );    
           return false;
         }
 			},
       focus: function( event, ui ) {
-  			$( "#city" ).val( ui.item.label );
+  			$( "#contactsearch" ).val( ui.item.label );
 				return false;
 			},      
 			open: function() {

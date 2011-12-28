@@ -97,8 +97,8 @@ font-size: 12px;
 <div class="demo">
 
 <div class="ui-widget">
-  <label for="city">Search: </label>
-  <input id="city" />
+  <label for="contactsearch">Search Contact: </label>
+  <input id="contactsearch" />
 </div>
 
 </div><!-- End demo -->
