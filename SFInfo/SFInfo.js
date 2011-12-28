@@ -76,7 +76,7 @@ dnd_init();
     
 ////////////////////////    
 
-  $( "#attachbutton" ).button();
+  $( "#attachbutton" ).button( "disable" )
   $( "#attachbutton" ).click(function() { alert("hallo"); return false; });
 
   $( "#contactsearch" ).autocomplete({
