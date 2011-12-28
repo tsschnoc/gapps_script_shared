@@ -81,6 +81,8 @@ dnd_init();
   $( "#attachbutton" ).click(function() { 
     alert($( "#contactid" ).val());
     alert($( 'select.Opp').val());
+          sf_attach_rest(sfurl, token,$( "#contactid" ).val(), $( 'select.Opp').val());
+    
   });
 
   $( "#contactsearch" ).autocomplete({
@@ -558,7 +560,7 @@ url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb
 
 
 
-  function sf_attach_rest(url, sessionId, id) {
+  function sf_attach_rest(url, sessionId, id, whatid) {
     var restServerUrl = url.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -571,6 +573,10 @@ url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb
     task.Subject = subject;
     task.WhoId = id;
     task.Status = 'Abgeschlossen';
+    
+    if (whatid != null) {
+      task.What = whatid;
+    }
 
   
     var params = {};
