@@ -104,9 +104,10 @@ dnd_init();
 				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
 			}
 		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+      var line = "<a>" + item.label + "<br>" + item.record.Account.Name + "</a>";
   		return $( "<li></li>" )
 				.data( "item.autocomplete", item )
-				.append( "<a>" + item.label + "<br>" + item.AccName + "</a>" )
+				.append( line )
 				.appendTo( ul );
 		};
 ////////////////    
@@ -151,7 +152,7 @@ dnd_init();
       for (var i=0;i<obj.data.length;i++)  {
         var record = obj.data[i];
         
-        arr.push({label:record.Name, value:record.Id, AccName:record.Account.Name});
+        arr.push({label:record.Name, value:record.Id, record:record});
       }
       
 //      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
