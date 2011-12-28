@@ -131,7 +131,7 @@ dnd_init();
 
 ////////////////////////////////////
   function sf_searchCases() {
-    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Contact(Id, Name, Account.Name)  ";
+    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Contact(Id, Name, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, Firstname, Lastname, Account.Name, Account.Id)  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
