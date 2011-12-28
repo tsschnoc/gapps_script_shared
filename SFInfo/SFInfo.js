@@ -104,7 +104,13 @@ dnd_init();
 				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
 			}
 		}).data( "autocomplete" )._renderItem = function( ul, item ) {
-      var line = "<a>" + item.label + "<br>" + item.record.Account.Name + "</a>";
+      if (item.record.Account != null){
+        var line2 = item.record.Account.Name;
+		  }
+      else {
+        var line2 = "-";
+      }    
+      var line = "<a>" + item.label + "<br>" + line2 + "</a>";
   		return $( "<li></li>" )
 				.data( "item.autocomplete", item )
 				.append( line )
