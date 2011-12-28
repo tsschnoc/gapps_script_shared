@@ -94,6 +94,7 @@ dnd_init();
 */          
         if (ui.item != null) {
 //          sf_attach_rest(sfurl, token,ui.item.value);
+          sf_queryOpps(ui.item.record);
           $( "#contactsearch" ).val( ui.item.label );    
           return false;
         }
@@ -175,6 +176,52 @@ dnd_init();
         
     gadgets.io.makeRequest(callUrl, callback, params);
   }
+
+
+
+
+
+  function sf_queryOpps(record) {
+    var queryString = "SELECT Id, Name from Opportunity where AccountId = \"" + record.Account.Id + "\"  ";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      if (obj.data == null) {
+        responseFunc([]);
+        return;
+      }
+      var arr = [];
+      for (var i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
+        
+        arr.push({label:record.Name, value:record.Id, record:record});
+      }
+      
+//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      responseFunc(arr);
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
+
+
+
 
 
 //////////////////////////////
