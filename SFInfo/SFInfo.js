@@ -75,7 +75,7 @@ dnd_init();
     
     
 ////////////////////////    
-  	$( "#contactsearch" ).autocomplete({
+  $( "#contactsearch" ).autocomplete({
 			source: function( request, response ) {
 				responseFunc = response;
         searchTerm = request;
@@ -116,6 +116,8 @@ dnd_init();
 				.append( line )
 				.appendTo( ul );
 		};
+
+  $( "#contactsearch" ).autocomplete( "search", "thomas.schnocklake@parx.com");    
 ////////////////    
 
   readSFData();
