@@ -92,6 +92,10 @@ dnd_init();
         }
                   
 			},
+      focus: function( event, ui ) {
+  			$( "#city" ).val( ui.item.label );
+				return false;
+			},      
 			open: function() {
 				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 			},
