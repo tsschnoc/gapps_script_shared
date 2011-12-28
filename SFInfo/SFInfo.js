@@ -79,8 +79,8 @@ dnd_init();
   $( "#attachbutton" ).button();
   $( "#attachbutton" ).button( "disable" );
   $( "#attachbutton" ).click(function() { 
-    alert($( "#contactid" ).val());
-    alert($( 'select.Opp').val());
+//    alert($( "#contactid" ).val());
+//    alert($( 'select.Opp').val());
           sf_attach_rest(sfurl, token,$( "#contactid" ).val(), $( 'select.Opp').val());
     
   });
