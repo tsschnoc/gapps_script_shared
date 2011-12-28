@@ -118,6 +118,7 @@ dnd_init();
 		};
 
 //  $( "#contactsearch" ).autocomplete( "search", "thomas.schnocklake@parx.com");    
+    $( "#contactsearch" ).autocomplete( "disable" );
 ////////////////    
 
   readSFData();
