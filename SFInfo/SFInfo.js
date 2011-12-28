@@ -182,7 +182,7 @@ dnd_init();
 
 
   function sf_queryOpps(record) {
-    var queryString = "SELECT Id, Name from Opportunity where AccountId = \"" + record.Account.Id + "\"  ";
+    var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "'  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
