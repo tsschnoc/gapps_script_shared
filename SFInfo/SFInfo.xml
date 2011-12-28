@@ -160,12 +160,9 @@ zoom: 1;
 </div>
 
 <div class="ui-widget">
-  <label for="Case">Case</label>
-  <select id="Case" name="Case" class="Case">
+  <label for="Opp">Opp</label>
+  <select id="Opp" name="Opp" class="Opp">
   </select>
-                
-  <label for="relatedsearch">Search Related: </label>
-  <input id="relatedsearch" />
 </div>
 
 <div class="ui-widget">

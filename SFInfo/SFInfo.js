@@ -84,7 +84,7 @@ dnd_init();
 			source: function( request, response ) {
 				responseFunc = response;
         searchTerm = request;
-        sf_searchCases();        
+        sf_searchContacts();        
 			},
 			minLength: 2,
 			select: function( event, ui ) {
@@ -138,7 +138,7 @@ dnd_init();
 
 
 ////////////////////////////////////
-  function sf_searchCases() {
+  function sf_searchContacts() {
     var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Contact(Id, Name, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, Firstname, Lastname, Account.Name, Account.Id)  ";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
@@ -201,7 +201,7 @@ dnd_init();
     };
         
     var callback = function(obj) {        
-      $('select.Case').empty();
+      $('select.Opp').empty();
       for (var i=0;i<obj.data.records.length;i++)  {
         var record = obj.data.records[i];
         var option = $('<option />').attr({
@@ -209,7 +209,7 @@ dnd_init();
         });
         option.html(record.Name);
         console.log(option);
-        $('select.Case').append(option);
+        $('select.Opp').append(option);
       }
     };
         
