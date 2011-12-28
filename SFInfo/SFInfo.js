@@ -89,8 +89,9 @@ dnd_init();
 */          
         if (ui.item != null) {
           sf_attach_rest(sfurl, token,ui.item.value);
+          $( "#city" ).val( ui.item.label );    
+          return false;
         }
-        $( "#city" ).val( ui.item.label );          
 			},
       focus: function( event, ui ) {
   			$( "#city" ).val( ui.item.label );
