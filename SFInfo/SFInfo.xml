@@ -102,6 +102,13 @@ font-size: 12px;
   <input id="contactsearch" />
 </div>
 
+<div class="ui-widget">
+  <label for="relatedsearch">Search Related: </label>
+  <input id="relatedsearch" />
+</div>
+
+<input type="Attach" value="Attach">
+
 </div><!-- End demo -->
 
  <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
