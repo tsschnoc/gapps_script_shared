@@ -120,7 +120,7 @@ dnd_init();
 ////////////////    
 
   readSFData();
-  $( "#contactsearch" ).autocomplete( "search", "thomas.schnocklake@parx.com");    
+  
   
   fetchData();
 
@@ -433,7 +433,7 @@ dnd_init();
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
         
         $(".credentials").addClass("invisible");
-        
+$( "#contactsearch" ).autocomplete( "search", sender_email);    
         sf_search_rest(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
       }
     };
