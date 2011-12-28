@@ -79,7 +79,7 @@ dnd_init();
   $( "#attachbutton" ).button();
   $( "#attachbutton" ).button( "disable" );
   $( "#attachbutton" ).click(function() { 
-    alert($( "#contactsearch" ).val());
+    alert($( "#contactid" ).val());
     alert($( 'select.Opp').val());
   });
 
@@ -100,13 +100,14 @@ dnd_init();
           $( "#attachbutton" ).button( "enable" );
           sf_queryOpps(ui.item.record);
           $( "#contactsearch" ).val( ui.item.label );    
+          $( "#contactid" ).val( ui.item.value );
           return false;
         }
 			},
-      focus: function( event, ui ) {
-  			$( "#contactsearch" ).val( ui.item.label );
-				return false;
-			},      
+//      focus: function( event, ui ) {
+//  			$( "#contactsearch" ).val( ui.item.label );
+//				return false;
+//			},      
 			open: function() {
 				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
 			},
