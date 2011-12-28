@@ -107,7 +107,7 @@ font-size: 12px;
   <input id="relatedsearch" />
 </div>
 
-<input type="Attach" value="Attach">
+<input type="Attach" value="Attach" id="attachbutton">
 
 </div><!-- End demo -->
 

@@ -75,6 +75,10 @@ dnd_init();
     
     
 ////////////////////////    
+
+  $( "#attachbutton" ).button();
+  $( "#attachbutton" ).click(function() { alert("hallo"); return false; });
+
   $( "#contactsearch" ).autocomplete({
 			source: function( request, response ) {
 				responseFunc = response;
