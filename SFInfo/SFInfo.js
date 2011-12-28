@@ -202,6 +202,14 @@ dnd_init();
         
     var callback = function(obj) {        
       $('select.Opp').empty();
+      var option = $('<option />').attr({
+          value: null
+        });
+      option.html("");
+      $('select.Opp').append(option);      
+      
+      
+      
       for (var i=0;i<obj.data.records.length;i++)  {
         var record = obj.data.records[i];
         var option = $('<option />').attr({
