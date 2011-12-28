@@ -93,7 +93,7 @@ dnd_init();
 					"Nothing selected, input was " + this.value);
 */          
         if (ui.item != null) {
-          sf_attach_rest(sfurl, token,ui.item.value);
+//          sf_attach_rest(sfurl, token,ui.item.value);
           $( "#contactsearch" ).val( ui.item.label );    
           return false;
         }
