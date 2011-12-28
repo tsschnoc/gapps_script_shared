@@ -103,7 +103,12 @@ dnd_init();
 			close: function() {
 				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
 			}
-		});
+		}).data( "autocomplete" )._renderItem = function( ul, item ) {
+  		return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + item.label + "<br>" + "test" + "</a>" )
+				.appendTo( ul );
+		};
 ////////////////    
 
   readSFData();
