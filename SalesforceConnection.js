@@ -263,6 +263,58 @@ Logger.log("queryUrl: \n" + queryUrl);
   });
 };
 
+
+SalesforceConnection.prototype.updateSfFromFields = 
+  function(sf_objectname, fieldNames, records) {
+  
+  if (this._authinfo == null) {
+    this.login();
+  }
+  var stmts = [];
+  Logger.log(fieldNames);
+  records.forEach(function(record, i) {
+    var stmt = {};
+    record.forEach(function(value, j) {
+        insertToSObject(stmt, fieldNames[j], value);
+    });
+    Logger.log("JSON: " + JSON.stringify(stmt));
+    stmts.push(stmt);
+  });
+  var queryUrl = 
+    this._authinfo.restServerUrl + "/services/data/v20.0/sobjects/"  + encodeURIComponent(sf_objectname) + "/";
+  var sessionId = this._authinfo.sessionId;
+  stmts.forEach(function(stmt, j) {
+    var id = stmt.Id;
+    delete stmt.Id;
+    Logger.log(stmt);
+    var ct = "application/json;charset=ISO-8859-1";
+    
+    var payload = JSON.stringify(stmt);
+    
+    
+    Logger.log("Authorization: \n" + "OAuth " + sessionId);
+    Logger.log("ContentType: \n" + "application/json; charset=utf-8");
+    Logger.log("payload: \n" + payload);
+    Logger.log("queryUrl+ id: \n" + queryUrl+ id);
+    var response = UrlFetchApp.fetch(queryUrl+ id+ "?_HttpMethod=PATCH",
+    {
+      method: "POST",
+      headers: {
+        "Authorization": "OAuth " + sessionId,
+        "Content-Type": ct
+      },
+      contentType: ct,
+      payload: payload
+    });
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    Logger.log(queryResult);
+  });
+};
+
+
+
+
+
 SalesforceConnection.prototype.updateSfRecord = 
   function(sf_objectname, fieldNames, records) {
   
