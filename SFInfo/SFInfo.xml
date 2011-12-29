@@ -79,7 +79,7 @@ font-size: 12px;
 
 .ui-button-disabled {
   color: gray ! important;
-  cursor: auto;
+  cursor: default;
 }
 .ui-button {
   color: black;
