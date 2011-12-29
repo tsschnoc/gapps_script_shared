@@ -60,15 +60,11 @@ var startupfunc = function() {
       //    alert($( 'select.Opp').val());
       sf_attach_rest(sfurl, token, $("#contactid").val(), $('select.Opp').val());
     });
-    $("#contactsearch").click(function(){
-        // Select input field contents
-        this.select();
-        return false;
-    });    
+    
     $("#contactsearch").focus(function(){
         // Select input field contents
         this.select();
-        return false;
+        return true;
     });    
     $("#contactsearch").autocomplete({
       source: function(request, response) {
