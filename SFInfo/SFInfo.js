@@ -61,7 +61,7 @@ var startupfunc = function() {
       sf_attach_rest(sfurl, token, $("#contactid").val(), $('select.Opp').val());
     });
     
-    $("#contactsearch").focus(function(){
+    $("#contactsearch").click(function(){
         // Select input field contents
         this.select();
         return true;
