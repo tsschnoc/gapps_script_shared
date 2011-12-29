@@ -35,7 +35,7 @@ document.body.appendChild(matchList);
 gadgets.window.adjustHeight(200);
 google.load("jquery", "1");
 google.load("jqueryui", "1");
-_IG_RegisterOnloadHandler(function() {
+var startupfunc = function() {
   // Put Jquery here
   var username;
   var password;
@@ -105,7 +105,9 @@ _IG_RegisterOnloadHandler(function() {
     readSFData();
     fetchData();
   });
-});
+}
+
+_IG_RegisterOnloadHandler(startupfunc);
 ////////////////////////////////////
 
 function sf_searchContacts() {
