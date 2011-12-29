@@ -78,10 +78,10 @@ font-size: 12px;
 
 
 .ui-button-disabled {
-color: gray;
+  color: gray ! important;
 }
 .ui-button {
-color: black;
+  color: black;
 
 background-attachment: scroll;
 background-clip: border-box;
