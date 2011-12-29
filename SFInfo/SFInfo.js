@@ -452,7 +452,8 @@ function sf_attach_restSpread(sfurl, sessionId, parentid, msg_id) {
   console.log("!!!!!!!!!!!!!!!!!! postdata :" + postdata);
   params[gadgets.io.RequestParameters.POST_DATA] = postdata;
   gadgets.io.makeRequest(url, function(obj) {
-    if (obj.errors[0] == "400 Error") {
+//    if (obj.errors[0] == "400 Error") {
+    if (obj.errors.length>0) {
       var prefs = new gadgets.Prefs();
       prefs.set("sheeturl", '');  
     }
