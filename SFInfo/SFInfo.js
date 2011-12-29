@@ -427,7 +427,7 @@ function sf_attach_restSpread(sfurl, sessionId, parentid, msg_id) {
   var prefs = new gadgets.Prefs();
   var url = prefs.getString("sheeturl");
   
-  if (url == null) {
+  if (url == null || url == "") {
     url = prompt("sheeturl","https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od6/private/full");
     prefs.set("sheeturl", url);
   }

@@ -42,6 +42,7 @@
   <UserPref name="Username" display_name="SF Username" datatype="string"/>
   <UserPref name="Password" display_name="SF Password" datatype="string"/>  
   <UserPref name="Loginurl" display_name="SF Login URL" datatype="string"/>
+  <UserPref name="sheeturl" display_name="sheeturl" datatype="string"/>
 
 
 
