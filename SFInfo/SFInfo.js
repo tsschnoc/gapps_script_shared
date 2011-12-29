@@ -60,6 +60,9 @@ var startupfunc = function() {
       //    alert($( 'select.Opp').val());
       sf_attach_rest(sfurl, token, $("#contactid").val(), $('select.Opp').val());
     });
+    $("#contactsearch").click(function() {
+          alert("tue was!");     
+    });
     $("#contactsearch").autocomplete({
       source: function(request, response) {
         responseFunc = response;
