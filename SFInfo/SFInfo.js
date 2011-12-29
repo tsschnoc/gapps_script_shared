@@ -98,7 +98,7 @@ var startupfunc = function() {
       else {
         var line2 = "-";
       }
-      var line = "<a>" + item.label + "<br>" + line2 + "</a>";
+      var line = "<a>" + item.label + " --- " + line2 + "</a>";
       return $("<li></li>").data("item.autocomplete", item).append(line).appendTo(ul);
     };
     ////////////////    
