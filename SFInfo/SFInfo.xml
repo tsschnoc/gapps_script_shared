@@ -77,10 +77,16 @@ font-size: 12px;
 }  
 
 
+.ui-button-disabled {
+color: gray;
+}
 .ui-button {
+color: black;
+
 background-attachment: scroll;
 background-clip: border-box;
-background-color: transparent;
+/*background-color: transparent;*/
+background-color: darkGray;
 background-image: none;
 background-origin: padding-box;
 border-bottom-color: #1C94C4;
@@ -97,7 +103,7 @@ border-top-color: #1C94C4;
 border-top-style: none;
 border-top-width: 0px;
 box-sizing: content-box;
-color: #1C94C4;
+/*color: #1C94C4; */
 cursor: pointer;
 display: block;
 font-family: 'Trebuchet MS', Tahoma, Verdana, Arial, sans-serif;

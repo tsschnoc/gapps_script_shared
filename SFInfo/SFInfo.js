@@ -32,7 +32,7 @@ for (var match in matches) {
   }
 }
 document.body.appendChild(matchList);
-gadgets.window.adjustHeight(200);
+//gadgets.window.adjustHeight(200);
 google.load("jquery", "1");
 google.load("jqueryui", "1");
 var startupfunc = function() {
