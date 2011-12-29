@@ -63,6 +63,10 @@ var startupfunc = function() {
     $("#contactsearch").click(function() {
           alert("tue was!");     
     });
+    $("#contactsearch").focus(function(){
+        // Select input field contents
+        this.select();
+    });    
     $("#contactsearch").autocomplete({
       source: function(request, response) {
         responseFunc = response;
