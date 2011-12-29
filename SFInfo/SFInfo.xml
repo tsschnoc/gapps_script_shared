@@ -174,7 +174,7 @@ zoom: 1;
 </div>
 
 <div class="ui-widget">
-  <a href="#" id="attachbutton">Attach</a>
+  <button id="attachbutton">Attach</button>
 </div>
 
 </div><!-- End demo -->
