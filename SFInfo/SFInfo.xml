@@ -72,7 +72,7 @@
 		overflow-x: hidden;
 		/* add padding to account for vertical scrollbar */
 		padding-right: 20px;
-width: 150px ! important;
+width: 500px ! important;
 font-size: 12px;
 }  
 

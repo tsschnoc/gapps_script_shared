@@ -428,7 +428,7 @@ function sf_attach_restSpread(sfurl, sessionId, parentid, msg_id) {
   var url = prefs.getString("sheeturl");
   
   if (url == null || url == "") {
-    url = prompt("sheeturl","https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od6/private/full");
+    url = prompt("sheeturl","https://spreadsheets.google.com/feeds/list/{Sheetid}/od{X}/private/full");
     prefs.set("sheeturl", url);
   }
 //  var url = "https://spreadsheets.google.com/feeds/list/0Ag5xGwdJpcHXdFJMQUFuX1dWU1Jvb2dPSDJIeXVaQWc/od6/private/full";
