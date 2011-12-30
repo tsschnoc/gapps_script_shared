@@ -217,18 +217,10 @@ function showContactDiv(record) {
     div = document.getElementById("contactDetail");
     $('#contactDetail').empty();
 
-//    div.className = "droppable ui-widget-header ui-droppable";
-//    div.id = record.Id;
-    div2 = document.createElement('div');
-    div2.style.display = "inline";
-    var a = document.createElement('A');
-    a.href = 'https://parxch.my.salesforce.com/' + record.Id;
-    a.target = "_blank";
-    a.appendChild(document.createTextNode(record.Name));
-    div2.appendChild(a);
-    div.appendChild(div2);
-
-    $('#contactDetail').append('<div style="display: inline; "><a href="https://parxch.my.salesforce.com/' + record.Id + '" target="_blank">' + record.Name + '</a></div>');
+    var dispName = record.Name;
+    if (record.Account != null)
+      dispName += '( ' + record.Account.Name + ' )';
+    $('#contactDetail').append('<div style="display: inline; "><a href="https://parxch.my.salesforce.com/' + record.Id + '" target="_blank">' + dispName + '</a></div>');
 
 
     for (var i in record) {
