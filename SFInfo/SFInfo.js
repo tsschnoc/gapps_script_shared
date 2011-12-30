@@ -246,8 +246,8 @@ function showContactDiv(record) {
     //  div.appendChild(div2);
 
 //listItem.appendChild(div);
-if (document.getElementById("contactDetail").hasChildNodes()) {
-document.getElementById("contactDetail").removeChild(0);
+if (document.getElementById("contactDetail").hasChildNodes()) { 
+document.getElementById("contactDetail").removeChild(document.getElementById("contactDetail").firstChild);
 }
 
 document.getElementById("contactDetail").appendChild(div);
