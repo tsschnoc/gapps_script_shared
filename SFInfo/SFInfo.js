@@ -124,7 +124,7 @@ var startupfunc = function() {
 
 
     $("#openbutton").button();
-    $("#openbutton").button("disable");
+//    $("#openbutton").button("disable");
     $("#openbutton").click(function() {
       openfunc();
     });
