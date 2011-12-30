@@ -216,7 +216,6 @@ function showContactDiv(record) {
 //    div = document.createElement('div');
     div = document.getElementById("contactDetail");
     $('#contactDetail').empty();
-    $('#contactDetail').append('<p>Test</p>');
 
 //    div.className = "droppable ui-widget-header ui-droppable";
 //    div.id = record.Id;
@@ -229,7 +228,7 @@ function showContactDiv(record) {
     div2.appendChild(a);
     div.appendChild(div2);
 
-    $('#contactDetail').append('<div style="display: inline; "><a href="https://parxch.my.salesforce.com/003200000076y0FAAQ" target="_blank">Beat Käch</a></div>');
+    $('#contactDetail').append('<div style="display: inline; "><a href="https://parxch.my.salesforce.com/' + record.Id + '" target="_blank">' + record.Name + '</a></div>');
 
 
     for (var i in record) {

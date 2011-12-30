@@ -176,7 +176,7 @@ zoom: 1;
   <div id="contactDetail" style="display: inline; "></div>
   <input id="contactid" type="hidden">
 </div>
-<br/>
+
 <div class="ui-widget">
   <label for="Opp">Opp</label>
   <select id="Opp" name="Opp" class="Opp">
