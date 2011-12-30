@@ -214,7 +214,8 @@ function showContactDiv(record) {
     var div;
     var div2;
 //    div = document.createElement('div');
-    div = document.getElementById("contactDetail");
+//    div = document.getElementById("contactDetail");
+    div = $('#contactDetail');
     $('#contactDetail').empty();
     
 
