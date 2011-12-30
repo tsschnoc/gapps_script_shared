@@ -215,6 +215,7 @@ function showContactDiv(record) {
     var div2;
 //    div = document.createElement('div');
     div = document.getElementById("contactDetail");
+    $('#contactDetail').empty();
     
 
 //    div.className = "droppable ui-widget-header ui-droppable";
