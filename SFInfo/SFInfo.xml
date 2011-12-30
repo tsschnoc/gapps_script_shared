@@ -173,6 +173,7 @@ zoom: 1;
 <div class="ui-widget">
   <label for="contactsearch">Search Contact: </label>
   <input id="contactsearch" />
+  <div id="contactDetail"/>
   <input id="contactid" type="hidden">
 </div>
 

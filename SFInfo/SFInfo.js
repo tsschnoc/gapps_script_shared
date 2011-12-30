@@ -88,6 +88,7 @@ var openfunc = function() {
           sf_queryOpps(ui.item.record);
           $("#contactsearch").val(ui.item.label);
           $("#contactid").val(ui.item.value);
+          showContactDiv(ui.item.record);
           return false;
         }
       },
@@ -208,6 +209,48 @@ function sf_queryOpps(record) {
       };
   gadgets.io.makeRequest(callUrl, callback, params);
 }
+
+function showContactDiv(record) {
+    var div;
+    var div2;
+    div = document.createElement('div');
+    div.className = "droppable ui-widget-header ui-droppable";
+    div.id = record.Id;
+    div2 = document.createElement('div');
+    div2.style.display = "inline";
+    var a = document.createElement('A');
+    a.href = 'https://parxch.my.salesforce.com/' + record.Id;
+    a.target = "_blank";
+    a.appendChild(document.createTextNode(record.Name));
+    div2.appendChild(a);
+    div.appendChild(div2);
+    for (var i in record) {
+      if (i.indexOf("Phone") >= 0 || i.indexOf("Telefon") >= 0) {
+        if (record[i] != null) {
+          console.log(i + record[i]);
+          div2 = document.createElement('div');
+          div2.className = "phone";
+/*
+        div2.style.display = "inline";
+        div2.style.background = "lightgray";
+        */
+          div2.appendChild(document.createTextNode(record[i]));
+          div.appendChild(div2);
+        }
+      }
+    }
+    //  div2.className = "droppable ui-widget-header ui-droppable";
+    //  div2.id = record.Id;
+    //  extractedText = document.createTextNode(record.Name);   
+    //  div2.appendChild(extractedText);
+    //  div.appendChild(div2);
+
+//listItem.appendChild(div);
+document.getElementById("contactDetail").appendChild(div);
+
+
+}
+
 //////////////////////////////
 
 function showOneSection(toshow) {
