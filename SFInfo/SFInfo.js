@@ -112,6 +112,7 @@ var openfunc = function() {
       return $("<li></li>").data("item.autocomplete", item).append(line).appendTo(ul);
     };
     ////////////////    
+    gadgets.window.adjustHeight(200);  
     readSFData();
     fetchData();
   });
