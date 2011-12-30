@@ -35,7 +35,11 @@ document.body.appendChild(matchList);
 //gadgets.window.adjustHeight(200);
 google.load("jquery", "1");
 google.load("jqueryui", "1");
-var startupfunc = function() {
+
+
+
+
+var openfunc = function() {
   // Put Jquery here
   var username;
   var password;
@@ -113,6 +117,21 @@ var startupfunc = function() {
   });
 }
 
+var startupfunc = function() {
+  $(document).ready(function() {
+    
+
+
+    $("#openbutton").button();
+    $("#openbutton").button("disable");
+    $("#openbutton").click(function() {
+      openfunc();
+    });
+
+  });
+}
+
+
 _IG_RegisterOnloadHandler(startupfunc);
 ////////////////////////////////////
 
@@ -153,7 +172,8 @@ function sf_searchContacts() {
 }
 
 function sf_queryOpps(record) {
-  var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "' and StageName != 'Closed / Won' and  StageName != 'Closed / Lost' order by Name asc";
+//  var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "' and StageName != 'Closed / Won' and  StageName != 'Closed / Lost' order by Name asc";
+  var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "' order by Name asc";
   var restServerUrl = sfurl.split("/")[2];
   restServerUrl = restServerUrl.replace("-api", "");
   restServerUrl = "https://" + restServerUrl;

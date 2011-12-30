@@ -2,7 +2,7 @@
 <Module>
   <ModulePrefs title="SFInfo"
     description="Look up Accounts, Contacts, Opps in Salesforce and attach the email by 'Drag and Drop' to them"
-    height="200"
+    height="20"
     author="Thomas"
     author_email="..."
     author_location="Zuhause">
@@ -161,6 +161,11 @@ zoom: 1;
 
 
 <div class="demo">
+
+<div class="ui-widget">
+  <button id="openbutton">Open Attacher</button>
+</div>
+
 
 <div class="ui-widget">
   <label for="contactsearch">Search Contact: </label>
