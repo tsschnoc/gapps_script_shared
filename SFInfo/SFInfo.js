@@ -214,7 +214,7 @@ function showContactDiv(record) {
     var div;
     var div2;
     div = document.createElement('div');
-    div.className = "droppable ui-widget-header ui-droppable";
+//    div.className = "droppable ui-widget-header ui-droppable";
     div.id = record.Id;
     div2 = document.createElement('div');
     div2.style.display = "inline";
@@ -248,7 +248,11 @@ function showContactDiv(record) {
 //listItem.appendChild(div);
 document.getElementById("contactDetail").appendChild(div);
 
-
+$('.phone').click(function() {
+    console.log('Handler for .click() called.');
+    console.log($(this)[0].innerText);
+    callNumber($(this)[0].innerText);
+  });
 }
 
 //////////////////////////////
