@@ -213,7 +213,9 @@ function sf_queryOpps(record) {
 function showContactDiv(record) {
     var div;
     var div2;
-    div = document.createElement('div');
+//    div = document.createElement('div');
+div = document.getElementById("contactDetail");
+
 //    div.className = "droppable ui-widget-header ui-droppable";
     div.id = record.Id;
     div2 = document.createElement('div');
@@ -246,11 +248,8 @@ function showContactDiv(record) {
     //  div.appendChild(div2);
 
 //listItem.appendChild(div);
-if (document.getElementById("contactDetail").hasChildNodes()) { 
-document.getElementById("contactDetail").removeChild(document.getElementById("contactDetail").firstChild);
-}
 
-document.getElementById("contactDetail").appendChild(div);
+//document.getElementById("contactDetail").appendChild(div);
 
 $('.phone').click(function() {
     console.log('Handler for .click() called.');
