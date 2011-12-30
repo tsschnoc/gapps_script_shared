@@ -214,10 +214,11 @@ function showContactDiv(record) {
     var div;
     var div2;
 //    div = document.createElement('div');
-div = document.getElementById("contactDetail");
+    div = document.getElementById("contactDetail");
+    
 
 //    div.className = "droppable ui-widget-header ui-droppable";
-    div.id = record.Id;
+//    div.id = record.Id;
     div2 = document.createElement('div');
     div2.style.display = "inline";
     var a = document.createElement('A');
