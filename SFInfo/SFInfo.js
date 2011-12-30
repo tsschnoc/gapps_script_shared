@@ -226,15 +226,10 @@ function showContactDiv(record) {
     for (var i in record) {
       if (i.indexOf("Phone") >= 0 || i.indexOf("Telefon") >= 0) {
         if (record[i] != null) {
-          console.log(i + record[i]);
-          div2 = document.createElement('div');
-          div2.className = "phone";
-/*
-        div2.style.display = "inline";
-        div2.style.background = "lightgray";
-        */
-          div2.appendChild(document.createTextNode(record[i]));
-          div.appendChild(div2);
+          $('#contactDetail').append('<div class="phone">' + record[i] + '</div>');
+      
+    
+          
         }
       }
     }
