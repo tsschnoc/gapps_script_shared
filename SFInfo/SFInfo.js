@@ -246,7 +246,7 @@ function showContactDiv(record) {
 $('.phone').click(function() {
     console.log('Handler for .click() called.');
     console.log($(this)[0].innerText);
-    callNumber($(this)[0].innerText);
+    callNumber($(this)[0].innerText.split(":")[1]);
   });
 }
 
