@@ -153,7 +153,7 @@ function sf_searchContacts() {
 }
 
 function sf_queryOpps(record) {
-  var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "'  ";
+  var queryString = "SELECT Id, Name from Opportunity where AccountId = '" + record.Account.Id + "' and StageName != 'Closed / Won' and  StageName != 'Closed / Lost' order by Name asc";
   var restServerUrl = sfurl.split("/")[2];
   restServerUrl = restServerUrl.replace("-api", "");
   restServerUrl = "https://" + restServerUrl;
