@@ -148,13 +148,6 @@ zoom: 1;
   <button id="openbutton">Open Attacher</button>
 </div>
 
-
-
-<div class="credentials">
-    SF-Username:<input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
-    PasswordToken<input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-    <input type=button id="GoBtn" value=" Login " name=" Login "> 
-</div>
 <!--
 <div class="demo">
 
@@ -188,6 +181,14 @@ zoom: 1;
 </div>
 
 </div><!-- End demo -->
+
+
+<div class="credentials">
+    SF-Username:<input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+    PasswordToken<input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+    <input type=button id="GoBtn" value=" Login " name=" Login "> 
+</div>
+
 
  <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
 
