@@ -144,7 +144,7 @@ zoom: 1;
   
 </style>
 
-<div class="ui-widget">
+<div class="ui-widget" id="openbuttondiv">
   <button id="openbutton">Open Attacher</button>
 </div>
 
@@ -178,7 +178,7 @@ zoom: 1;
 </div>
 
 <div class="ui-widget">
-  <label for="Opp">Opp</label>
+  <label for="Opp">Opportunity: </label>
   <select id="Opp" name="Opp" class="Opp">
   </select>
 </div>

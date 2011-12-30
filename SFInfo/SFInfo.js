@@ -113,6 +113,7 @@ var openfunc = function() {
       return $("<li></li>").data("item.autocomplete", item).append(line).appendTo(ul);
     };
     ////////////////    
+    $('#openbuttondiv').remove();
     gadgets.window.adjustHeight(200);  
     readSFData();
     fetchData();
