@@ -226,7 +226,7 @@ function showContactDiv(record) {
     for (var i in record) {
       if (i.indexOf("Phone") >= 0 || i.indexOf("Telefon") >= 0) {
         if (record[i] != null) {
-          $('#contactDetail').append('<div class="phone">' + record[i] + '</div>');
+          $('#contactDetail').append('<div class="phone">' + i + ': ' + record[i] + '</div>');
       
     
           
