@@ -102,55 +102,6 @@
   
   
   
-////////////////////////////////////
-////////////////////////////////////
-//    var responseFunc;
-//    var searchTerm;
-////////////////////////////////////
-  function cal_readevents() {
-/*    var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
-    var callUrl = "https://www.googleapis.com/calendar/v3/calendars/primary/events";
-    var params = {};
-    var postdata = "";
-*/    
-//    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
-/*    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
-    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
-//    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "X-PrettyPrint": "1",
-      "GData-Version": "3.0",
-      "Content-Type": "application/json"
-    };
-    */
-      
-    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;  
-    var callback1 = function(obj) {        
-      console.debug(obj);
-      if (obj.data == null) {
-        
-        return;
-      }
-      var arr = [];
-      for (var i=0;i<obj.data.length;i++)  {
-        var record = obj.data[i];
-        
-        arr.push({label:record.Subject, value:record.Id});
-      }
-      
-//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
-      responseFunc(arr);
-    };
-      
-var params = {};
-params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-gadgets.io.makeRequest('https://www.googleapis.com/calendar/v3/calendars/primary/events?key=AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q', callback1, params);      
-      
-      
-        
-//    gadgets.io.makeRequest(callUrl, callback, params);
-  }
   
 
   function fetchData() {
@@ -177,8 +128,8 @@ gadgets.io.makeRequest('https://www.googleapis.com/calendar/v3/calendars/primary
             if (current_event == null) {
               $('#dialog')[0].style.display = 'none';
             }
-            //readSFData();
-            reqestCalNochmal();
+            readSFData();
+            
 
       }
         else {
