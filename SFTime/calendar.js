@@ -187,7 +187,27 @@ gadgets.io.makeRequest('https://www.googleapis.com/calendar/v3/calendars/primary
           showOnly('errors');
         }
         };
-    calendar.getAllCalendarsFeed('http://www.google.com/calendar/feeds/default/allcalendars/full', callback, callback);
+//    calendar.getAllCalendarsFeed('http://www.google.com/calendar/feeds/default/allcalendars/full', callback, callback);
+
+
+    var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?key=' + key;
+    var params = {};
+    var postdata = "";
+    
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
+    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "X-PrettyPrint": "1",
+      "GData-Version": "3.0",
+      "Content-Type": "application/json"
+    };
+    
+    gadgets.io.makeRequest(callUrl, callback, params);
+
   }
 
   function subscribeEventsCallback(e) {    
