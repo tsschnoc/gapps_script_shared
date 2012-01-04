@@ -108,7 +108,7 @@
 ////////////////////////////////////
   function cal_readevents() {
     var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
-    var callUrl = "https://www.googleapis.com/calendar/v3/calendars/thomas.schnocklake%40parx.com/events?timeMax=2012-01-07T23%3A59%3A59.000Z&timeMin=2012-01-01T00%3A00%3A00.000Z&pp=1&key=" + key;
+    var callUrl = "https://www.googleapis.com/calendar/v3/calendars/primary/events?timeMax=2012-01-07T23%3A59%3A59.000Z&timeMin=2012-01-01T00%3A00%3A00.000Z&pp=1&key=" + key;
     var params = {};
     var postdata = "";
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
