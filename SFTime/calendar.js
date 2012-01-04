@@ -114,7 +114,7 @@
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
     params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
-    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+//    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
       "X-PrettyPrint": "1",
