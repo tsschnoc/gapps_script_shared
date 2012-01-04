@@ -107,10 +107,11 @@
 //    var searchTerm;
 ////////////////////////////////////
   function cal_readevents() {
-    var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+/*    var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
     var callUrl = "https://www.googleapis.com/calendar/v3/calendars/primary/events";
     var params = {};
     var postdata = "";
+*/    
 //    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
 /*    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
@@ -124,7 +125,8 @@
     */
       
     //params[gadgets.io.RequestParameters.POST_DATA] = postdata;  
-    var callback = function(obj) {        
+    var callback1 = function(obj) {        
+      console.debug(obj);
       if (obj.data == null) {
         
         return;
@@ -142,7 +144,7 @@
       
 var params = {};
 params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-gadgets.io.makeRequest("https://www.google.com", callback, params);      
+gadgets.io.makeRequest("https://www.google.com", callback1, params);      
       
       
         
