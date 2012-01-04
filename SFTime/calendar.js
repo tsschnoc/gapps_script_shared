@@ -112,7 +112,7 @@
     var params = {};
     var postdata = "";
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
-    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+/*    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
 //    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -121,6 +121,7 @@
       "GData-Version": "3.0",
       "Content-Type": "application/json"
     };
+    */
       
     //params[gadgets.io.RequestParameters.POST_DATA] = postdata;  
     var callback = function(obj) {        
