@@ -27,7 +27,8 @@
     });
     $('.hasDatepicker').datepicker();
     $('.generate').click(function(e) {
-      cal_readevents();
+      //cal_readevents();
+      reqestCalNochmal();
       return;
       e.preventDefault();
       console.debug('generate Button pressed');
