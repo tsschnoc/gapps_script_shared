@@ -144,7 +144,7 @@
       
 var params = {};
 params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-gadgets.io.makeRequest("https://www.google.com", callback1, params);      
+gadgets.io.makeRequest("https://www.googleapis.com/calendar/v3/calendars/primary/events", callback1, params);      
       
       
         
