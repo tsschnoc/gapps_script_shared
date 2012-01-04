@@ -27,10 +27,10 @@
     });
     $('.hasDatepicker').datepicker();
     $('.generate').click(function(e) {
+      e.preventDefault();
       //cal_readevents();
       reqestCalNochmal();
       return;
-      e.preventDefault();
       console.debug('generate Button pressed');
       console.debug(current_event.timezone);
       //            fetttttch();
