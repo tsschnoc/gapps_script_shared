@@ -111,7 +111,7 @@
     var callUrl = "https://www.googleapis.com/calendar/v3/calendars/primary/events";
     var params = {};
     var postdata = "";
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
+//    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
 /*    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
 //    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
@@ -139,9 +139,14 @@
 //      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
       responseFunc(arr);
     };
+      
+var params = {};
+params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+gadgets.io.makeRequest("https://www.googleapis.com/calendar/v3/calendars/primary/events", callback, params);      
+      
+      
         
-        
-    gadgets.io.makeRequest(callUrl, callback, params);
+//    gadgets.io.makeRequest(callUrl, callback, params);
   }
   
 
