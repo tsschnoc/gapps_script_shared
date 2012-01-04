@@ -171,7 +171,7 @@ gadgets.io.makeRequest('https://www.googleapis.com/calendar/v3/calendars/primary
           $('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
           showOnly('approval');
         }
-        else if (response.feed) {
+        else if (response.data) {
             showOnly('main');
             if (current_event == null) {
               $('#dialog')[0].style.display = 'none';
