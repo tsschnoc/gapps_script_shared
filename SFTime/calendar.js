@@ -28,7 +28,7 @@
     $('.hasDatepicker').datepicker();
     $('.refreshCal').click(function(e) {
       e.preventDefault();
-      reqestCalNochmal();
+      reqCalTimecardEvents();
     });
     
     $('.generate').click(function(e) {
@@ -168,7 +168,7 @@
   
   
   
-  function reqestCalNochmal() {
+  function reqCalTimecardEvents() {
     var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
     var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?pp=1&key=' + key;
     var params = {};
@@ -185,15 +185,15 @@
       "Content-Type": "application/json"
     };
     
-    var callback = function(response) {
-      console.debug(response.response);
-    
+    var callback = function(obj) {
+      for (var i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
+        console.debug(record.id);
+      }
+          
     };
     
     gadgets.io.makeRequest(callUrl, callback, params);
-    
-    
-    
   }
   
 
