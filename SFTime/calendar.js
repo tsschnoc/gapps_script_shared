@@ -26,11 +26,14 @@
 //      readSFData();
     });
     $('.hasDatepicker').datepicker();
+    $('.refreshCal').click(function(e) {
+      e.preventDefault();
+      reqestCalNochmal();
+    });
+    
     $('.generate').click(function(e) {
       e.preventDefault();
-      //cal_readevents();
-      reqestCalNochmal();
-      return;
+
       console.debug('generate Button pressed');
       console.debug(current_event.timezone);
       //            fetttttch();

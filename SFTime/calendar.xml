@@ -82,6 +82,10 @@ background: white;
 
         <div id="main" style="display:none">
           <div class="credentials">
+                <button class="refreshCal">RefreshCalendar</button>
+          </div>
+          
+          <div class="credentials">
               SF-Username:<input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
               PasswordToken<input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
               <input type=button id="GoBtn" value=" Login " name=" Login "> 
