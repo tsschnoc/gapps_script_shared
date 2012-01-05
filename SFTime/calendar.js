@@ -186,8 +186,8 @@
     };
     
     var callback = function(obj) {
-      for (var i=0;i<obj.data.length;i++)  {
-        var record = obj.data[i];
+      for (var i=0;i<obj.data.items.length;i++)  {
+        var record = obj.data.items[i];
         console.debug(record.id);
       }
           
