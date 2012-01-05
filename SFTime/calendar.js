@@ -205,7 +205,8 @@
       for (var i=0;i<obj.data.items.length;i++)  {
         var record = obj.data.items[i];
         console.debug(record.id);
-        gadgets.io.makeRequest(callUrl.replace("**EVENTID**",record.id) , delCallback, params);
+//        gadgets.io.makeRequest(callUrl.replace("**EVENTID**",record.id) , delCallback, params);
+        gadgets.io.makeRequest(callUrl.replace("**EVENTID**",record.id) , null, params);
       }
           
     };
