@@ -81,7 +81,7 @@ background: white;
         <div id="errors" style="display: none"></div>
 
         <div id="main" style="display:none">
-          <div class="credentials">
+          <div class="refresh">
                 <button class="refreshCal">RefreshCalendar</button>
           </div>
           
