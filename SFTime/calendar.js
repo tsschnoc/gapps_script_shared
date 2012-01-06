@@ -237,8 +237,8 @@ var gcal_timecards = null;
         delete gcal_timecards[i];
         delete sf_timecards[i];
       } else {
-        insert_timecards.push(gcal_timecards[i]);
-        delete gcal_timecards[i];
+        insert_timecards.push(sf_timecards[i]);
+        delete sf_timecards[i];
       }
       
     }
