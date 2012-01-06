@@ -195,7 +195,7 @@ var gcal_timecards = null;
     
     var callback = function(obj) {
       gcal_timecards  = {};    
-      if (obj.data != null) {
+      if (obj.data != null && obj.data.items != null ) {
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
