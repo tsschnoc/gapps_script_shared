@@ -227,7 +227,7 @@ var gcal_timecards = null;
       if (gcal_timecards[i] != null) {
         //compare
         console.debug('compare');
-        if (gcal_timecards[i].json.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
+        if (gcal_timecards[i].record.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
           // tue nichts
         } else {
           insert_timecards.push(sf_timecards[i]);
