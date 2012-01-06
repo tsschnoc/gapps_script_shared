@@ -9,6 +9,11 @@
     var searchTerm;
 
 
+var sf_timecards = null;
+var gcal_timecards = null;
+
+
+
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 
@@ -482,11 +487,16 @@
       "X-PrettyPrint": "1"
     };
         
+    sf_timecards = {};        
     var callback = function(obj) {        
       for (var i=0;i<obj.data.records.length;i++)  {
         record = obj.data.records[i];
         console.log(JSON.stringify(record));
+        
+        sf_timecards[record.Id] = record;
       }
+      
+      console.log(sf_timecards);
     };
         
     gadgets.io.makeRequest(callUrl, callback, params);
