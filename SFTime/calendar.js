@@ -248,9 +248,9 @@ var gcal_timecards = null;
       delete gcal_timecards[i];        
     }
 
-
-    insertSFToGcalEvent(insert_timecards[0]);
-    
+    for (var i in insert_timecards) {
+      insertSFToGcalEvent(insert_timecards[i]);
+    }
     
     sf_timecards = null ;
     gcal_timecards = null;
