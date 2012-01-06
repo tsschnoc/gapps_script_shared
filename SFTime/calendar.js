@@ -198,7 +198,7 @@ var gcal_timecards = null;
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
-        var record = JSON.parse(event.Description);
+        var record = JSON.parse(event.description);
         gcal_timecards[record.Id] = record;
 
       }          
