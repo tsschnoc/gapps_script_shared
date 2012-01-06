@@ -201,12 +201,34 @@ var gcal_timecards = null;
         var record = JSON.parse(event.description);
         gcal_timecards[record.Id] = record;
 
-      }          
+      } 
+      
+      matchTimeCards();
     };
     
     gadgets.io.makeRequest(callUrl, callback, params);
   }
   
+  
+  function matchTimeCards() {
+    var sf_timecards = null;
+    var gcal_timecards = null;
+
+    var insert_timecards = {};
+
+
+    for (var i in sf_timecards) {
+      console.debug(i);
+      if (gcal_timecards[i] != null) {
+        //compare
+        console.debug('compare');
+      } else {
+        console.debug('nix');
+      }
+      
+    }
+
+  }
   
   function delEvent(eventid) {
       var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
@@ -484,6 +506,7 @@ var gcal_timecards = null;
       }
       
       console.log(sf_timecards);
+      matchTimeCards();
     };
         
     gadgets.io.makeRequest(callUrl, callback, params);
