@@ -299,9 +299,12 @@ var gcal_timecards = null;
       };
       
 
-    gadgets.io.makeRequest(callUrl.replace("**EVENTID**",eventid) , null, params);    
+    gadgets.io.makeRequest(callUrl , insCallback, params);    
   }
   
+  function insCallback(obj) { 
+    console.debug(obj);
+  }
 
   function subscribeEventsCallback(e) {    
 //    google.calendar.showDate(2011, 12, 5);
