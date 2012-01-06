@@ -211,9 +211,7 @@ var gcal_timecards = null;
   
   
   function matchTimeCards() {
-    var sf_timecards = null;
-    var gcal_timecards = null;
-
+    
     var insert_timecards = {};
 
 
@@ -223,7 +221,7 @@ var gcal_timecards = null;
         //compare
         console.debug('compare');
       } else {
-        console.debug('nix');
+        insert_timecards[i] = gcal_timecards[i];
       }
       
     }
