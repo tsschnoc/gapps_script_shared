@@ -194,7 +194,8 @@ var gcal_timecards = null;
     };
     
     var callback = function(obj) {
-      gcal_timecards  = {};        
+      gcal_timecards  = {};    
+      if (obj.data != null)
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
@@ -287,9 +288,9 @@ var gcal_timecards = null;
       insEvent.description = JSON.stringify(sftimecard);
       insEvent.summary = sftimecard.Id;
       insEvent.start = {"dateTime": "2012-01-07T19:55:27.000Z"};
-      insEvent.start = {"dateTime": sftimecard.Date + "T" + sftimecard.TimeStart__c.substring(0, 1) + ":" + sftimecard.TimeStart__c.substring(2, 3) + ":00.000Z"};
+      insEvent.start = {"dateTime": sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 1) + ":" + sftimecard.TimeStart__c.substring(2, 3) + ":00.000Z"};
       insEvent.end = {"dateTime": "2012-01-07T20:55:27.000Z"};
-      insEvent.end = {"dateTime": sftimecard.Date + "T" + sftimecard.TimeStart__c.substring(0, 1) + ":" + sftimecard.TimeStart__c.substring(2, 3) + ":00.000Z"};
+      insEvent.end = {"dateTime": sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 1) + ":" + sftimecard.TimeStart__c.substring(2, 3) + ":00.000Z"};
       
       var postdata = JSON.stringify(insEvent);
       
