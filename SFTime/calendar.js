@@ -297,7 +297,7 @@ var gcal_timecards = null;
       
       
       startTime = new Date(startTime.getTime() + sftimecard.HoursWorked__c * 60 * 60 * 1000);
-      insEvent.start = {"dateTime": startTime.format("isoUtcDateTime")};
+      insEvent.end = {"dateTime": startTime.format("isoUtcDateTime")};
       
       var postdata = JSON.stringify(insEvent);
       
