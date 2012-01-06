@@ -171,6 +171,8 @@
   function reqCalTimecardEvents() {
     var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
     var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?pp=1&key=' + key;
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=2012-01-09T00%3A00%3A00%2B01%3A00&timeMin=2012-01-02T00%3A00%3A00%2B01%3A00&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
+    
     var params = {};
     var postdata = "";
     
@@ -205,13 +207,34 @@
       for (var i=0;i<obj.data.items.length;i++)  {
         var record = obj.data.items[i];
         console.debug(record.id);
-//        gadgets.io.makeRequest(callUrl.replace("**EVENTID**",record.id) , delCallback, params);
-        gadgets.io.makeRequest(callUrl.replace("**EVENTID**",record.id) , null, params);
+        delEvent(record.id);
       }
           
     };
     
     gadgets.io.makeRequest(callUrl, callback, params);
+  }
+  
+  
+  function delEvent(eventid) {
+      var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events/**EVENTID**?pp=1&key=' + key;
+      var params = {};
+      var postdata = "";
+      
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.DELETE;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "X-PrettyPrint": "1",
+        "GData-Version": "3.0",
+        "Content-Type": "application/json"
+      };
+      
+
+    gadgets.io.makeRequest(callUrl.replace("**EVENTID**",eventid) , null, params);    
   }
   
   function delCallback(obj) {
