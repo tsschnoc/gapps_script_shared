@@ -195,7 +195,7 @@ var gcal_timecards = null;
     
     var callback = function(obj) {
       gcal_timecards  = {};    
-      if (obj.data != null)
+      if (obj.data != null) {
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
@@ -203,7 +203,7 @@ var gcal_timecards = null;
         gcal_timecards[event.record.Id] = event;
 
       } 
-      
+      }
       matchTimeCards();
     };
     
