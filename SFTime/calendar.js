@@ -290,7 +290,7 @@ var gcal_timecards = null;
       insEvent.summary = sftimecard.Description__c;
       insEvent.location = sftimecard.Id;
 
-      var startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+02:00"));
+      var startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+01:00"));
 
       
       insEvent.start = {"dateTime": startTime.format("isoUtcDateTime")};
