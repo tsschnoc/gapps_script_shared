@@ -249,6 +249,11 @@ var gcal_timecards = null;
 
 
     insertSFToGcalEvent(insert_timecards[0]);
+    
+    
+    sf_timecards = null ;
+    gcal_timecards = null;
+    
   }
   
   function delEvent(eventid) {
