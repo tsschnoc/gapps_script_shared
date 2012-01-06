@@ -28,7 +28,7 @@
     $('.hasDatepicker').datepicker();
     $('.refreshCal').click(function(e) {
       e.preventDefault();
-      reqCalTimecardEvents();
+      //reqCalTimecardEvents();
       sf_ReqTimeTickets();
     });
     
