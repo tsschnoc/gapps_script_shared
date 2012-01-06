@@ -293,18 +293,11 @@ var gcal_timecards = null;
       var startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+02:00"));
 
       
-      var startTimeString = startTime.year + '-' + ((startTime.month < 10) ? '0' + startTime.month : startTime.month) + '-' + ((startTime.date < 10) ? '0' + startTime.date : startTime.date) + 'T' + ((startTime.hour < 10) ? '0' + startTime.hour : startTime.hour) + ':' + ((startTime.minute < 10) ? '0' + startTime.minute : startTime.minute) + ':' + ((startTime.second < 10) ? '0' + startTime.second : startTime.second) + '.000+01:00';
-
-      insEvent.start = {"dateTime": "2012-01-07T19:55:27.000Z"};
-      insEvent.start = {"dateTime": sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+02:00"};
-      insEvent.start = {"dateTime": startTimeString};
+      insEvent.start = {"dateTime": startTime.format("isoUtcDateTime")};
       
       
-      startTime = new Date(startTime.UTC() + sftimecard.HoursWorked__c * 60 * 60 * 1000);
-      var startTimeString = startTime.year + '-' + ((startTime.month < 10) ? '0' + startTime.month : startTime.month) + '-' + ((startTime.date < 10) ? '0' + startTime.date : startTime.date) + 'T' + ((startTime.hour < 10) ? '0' + startTime.hour : startTime.hour) + ':' + ((startTime.minute < 10) ? '0' + startTime.minute : startTime.minute) + ':' + ((startTime.second < 10) ? '0' + startTime.second : startTime.second) + '.000+01:00';
-      insEvent.end = {"dateTime": "2012-01-07T20:55:27.000Z"};
-      insEvent.end = {"dateTime": sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+02:00"};
-      insEvent.start = {"dateTime": startTimeString};
+      startTime = new Date(startTime.getTime() + sftimecard.HoursWorked__c * 60 * 60 * 1000);
+      insEvent.start = {"dateTime": startTime.format("isoUtcDateTime")};
       
       var postdata = JSON.stringify(insEvent);
       
