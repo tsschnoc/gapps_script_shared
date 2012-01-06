@@ -484,7 +484,7 @@
         
     var callback = function(obj) {        
       for (var i=0;i<obj.data.records.length;i++)  {
-        console.log(record.Description);
+        console.log(JSON.stringify(record.Description));
       }
     };
         
