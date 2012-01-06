@@ -194,26 +194,11 @@ var gcal_timecards = null;
     };
     
     var callback = function(obj) {
-      var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
-      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events/**EVENTID**?pp=1&key=' + key;
-      var params = {};
-      var postdata = "";
-      
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
-      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
-      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.DELETE;
-      params[gadgets.io.RequestParameters.HEADERS] = {
-        "X-PrettyPrint": "1",
-        "GData-Version": "3.0",
-        "Content-Type": "application/json"
-      };
       gcal_timecards  = {};        
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
-        var record = JSON.parse(record.Description);
+        var record = JSON.parse(event.Description);
         gcal_timecards[record.Id] = record;
 
       }          
