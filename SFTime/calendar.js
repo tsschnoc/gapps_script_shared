@@ -247,6 +247,8 @@ var gcal_timecards = null;
       delete gcal_timecards[i];        
     }
 
+
+    insertSFToGcalEvent(insert_timecards[0]);
   }
   
   function delEvent(eventid) {
@@ -270,9 +272,36 @@ var gcal_timecards = null;
     gadgets.io.makeRequest(callUrl.replace("**EVENTID**",eventid) , null, params);    
   }
   
-  function delCallback(obj) {
-    console.debug(obj);    
+  function insertSFToGcalEvent(sftimecard) {
+      var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?sendNotifications=false&pp=1&key=' + key;
+      var params = {};
+      
+      
+      var insEvent = {};
+      insEvent.description = JSON.stringify(sftimecard);
+      insEvent.summary = sftimecard.Id;
+      insEvent.start = {"dateTime": "2012-01-07T19:55:27.000Z"};
+      insEvent.end = {"dateTime": "2012-01-07T20:55:27.000Z"};
+      
+      var postdata = JSON.stringify(insEvent);
+      
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+      params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+      params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "X-PrettyPrint": "1",
+        "GData-Version": "3.0",
+        "Content-Type": "application/json"
+      };
+      
+
+    gadgets.io.makeRequest(callUrl.replace("**EVENTID**",eventid) , null, params);    
   }
+  
 
   function subscribeEventsCallback(e) {    
 //    google.calendar.showDate(2011, 12, 5);
