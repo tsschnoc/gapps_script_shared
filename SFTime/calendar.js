@@ -198,8 +198,8 @@ var gcal_timecards = null;
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
         console.debug(event.id);
-        var record = JSON.parse(event.description);
-        gcal_timecards[record.Id] = record;
+        event.record = JSON.parse(event.description);
+        gcal_timecards[event.record.Id] = event;
 
       } 
       
@@ -212,18 +212,39 @@ var gcal_timecards = null;
   
   function matchTimeCards() {
     
-    var insert_timecards = {};
+    var insert_timecards = [];
+    var delete_timecards = [];
 
+
+    if (sf_timecards != null && gcal_timecards != null ) {
+      
+    } else {
+      return;
+    }
 
     for (var i in sf_timecards) {
       console.debug(i);
       if (gcal_timecards[i] != null) {
         //compare
         console.debug('compare');
+        if (gcal_timecards[i].json.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
+          // tue nichts
+        } else {
+          insert_timecards.push(sf_timecards[i]);
+          delete_timecards.push(gcal_timecards[i]);
+          
+        }
+        delete gcal_timecards[i];
+        delete sf_timecards[i];
       } else {
-        insert_timecards[i] = gcal_timecards[i];
+        insert_timecards.push(gcal_timecards[i]);
+        delete gcal_timecards[i];
       }
       
+    }
+
+    for (var i in gcal_timecards) {
+      delete gcal_timecards[i];        
     }
 
   }
