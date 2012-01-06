@@ -33,7 +33,7 @@ var gcal_timecards = null;
     $('.hasDatepicker').datepicker();
     $('.refreshCal').click(function(e) {
       e.preventDefault();
-      //reqCalTimecardEvents();
+      reqCalTimecardEvents();
       sf_ReqTimeTickets();
     });
     
@@ -209,11 +209,13 @@ var gcal_timecards = null;
         "GData-Version": "3.0",
         "Content-Type": "application/json"
       };
-      
+      gcal_timecards  = {};        
       for (var i=0;i<obj.data.items.length;i++)  {
-        var record = obj.data.items[i];
-        console.debug(record.id);
-        delEvent(record.id);
+        var event = obj.data.items[i];
+        console.debug(event.id);
+        var record = JSON.parse(record.Description);
+        gcal_timecards[record.Id] = record;
+
       }          
     };
     
