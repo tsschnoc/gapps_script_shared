@@ -208,8 +208,7 @@
         var record = obj.data.items[i];
         console.debug(record.id);
         delEvent(record.id);
-      }
-          
+      }          
     };
     
     gadgets.io.makeRequest(callUrl, callback, params);
@@ -463,6 +462,33 @@
 
 
 
+  function sf_timeTicketsCases() {
+    var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c FROM TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk'";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      for (var i=0;i<obj.data.records.length;i++)  {
+        console.log(record.Description);
+      }
+    };
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
 
 
   function sf_queryCases() {
