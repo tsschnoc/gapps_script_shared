@@ -287,7 +287,7 @@ var gcal_timecards = null;
       
       var insEvent = {};
       insEvent.description = JSON.stringify(sftimecard);
-      insEvent.summary = sftimecard.Description__c;
+      insEvent.summary = 'https://parxch.my.salesforce.com/' + sftimecard.Description__c;
       insEvent.location = sftimecard.Id;
 
       var startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+01:00"));
