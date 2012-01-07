@@ -312,7 +312,7 @@ var params = {};
 
         eval("var cb = function(obj) {restCallback(obj," + lastSentRequestId + ");};");
 
-        gadgets.io.makeRequest(cb, restCallback, params);
+        gadgets.io.makeRequest(callUrl, cb, params);
 return;
     params.responseId={};
       lastSentRequestId = lastSentRequestId + 1;
