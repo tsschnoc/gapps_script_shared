@@ -342,8 +342,8 @@ return;
 //    if (obj.data.responseId.Id >lastReceivedRequestId) {
     
       var myData = [];
-      for (i=0;i<obj.data.response.length;i++)  {
-        var record = obj.data.response[i];
+      for (i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
         myData = myData.concat([
           [record.Id, record.attributes.type, record.Name, record]
         ]);
