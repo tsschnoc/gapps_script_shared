@@ -339,6 +339,7 @@ return;
   function restCallback(obj,reqid) {
     console.log("!!!!!!!!!!!!!!!!!! obj :" + obj);   
     console.log("!!!!!!!!!!!!!!!!!! reqid :" + reqid);   
+    console.log("!!!!!!!!!!!!!!!!!! obj.error :" + obj.error);   
 //    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
 //    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
 //    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
