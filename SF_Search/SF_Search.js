@@ -307,7 +307,12 @@ var params = {};
           "Authorization": "OAuth " + sessionId,
           "X-PrettyPrint": "1"
         };
-        gadgets.io.makeRequest(callUrl, restCallback, params);
+        
+        lastSentRequestId = lastSentRequestId + 1;
+
+        eval("var cb = function(obj) {restCallback(obj," + lastSentRequestId + ");};");
+
+        gadgets.io.makeRequest(cb, restCallback, params);
 return;
     params.responseId={};
       lastSentRequestId = lastSentRequestId + 1;
@@ -331,8 +336,9 @@ return;
   }
   
  
-  function restCallback(obj) {
+  function restCallback(obj,reqid) {
     console.log("!!!!!!!!!!!!!!!!!! obj :" + obj);   
+    console.log("!!!!!!!!!!!!!!!!!! reqid :" + reqid);   
 //    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
 //    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
 //    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
