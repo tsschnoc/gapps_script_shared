@@ -307,8 +307,9 @@ var params = {};
           "Authorization": "OAuth " + sessionId,
           "X-PrettyPrint": "1"
         };
-//        gadgets.io.makeRequest(callUrl, restCallback, params);
-      params.responseId={};
+        gadgets.io.makeRequest(callUrl, restCallback, params);
+return;
+    params.responseId={};
       lastSentRequestId = lastSentRequestId + 1;
       params.responseId.Id=lastSentRequestId;
         
@@ -331,13 +332,14 @@ var params = {};
   
  
   function restCallback(obj) {
+    console.log("!!!!!!!!!!!!!!!!!! obj :" + obj);   
 //    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
 //    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
 //    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
 
-    if (obj.data.responseId.Id >lastReceivedRequestId) {
+//    if (obj.data.responseId.Id >lastReceivedRequestId) {
     
       var myData = [];
       for (i=0;i<obj.data.response.length;i++)  {
@@ -349,8 +351,8 @@ var params = {};
       }
   
       store.loadData(myData);
-      lastReceivedRequestId = obj.data.responseId.Id;
-    }
+//      lastReceivedRequestId = obj.data.responseId.Id;
+//    }
 
 
 
