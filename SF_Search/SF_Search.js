@@ -311,6 +311,7 @@ var params = {};
         lastSentRequestId = lastSentRequestId + 1;
 
         eval("var cb = function(obj) {restCallback(obj," + lastSentRequestId + ");};");
+console.log("!!!!!!!!!!!!!!!!!! cb :" + cb);   
 
         gadgets.io.makeRequest(callUrl, cb, params);
 return;
@@ -337,16 +338,15 @@ return;
   
  
   function restCallback(obj,reqid) {
-    console.log("!!!!!!!!!!!!!!!!!! obj :" + obj);   
+    console.log("!!!!!!!!!!!!!!!!!! obj :" + obj + "!!!!!!!!!!!!!!!!!! reqid :" + reqid);   
     console.log("!!!!!!!!!!!!!!!!!! reqid :" + reqid);   
-    console.log("!!!!!!!!!!!!!!!!!! obj.error :" + obj.error);   
 //    console.log("!!!!!!!!!!!!!!!!!! responseId :" + obj.data.responseId);   
 //    console.log("!!!!!!!!!!!!!!!!!! lastReceivedRequestId :" + obj.data.lastReceivedRequestId);   
 //    console.log("!!!!!!!!!!!!!!!!!! callback :" + obj.data);   
 //    console.log("!!!!!!!!!!!!!!!!!! data.0.name :" + obj.data.name);  
 
 
-//    if (obj.data.responseId.Id >lastReceivedRequestId) {
+    if (reqid >lastReceivedRequestId) {
     
       var myData = [];
       for (i=0;i<obj.data.length;i++)  {
@@ -358,8 +358,8 @@ return;
       }
   
       store.loadData(myData);
-//      lastReceivedRequestId = obj.data.responseId.Id;
-//    }
+      lastReceivedRequestId = reqid;
+    }
 
 
 
