@@ -573,16 +573,17 @@ var gcal_timecards = null;
       "X-PrettyPrint": "1"
     };
         
-    sf_timecards = {};        
+    var sf_timecards_tmp = {};        
     var callback = function(obj) {        
       for (var i=0;i<obj.data.records.length;i++)  {
         record = obj.data.records[i];
         console.log(JSON.stringify(record));
         
-        sf_timecards[record.Id] = record;
+        sf_timecards_tmp[record.Id] = record;
       }
       
-      console.log(sf_timecards);
+      console.log(sf_timecards_tmp);
+      sf_timecards = sf_timecards_tmp;
       matchTimeCards();
     };
         
