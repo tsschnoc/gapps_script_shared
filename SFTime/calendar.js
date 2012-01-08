@@ -244,6 +244,9 @@ var gcal_timecards = null;
       
     }
 
+    console.debug('insert_timecards ' + insert_timecards);
+    console.debug('delete_timecards ' + delete_timecards);
+
     for (var i in gcal_timecards) {
       delete gcal_timecards[i];        
     }
@@ -255,6 +258,8 @@ var gcal_timecards = null;
     for (var i in delete_timecards) {
       delEvent(delete_timecards[i].Id); 
     }
+    
+    
     
     sf_timecards = null ;
     gcal_timecards = null;
