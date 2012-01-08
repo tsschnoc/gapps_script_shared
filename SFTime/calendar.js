@@ -553,6 +553,20 @@ var gcal_timecards = null;
   }
 
 
+function makeCachedRequest(url, callback, params, refreshInterval) {
+  var ts = new Date().getTime();
+  var sep = "?";
+  if (refreshInterval && refreshInterval > 0) {
+    ts = Math.floor(ts / (refreshInterval * 1000));
+  }
+  if (url.indexOf("?") > -1) {
+    sep = "&";
+  }
+  url = [ url, sep, "nocache=", ts ].join("");
+  gadgets.io.makeRequest(url, callback, params);
+}
+
+
 
   function sf_ReqTimeTickets() {
     var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c FROM TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk'";
@@ -587,7 +601,8 @@ var gcal_timecards = null;
       matchTimeCards();
     };
         
-    gadgets.io.makeRequest(callUrl, callback, params);
+//    gadgets.io.makeRequest(callUrl, callback, params);
+    makeCachedRequest(callUrl, callback, params, 0);
   }
 
 
