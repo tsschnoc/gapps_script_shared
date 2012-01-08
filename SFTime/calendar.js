@@ -252,6 +252,10 @@ var gcal_timecards = null;
       insertSFToGcalEvent(insert_timecards[i]);
     }
     
+    for (var i in delete_timecards) {
+      delEvent(delete_timecards[i].Id); 
+    }
+    
     sf_timecards = null ;
     gcal_timecards = null;
     
