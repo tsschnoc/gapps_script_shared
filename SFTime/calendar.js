@@ -561,7 +561,7 @@ var gcal_timecards = null;
     restServerUrl = "https://" + restServerUrl;
     console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
-    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString) + "&nocache=1";
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
