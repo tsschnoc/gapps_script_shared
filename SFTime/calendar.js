@@ -228,8 +228,10 @@ var gcal_timecards = null;
       if (gcal_timecards[i] != null) {
         //compare
         console.debug('compare');
+        console.debug(gcal_timecards[i].record.LastModifiedDate + " " + sf_timecards[i].LastModifiedDate);
         if (gcal_timecards[i].record.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
           // tue nichts
+          console.debug('gleich');
         } else {
           insert_timecards.push(sf_timecards[i]);
           delete_timecards.push(gcal_timecards[i]);
