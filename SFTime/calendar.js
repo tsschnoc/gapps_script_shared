@@ -258,7 +258,7 @@ var gcal_timecards = null;
     }
     
     for (var i in delete_timecards) {
-      delEvent(delete_timecards[i].Id); 
+      delEvent(delete_timecards[i].id); 
     }
     
     
