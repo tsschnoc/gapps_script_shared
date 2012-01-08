@@ -262,6 +262,7 @@ var gcal_timecards = null;
     }
     
     
+    google.calendar.refreshEvents();
     
     sf_timecards = null ;
     gcal_timecards = null;
