@@ -1,3 +1,4 @@
+var xxx = "hallo du";
 function onOpenRemote() {
   Xml.parseJS(['solve360', '1']);
   Utilities.base64Encode('solve360');
@@ -7,9 +8,11 @@ function onOpenRemote() {
   
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var menuEntries = [ {name: "salesforce_retrieve_SObjects", functionName: "salesforce_retrieve_SObjects"},
-                      {name: "salesforce_retrieve_SObject_Fields", functionName: "salesforce_retrieve_SObject_Fields"},
-                      {name: "sendEmails", functionName: "sendEmails"} ];
+                      {name: "salesforce_retrieve_SObject_Fields", functionName: "salesforce_retrieve_SObject_Fields"} ];
   ss.addMenu("Salesforce_Reader", menuEntries);
+  
+  
+  
 }
 
 
