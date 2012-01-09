@@ -1,4 +1,10 @@
-function onOpen() {
+function onOpenRemote() {
+  Xml.parseJS(['solve360', '1']);
+  Utilities.base64Encode('solve360');
+  
+  eval(UrlFetchApp.fetch("https://raw.github.com/tsschnoc/gapps_script_shared/master/SalesforceConnection.js").getContentText());
+  eval(UrlFetchApp.fetch("http://stevenlevithan.com/assets/misc/date.format.js").getContentText());
+  
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var menuEntries = [ {name: "salesforce_retrieve_SObjects", functionName: "salesforce_retrieve_SObjects"},
                       {name: "salesforce_retrieve_SObject_Fields", functionName: "salesforce_retrieve_SObject_Fields"},
@@ -341,11 +347,6 @@ function salesforce_retrieve_SObject_Fields() {
     var subject = sheet.getRange(7,2).getValue();
     var evaluation = sheet.getRange(8,2).getValue();
   
-  Xml.parseJS(['solve360', '1']);
-  Utilities.base64Encode('solve360');
-  
-  eval(UrlFetchApp.fetch("https://raw.github.com/tsschnoc/gapps_script_shared/master/SalesforceConnection.js").getContentText());
-  eval(UrlFetchApp.fetch("http://stevenlevithan.com/assets/misc/date.format.js").getContentText());
   var con = new SalesforceConnection(); 
   
   con.setCredentials(uname,passwd,url);  
