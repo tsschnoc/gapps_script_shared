@@ -191,7 +191,9 @@
     
         var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=' + 
         encodeURIComponent(new Date(viewend.year,viewend.month-1,viewend.date).toISOString()) + 
-        '&timeMin=' + encodeURIComponent(new Date(viewstart.year,viewstart.month-1,viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
+        '&timeMin=' + 
+        encodeURIComponent(new Date(viewstart.year,viewstart.month-1,viewstart.date,23,59,59,999).toISOString()) + 
+        '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
 
     
     console.debug('callUrl ' + callUrl);
@@ -602,8 +604,8 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
     var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c" 
   + " FROM TimeCard__c " 
 	+ "WHERE Timekeeper__c = '0032000000UMVLk'" 
-	+ " and Date__c >= " + viewstart.year + "-" + (viewstart.month-1) + "-" + viewstart.date 
-	+ " and Date__c <= " + viewend.year + "-" + (viewend.month-1) + "-" + viewend.date;
+	+ " and Date__c >= " + viewstart.year + "-" + (viewstart.month) + "-" + viewstart.date 
+	+ " and Date__c <= " + viewend.year + "-" + (viewend.month) + "-" + viewend.date;
   
   
 console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);  
