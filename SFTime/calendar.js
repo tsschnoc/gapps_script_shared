@@ -195,7 +195,7 @@
 
     
     console.debug('callUrl ' + callUrl);
-    
+    return;
     
     
     var params = {};
@@ -599,6 +599,18 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
 
   function sf_ReqTimeTickets() {
     var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c FROM TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk'";
+    var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c" 
+  + " FROM TimeCard__c " 
+	+ "WHERE Timekeeper__c = '0032000000UMVLk'" 
+	+ " and Date__c >= " + dates.startTime.year + "-" + (dates.startTime.month-1) + "-" + dates.startTime.date 
+	+ " and Date__c >= " + dates.endTime.year + "-" + (dates.endTime.month-1) + "-" + dates.endTime.date;
+  
+  
+console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);  
+return;
+  
+  
+  
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
