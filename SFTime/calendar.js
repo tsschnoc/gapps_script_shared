@@ -2,15 +2,18 @@
   var calendar = null;
   var debug_html = "debug";
   var current_event = null;
-
+  
   var token = null;
   var sfurl = null;
-    var responseFunc;
-    var searchTerm;
-
-
-var sf_timecards = null;
-var gcal_timecards = null;
+  var responseFunc;
+  var searchTerm;
+  
+  
+  var sf_timecards = null;
+  var gcal_timecards = null;
+  
+  var viewstart = null;
+  var viewend = null;
 
 
 
@@ -178,6 +181,12 @@ var gcal_timecards = null;
   function reqCalTimecardEvents() {
     var key = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
     var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?pp=1&key=' + key;
+    
+    
+//  var viewstart = null;
+//  var viewend = null;
+    
+    
     var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=2012-01-09T00%3A00%3A00%2B01%3A00&timeMin=2012-01-02T00%3A00%3A00%2B01%3A00&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
     
     var params = {};
@@ -432,6 +441,11 @@ var gcal_timecards = null;
   function datesCallback(dates) {
     var start = dates.startTime;
     var end = dates.endTime;
+    
+    viewstart = dates.startTime;
+    viewend = dates.endTime;
+    
+    
     var out = start.month + '/' + start.date + ' - ' + end.month + '/' + end.date;
     console.log("!!!!!!!!!!!!!£££££££££££££££££££££££££££££££££ + " + out);
   }
