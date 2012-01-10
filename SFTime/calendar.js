@@ -189,6 +189,15 @@
     
     var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=2012-01-09T00%3A00%3A00%2B01%3A00&timeMin=2012-01-02T00%3A00%3A00%2B01%3A00&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
     
+        var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=' + 
+        encodeURIComponent(new Date(viewend.year,viewend.month-1,viewend.date).toISOString()) + 
+        '&timeMin=' + encodeURIComponent(new Date(viewstart.year,viewstart.month-1,viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
+
+    
+    console.debug('callUrl ' + callUrl);
+    
+    
+    
     var params = {};
     var postdata = "";
     
