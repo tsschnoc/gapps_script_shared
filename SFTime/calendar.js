@@ -19,6 +19,7 @@ var gcal_timecards = null;
 
   function initGadget() {
     google.calendar.read.subscribeToEvents(subscribeEventsCallback);
+    google.calendar.subscribeToDates(datesCallback);
 //    $.ui.dialog.defaults.bgiframe = true;
     $.datepicker.setDefaults({
       dateFormat: 'yymmdd'
@@ -428,8 +429,12 @@ var gcal_timecards = null;
   }
 
 
-
-
+  function datesCallback(dates) {
+    var start = dates.startTime;
+    var end = dates.endTime;
+    var out = start.month + '/' + start.date + ' - ' + end.month + '/' + end.date;
+    console.log("!!!!!!!!!!!!!£££££££££££££££££££££££££££££££££ + " + out);
+  }
 
 
 
