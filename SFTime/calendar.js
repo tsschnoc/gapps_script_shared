@@ -196,9 +196,7 @@
         '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + key;
 
     
-    console.debug('callUrl ' + callUrl);
-    return;
-    
+    console.debug('callUrl ' + callUrl);    
     
     var params = {};
     var postdata = "";
@@ -609,7 +607,7 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
   
   
 console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);  
-return;
+
   
   
   
