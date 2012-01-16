@@ -9,7 +9,7 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
     sep = "&";
   }
   url = [ url, sep, "nocache=", ts ].join("");
-  makeCachedRequest(url, callback, params,0);
+  gadgets.io.makeRequest(url, callback, params,0);
 }
 
 
