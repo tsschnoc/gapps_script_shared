@@ -1,3 +1,19 @@
+
+function makeCachedRequest(url, callback, params, refreshInterval) {
+  var ts = new Date().getTime();
+  var sep = "?";
+  if (refreshInterval && refreshInterval > 0) {
+    ts = Math.floor(ts / (refreshInterval * 1000));
+  }
+  if (url.indexOf("?") > -1) {
+    sep = "&";
+  }
+  url = [ url, sep, "nocache=", ts ].join("");
+  makeCachedRequest(url, callback, params,0);
+}
+
+
+
 function callNumber(number) {
   var prefs = new gadgets.Prefs();
   if (prefs.getString("callTriggerUrl") == "callto") {
@@ -28,7 +44,7 @@ function makeCall(url, from, to, user, password) {
   postdata = gadgets.io.encodeValues(postdata);
   params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
   params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-  gadgets.io.makeRequest('http://tel.zuerify.com/c2c/c2c.php', response, params);
+  makeCachedRequest('http://tel.zuerify.com/c2c/c2c.php', response, params);
 }
 
 function response(obj) {
@@ -139,7 +155,7 @@ Ext.onReady(function() {
     postdata = gadgets.io.encodeValues(postdata);
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-    gadgets.io.makeRequest('http://tel.zuerify.com/c2c/c2c.php', response, params);
+    makeCachedRequest('http://tel.zuerify.com/c2c/c2c.php', response, params);
   }
 
   function response(obj) {
@@ -313,7 +329,7 @@ var params = {};
         eval("var cb = function(obj) {restCallback(obj," + lastSentRequestId + ");};");
 console.log("!!!!!!!!!!!!!!!!!! cb :" + cb);   
 
-        gadgets.io.makeRequest(callUrl, cb, params);
+        makeCachedRequest(callUrl, cb, params);
 return;
     params.responseId={};
       lastSentRequestId = lastSentRequestId + 1;
@@ -332,8 +348,8 @@ return;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
         params[gadgets.io.RequestParameters.POST_DATA] = sendstring;
       
-//        gadgets.io.makeRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
-        gadgets.io.makeRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
+//        makeCachedRequest("http://home.schnocklake.de:8888/proxy", restCallback, params);
+        makeCachedRequest("http://tsschnocmailpush.appspot.com/proxy", restCallback, params);
   }
   
  
@@ -395,7 +411,7 @@ return;
           "SOAPAction": SOAPAction,
           "Content-Type": "text/xml;charset=UTF-8"
         };
-        gadgets.io.makeRequest(url, this.callback, params);
+        makeCachedRequest(url, this.callback, params);
       }
       catch (e) {
         //console.debug(e);
@@ -449,6 +465,10 @@ return;
       }
     };
   }
+
+
+
+
 
   function record_to_json_tring(record) {
     var elems = record.childNodes;
