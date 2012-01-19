@@ -649,7 +649,7 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
 
   function sf_queryCases() {
 //    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
-    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk' order by LastModifiedDate desc Limit 20";
+    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk' order by LastModifiedDate desc Limit 50";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -674,7 +674,7 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
       for (var i=0;i<obj.data.records.length;i++)  {
         var record = obj.data.records[i];
         
-        if (ids.indexOf(record.Case__r.Id) < 0 ) {
+        if (ids.indexOf(record.Case__r.Id) < 0 && ids.length < 20) {
           ids.push(record.Case__r.Id);
           var option = $('<option />').attr({
             value: record.Case__r.Id
