@@ -365,7 +365,7 @@
       }
 //      $('#Description').get(0).val('');
       gadgets.window.adjustHeight();
-//      sf_queryCases();
+      sf_queryCases();
     }
     else {
       current_event = null;
@@ -648,7 +648,8 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
 
 
   function sf_queryCases() {
-    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
+//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
+    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk' order by LastModifiedDate desc Limit 20";
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
@@ -671,9 +672,10 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
       for (var i=0;i<obj.data.records.length;i++)  {
         var record = obj.data.records[i];
         var option = $('<option />').attr({
-          value: record.Id
+          value: record.Case__r.Id
         });
-        option.html(record.Description!==null ? record.Description : record.CaseNumber);
+//        option.html(record.Description!==null ? record.Description : record.CaseNumber);
+        option.html(Case__r.Subject + Case__r.Project__r.Name);
         console.log(option);
         $('select.Case').append(option);
       }
