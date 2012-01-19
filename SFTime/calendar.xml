@@ -93,7 +93,7 @@ background: white;
             <form>
               <div>
                 <label for="Case">Case</label>
-                <select id="Case" name="Case" class="Case">
+                <select id="Case" name="Case" class="Case" style="width: 150px;">
                 </select>
               </div>
               <div>
