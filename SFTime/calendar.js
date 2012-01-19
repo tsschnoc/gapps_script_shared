@@ -667,17 +667,23 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
       "X-PrettyPrint": "1"
     };
         
+    var ids = [];        
+        
     var callback = function(obj) {        
       $('select.Case').empty();
       for (var i=0;i<obj.data.records.length;i++)  {
         var record = obj.data.records[i];
-        var option = $('<option />').attr({
-          value: record.Case__r.Id
-        });
-//        option.html(record.Description!==null ? record.Description : record.CaseNumber);
-        option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
-        console.log(option);
-        $('select.Case').append(option);
+        
+        if (ids.indexOf(record.Case__r.Id) < 0 ) {
+          ids.push(record.Case__r.Id);
+          var option = $('<option />').attr({
+            value: record.Case__r.Id
+          });
+  //        option.html(record.Description!==null ? record.Description : record.CaseNumber);
+          option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
+          console.log(option);
+          $('select.Case').append(option);
+        }
       }
     };
         
