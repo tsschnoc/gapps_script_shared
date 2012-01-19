@@ -675,7 +675,7 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
           value: record.Case__r.Id
         });
 //        option.html(record.Description!==null ? record.Description : record.CaseNumber);
-        option.html(Case__r.Subject + Case__r.Project__r.Name);
+        option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
         console.log(option);
         $('select.Case').append(option);
       }
