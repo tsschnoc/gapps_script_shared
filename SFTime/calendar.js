@@ -715,6 +715,7 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     ticket.Case__c = caseId;
     ticket.Description__c = $('#Description').val();
     ticket.Timekeeper__c = '0032000000UMVLk';
+    ticket.RecordTypeID='012D0000000Uu3y';
     ticket.Date__c = startDate;
     
     ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
