@@ -269,6 +269,8 @@
     console.debug('delete_timecards ' + delete_timecards);
 
     for (var i in gcal_timecards) {
+      
+      delete_timecards.push(gcal_timecards[i]);
       delete gcal_timecards[i];        
     }
 
