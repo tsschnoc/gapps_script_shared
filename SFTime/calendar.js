@@ -754,6 +754,15 @@ console.log("!!!!!!!!!!" + params);
 
 var privateCallback = function(obj) {        
       console.log("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);  
+              
+        google.calendar.refreshEvents();
+        
+        var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.startTime.year + "," + current_event.startTime.month + "," + current_event.startTime.date + ");";
+              console.log("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);  
+
+        setTimeout(refreshCode,2000);
+        setTimeout(refreshCode,5000);
+
 };
 gadgets.io.makeRequest(sfurl, privateCallback, params);    
   } //sf_soap_insertTimeTicket
@@ -806,6 +815,9 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
         
     var callback = function(obj) {        
       console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
+      reqCalTimecardEvents();
+      sf_ReqTimeTickets();
+      
         google.calendar.refreshEvents();
         
         var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.startTime.year + "," + current_event.startTime.month + "," + current_event.startTime.date + ");";
