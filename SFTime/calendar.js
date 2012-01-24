@@ -433,7 +433,7 @@
     
     
     var out = start.month + '/' + start.date + ' - ' + end.month + '/' + end.date;
-    console.log("!!!!!!!!!!!!!£££££££££££££££££££££££££££££££££ + " + out);
+    debug("!!!!!!!!!!!!!£££££££££££££££££££££££££££££££££ + " + out);
   }
 
 
@@ -442,7 +442,7 @@
     if (token == null) {
       var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
       var prefs = new gadgets.Prefs();
-      console.log("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));   
+      debug("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));   
       if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
         return;
       }
@@ -467,10 +467,10 @@
     this.postdata = postdata;
     this.request = function() {
       try {
-        console.log('SOAPAction: ' + this.SOAPAction);
-        console.log('url : ' + this.url);
-        console.log('postdata : ' + this.postdata);
-        console.log('number : ' + this.number);
+        debug('SOAPAction: ' + this.SOAPAction);
+        debug('url : ' + this.url);
+        debug('postdata : ' + this.postdata);
+        debug('number : ' + this.number);
         var params = {};
         params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
         params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
@@ -497,11 +497,11 @@
         return;
       }
       
-      console.log("callback:" + this + " " + obj);
-      //console.log('1');
-      //console.log(obj);
+      debug("callback:" + this + " " + obj);
+      //debug('1');
+      //debug(obj);
       var document = obj.data;
-      //console.log(obj.data);
+      //debug(obj.data);
       if (document.getElementsByTagName("loginResponse").length > 0) {
         token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
         sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
@@ -524,10 +524,10 @@
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
-    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
     var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
-//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -583,7 +583,7 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
 	  " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
   
   
-console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);  
+debug("!!!!!!!!!!!!!!!!!! queryString :" + queryString);  
 
   
   
@@ -591,10 +591,10 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
-    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
     var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString) + "&nocache=1";
-//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -609,12 +609,12 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
     var callback = function(obj) {        
       for (var i=0;i<obj.data.records.length;i++)  {
         record = obj.data.records[i];
-        console.log(JSON.stringify(record));
+        debug(JSON.stringify(record));
         
         sf_timecards_tmp[record.Id] = record;
       }
       
-      console.log(sf_timecards_tmp);
+      debug(sf_timecards_tmp);
       sf_timecards = sf_timecards_tmp;
       matchTimeCards();
     };
@@ -630,10 +630,10 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
     restServerUrl = "https://" + restServerUrl;
-    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
     
     var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
-//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -658,7 +658,7 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
           });
   //        option.html(record.Description!==null ? record.Description : record.CaseNumber);
           option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
-          console.log(option);
+          debug(option);
           $('select.Case').append(option);
         }
       }
@@ -725,17 +725,17 @@ params[gadgets.io.RequestParameters.POST_DATA] = postdata;
 params[gadgets.io.RequestParameters.HEADERS] = {};
 params[gadgets.io.RequestParameters.HEADERS].SOAPAction= "Dummy";
 params[gadgets.io.RequestParameters.HEADERS]['Content-Type'] = "text/xml;charset=UTF-8";
-console.log("!!!!!!!!!!" + params);
+debug("!!!!!!!!!!" + params);
 
 var privateCallback = function(obj) {        
-      console.log("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);  
+      debug("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);  
         reqCalTimecardEvents();
         sf_ReqTimeTickets();
               
         google.calendar.refreshEvents();
         
         var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.startTime.year + "," + current_event.startTime.month + "," + current_event.startTime.date + ");";
-              console.log("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);  
+              debug("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);  
 
         setTimeout(refreshCode,2000);
         setTimeout(refreshCode,5000);
