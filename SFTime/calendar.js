@@ -18,6 +18,17 @@
   var apikey = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
 
 
+  var timeticket_calendarId = 'parx.com_mhs7i7bglkukrt9bstt0a8mg9o@group.calendar.google.com';
+  
+  
+  function debug(text) {
+    if (true) {
+      if (console && console.debug) {
+        console.debug(text);      
+      }      
+    }
+  }
+
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 
@@ -54,10 +65,10 @@
     $('.SaveEvent').click(function(e) {
       e.preventDefault();
 
-      console.debug('SaveEvent Button pressed');
-      console.debug(current_event.timezone);
+      debug('SaveEvent Button pressed');
+      debug(current_event.timezone);
       //            fetttttch();
-      console.debug($('#Case').val());
+      debug($('#Case').val());
       
 
       var caseId = $('#Case').val();    
@@ -156,23 +167,13 @@
   
   
   function reqCalTimecardEvents() {
-    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?pp=1&key=' + apikey;
-    
-    
-//  var viewstart = null;
-//  var viewend = null;
-    
-    
-    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=2012-01-09T00%3A00%3A00%2B01%3A00&timeMin=2012-01-02T00%3A00%3A00%2B01%3A00&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + apikey;
-    
-        var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?timeMax=' + 
-        encodeURIComponent(new Date(viewend.year,viewend.month-1,viewend.date,23,59,59,999).toISOString()) + 
-        '&timeMin=' + 
-        encodeURIComponent(new Date(viewstart.year,viewstart.month-1,viewstart.date).toISOString()) + 
-        '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + apikey;
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + 
+      '?timeMax=' + encodeURIComponent(new Date(viewend.year,viewend.month-1,viewend.date,23,59,59,999).toISOString()) + 
+      '&timeMin=' + encodeURIComponent(new Date(viewstart.year,viewstart.month-1,viewstart.date).toISOString()) + 
+      '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + apikey;
 
     
-    console.debug('callUrl ' + callUrl);    
+    debug('callUrl ' + callUrl);    
     
     var params = {};
     var postdata = "";
@@ -193,7 +194,7 @@
       if (obj.data != null && obj.data.items != null ) {
       for (var i=0;i<obj.data.items.length;i++)  {
         var event = obj.data.items[i];
-        console.debug(event.id);
+        debug(event.id);
         event.record = JSON.parse(event.description);
         gcal_timecards[event.record.Id] = event;
 
@@ -219,14 +220,14 @@
     }
 
     for (var i in sf_timecards) {
-      console.debug(i);
+      debug(i);
       if (gcal_timecards[i] != null) {
         //compare
-        console.debug('compare');
-        console.debug(gcal_timecards[i].record.LastModifiedDate + " " + sf_timecards[i].LastModifiedDate);
+        debug('compare');
+        debug(gcal_timecards[i].record.LastModifiedDate + " " + sf_timecards[i].LastModifiedDate);
         if (gcal_timecards[i].record.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
           // tue nichts
-          console.debug('gleich');
+          debug('gleich');
         } else {
           insert_timecards.push(sf_timecards[i]);
           delete_timecards.push(gcal_timecards[i]);
@@ -241,8 +242,8 @@
       
     }
 
-    console.debug('insert_timecards ' + insert_timecards);
-    console.debug('delete_timecards ' + delete_timecards);
+    debug('insert_timecards ' + insert_timecards);
+    debug('delete_timecards ' + delete_timecards);
 
     for (var i in gcal_timecards) {
       
@@ -267,7 +268,7 @@
   }
   
   function delEvent(eventid) {
-      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events/**EVENTID**?pp=1&key=' + apikey;
+      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events/**EVENTID**?pp=1&key=' + apikey;
       var params = {};
       var postdata = "";
       
@@ -288,7 +289,7 @@
   }
   
   function insertSFToGcalEvent(sftimecard) {
-      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/parx.com_mhs7i7bglkukrt9bstt0a8mg9o%40group.calendar.google.com/events?sendNotifications=false&pp=1&key=' + apikey;
+      var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events?sendNotifications=false&pp=1&key=' + apikey;
       var params = {};
       
       
@@ -325,7 +326,7 @@
   }
   
   function insCallback(obj) { 
-    console.debug(obj);
+    debug(obj);
   }
 
   function subscribeEventsCallback(e) {    
@@ -335,7 +336,7 @@
     var html = 'No event';
     if (e) {
       current_event = e;
-      console.debug(gadgets.json.stringify(e));
+      debug(gadgets.json.stringify(e));
       if (current_event != null) {
         $('#dialog').get(0).style.display = 'block';
       }
@@ -346,7 +347,7 @@
     else {
       current_event = null;
       $('#dialog').get(0).style.display = 'none';
-      console.debug("kein event");
+      debug("kein event");
       gadgets.window.adjustHeight();
     }
   }
@@ -388,7 +389,7 @@
       //{"timezone":"Europe/Zurich","startTime":{"year":2010,"month":12,"date":30,"hour":10,"minute":0,"second":0},"endTime":{"year":2010,"month":12,"date":30,"hour":11,"minute":30,"second":0}}
       var startTimeString = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date) + 'T' + ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + ':' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute) + ':' + ((current_event.startTime.second < 10) ? '0' + current_event.startTime.second : current_event.startTime.second) + '.000+01:00';
       var endTimeString = current_event.endTime.year + '-' + ((current_event.endTime.month < 10) ? '0' + current_event.endTime.month : current_event.endTime.month) + '-' + ((current_event.endTime.date < 10) ? '0' + current_event.endTime.date : current_event.endTime.date) + 'T' + ((current_event.endTime.hour < 10) ? '0' + current_event.endTime.hour : current_event.endTime.hour) + ':' + ((current_event.endTime.minute < 10) ? '0' + current_event.endTime.minute : current_event.endTime.minute) + ':' + ((current_event.endTime.second < 10) ? '0' + current_event.endTime.second : current_event.endTime.second) + '.000+01:00';
-      console.debug(startTimeString + ' ' + endTimeString);
+      debug(startTimeString + ' ' + endTimeString);
       //var startTime = google.gdata.DateTime.fromIso8601("2010-12-31T09:00:00.000+01:00");
       //var endTime = google.gdata.DateTime.fromIso8601("2010-12-31T10:00:00.000+01:00");
       var startTime = google.gdata.DateTime.fromIso8601(startTimeString);
@@ -397,16 +398,16 @@
       when.setEndTime(endTime);
       // Add the When object to the event
       entry.addTime(when);
-      console.debug(when);
+      debug(when);
     }
     catch (e) {
-      console.debug(e);
+      debug(e);
     }
     // The callback method that will be called after a successful insertion from insertEntry()
     var callback = function(result) {
-        console.debug('event created!');
+        debug('event created!');
         google.calendar.refreshEvents();
-        console.debug('events refreshed!');
+        debug('events refreshed!');
         google.calendar.showDate(2009, 12, 31);
         google.calendar.showDate(current_event.startTime.year, current_event.startTime.month, current_event.startTime.date);
         }
@@ -415,7 +416,7 @@
         
         
     var handleError = function(error) {
-        console.debug(error);
+        debug(error);
         }
         
         // Submit the request using the calendar service object
@@ -481,7 +482,7 @@
         gadgets.io.makeRequest(url, this.callback, params);
       }
       catch (e) {
-        //console.debug(e);
+        //debug(e);
       }
     };
     this.callback = function(obj) {
