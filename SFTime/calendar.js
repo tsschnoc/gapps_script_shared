@@ -39,6 +39,15 @@
       e.preventDefault();
       reqCalTimecardEvents();
       sf_ReqTimeTickets();
+      
+      google.calendar.refreshEvents();
+      
+      var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.viewstart.year + "," + current_event.viewstart.month + "," + current_event.viewstart.date + ");";
+      
+      setTimeout(refreshCode,2000);
+      setTimeout(refreshCode,5000);
+        
+        
     });
     
     $('.SaveEvent').click(function(e) {
@@ -739,71 +748,6 @@ gadgets.io.makeRequest(sfurl, privateCallback, params);
   
   
   
-  
-  function sf_upsertTimeTicket(caseId, caseDesc) {
-    var restServerUrl = sfurl.split("/")[2];
-    restServerUrl = restServerUrl.replace("-api", "");
-    restServerUrl = "https://" + restServerUrl;
-//    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
-    
-//    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/a03G0000005fhqDIAQ?_HttpMethod=PATCH";
-    var callUrl = restServerUrl + "/services/data/v23.0/sobjects/TimeCard__c/";
-console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
-    
-    
-    
-    
-    
-//      var startTimeString = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date) + 'T' + ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + ':' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute) + ':' + ((current_event.startTime.second < 10) ? '0' + current_event.startTime.second : current_event.startTime.second) + '.000+01:00';
-//      var endTimeString = current_event.endTime.year + '-' + ((current_event.endTime.month < 10) ? '0' + current_event.endTime.month : current_event.endTime.month) + '-' + ((current_event.endTime.date < 10) ? '0' + current_event.endTime.date : current_event.endTime.date) + 'T' + ((current_event.endTime.hour < 10) ? '0' + current_event.endTime.hour : current_event.endTime.hour) + ':' + ((current_event.endTime.minute < 10) ? '0' + current_event.endTime.minute : current_event.endTime.minute) + ':' + ((current_event.endTime.second < 10) ? '0' + current_event.endTime.second : current_event.endTime.second) + '.000+01:00';
-      var startDate = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date);
-    
-    
-    var ticket  = {};
-//    ticket.Id = 'a03G0000005fhqDIAQ';
-    ticket.Case__c = caseId;
-    ticket.Description__c = $('#Description').val();
-    ticket.Timekeeper__c = '0032000000UMVLk';
-    ticket.RecordTypeID='012D0000000Uu3y';
-    ticket.Date__c = startDate;
-    
-    ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
-    ticket.HoursWorked__c = (( current_event.endTime.hour * 60 + current_event.endTime.minute  ) - ( current_event.startTime.hour * 60  + current_event.startTime.minute )) / 60;
-    
-    var params = {};
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.POST_DATA] = JSON.stringify(ticket);
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "Authorization": "OAuth " + token,
-      "X-PrettyPrint": "1",
-      "ACCEPT ": "JSON",
-      "X-PrettyPrint": "1",
-      "Content-Type": "application/json"
-      
-    };
-        
-    var callback = function(obj) {        
-        reqCalTimecardEvents();
-        sf_ReqTimeTickets();
-      console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
-      
-        google.calendar.refreshEvents();
-        
-        var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.startTime.year + "," + current_event.startTime.month + "," + current_event.startTime.date + ");";
-              console.log("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);  
-
-        setTimeout(refreshCode,2000);
-        setTimeout(refreshCode,5000);
-    };
-        
-        
-    gadgets.io.makeRequest(callUrl, callback, params);
-  }
-  
- 
-
-
 
 
 
