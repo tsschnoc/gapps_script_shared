@@ -336,19 +336,6 @@
 	}
 
 
-	function datesCallback(dates) {
-		var start = dates.startTime;
-		var end = dates.endTime;
-
-		viewstart = dates.startTime;
-		viewend = dates.endTime;
-
-
-		var out = start.month + '/' + start.date + ' - ' + end.month + '/' + end.date;
-		debug("!!!!! Shown period in Calendar GUI:  " + out);
-	}
-
-
 
 	function SFLogin() {
 		if (token == null) {
