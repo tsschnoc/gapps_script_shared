@@ -386,7 +386,7 @@
 					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
 
 					$(".credentials").addClass("invisible");
-					gadgets.window.adjustHeight();
+					gadgets.window.adjustHeight(300);
 				}
 			};
 
