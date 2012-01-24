@@ -693,6 +693,53 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
     gadgets.io.makeRequest(callUrl, callback, params);
   }
   
+  
+  
+  
+  function sf_soap_insertTimeTicket(caseId, caseDesc) {  
+var postdata = '';    
+postdata+="<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\" xmlns:urn1=\"urn:sobject.partner.soap.sforce.com\">";
+postdata+="   <soapenv:Header>";
+postdata+="      <urn:SessionHeader>";
+postdata+="         <urn:sessionId>" + token + "</urn:sessionId>";
+postdata+="      </urn:SessionHeader>";
+postdata+="   </soapenv:Header>";
+postdata+="   <soapenv:Body>";
+postdata+="      <urn:create>";
+postdata+="         <urn:sObjects>";
+postdata+="            <urn1:type>TimeCard__c</urn1:type>";
+postdata+="<RecordTypeId>012D0000000Uu3yIAC</RecordTypeId>";
+postdata+="<Timekeeper__c>003M0000008VdPdIAK</Timekeeper__c>";
+postdata+="<Date__c>2012-01-24</Date__c>";
+postdata+="<HoursWorked__c>1.0</HoursWorked__c>";
+postdata+="<Task__c>Work</Task__c>";
+postdata+="<Description__c>desc</Description__c>";
+postdata+="<Case__c>500M00000012YXeIAM</Case__c>";
+postdata+="<TimeStart__c>1130</TimeStart__c>";
+postdata+="         </urn:sObjects>";
+postdata+="      </urn:create>";
+postdata+="   </soapenv:Body>";
+postdata+="</soapenv:Envelope>";
+
+var params = {};
+params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+console.log("!!!!!!!!!!" + params);
+params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+params[gadgets.io.RequestParameters.HEADERS] = {};
+params[gadgets.io.RequestParameters.HEADERS].SOAPAction= "Dummy";
+params[gadgets.io.RequestParameters.HEADERS].Content-Type = "text/xml;charset=UTF-8";
+console.log("!!!!!!!!!!" + params);
+
+var privateCallback = function(obj) {        
+      console.log("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);  
+};
+gadgets.io.makeRequest(sfurl, privateCallback, params);    
+  } //sf_soap_insertTimeTicket
+  
+  
+  
+  
   function sf_upsertTimeTicket(caseId, caseDesc) {
     var restServerUrl = sfurl.split("/")[2];
     restServerUrl = restServerUrl.replace("-api", "");
@@ -759,6 +806,40 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
 
   gadgets.util.registerOnLoadHandler(initGadget);
 })(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
