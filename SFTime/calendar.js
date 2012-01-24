@@ -16,12 +16,10 @@
 	var viewend = null;
 
 	var apikey = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
-
-
-	var Timekeeper__c = '0032000000UMVLk';
 	var RecordTypeID = '012D0000000Uu3y';
 
-	var timeticket_calendarId = 'parx.com_mhs7i7bglkukrt9bstt0a8mg9o@group.calendar.google.com';
+  var Timekeeper__c = null;
+	var timeticket_calendarId = null;
 
 	function debug(text) {
 		if (false) {
@@ -72,8 +70,10 @@
 
 		$("#SFLogin").click(function() {
 			var prefs = new gadgets.Prefs();
-			prefs.set("Username", $("#username").val());
+  		prefs.set("Username", $("#username").val());
 			prefs.set("Password", $("#password").val());
+  		prefs.set("CalID", $("#CalID").val());
+			prefs.set("TimeKeeper", $("#TimeKeeper").val());
 			SFLogin();
 		});
 
@@ -148,7 +148,11 @@
 
 
 	function reqCalTimecardEvents() {
-		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
+		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + 
+      '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + 
+      '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + 
+      '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + 
+      '&key=' + apikey;
 
 
 		debug('callUrl ' + callUrl);
@@ -347,6 +351,9 @@
 				return;
 			}
 
+      Timekeeper__c = prefs.getString("TimeKeeper");
+      timeticket_calendarId = prefs.getString("CalID") + '@group.calendar.google.com';
+
 			postdata = postdata.replace("**username**", prefs.getString("Username"));
 			postdata = postdata.replace("**password**", prefs.getString("Password"));
 			var url = "https://login.salesforce.com/services/Soap/u/23.0";
@@ -392,52 +399,6 @@
 	}
 
 
-	////////////////////////////////////
-	////////////////////////////////////
-	//    var responseFunc;
-	//    var searchTerm;
-	////////////////////////////////////
-
-	function sf_searchCases() {
-		var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
-		var restServerUrl = sfurl.split("/")[2];
-		restServerUrl = restServerUrl.replace("-api", "");
-		restServerUrl = "https://" + restServerUrl;
-		debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);
-
-		var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
-		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
-		var params = {};
-		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-		//params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-		params[gadgets.io.RequestParameters.HEADERS] = {
-			"Authorization": "OAuth " + token,
-			"X-PrettyPrint": "1"
-		};
-
-		var callback = function(obj) {
-				if (obj.data == null) {
-					responseFunc([]);
-					return;
-				}
-				var arr = [];
-				for (var i = 0; i < obj.data.length; i++) {
-					var record = obj.data[i];
-
-					arr.push({
-						label: record.Subject,
-						value: record.Id
-					});
-				}
-
-				//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
-				responseFunc(arr);
-			};
-
-
-		makeCachedRequest(callUrl, callback, params);
-	}
 
 
 	function makeCachedRequest(url, callback, params, refreshInterval) {
@@ -970,3 +931,75 @@ shindig.oauth.popup = function(options) {
 		createApprovedOnClick: createApprovedOnClick
 	};
 };
+
+
+
+
+
+
+
+
+  ////////////////////////////////////
+	////////////////////////////////////
+	//    var responseFunc;
+	//    var searchTerm;
+	////////////////////////////////////
+
+	function sf_searchCases() {
+		var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
+		var restServerUrl = sfurl.split("/")[2];
+		restServerUrl = restServerUrl.replace("-api", "");
+		restServerUrl = "https://" + restServerUrl;
+		debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);
+
+		var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+		var params = {};
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		//params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+		params[gadgets.io.RequestParameters.HEADERS] = {
+			"Authorization": "OAuth " + token,
+			"X-PrettyPrint": "1"
+		};
+
+		var callback = function(obj) {
+				if (obj.data == null) {
+					responseFunc([]);
+					return;
+				}
+				var arr = [];
+				for (var i = 0; i < obj.data.length; i++) {
+					var record = obj.data[i];
+
+					arr.push({
+						label: record.Subject,
+						value: record.Id
+					});
+				}
+
+				//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+				responseFunc(arr);
+			};
+
+
+		makeCachedRequest(callUrl, callback, params);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
