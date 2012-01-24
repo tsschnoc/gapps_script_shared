@@ -86,36 +86,30 @@ background: white;
         <div class="refresh">
               <button class="refreshCal">RefreshCalendar</button>
         </div>
+        
         <div id="main" style="display:none">          
           <div class="credentials">
-              SF-Username:<input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
-              PasswordToken<input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-              <input type=button id="GoBtn" value=" Login " name=" Login "> 
+              <label for="username">SF-Username:</label>
+              <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+              <label for="password">PasswordToken:</label>              
+              <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+              
+              <input type=button id="SFLogin" value="SF Login " name="SF Login "> 
           </div>
           <div id="dialog">
             <form>
               <div>
+              
                 <label for="Case">Case</label>
                 <select id="Case" name="Case" class="Case" style="width: 150px;">
                 </select>
-              </div>
-              <div>
+                
+                <label for="Description">Description: </label>
                 <input type="text" name="Description" id="Description" /> 
+
+
               </div>
-
-
-<div class="demo">
-
-<div class="ui-widget">
-  <label for="city">Your city: </label>
-	<input id="city" />	
-</div>
-
-
-</div><!-- End demo -->
-
-              <input type="hidden" name="ctz" />
-              <button class="generate">Save Event</button>
+              <button class="SaveEvent">Save Event</button>
             </form>
 
           </div>

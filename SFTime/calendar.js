@@ -41,10 +41,10 @@
       sf_ReqTimeTickets();
     });
     
-    $('.generate').click(function(e) {
+    $('.SaveEvent').click(function(e) {
       e.preventDefault();
 
-      console.debug('generate Button pressed');
+      console.debug('SaveEvent Button pressed');
       console.debug(current_event.timezone);
       //            fetttttch();
       console.debug($('#Case').val());
@@ -58,42 +58,10 @@
 //      createEvent();
       return false;
     });
+      
     
     
-/////////////////////////////////////////////    
-   
-    function log( message ) {
-  		$( "<div/>" ).text( message ).prependTo( "#log" );
-			$( "#log" ).scrollTop( 0 );
-		}
-
-		$( "#city" ).autocomplete({
-			source: function( request, response ) {
-				responseFunc = response;
-        searchTerm = request;
-        sf_searchCases();        
-			},
-			minLength: 2,
-			select: function( event, ui ) {
-				log( ui.item ?
-					"Selected: " + ui.item.label :
-					"Nothing selected, input was " + this.value);
-			},
-			open: function() {
-				$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-			},
-			close: function() {
-				$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-			}
-		});
-    
-    
-  
-//////////////////    
-    
-    
-    
-    $("#GoBtn").click(function() {
+    $("#SFLogin").click(function() {
       username = $("#username").val();
       password = $("#password").val();
       var prefs = new gadgets.Prefs();
