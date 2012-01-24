@@ -348,6 +348,7 @@
 			debug("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));
 			if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
 				$(".credentials").removeClass("invisible");
+  			gadgets.window.adjustHeight();        
 				return;
 			}
 
@@ -386,7 +387,7 @@
 					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
 
 					$(".credentials").addClass("invisible");
-					gadgets.window.adjustHeight(300);
+					gadgets.window.adjustHeight();
 				}
 			};
 
