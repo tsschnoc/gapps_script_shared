@@ -48,7 +48,7 @@
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
 			calendar.useOAuth('google');
 			fetchData();
-			//      readSFData();
+			//      SFLogin();
 		});
 		$('.hasDatepicker').datepicker();
 		$('.refreshCal').click(function(e) {
@@ -79,8 +79,6 @@
 			var caseDesc = $('option[value|="' + caseId + '"]').text();
 
 			sf_soap_insertTimeTicket(caseId, caseDesc);
-			//responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
-			//      createEvent();
 			return false;
 		});
 
@@ -90,7 +88,7 @@
 			var prefs = new gadgets.Prefs();
 			prefs.set("Username", $("#username").val());
 			prefs.set("Password", $("#password").val());
-			readSFData();
+			SFLogin();
 
 		});
 
@@ -132,7 +130,7 @@
 					if (current_event == null) {
 						$('#dialog')[0].style.display = 'none';
 					}
-					readSFData();
+					SFLogin();
 
 
 				}
@@ -168,7 +166,11 @@
 
 
 	function reqCalTimecardEvents() {
-		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1&key=' + apikey;
+		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + 
+      '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + 
+      '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + 
+      '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + 
+      '&key=' + apikey;
 
 
 		debug('callUrl ' + callUrl);
@@ -269,7 +271,7 @@
 	}
 
 	function delEvent(eventid) {
-		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events/**EVENTID**?pp=1&key=' + apikey;
+		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events/' + eventid + '?pp=1&key=' + apikey;
 		var params = {};
 		var postdata = "";
 
@@ -286,7 +288,7 @@
 		};
 
 
-		makeCachedRequest(callUrl.replace("**EVENTID**", eventid), null, params);
+		makeCachedRequest(callUrl, null, params);
 	}
 
 	function insertSFToGcalEvent(sftimecard) {
@@ -356,75 +358,6 @@
 		}
 	}
 
-	function createEvent() {
-		try {
-			// The default "private/full" feed is used to insert event to the
-			// primary calendar of the authenticated user
-			var feedUri = 'http://www.google.com/calendar/feeds/default/private/full';
-			// Create an instance of CalendarEventEntry representing the new event
-			var entry = new google.gdata.calendar.CalendarEventEntry();
-			// Set the title of the event
-			var sfid = $('#Case').val();
-
-			var optname = $('option[value|="' + sfid + '"]').text();
-
-
-			entry.setTitle(google.gdata.atom.Text.create(optname));
-			entry.setContent(google.gdata.atom.Text.create('#' + $('#Case').val()));
-
-
-			var extendedProp = new google.gdata.ExtendedProperty();
-			extendedProp.setName('sfid');
-			extendedProp.setRealm('shared');
-			extendedProp.setValue(sfid);
-
-			var extendedProp1 = new google.gdata.ExtendedProperty();
-			extendedProp1.setName('optname');
-			extendedProp1.setRealm('shared');
-			extendedProp1.setValue(optname);
-
-
-
-			entry.setExtendedProperties([extendedProp, extendedProp1]);
-			// Create a When object that will be attached to the event
-			var when = new google.gdata.When();
-			// Set the start and end time of the When object
-			//{"timezone":"Europe/Zurich","startTime":{"year":2010,"month":12,"date":30,"hour":10,"minute":0,"second":0},"endTime":{"year":2010,"month":12,"date":30,"hour":11,"minute":30,"second":0}}
-			var startTimeString = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date) + 'T' + ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + ':' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute) + ':' + ((current_event.startTime.second < 10) ? '0' + current_event.startTime.second : current_event.startTime.second) + '.000+01:00';
-			var endTimeString = current_event.endTime.year + '-' + ((current_event.endTime.month < 10) ? '0' + current_event.endTime.month : current_event.endTime.month) + '-' + ((current_event.endTime.date < 10) ? '0' + current_event.endTime.date : current_event.endTime.date) + 'T' + ((current_event.endTime.hour < 10) ? '0' + current_event.endTime.hour : current_event.endTime.hour) + ':' + ((current_event.endTime.minute < 10) ? '0' + current_event.endTime.minute : current_event.endTime.minute) + ':' + ((current_event.endTime.second < 10) ? '0' + current_event.endTime.second : current_event.endTime.second) + '.000+01:00';
-			debug(startTimeString + ' ' + endTimeString);
-			//var startTime = google.gdata.DateTime.fromIso8601("2010-12-31T09:00:00.000+01:00");
-			//var endTime = google.gdata.DateTime.fromIso8601("2010-12-31T10:00:00.000+01:00");
-			var startTime = google.gdata.DateTime.fromIso8601(startTimeString);
-			var endTime = google.gdata.DateTime.fromIso8601(endTimeString);
-			when.setStartTime(startTime);
-			when.setEndTime(endTime);
-			// Add the When object to the event
-			entry.addTime(when);
-			debug(when);
-		}
-		catch (e) {
-			debug(e);
-		}
-		// The callback method that will be called after a successful insertion from insertEntry()
-		var callback = function(result) {
-				debug('event created!');
-				google.calendar.refreshEvents();
-				debug('events refreshed!');
-				google.calendar.showDate(2009, 12, 31);
-				google.calendar.showDate(current_event.startTime.year, current_event.startTime.month, current_event.startTime.date);
-			}
-
-			// Error handler will be invoked if there is an error from insertEntry()
-
-		var handleError = function(error) {
-				debug(error);
-			}
-
-			// Submit the request using the calendar service object
-			calendar.insertEntry(feedUri, entry, callback, handleError, google.gdata.calendar.CalendarEventEntry);
-	}
-
 
 	function datesCallback(dates) {
 		var start = dates.startTime;
@@ -435,12 +368,12 @@
 
 
 		var out = start.month + '/' + start.date + ' - ' + end.month + '/' + end.date;
-		debug("!!!!!!!!!!!!!£££££££££££££££££££££££££££££££££ + " + out);
+		debug("!!!!! Shown period in Calendar GUI:  " + out);
 	}
 
 
 
-	function readSFData() {
+	function SFLogin() {
 		if (token == null) {
 			var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
 			var prefs = new gadgets.Prefs();
@@ -495,7 +428,7 @@
 				prefs.set("Password", '');
 
 
-				readSFData();
+				SFLogin();
 				return;
 			}
 
@@ -581,8 +514,8 @@
 
 
 	function sf_ReqTimeTickets() {
-		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c FROM TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk'";
-		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c" + " FROM TimeCard__c " + "WHERE Timekeeper__c = '0032000000UMVLk'" + " and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
+		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c FROM TimeCard__c WHERE Timekeeper__c = '' + Timekeeper__c + ''";
+		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c" + " FROM TimeCard__c " + "WHERE Timekeeper__c = '' + Timekeeper__c + ''" + " and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
 
 		debug("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
@@ -627,7 +560,7 @@
 
 	function sf_queryCases() {
 		//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
-		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '0032000000UMVLk' order by LastModifiedDate desc Limit 50";
+		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '' + Timekeeper__c + '' order by LastModifiedDate desc Limit 50";
 		var restServerUrl = sfurl.split("/")[2];
 		restServerUrl = restServerUrl.replace("-api", "");
 		restServerUrl = "https://" + restServerUrl;
@@ -680,8 +613,8 @@
 		//    ticket.Id = 'a03G0000005fhqDIAQ';
 		ticket.Case__c = caseId;
 		ticket.Description__c = $('#Description').val();
-		ticket.Timekeeper__c = '0032000000UMVLk';
-		ticket.RecordTypeID = '012D0000000Uu3y';
+		ticket.Timekeeper__c = '' + Timekeeper__c + '';
+		ticket.RecordTypeID = '' + RecordTypeID + '';
 		ticket.Date__c = startDate;
 
 		ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
@@ -704,7 +637,7 @@
 		postdata += "         <urn:sObjects>";
 		postdata += "            <urn1:type>TimeCard__c</urn1:type>";
 		postdata += objXML
-/*postdata+="<RecordTypeId>012D0000000Uu3yIAC</RecordTypeId>";
+/*postdata+="<RecordTypeId>' + RecordTypeID + 'IAC</RecordTypeId>";
 postdata+="<Timekeeper__c>003M0000008VdPdIAK</Timekeeper__c>";
 postdata+="<Date__c>2012-01-24</Date__c>";
 postdata+="<HoursWorked__c>1.0</HoursWorked__c>";
