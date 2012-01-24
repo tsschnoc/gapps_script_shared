@@ -562,7 +562,8 @@
 
 	function sf_queryCases() {
 		//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
-		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c WHERE Timekeeper__c = '' + Timekeeper__c + '' order by LastModifiedDate desc Limit 50";
+		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " +
+                        " WHERE Timekeeper__c = \'"+ Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
 		var restServerUrl = sfurl.split("/")[2];
 		restServerUrl = restServerUrl.replace("-api", "");
 		restServerUrl = "https://" + restServerUrl;
