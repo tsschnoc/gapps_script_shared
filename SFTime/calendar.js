@@ -698,13 +698,17 @@ console.log("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
   
   function sf_soap_insertTimeTicket(caseId, caseDesc) {  
 
+      var startDate = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date);
+    
+    
     var ticket  = {};
 //    ticket.Id = 'a03G0000005fhqDIAQ';
     ticket.Case__c = caseId;
     ticket.Description__c = $('#Description').val();
     ticket.Timekeeper__c = '0032000000UMVLk';
     ticket.RecordTypeID='012D0000000Uu3y';
-    ticket.Date__c = startDate;    
+    ticket.Date__c = startDate;
+    
     ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
     ticket.HoursWorked__c = (( current_event.endTime.hour * 60 + current_event.endTime.minute  ) - ( current_event.startTime.hour * 60  + current_event.startTime.minute )) / 60;
 
