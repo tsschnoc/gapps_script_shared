@@ -105,7 +105,8 @@ background: white;
                 </select>
                 
                 <label for="Description">Description: </label>
-                <input type="text" name="Description" id="Description" /> 
+                
+                <textarea type="text" name="Description" id="Description" rows="10" cols="20"/> 
 
 
               </div>
