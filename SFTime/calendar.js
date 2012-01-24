@@ -754,6 +754,8 @@ console.log("!!!!!!!!!!" + params);
 
 var privateCallback = function(obj) {        
       console.log("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);  
+        reqCalTimecardEvents();
+        sf_ReqTimeTickets();
               
         google.calendar.refreshEvents();
         
