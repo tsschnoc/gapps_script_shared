@@ -381,21 +381,52 @@
 			if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
 				return;
 			}
-
+	
 			postdata = postdata.replace("**username**", prefs.getString("Username"));
 			postdata = postdata.replace("**password**", prefs.getString("Password"));
-			var SOAPAction = "testaction";
 			var url = "https://login.salesforce.com/services/Soap/u/23.0";
-			//      url = prefs.getString("Loginurl");
-			//  makeSOAPRequest(url, SOAPAction, postdata);
-			(new SOAPRequest(url, SOAPAction, postdata, 1)).request();
+
+//			(new SOAPRequest(url, SOAPAction, postdata, 1)).request();
+			var params = {};
+			params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+			params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+			params[gadgets.io.RequestParameters.HEADERS] = {
+				"SOAPAction": "dummyAction",
+				"Content-Type": "text/xml;charset=UTF-8"
+			};
+	
+			logincallback = function(obj) {	
+				if (obj.errors[0] == "502 Error") {
+					var prefs = new gadgets.Prefs();
+					prefs.set("Username", '');
+					prefs.set("Password", '');
+	
+	
+					SFLogin();
+					return;
+				}
+	
+				debug("callback:" + this + " " + obj);
+				var document = obj.data;
+				if (document.getElementsByTagName("loginResponse").length > 0) {
+					token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
+					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
+	
+					$(".credentials").addClass("invisible");
+				}
+			};
+	
+	
+			makeCachedRequest(url, logincallback, params);
 		}
 		else {
-			//      sf_queryCases(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
+	
 		}
 	}
 
-	function SOAPRequest(url, SOAPAction, postdata, number) {
+
+  function SOAPRequest(url, SOAPAction, postdata, number) {
 		this.number = number;
 		this.url = url;
 		this.SOAPAction = SOAPAction;
@@ -613,8 +644,8 @@
 
 
 		var ticket = {};
-		//    ticket.Id = 'a03G0000005fhqDIAQ';
-		ticket.Case__c = caseId;
+
+    ticket.Case__c = caseId;
 		ticket.Description__c = $('#Description').val();
 		ticket.Timekeeper__c = '' + Timekeeper__c + '';
 		ticket.RecordTypeID = '' + RecordTypeID + '';
