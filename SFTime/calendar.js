@@ -814,9 +814,9 @@ console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     };
         
     var callback = function(obj) {        
-      console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
         reqCalTimecardEvents();
         sf_ReqTimeTickets();
+      console.log("!!!!!!!!!!!!!!!!!! sf_upsertTimeTicket callback obj :" + obj);  
       
         google.calendar.refreshEvents();
         
