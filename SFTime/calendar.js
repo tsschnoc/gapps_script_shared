@@ -51,6 +51,7 @@
 			//      SFLogin();
 		});
 		$('.hasDatepicker').datepicker();
+    $(".credentials").addClass("invisible");    
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
 			reqCalTimecardEvents();
@@ -62,20 +63,12 @@
 
 			setTimeout(refreshCode, 2000);
 			setTimeout(refreshCode, 5000);
-
-
 		});
 
 		$('.SaveEvent').click(function(e) {
 			e.preventDefault();
 
-			debug('SaveEvent Button pressed');
-			debug(current_event.timezone);
-			//            fetttttch();
-			debug($('#Case').val());
-
-
-			var caseId = $('#Case').val();
+      var caseId = $('#Case').val();
 			var caseDesc = $('option[value|="' + caseId + '"]').text();
 
 			sf_soap_insertTimeTicket(caseId, caseDesc);
@@ -89,7 +82,6 @@
 			prefs.set("Username", $("#username").val());
 			prefs.set("Password", $("#password").val());
 			SFLogin();
-
 		});
 
 
@@ -131,8 +123,6 @@
 						$('#dialog')[0].style.display = 'none';
 					}
 					SFLogin();
-
-
 				}
 				else {
 					if (console && console.debug) {
@@ -379,6 +369,7 @@
 			var prefs = new gadgets.Prefs();
 			debug("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));
 			if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
+        $(".credentials").removeClass("invisible");        
 				return;
 			}
 	
@@ -423,60 +414,6 @@
 		else {
 	
 		}
-	}
-
-
-  function SOAPRequest(url, SOAPAction, postdata, number) {
-		this.number = number;
-		this.url = url;
-		this.SOAPAction = SOAPAction;
-		this.postdata = postdata;
-		this.request = function() {
-			try {
-				debug('SOAPAction: ' + this.SOAPAction);
-				debug('url : ' + this.url);
-				debug('postdata : ' + this.postdata);
-				debug('number : ' + this.number);
-				var params = {};
-				params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-				params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-				params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-				params[gadgets.io.RequestParameters.HEADERS] = {
-					"SOAPAction": SOAPAction,
-					"Content-Type": "text/xml;charset=UTF-8"
-				};
-				makeCachedRequest(url, this.callback, params);
-			}
-			catch (e) {
-				//debug(e);
-			}
-		};
-		this.callback = function(obj) {
-
-			if (obj.errors[0] == "502 Error") {
-				var prefs = new gadgets.Prefs();
-				prefs.set("Username", '');
-				prefs.set("Password", '');
-
-
-				SFLogin();
-				return;
-			}
-
-			debug("callback:" + this + " " + obj);
-			//debug('1');
-			//debug(obj);
-			var document = obj.data;
-			//debug(obj.data);
-			if (document.getElementsByTagName("loginResponse").length > 0) {
-				token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
-				sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
-
-				$(".credentials").addClass("invisible");
-
-				//        sf_queryCases(sfurl, token, "FIND { " + sender_email + " } RETURNING contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname)");
-			}
-		};
 	}
 
 
