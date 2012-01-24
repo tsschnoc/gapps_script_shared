@@ -22,7 +22,7 @@
   
   
   function debug(text) {
-    if (true) {
+    if (false) {
       if (console && console.debug) {
         console.debug(text);      
       }      
