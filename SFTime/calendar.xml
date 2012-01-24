@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module> 
-  <ModulePrefs title="Google Calendar SF Timetracking" author="Fred.vom.Jupiter@parx.com" height="385">
+  <ModulePrefs title="Time Cards" author="Fred.vom.Jupiter@parx.com" height="20">
   <OAuth> 
     <Service name="google"> 
       <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
@@ -117,7 +117,7 @@ background: white;
         </div>
 
         <div id="loading">
-          <h3>Loading...</h3>
+          <h3>Login...</h3>
           <p><img src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/ajax-loader.gif"></p>
         </div>
 
