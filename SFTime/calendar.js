@@ -31,11 +31,12 @@
 		}
 	}
 
-
 	function initGadget() {
 		google.calendar.read.subscribeToEvents(subscribeEventsCallback);
-		google.calendar.subscribeToDates(datesCallback);
-
+		google.calendar.subscribeToDates(function(dates) {
+			viewstart = dates.startTime;
+			viewend = dates.endTime;
+		});
 		google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
@@ -43,7 +44,7 @@
 			fetchData();
 			//      SFLogin();
 		});
-    $(".credentials").addClass("invisible");    
+		$(".credentials").addClass("invisible");
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
 			reqCalTimecardEvents();
@@ -60,7 +61,7 @@
 		$('.SaveEvent').click(function(e) {
 			e.preventDefault();
 
-      var caseId = $('#Case').val();
+			var caseId = $('#Case').val();
 			var caseDesc = $('option[value|="' + caseId + '"]').text();
 
 			sf_soap_insertTimeTicket(caseId, caseDesc);
@@ -76,7 +77,7 @@
 			SFLogin();
 		});
 
-    gadgets.window.adjustHeight();
+		gadgets.window.adjustHeight();
 	}
 
 	function showOnly(id) {
@@ -125,7 +126,7 @@
 				}
 			};
 
-    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?key=' + apikey;
+		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?key=' + apikey;
 		var params = {};
 		var postdata = "";
 
@@ -147,11 +148,7 @@
 
 
 	function reqCalTimecardEvents() {
-		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + 
-      '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + 
-      '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + 
-      '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + 
-      '&key=' + apikey;
+		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
 
 
 		debug('callUrl ' + callUrl);
@@ -319,8 +316,8 @@
 
 	function subscribeEventsCallback(e) {
 		if (e) {
-//event aufgemacht
-      current_event = e;
+			//event aufgemacht
+			current_event = e;
 			debug(gadgets.json.stringify(e));
 			if (current_event != null) {
 				$('#dialog').get(0).style.display = 'block';
@@ -330,8 +327,8 @@
 			sf_queryCases();
 		}
 		else {
-//event geschlossen
-      current_event = null;
+			//event geschlossen
+			current_event = null;
 			$('#dialog').get(0).style.display = 'none';
 			debug("kein event");
 			gadgets.window.adjustHeight();
@@ -359,15 +356,15 @@
 			var prefs = new gadgets.Prefs();
 			debug("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));
 			if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
-        $(".credentials").removeClass("invisible");        
+				$(".credentials").removeClass("invisible");
 				return;
 			}
-	
+
 			postdata = postdata.replace("**username**", prefs.getString("Username"));
 			postdata = postdata.replace("**password**", prefs.getString("Password"));
 			var url = "https://login.salesforce.com/services/Soap/u/23.0";
 
-//			(new SOAPRequest(url, SOAPAction, postdata, 1)).request();
+			//			(new SOAPRequest(url, SOAPAction, postdata, 1)).request();
 			var params = {};
 			params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
 			params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
@@ -376,34 +373,34 @@
 				"SOAPAction": "dummyAction",
 				"Content-Type": "text/xml;charset=UTF-8"
 			};
-	
-			logincallback = function(obj) {	
+
+			logincallback = function(obj) {
 				if (obj.errors[0] == "502 Error") {
 					var prefs = new gadgets.Prefs();
 					prefs.set("Username", '');
 					prefs.set("Password", '');
-	
-	
+
+
 					SFLogin();
 					return;
 				}
-	
+
 				debug("callback:" + this + " " + obj);
 				var document = obj.data;
 				if (document.getElementsByTagName("loginResponse").length > 0) {
 					token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
 					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
-	
+
 					$(".credentials").addClass("invisible");
-          gadgets.window.adjustHeight();
+					gadgets.window.adjustHeight();
 				}
 			};
-	
-	
+
+
 			makeCachedRequest(url, logincallback, params);
 		}
 		else {
-	
+
 		}
 	}
 
@@ -413,7 +410,6 @@
 	//    var responseFunc;
 	//    var searchTerm;
 	////////////////////////////////////
-
 
 	function sf_searchCases() {
 		var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
@@ -473,10 +469,7 @@
 
 
 	function sf_ReqTimeTickets() {
-		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + 
-      " FROM TimeCard__c " + 
-      " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + 
-      "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
+		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
 
 		debug("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
@@ -521,8 +514,7 @@
 
 	function sf_queryCases() {
 		//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
-		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " +
-                        " WHERE Timekeeper__c = \'"+ Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
+		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
 		var restServerUrl = sfurl.split("/")[2];
 		restServerUrl = restServerUrl.replace("-api", "");
 		restServerUrl = "https://" + restServerUrl;
@@ -573,7 +565,7 @@
 
 		var ticket = {};
 
-    ticket.Case__c = caseId;
+		ticket.Case__c = caseId;
 		ticket.Description__c = $('#Description').val();
 		ticket.Timekeeper__c = '' + Timekeeper__c + '';
 		ticket.RecordTypeID = '' + RecordTypeID + '';
@@ -638,7 +630,6 @@ postdata+="<TimeStart__c>1130</TimeStart__c>";
 			};
 		makeCachedRequest(sfurl, privateCallback, params);
 	} //sf_soap_insertTimeTicket
-
 
 
 
@@ -934,7 +925,6 @@ shindig.oauth.popup = function(options) {
 	// Called when we recieve an indication the user has approved access, either
 	// because they closed the popup window or clicked an "I've approved" button.
 
-
 	function handleApproval() {
 		if (timer) {
 			window.clearInterval(timer);
@@ -950,7 +940,6 @@ shindig.oauth.popup = function(options) {
 
 	// Called at intervals to check whether the window has closed.  If it has,
 	// we act as if the user had clicked the "I've approved" link.
-
 
 	function checkClosed() {
 		if ((!win) || win.closed) {
