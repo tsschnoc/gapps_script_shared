@@ -42,7 +42,7 @@
       
       google.calendar.refreshEvents();
       
-      var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.viewstart.year + "," + current_event.viewstart.month + "," + current_event.viewstart.date + ");";
+      var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + viewstart.year + "," + viewstart.month + "," + viewstart.date + ");";
       
       setTimeout(refreshCode,2000);
       setTimeout(refreshCode,5000);
