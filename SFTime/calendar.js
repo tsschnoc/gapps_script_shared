@@ -84,7 +84,7 @@
 			SFLogin();
 		});
 
-
+    gadgets.window.adjustHeight();
 	}
 
 	function showOnly(id) {
@@ -405,6 +405,7 @@
 					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
 	
 					$(".credentials").addClass("invisible");
+          gadgets.window.adjustHeight();
 				}
 			};
 	
