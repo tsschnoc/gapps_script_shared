@@ -1,7 +1,6 @@
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 (function($) {
 	var calendar = null;
-	var debug_html = "debug";
 	var current_event = null;
 
 	var token = null;
@@ -22,10 +21,7 @@
 	var Timekeeper__c = '0032000000UMVLk';
 	var RecordTypeID = '012D0000000Uu3y';
 
-
-
 	var timeticket_calendarId = 'parx.com_mhs7i7bglkukrt9bstt0a8mg9o@group.calendar.google.com';
-
 
 	function debug(text) {
 		if (false) {
@@ -39,10 +35,7 @@
 	function initGadget() {
 		google.calendar.read.subscribeToEvents(subscribeEventsCallback);
 		google.calendar.subscribeToDates(datesCallback);
-		//    $.ui.dialog.defaults.bgiframe = true;
-		$.datepicker.setDefaults({
-			dateFormat: 'yymmdd'
-		});
+
 		google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
@@ -50,7 +43,6 @@
 			fetchData();
 			//      SFLogin();
 		});
-		$('.hasDatepicker').datepicker();
     $(".credentials").addClass("invisible");    
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
@@ -132,9 +124,8 @@
 					showOnly('errors');
 				}
 			};
-		//    calendar.getAllCalendarsFeed('http://www.google.com/calendar/feeds/default/allcalendars/full', callback, callback);
 
-		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?key=' + apikey;
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/primary/events?key=' + apikey;
 		var params = {};
 		var postdata = "";
 
@@ -327,11 +318,9 @@
 	}
 
 	function subscribeEventsCallback(e) {
-		//    google.calendar.showDate(2011, 12, 5);
-		//    google.calendar.showDate(2011, 12, 12);
-		var html = 'No event';
 		if (e) {
-			current_event = e;
+//event aufgemacht
+      current_event = e;
 			debug(gadgets.json.stringify(e));
 			if (current_event != null) {
 				$('#dialog').get(0).style.display = 'block';
@@ -341,7 +330,8 @@
 			sf_queryCases();
 		}
 		else {
-			current_event = null;
+//event geschlossen
+      current_event = null;
 			$('#dialog').get(0).style.display = 'none';
 			debug("kein event");
 			gadgets.window.adjustHeight();
