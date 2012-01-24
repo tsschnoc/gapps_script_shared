@@ -53,7 +53,7 @@
       var caseId = $('#Case').val();    
       var caseDesc = $('option[value|="' + caseId + '"]').text();
 
-      sf_upsertTimeTicket(caseId, caseDesc);
+      sf_soap_insertTimeTicket(caseId, caseDesc);
       //responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
 //      createEvent();
       return false;
