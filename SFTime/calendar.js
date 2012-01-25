@@ -89,6 +89,29 @@
 
 
 
+  function subscribeEventsCallback(e) {
+		if (e) {
+			//event aufgemacht
+			debug(gadgets.json.stringify(e));
+      if (e.calendar && e.calendar.email && e.calendar.email == timeticket_calendarId) {
+        current_event = e;
+        $('#dialog').get(0).style.display = 'block';
+        gadgets.window.adjustHeight();
+        sf_queryCases();
+		  }
+		}
+		else {
+			//event geschlossen
+			current_event = null;
+			$('#dialog').get(0).style.display = 'none';
+			debug("kein event");
+			gadgets.window.adjustHeight();
+		}
+	}
+
+
+
+
 
 
 	function fetchData() {
@@ -316,28 +339,6 @@
 
 	function insCallback(obj) {
 		debug(obj);
-	}
-
-	function subscribeEventsCallback(e) {
-		if (e) {
-			//event aufgemacht
-			debug(gadgets.json.stringify(e));
-			if (current_event != null) {
-        if (e.calendar && e.calendar.email) {
-      		current_event = e;
-          $('#dialog').get(0).style.display = 'block';
-      		gadgets.window.adjustHeight();
-    			sf_queryCases();
-			  }
-			}
-		}
-		else {
-			//event geschlossen
-			current_event = null;
-			$('#dialog').get(0).style.display = 'none';
-			debug("kein event");
-			gadgets.window.adjustHeight();
-		}
 	}
 
 
