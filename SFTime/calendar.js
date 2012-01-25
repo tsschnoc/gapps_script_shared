@@ -5,6 +5,8 @@
 
 	var token = null;
 	var sfurl = null;
+  var restServerUrl = null;   
+  
 	var responseFunc;
 	var searchTerm;
 
@@ -45,15 +47,7 @@
 		$(".credentials").addClass("invisible");
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
-			reqCalTimecardEvents();
-			sf_ReqTimeTickets();
-
-			google.calendar.refreshEvents();
-
-			var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + viewstart.year + "," + viewstart.month + "," + viewstart.date + ");";
-
-			setTimeout(refreshCode, 2000);
-			setTimeout(refreshCode, 5000);
+			syncCalendar();
 		});
 
 		$('.SaveEvent').click(function(e) {
@@ -88,7 +82,16 @@
 	}
 
 
-
+  function syncCalendar() {
+  	reqCalTimecardEvents();
+  	sf_ReqTimeTickets();
+  
+  	google.calendar.refreshEvents();  
+  	var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + viewstart.year + "," + viewstart.month + "," + viewstart.date + ");";
+  	setTimeout(refreshCode, 2000);
+  	setTimeout(refreshCode, 5000);
+  }
+  
   function subscribeEventsCallback(e) {
 		if (e) {
 			//event aufgemacht
@@ -388,6 +391,12 @@
 					token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
 					sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
 
+
+        	var restServerUrl = sfurl.split("/")[2];
+      		restServerUrl = restServerUrl.replace("-api", "");
+      		restServerUrl = "https://" + restServerUrl;
+
+
 					$(".credentials").addClass("invisible");
 					gadgets.window.adjustHeight();
 				}
@@ -422,19 +431,7 @@
 	function sf_ReqTimeTickets() {
 		var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
-
-		debug("!!!!!!!!!!!!!!!!!! queryString :" + queryString);
-
-
-
-
-		var restServerUrl = sfurl.split("/")[2];
-		restServerUrl = restServerUrl.replace("-api", "");
-		restServerUrl = "https://" + restServerUrl;
-		debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);
-
-		var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString) + "&nocache=1";
-		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+		var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
 		var params = {};
 		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -458,7 +455,6 @@
 				matchTimeCards();
 			};
 
-		//    makeCachedRequest(callUrl, callback, params);
 		makeCachedRequest(callUrl, callback, params, 0);
 	}
 
@@ -466,11 +462,6 @@
 	function sf_queryCases() {
 		//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
 		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
-		var restServerUrl = sfurl.split("/")[2];
-		restServerUrl = restServerUrl.replace("-api", "");
-		restServerUrl = "https://" + restServerUrl;
-		debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);
-
 		var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
 		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
 		var params = {};
@@ -494,7 +485,6 @@
 						var option = $('<option />').attr({
 							value: record.Case__r.Id
 						});
-						//        option.html(record.Description!==null ? record.Description : record.CaseNumber);
 						option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
 						debug(option);
 						$('select.Case').append(option);
@@ -542,15 +532,6 @@
 		postdata += "         <urn:sObjects>";
 		postdata += "            <urn1:type>TimeCard__c</urn1:type>";
 		postdata += objXML
-/*postdata+="<RecordTypeId>' + RecordTypeID + 'IAC</RecordTypeId>";
-postdata+="<Timekeeper__c>003M0000008VdPdIAK</Timekeeper__c>";
-postdata+="<Date__c>2012-01-24</Date__c>";
-postdata+="<HoursWorked__c>1.0</HoursWorked__c>";
-postdata+="<Task__c>Work</Task__c>";
-postdata+="<Description__c>desc</Description__c>";
-postdata+="<Case__c>500M00000012YXeIAM</Case__c>";
-postdata+="<TimeStart__c>1130</TimeStart__c>";
-*/
 		postdata += "         </urn:sObjects>";
 		postdata += "      </urn:create>";
 		postdata += "   </soapenv:Body>";
@@ -567,16 +548,8 @@ postdata+="<TimeStart__c>1130</TimeStart__c>";
 
 		var privateCallback = function(obj) {
 				debug("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);
-				reqCalTimecardEvents();
-				sf_ReqTimeTickets();
-
-				google.calendar.refreshEvents();
-
-				var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + current_event.startTime.year + "," + current_event.startTime.month + "," + current_event.startTime.date + ");";
-				debug("!!!!!!!!!!!!!!!!!! refreshCode c :" + refreshCode);
-
-				setTimeout(refreshCode, 2000);
-				setTimeout(refreshCode, 5000);
+        
+				syncCalendar();
 
 			};
 		makeCachedRequest(sfurl, privateCallback, params);
@@ -950,11 +923,6 @@ shindig.oauth.popup = function(options) {
 
 	function sf_searchCases() {
 		var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
-		var restServerUrl = sfurl.split("/")[2];
-		restServerUrl = restServerUrl.replace("-api", "");
-		restServerUrl = "https://" + restServerUrl;
-		debug("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);
-
 		var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
 		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
 		var params = {};
