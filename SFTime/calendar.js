@@ -96,7 +96,10 @@
 		if (e) {
 			//event aufgemacht
 			debug(gadgets.json.stringify(e));
-			if (e.calendar && e.calendar.email && e.calendar.email == timeticket_calendarId) {
+			if (
+          (!e.calendar) || 
+          (e.calendar && e.calendar.email && e.calendar.email == timeticket_calendarId)
+          ) {
 				current_event = e;
 				$('#dialog').get(0).style.display = 'block';
 				gadgets.window.adjustHeight();
