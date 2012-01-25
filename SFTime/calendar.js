@@ -321,14 +321,15 @@
 	function subscribeEventsCallback(e) {
 		if (e) {
 			//event aufgemacht
-			current_event = e;
 			debug(gadgets.json.stringify(e));
 			if (current_event != null) {
-				$('#dialog').get(0).style.display = 'block';
+        if (e.calendar && e.calendar.email) {
+      		current_event = e;
+          $('#dialog').get(0).style.display = 'block';
+      		gadgets.window.adjustHeight();
+    			sf_queryCases();
+			  }
 			}
-			//      $('#Description').get(0).val('');
-			gadgets.window.adjustHeight();
-			sf_queryCases();
 		}
 		else {
 			//event geschlossen
