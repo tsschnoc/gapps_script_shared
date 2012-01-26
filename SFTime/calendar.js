@@ -37,7 +37,7 @@
 			viewstart = dates.startTime;
 			viewend = dates.endTime;
 		});
-		google.load('gdata', '2.x');
+//		google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
 			calendar.useOAuth('google');
@@ -57,6 +57,14 @@
 			var caseDesc = $('option[value|="' + caseId + '"]').text();
 
 			sf_soap_insertTimeTicket(caseId, caseDesc);
+			return false;
+		});
+
+  	$('.Oauthtest').click(function(e) {
+			e.preventDefault();
+
+
+      sfOauth();
 			return false;
 		});
 
@@ -173,6 +181,58 @@
 		makeCachedRequest(callUrl, callback, params);
 
 	}
+
+function sfOauth() {
+
+	message = {};
+	message.parameters = {};
+
+	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+	var consumerSecret = "884370394195470338";
+	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
+	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
+	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
+
+
+	message.action = requestTokenUrl;
+	message.method = "POST";
+
+
+	message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
+	message.parameters.oauth_consumer_key = consumerKey;
+	message.parameters.oauth_signature_method = "HMAC-SHA1";
+
+	message.parameters.oauth_timestamp = OAuth.timestamp();
+	message.parameters.oauth_nonce = OAuth.nonce(6);
+
+	var baseString = OAuth.SignatureMethod.getBaseString(message);
+	debug(baseString);
+	b64pad = '=';
+	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
+	debug(signature);
+	message.parameters.oauth_signature = signature;
+
+	var postData = OAuth.formEncode(message.parameters);
+	debug(postData);
+
+  	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+		params[gadgets.io.RequestParameters.HEADERS] = {
+			"Content-Type": "application/x-www-form-urlencoded"
+		};
+
+
+  	var callback = function(obj) {
+      debug(obj);
+    }
+
+
+
+		makeCachedRequest(callUrl, insCallback, params);
+
+}
+
 
 
 

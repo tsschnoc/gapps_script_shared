@@ -28,6 +28,10 @@
         <script src="https://www.google.com/jsapi"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+        <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/oAuthGadget/oauth.js"></script>
+        <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/oAuthGadget/sha1.js"></script>
+
 <!--
 <script type="text/javascript" src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/popup.js"></script>
 -->
@@ -87,7 +91,9 @@ background: white;
 
         <div class="refresh">
               <button class="refreshCal">RefreshCalendar</button>
-        </div>
+              <input type=button id="Oauthtest" value="Oauthtest " name="Oauthtest"> 
+
+      </div>
         
         <div id="main" style="display:none">          
           <div class="credentials">
