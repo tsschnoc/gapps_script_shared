@@ -46,13 +46,14 @@
 			viewstart = dates.startTime;
 			viewend = dates.endTime;
 		});
-		google.load('gdata', '2.x');
+/*		google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
 			calendar.useOAuth('google');
 			fetchData();
 			//      SFLogin();
 		});
+*/    
 		$(".credentials").addClass("invisible");
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
@@ -146,7 +147,7 @@ function oauthcallback(response) {
 		},
 		onClose: function() {
 			showOnly('loading');
-			fetchData();
+			alert('im done');
 		}
 	});
 	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
