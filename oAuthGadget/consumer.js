@@ -12,17 +12,21 @@ consumer.example =
   }
 };
 
+
+
+
+
 consumer.madgex =
-{ consumerKey   : "key"
-, consumerSecret: "secret"
+{ consumerKey   : "3MVG9yZ.WNe6byQCAGhFiyIdi2zoAABoc1ciOVKePwIzaLaW9pnC_0.cYBa7xtM6WHIg4zenyYK6zLBe1eA57"
+, consumerSecret: "2666063274963958310"
 , accessToken: "requestkey"
 , accessTokenSecret: "requestsecret"
 , echo: "accesskey"
 , echoSecret: "accesssecret"
 , serviceProvider:
   { signatureMethod     : "HMAC-SHA1"
-  , requestTokenURL     : "http://echo.lab.madgex.com/request-token.ashx"
-  , accessTokenURL      : "http://echo.lab.madgex.com/access-token.ashx"
+  , requestTokenURL     : "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler"
+  , accessTokenURL      : "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler"
   , echoURL             : "http://echo.lab.madgex.com/echo.ashx"
   }
 };
