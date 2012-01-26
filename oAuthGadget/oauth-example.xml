@@ -30,6 +30,7 @@ function getRequestToken(c) {
                  , action: c.serviceProvider.requestTokenURL
                  , parameters: { oauth_signature_method: c.serviceProvider.signatureMethod
                                , oauth_consumer_key: c.consumerKey
+                               , oauth_callback: "https://docs.google.com/a/macros/parx.com/macroClient?cmd=22&pid=CKHC1KEEEiFNNXAzQnJHbWhtdEtJRXR5QlRzMHVhTnYxcVYzZEtTYlM"
                                }
                  }
                , { consumerSecret: c.consumerSecret
