@@ -285,7 +285,7 @@ oauth_token_secret: "1350605358191929401"
   	message.method = "POST";
   
     message.parameters.oauth_token = SF_RequestToken.oauth_token;
-//    message.parameters.oauth_verifier = '';
+    message.parameters.oauth_verifier = 'nix';
 
   	message.parameters.oauth_consumer_key = consumerKey;
   	message.parameters.oauth_signature_method = "HMAC-SHA1";
