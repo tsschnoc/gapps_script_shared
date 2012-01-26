@@ -160,6 +160,7 @@ function oauthcallback(response) {
 			showOnly('loading');
 			alert('im done');
       debug(SF_RequestToken);
+      sfGetAccessToken();
 		}
 	});
 	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
@@ -262,6 +263,59 @@ function oauthcallback(response) {
   	gadgets.io.makeRequest(requestTokenUrl, oauthcallback, params);
   
   }
+
+
+
+
+  function sfGetAccessToken() {
+    $('#errors').hide();
+
+/*
+SF_RequestToken
+Object
+oauth_callback_confirmed: "true"
+oauth_token: "mToxhE5PRY63QaHwWfHFBFxDO1xxuFdtBWXarqvEoIJPoelRjo_xDDo5XjAD3i1gVyUvQS5lrUSayD0RLMoK"
+oauth_token_secret: "1350605358191929401"
+*/
+
+    var message = {};
+  	message.parameters = {};
+    
+  	message.action = accessTokenUrl;
+  	message.method = "POST";
+  
+    message.parameters.oauth_token = SF_RequestToken.oauth_token;
+//    message.parameters.oauth_verifier = '';
+
+  	message.parameters.oauth_consumer_key = consumerKey;
+  	message.parameters.oauth_signature_method = "HMAC-SHA1";
+  
+  	message.parameters.oauth_timestamp = OAuth.timestamp();
+  	message.parameters.oauth_nonce = OAuth.nonce(6);
+  
+  	var baseString = OAuth.SignatureMethod.getBaseString(message);
+  	debug(baseString);
+  	b64pad = '=';
+  	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
+  	debug(signature);
+  	message.parameters.oauth_signature = signature;
+  
+  	var postData = OAuth.formEncode(message.parameters);
+  	debug(postData);
+  	var params = {};
+  	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
+  	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+  	params[gadgets.io.RequestParameters.POST_DATA] = postData;
+  	params[gadgets.io.RequestParameters.HEADERS] = {
+  		"Content-Type": "application/x-www-form-urlencoded"
+  	};
+  
+  
+  	gadgets.io.makeRequest(accessTokenUrl, oauthcallback, params);
+  
+  }
+
+
 
 function reqCalTimecardEvents() {
 		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
