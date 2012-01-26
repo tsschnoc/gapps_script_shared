@@ -31,7 +31,7 @@
   	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
   	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
 
-var SF_Oauth_ReqKeys = null;
+var SF_RequestToken = null;
 
 	function debug(text) {
 		if (true) {
@@ -91,6 +91,7 @@ var SF_Oauth_ReqKeys = null;
 		});
 
 		gadgets.window.adjustHeight();
+    sfOauth();
 	}
 
 	function showOnly(id) {
@@ -138,14 +139,12 @@ var SF_Oauth_ReqKeys = null;
 
 
 function oauthcallback(response) {  
-  
-  
-var pairs = response.data.split('&')
-SF_Oauth_ReqKeys = {}; 
-for (i in pairs) {
-  kv = pairs[i].split('='); 
-	SF_Oauth_ReqKeys[kv[0]] = kv[1];
-} 
+  var pairs = response.data.split('&');
+  SF_RequestToken = {};
+  for (var i in pairs) {
+    var kv = pairs[i].split('=');
+    SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+  }
   
   
   
