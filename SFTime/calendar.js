@@ -31,6 +31,7 @@
   	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
   	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
 
+var SF_Oauth_ReqKeys = null;
 
 	function debug(text) {
 		if (true) {
@@ -137,6 +138,18 @@
 
 
 function oauthcallback(response) {  
+	$('#errors').hide();
+  
+  
+var pairs = response.data.split('&')
+SF_Oauth_ReqKeys = {}; 
+for (i in pairs) {
+  kv = pairs[i].split('='); 
+	SF_Oauth_ReqKeys[kv[0]] = kv[1];
+} 
+  
+  
+  
 	response.oauthApprovalUrl = authorizationUrl + "&" + response.data;
 	debug(response.oauthApprovalUrl);
 	var popup = shindig.oauth.popup({
