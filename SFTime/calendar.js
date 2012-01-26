@@ -24,7 +24,7 @@
 	var timeticket_calendarId = null;
 
 	function debug(text) {
-		if (false) {
+		if (true) {
 			if (console && console.debug) {
 				console.debug(text);
 			}
@@ -59,12 +59,12 @@
 			sf_soap_insertTimeTicket(caseId, caseDesc);
 			return false;
 		});
-
-  	$('.Oauthtest').click(function(e) {
+		
+		$('#Oauthtest').click(function(e) {
 			e.preventDefault();
-
-
-      sfOauth();
+		
+		
+			sfOauth();
 			return false;
 		});
 
