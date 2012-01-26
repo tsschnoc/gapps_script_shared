@@ -228,7 +228,7 @@
   
   
   
-  	makeCachedRequest(requestTokenUrl, oauthcallback, params);
+  	gadgets.io.makeRequest(requestTokenUrl, oauthcallback, params);
   
   }
 
