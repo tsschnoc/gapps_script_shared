@@ -22,17 +22,17 @@
 
 	var Timekeeper__c = null;
 	var timeticket_calendarId = null;
-
-
-
-    var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
-    var consumerSecret = "884370394195470338";
-  	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
-  	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
-  	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
-
-var SF_RequestToken = null;
-
+	
+	
+	
+	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+	var consumerSecret = "884370394195470338";
+	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
+	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
+	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
+	
+	var SF_RequestToken = null;
+  
 	function debug(text) {
 		if (true) {
 			if (console && console.debug) {
@@ -159,7 +159,7 @@ function oauthcallback(response) {
 		onClose: function() {
 			showOnly('loading');
 			alert('im done');
-      debug(SF_Oauth_ReqKeys);
+      debug(SF_RequestToken);
 		}
 	});
 	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
@@ -233,7 +233,8 @@ function oauthcallback(response) {
   	message.action = requestTokenUrl;
   	message.method = "POST";
   
-  	message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
+    message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
+    message.parameters.oauth_callback = "oob";
   	message.parameters.oauth_consumer_key = consumerKey;
   	message.parameters.oauth_signature_method = "HMAC-SHA1";
   
