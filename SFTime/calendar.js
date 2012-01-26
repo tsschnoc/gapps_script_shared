@@ -222,13 +222,13 @@
   	};
   
   
-  	var callback = function(obj) {
+  	var oauthcallback = function(obj) {
   			debug(obj);
   		}
   
   
   
-  	makeCachedRequest(callUrl, insCallback, params);
+  	makeCachedRequest(requestTokenUrl, oauthcallback, params);
   
   }
 
