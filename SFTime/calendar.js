@@ -216,7 +216,7 @@
   	var params = {};
   	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
   	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-  	params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+  	params[gadgets.io.RequestParameters.POST_DATA] = postData;
   	params[gadgets.io.RequestParameters.HEADERS] = {
   		"Content-Type": "application/x-www-form-urlencoded"
   	};
