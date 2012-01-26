@@ -37,7 +37,7 @@
 			viewstart = dates.startTime;
 			viewend = dates.endTime;
 		});
-//		google.load('gdata', '2.x');
+		google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
 			calendar.useOAuth('google');
