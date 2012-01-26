@@ -59,11 +59,11 @@
 			sf_soap_insertTimeTicket(caseId, caseDesc);
 			return false;
 		});
-		
+
 		$('#Oauthtest').click(function(e) {
 			e.preventDefault();
-		
-		
+
+
 			sfOauth();
 			return false;
 		});
@@ -105,7 +105,7 @@
 			//event aufgemacht
 			debug(gadgets.json.stringify(e));
 			if (
-          (!e.calendar) || 
+          (!e.calendar) ||
           (e.calendar && e.calendar.email && e.calendar.email == timeticket_calendarId)
           ) {
 				current_event = e;
@@ -182,61 +182,57 @@
 
 	}
 
-function sfOauth() {
 
-	message = {};
-	message.parameters = {};
-
-	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
-	var consumerSecret = "884370394195470338";
-	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
-	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
-	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
-
-
-	message.action = requestTokenUrl;
-	message.method = "POST";
-
-
-	message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
-	message.parameters.oauth_consumer_key = consumerKey;
-	message.parameters.oauth_signature_method = "HMAC-SHA1";
-
-	message.parameters.oauth_timestamp = OAuth.timestamp();
-	message.parameters.oauth_nonce = OAuth.nonce(6);
-
-	var baseString = OAuth.SignatureMethod.getBaseString(message);
-	debug(baseString);
-	b64pad = '=';
-	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
-	debug(signature);
-	message.parameters.oauth_signature = signature;
-
-	var postData = OAuth.formEncode(message.parameters);
-	debug(postData);
-
+  function sfOauth() {
+  
+  	var message = {};
+  	message.parameters = {};
+  
+  	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+  	var consumerSecret = "884370394195470338";
+  	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
+  	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
+  	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
+  
+  	message.action = requestTokenUrl;
+  	message.method = "POST";
+  
+  	message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
+  	message.parameters.oauth_consumer_key = consumerKey;
+  	message.parameters.oauth_signature_method = "HMAC-SHA1";
+  
+  	message.parameters.oauth_timestamp = OAuth.timestamp();
+  	message.parameters.oauth_nonce = OAuth.nonce(6);
+  
+  	var baseString = OAuth.SignatureMethod.getBaseString(message);
+  	debug(baseString);
+  	b64pad = '=';
+  	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
+  	debug(signature);
+  	message.parameters.oauth_signature = signature;
+  
+  	var postData = OAuth.formEncode(message.parameters);
+  	debug(postData);
+  	var params = {};
   	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-		params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-		params[gadgets.io.RequestParameters.HEADERS] = {
-			"Content-Type": "application/x-www-form-urlencoded"
-		};
-
-
+  	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+  	params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+  	params[gadgets.io.RequestParameters.HEADERS] = {
+  		"Content-Type": "application/x-www-form-urlencoded"
+  	};
+  
+  
   	var callback = function(obj) {
-      debug(obj);
-    }
+  			debug(obj);
+  		}
+  
+  
+  
+  	makeCachedRequest(callUrl, insCallback, params);
+  
+  }
 
-
-
-		makeCachedRequest(callUrl, insCallback, params);
-
-}
-
-
-
-
-	function reqCalTimecardEvents() {
+function reqCalTimecardEvents() {
 		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
 
 
@@ -522,7 +518,7 @@ function sfOauth() {
 		//    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
 		var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
 		var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
-		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+		//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
 		var params = {};
 		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -844,11 +840,11 @@ Date.prototype.format = function(mask, utc) {
  *
  * 2) Gadget creates a popup object and associates event handlers with the UI
  * elements:
- *  
+ *
  *    var popup = shindig.oauth.popup({
  *        destination: response.oauthApprovalUrl,
  *        windowOptions: "height=300,width=200",
- *        onOpen: function() { 
+ *        onOpen: function() {
  *          $("personalizeDone").style.display = "block"
  *        },
  *        onClose: function() {
@@ -982,7 +978,7 @@ shindig.oauth.popup = function(options) {
 function sf_searchCases() {
 	var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
 	var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
-	//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+	//debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
 	var params = {};
 	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
