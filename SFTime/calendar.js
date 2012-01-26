@@ -138,7 +138,6 @@ var SF_Oauth_ReqKeys = null;
 
 
 function oauthcallback(response) {  
-	$('#errors').hide();
   
   
 var pairs = response.data.split('&')
@@ -161,6 +160,7 @@ for (i in pairs) {
 		onClose: function() {
 			showOnly('loading');
 			alert('im done');
+      debug(SF_Oauth_ReqKeys);
 		}
 	});
 	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
@@ -226,7 +226,8 @@ for (i in pairs) {
 
 
   function sfOauth() {
-  
+    $('#errors').hide();
+
   	var message = {};
   	message.parameters = {};
     
