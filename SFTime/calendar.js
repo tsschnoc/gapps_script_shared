@@ -23,6 +23,15 @@
 	var Timekeeper__c = null;
 	var timeticket_calendarId = null;
 
+
+
+    var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+    var consumerSecret = "884370394195470338";
+  	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
+  	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
+  	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
+
+
 	function debug(text) {
 		if (true) {
 			if (console && console.debug) {
@@ -126,6 +135,25 @@
 
 
 
+function oauthcallback(response) {  
+	response.oauthApprovalUrl = authorizationUrl + "&" + response.data;
+	debug(response.oauthApprovalUrl);
+	var popup = shindig.oauth.popup({
+		destination: response.oauthApprovalUrl,
+		windowOptions: 'height=600,width=800',
+		onOpen: function() {
+			showOnly('waiting');
+		},
+		onClose: function() {
+			showOnly('loading');
+			fetchData();
+		}
+	});
+	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
+	$('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
+	showOnly('approval');
+}
+
 
 
 	function fetchData() {
@@ -187,13 +215,7 @@
   
   	var message = {};
   	message.parameters = {};
-  
-  	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
-  	var consumerSecret = "884370394195470338";
-  	var requestTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/RequestTokenHandler";
-  	var accessTokenUrl = "https://login.salesforce.com/_nc_external/system/security/oauth/AccessTokenHandler";
-  	var authorizationUrl = "https://login.salesforce.com/setup/secur/RemoteAccessAuthorizationPage.apexp?oauth_consumer_key=" + encodeURIComponent(consumerKey);
-  
+    
   	message.action = requestTokenUrl;
   	message.method = "POST";
   
@@ -220,12 +242,6 @@
   	params[gadgets.io.RequestParameters.HEADERS] = {
   		"Content-Type": "application/x-www-form-urlencoded"
   	};
-  
-  
-  	var oauthcallback = function(obj) {
-  			debug(obj);
-  		}
-  
   
   
   	gadgets.io.makeRequest(requestTokenUrl, oauthcallback, params);
