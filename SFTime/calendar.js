@@ -33,6 +33,10 @@
 	
 	var SF_RequestToken = null;
   
+  
+  var TestWin = null;
+  
+  
 	function debug(text) {
 		if (true) {
 			if (console && console.debug) {
@@ -1022,6 +1026,7 @@ shindig.oauth.popup = function(options) {
 			// Note that because we don't call window.open until the user has clicked
 			// something the popup blockers *should* let us through.
 			win = window.open(destination, "_blank", windowOptions);
+TestWin = win;      
 			if (win) {
 				// Poll every 100ms to check if the window has been closed
 				timer = window.setInterval(checkClosed, 100);
