@@ -33,10 +33,6 @@
   var oAuthToken = null;
   var oauth2_identity = null;
 
-  var TestWin = null;
-
-
-
 
   function debug(text) {
     if (true) {
@@ -98,7 +94,6 @@
 
     window.addEventListener('message', popupMessageReceiver, false);
     fetchData();
-    initialize_sf_oauth();
   }
 
   function showOnly(id) {
