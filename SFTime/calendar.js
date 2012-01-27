@@ -24,8 +24,10 @@
   var timeticket_calendarId = null;
 
 
-  var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
-  var consumerSecret = "884370394195470338";
+//  var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+//  var consumerSecret = "884370394195470338";
+  var consumerKey = null;
+  var consumerSecret = null;
 
   var SF_RequestToken = null;
 
@@ -48,15 +50,7 @@
       viewstart = dates.startTime;
       viewend = dates.endTime;
     });
-/*
-    google.load('gdata', '2.x');
-		google.setOnLoadCallback(function() {
-			calendar = new google.gdata.calendar.CalendarService('goocal-print');
-			calendar.useOAuth('google');
-			fetchData();
-			//      SFLogin();
-		});
-*/
+
     $(".credentials").addClass("invisible");
     $('.refreshCal').click(function(e) {
       e.preventDefault();
@@ -73,22 +67,13 @@
       return false;
     });
 
-    $('#Oauthtest').click(function(e) {
-      e.preventDefault();
-
-      return false;
-    });
-
-
-
+/*
     $("#SFLogin").click(function() {
       var prefs = new gadgets.Prefs();
-      prefs.set("Username", $("#username").val());
-      prefs.set("Password", $("#password").val());
       prefs.set("CalID", $("#CalID").val());
       prefs.set("TimeKeeper", $("#TimeKeeper").val());
-      SFLogin();
     });
+*/    
 
     gadgets.window.adjustHeight();
 
@@ -157,57 +142,59 @@
   }
 
 
-    function popupMessageReceiver(event) {
-      //alert ('Message received: ' + event.origin + ' : '  + event.data);
-      if (SF_RequestToken === null) SF_RequestToken = {};
+  function popupMessageReceiver(event) {
+    //alert ('Message received: ' + event.origin + ' : '  + event.data);
+    if (SF_RequestToken === null) SF_RequestToken = {};
 
-      if (event.origin == 'https://s3.amazonaws.com') {
-        var pairs = event.data.split('?')[1].split('&');
-        for (var i in pairs) {
-          var kv = pairs[i].split('=');
-          SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
-        }
-
-        debug(SF_RequestToken);
-
-        var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(SF_RequestToken.code) + '&client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=gettoken&format=json';
-
-        var params = {};
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-        params[gadgets.io.RequestParameters.HEADERS] = {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-PrettyPrint": "1"
-        };
-
-        var oauth2_callback = function(response) {
-            debug(response.data);
-            oAuthToken = response.data;
-            var params = {};
-            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-            params[gadgets.io.RequestParameters.HEADERS] = {
-              "Accept": "application/json",
-              "X-PrettyPrint": "1",
-              "Authorization": "OAuth " + oAuthToken.access_token
-            };
-
-
-            var identity_callback = function(response) {
-                debug(response.data);
-                oauth2_identity = response.data;
-                showOnly('main');
-            };
-                
-            makeCachedRequest(oAuthToken.id, identity_callback, params);
-
-            }
-            
-        makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+    if (event.origin == 'https://s3.amazonaws.com') {
+      var pairs = event.data.split('?')[1].split('&');
+      for (var i in pairs) {
+        var kv = pairs[i].split('=');
+        SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
       }
+
+      debug(SF_RequestToken);
+
+      var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(SF_RequestToken.code) + '&client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=gettoken&format=json';
+
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
+      };
+
+      var oauth2_callback = function(response) {
+          debug(response.data);
+          oAuthToken = response.data;
+          var params = {};
+          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+          params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+          params[gadgets.io.RequestParameters.HEADERS] = {
+            "Accept": "application/json",
+            "X-PrettyPrint": "1",
+            "Authorization": "OAuth " + oAuthToken.access_token
+          };
+
+
+          var identity_callback = function(response) {
+              debug(response.data);
+              oauth2_identity = response.data;
+              showOnly('main');
+              };
+
+          makeCachedRequest(oAuthToken.id, identity_callback, params);
+
+          }
+          
+          
+          
+      makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
     }
+  }
 
   function fetchData() {
     $('#errors').hide();
@@ -233,6 +220,15 @@
           if (current_event == null) {
             $('#dialog')[0].style.display = 'none';
           }
+          
+          for (i in response.data.items) {
+            var c = response.data.items[i];
+            if (c.summary == 'Timecard' || c.summary == 'TimeCard') {                             
+              consumerKey = c.description.split('/')[0];
+              consumerSecret = c.description.split('/')[1];
+            }
+          }
+          
           initialize_sf_oauth();
           //SFLogin();
         }
@@ -433,88 +429,6 @@
 
 
 
-  function SFLogin() {
-    if (token == null) {
-      var postdata = "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\">   <soapenv:Header>   </soapenv:Header>  <soapenv:Body>     <urn:login>        <urn:username>**username**</urn:username>        <urn:password>**password**</urn:password>      </urn:login>   </soapenv:Body></soapenv:Envelope>";
-      var prefs = new gadgets.Prefs();
-      debug("!!!!!!!!!!!!!!!!!! Username :" + prefs.getString("Username"));
-      if (prefs == null || prefs.getString("Username") == null || prefs.getString("Username") == '') {
-        $(".credentials").removeClass("invisible");
-        gadgets.window.adjustHeight();
-        return;
-      }
-
-      Timekeeper__c = prefs.getString("TimeKeeper");
-      timeticket_calendarId = prefs.getString("CalID") + '@group.calendar.google.com';
-
-      postdata = postdata.replace("**username**", prefs.getString("Username"));
-      postdata = postdata.replace("**password**", prefs.getString("Password"));
-      var url = "https://login.salesforce.com/services/Soap/u/23.0";
-
-      //			(new SOAPRequest(url, SOAPAction, postdata, 1)).request();
-      var params = {};
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-      params[gadgets.io.RequestParameters.HEADERS] = {
-        "SOAPAction": "dummyAction",
-        "Content-Type": "text/xml;charset=UTF-8"
-      };
-
-      logincallback = function(obj) {
-        if (obj.errors[0] == "502 Error") {
-          var prefs = new gadgets.Prefs();
-          prefs.set("Username", '');
-          prefs.set("Password", '');
-
-
-          SFLogin();
-          return;
-        }
-
-        debug("callback:" + this + " " + obj);
-        var document = obj.data;
-        if (document.getElementsByTagName("loginResponse").length > 0) {
-          token = document.getElementsByTagName("sessionId")[0].firstChild.nodeValue;
-          sfurl = document.getElementsByTagName("serverUrl")[0].firstChild.nodeValue;
-
-
-          restServerUrl = sfurl.split("/")[2];
-          restServerUrl = restServerUrl.replace("-api", "");
-          restServerUrl = "https://" + restServerUrl;
-
-
-          $(".credentials").addClass("invisible");
-          gadgets.window.adjustHeight();
-        }
-      };
-
-
-      makeCachedRequest(url, logincallback, params);
-    }
-    else {
-
-    }
-  }
-
-
-
-
-  function makeCachedRequest(url, callback, params, refreshInterval) {
-    var ts = new Date().getTime();
-    var sep = "?";
-    if (refreshInterval && refreshInterval > 0) {
-      ts = Math.floor(ts / (refreshInterval * 1000));
-    }
-    if (url.indexOf("?") > -1) {
-      sep = "&";
-    }
-    url = [url, sep, "nocache=", ts].join("");
-    gadgets.io.makeRequest(url, callback, params);
-  }
-
-
-
   function sf_ReqTimeTickets() {
     var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
@@ -642,7 +556,6 @@
     makeCachedRequest(sfurl, privateCallback, params);
   } //sf_soap_insertTimeTicket
 
-
   gadgets.util.registerOnLoadHandler(initGadget);
 })(jQuery);
 
@@ -658,6 +571,25 @@
 
 
 
+
+
+
+
+
+
+
+function makeCachedRequest(url, callback, params, refreshInterval) {
+  var ts = new Date().getTime();
+  var sep = "?";
+  if (refreshInterval && refreshInterval > 0) {
+    ts = Math.floor(ts / (refreshInterval * 1000));
+  }
+  if (url.indexOf("?") > -1) {
+    sep = "&";
+  }
+  url = [url, sep, "nocache=", ts].join("");
+  gadgets.io.makeRequest(url, callback, params);
+}
 
 
 

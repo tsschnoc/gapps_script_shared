@@ -103,7 +103,6 @@ background: white;
               <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
               <label for="password">PasswordToken:</label>              
               <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-*/
               <br>
               <label for="CalID">Google Calendar ID:</label>
               <input type=text maxlength=50 name="CalID" id="CalID" style="width:100px;"> @group.calendar.google.com
@@ -111,6 +110,7 @@ background: white;
               <input type=text maxlength=70 name="TimeKeeper" id="TimeKeeper" style="width:100px;"> 
               
               <input type=button id="SFLogin" value="SF Login " name="SF Login "> 
+*/
           </div>
           <div id="dialog">
             <form>
