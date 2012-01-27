@@ -23,7 +23,7 @@
 	var Timekeeper__c = null;
 	var timeticket_calendarId = null;
 	
-	
+	var oauth2_callbackurl = '';
 	
 	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
 	var consumerSecret = "884370394195470338";
@@ -61,6 +61,35 @@ function receiver(event) {
     }
 
     debug(SF_RequestToken);
+    
+    
+    
+    
+  	var postdata = 'grant_type=authorization_code&' +
+      'code=' + SF_RequestToken.code + 
+      '&client_id=' + encodeURIComponent(consumerKey) + 
+      '&client_secret=' + encodeURIComponent(consumerSecret) + 
+      '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + 
+      '&state=gettoken&format=json';
+    
+    var params = {};
+		params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+		params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+		params[gadgets.io.RequestParameters.HEADERS] = {
+			"Content-Type": "application/x-www-form-urlencoded",
+      ""X-PrettyPrint": "1"
+		};
+
+    var oauth2_callback = function(response) {
+      debug(response);
+    }
+		makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+    
+    
+    
+    
+    
     //sfGetAccessToken();
   }
   
