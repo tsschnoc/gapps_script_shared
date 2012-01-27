@@ -108,8 +108,6 @@ window.addEventListener('message', receiver, false);
 		$('#Oauthtest').click(function(e) {
 			e.preventDefault();
 
-
-			sfOauth();
 			return false;
 		});
 
@@ -174,9 +172,9 @@ window.addEventListener('message', receiver, false);
 
 
 
-function oauth2_ua() {  
-  
-  oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
+function oauth2_ua() {    
+//  oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
+  oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
 
 	var popup = shindig.oauth.popup({
 		destination: oauthApprovalUrl,
@@ -192,36 +190,6 @@ function oauth2_ua() {
 	$('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
 	showOnly('approval');
 }
-
-
-function oauthcallback(response) {  
-  var pairs = response.data.split('&');
-  SF_RequestToken = {};
-  for (var i in pairs) {
-    var kv = pairs[i].split('=');
-    SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
-  }
-  
-  
-  
-	response.oauthApprovalUrl = authorizationUrl + "&" + response.data;
-	debug(response.oauthApprovalUrl);
-	var popup = shindig.oauth.popup({
-		destination: response.oauthApprovalUrl,
-		windowOptions: 'height=600,width=800',
-		onOpen: function() {
-			showOnly('waiting');
-		},
-		onClose: function() {
-			showOnly('loading');
-		}
-	});
-	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
-	$('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
-	showOnly('approval');
-}
-
-
 
 	function fetchData() {
 		$('#errors').hide();
@@ -278,102 +246,9 @@ function oauthcallback(response) {
 	}
 
 
-  function sfOauth() {
-    $('#errors').hide();
 
-  	var message = {};
-  	message.parameters = {};
-    
-  	message.action = requestTokenUrl;
-  	message.method = "POST";
-  
-    message.parameters.oauth_callback = "https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html";
-    message.parameters.oauth_callback = "oob";
-  	message.parameters.oauth_consumer_key = consumerKey;
-  	message.parameters.oauth_signature_method = "HMAC-SHA1";
-  
-  	message.parameters.oauth_timestamp = OAuth.timestamp();
-  	message.parameters.oauth_nonce = OAuth.nonce(6);
-  
-  	var baseString = OAuth.SignatureMethod.getBaseString(message);
-  	debug(baseString);
-  	b64pad = '=';
-  	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
-  	debug(signature);
-  	message.parameters.oauth_signature = signature;
-  
-  	var postData = OAuth.formEncode(message.parameters);
-  	debug(postData);
-  	var params = {};
-  	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-  	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-  	params[gadgets.io.RequestParameters.POST_DATA] = postData;
-  	params[gadgets.io.RequestParameters.HEADERS] = {
-  		"Content-Type": "application/x-www-form-urlencoded"
-  	};
-  
-  
-  	gadgets.io.makeRequest(requestTokenUrl, oauthcallback, params);
-  
-  }
-
-
-
-
-  function sfGetAccessToken() {
-    $('#errors').hide();
-
-/*
-SF_RequestToken
-Object
-oauth_callback_confirmed: "true"
-oauth_token: "mToxhE5PRY63QaHwWfHFBFxDO1xxuFdtBWXarqvEoIJPoelRjo_xDDo5XjAD3i1gVyUvQS5lrUSayD0RLMoK"
-oauth_token_secret: "1350605358191929401"oauth_token_secret: "4004761199925836002"
-
-*/
-
-    var message = {};
-  	message.parameters = {};
-    
-  	message.action = accessTokenUrl;
-  	message.method = "POST";
-  
-    message.parameters.oauth_token = SF_RequestToken.oauth_token;
-    message.parameters.oauth_verifier = SF_RequestToken.oauth_verifier;
-
-  	message.parameters.oauth_consumer_key = consumerKey;
-  	message.parameters.oauth_signature_method = "HMAC-SHA1";
-  
-  	message.parameters.oauth_timestamp = OAuth.timestamp();
-  	message.parameters.oauth_nonce = OAuth.nonce(6);
-  
-  	var baseString = OAuth.SignatureMethod.getBaseString(message);
-  	debug(baseString);
-  	b64pad = '=';
-  	var signature = b64_hmac_sha1(consumerSecret + "&" + SF_RequestToken.oauth_token_secret, baseString);
-  	debug(signature);
-  	message.parameters.oauth_signature = signature;
-  
-  	var postData = OAuth.formEncode(message.parameters);
-  	debug(postData);
-  	var params = {};
-  	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.TEXT;
-  	params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-  	params[gadgets.io.RequestParameters.POST_DATA] = postData;
-  	params[gadgets.io.RequestParameters.HEADERS] = {
-  		"Content-Type": "application/x-www-form-urlencoded"
-  	};
-  
-  
-  	gadgets.io.makeRequest(accessTokenUrl, oauthcallback, params);
-  
-  }
-
-
-
-function reqCalTimecardEvents() {
+  function reqCalTimecardEvents() {
 		var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
-
 
 		debug('callUrl ' + callUrl);
 
