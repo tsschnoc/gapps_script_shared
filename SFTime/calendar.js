@@ -51,6 +51,8 @@
 function receiver(event) {
   //alert ('Message received: ' + event.origin + ' : '  + event.data);
 
+  if (SF_RequestToken === null) SF_RequestToken = {};
+  
   if (event.origin == 'https://s3.amazonaws.com') {
     var pairs = event.data.split('?')[1].split('&');
     for (var i in pairs) {
