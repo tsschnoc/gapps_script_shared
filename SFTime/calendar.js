@@ -189,9 +189,6 @@
           makeCachedRequest(oAuthToken.id, identity_callback, params);
 
           }
-          
-          
-          
       makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
     }
   }
@@ -223,14 +220,13 @@
           
           for (i in response.data.items) {
             var c = response.data.items[i];
-            if (c.summary == 'Timecard' || c.summary == 'TimeCard') {                             
+            if (c.summary == 'Timecards' || c.summary == 'TimeCards') {                             
               consumerKey = c.description.split('/')[0];
-              consumerSecret = c.description.split('/')[1];
+              consumerSecret = c.description.split('/')[1];              
             }
           }
           
           initialize_sf_oauth();
-          //SFLogin();
         }
         else {
           if (console && console.debug) {
