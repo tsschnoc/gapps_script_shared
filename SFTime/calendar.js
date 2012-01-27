@@ -95,8 +95,8 @@
 		});
 
 		gadgets.window.adjustHeight();
-    sfOauth();
-    //SFLogin();
+    //sfOauth();
+    SFLogin();
 	}
 
 	function showOnly(id) {
