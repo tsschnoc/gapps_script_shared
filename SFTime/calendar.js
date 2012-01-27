@@ -46,19 +46,37 @@
 	}
 
 	function initGadget() {
+    
+    
+function receiver(event) {
+  alert (event.data);
+  alert (event.origin);  
+        if (event.origin == 'http://documentA.com') {
+                if (event.data == 'Hello B') {
+                        event.source.postMessage('Hello A, how are you?', event.origin);
+                }
+                else {
+                        alert (event.data);
+                }
+        }
+}    
+window.addEventListener('message', receiver, false);
+    
+    
 		google.calendar.read.subscribeToEvents(subscribeEventsCallback);
 		google.calendar.subscribeToDates(function(dates) {
 			viewstart = dates.startTime;
 			viewend = dates.endTime;
 		});
-		google.load('gdata', '2.x');
+/*
+    google.load('gdata', '2.x');
 		google.setOnLoadCallback(function() {
 			calendar = new google.gdata.calendar.CalendarService('goocal-print');
 			calendar.useOAuth('google');
 			fetchData();
 			//      SFLogin();
 		});
-    
+*/    
 		$(".credentials").addClass("invisible");
 		$('.refreshCal').click(function(e) {
 			e.preventDefault();
@@ -95,8 +113,8 @@
 		});
 
 		gadgets.window.adjustHeight();
-    //sfOauth();
-    //SFLogin();
+    sfOauth();
+    
 	}
 
 	function showOnly(id) {
