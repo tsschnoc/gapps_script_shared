@@ -78,7 +78,7 @@ function receiver(event) {
 		params[gadgets.io.RequestParameters.POST_DATA] = postdata;
 		params[gadgets.io.RequestParameters.HEADERS] = {
 			"Content-Type": "application/x-www-form-urlencoded",
-      ""X-PrettyPrint": "1"
+      "X-PrettyPrint": "1"
 		};
 
     var oauth2_callback = function(response) {
