@@ -23,7 +23,7 @@
 	var Timekeeper__c = null;
 	var timeticket_calendarId = null;
 	
-	var oauth2_callbackurl = '';
+	var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
 	
 	var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
 	var consumerSecret = "884370394195470338";
@@ -66,7 +66,7 @@ function receiver(event) {
     
     
   	var postdata = 'grant_type=authorization_code&' +
-      'code=' + SF_RequestToken.code + 
+      'code=' + encodeURIComponent(SF_RequestToken.code) + 
       '&client_id=' + encodeURIComponent(consumerKey) + 
       '&client_secret=' + encodeURIComponent(consumerSecret) + 
       '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + 
