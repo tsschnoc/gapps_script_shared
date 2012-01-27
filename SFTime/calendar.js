@@ -49,9 +49,20 @@
     
     
 function receiver(event) {
-  alert (event.data);
-  alert (event.origin);  
-        if (event.origin == 'http://documentA.com') {
+  alert ('Message received: ' + event.origin + ' : '  + event.data);
+
+  var pairs = event.data.split('&');
+  for (var i in pairs) {
+    var kv = pairs[i].split('=');
+    SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+  }
+
+      debug(SF_RequestToken);
+
+sfGetAccessToken();
+
+  
+/*        if (event.origin == 'http://documentA.com') {
                 if (event.data == 'Hello B') {
                         event.source.postMessage('Hello A, how are you?', event.origin);
                 }
@@ -59,6 +70,7 @@ function receiver(event) {
                         alert (event.data);
                 }
         }
+*/        
 }    
 window.addEventListener('message', receiver, false);
     
@@ -181,9 +193,6 @@ function oauthcallback(response) {
 		},
 		onClose: function() {
 			showOnly('loading');
-			alert('im done');
-      debug(SF_RequestToken);
-      sfGetAccessToken();
 		}
 	});
 	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
