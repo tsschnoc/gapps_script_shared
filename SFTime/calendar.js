@@ -198,7 +198,8 @@
             var identity_callback = function(response) {
                 debug(response.data);
                 oauth2_identity = response.data;
-                }
+                showOnly('main');
+            };
                 
             makeCachedRequest(oAuthToken.id, identity_callback, params);
 
