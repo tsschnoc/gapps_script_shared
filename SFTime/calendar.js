@@ -49,18 +49,18 @@
     
     
 function receiver(event) {
-  alert ('Message received: ' + event.origin + ' : '  + event.data);
+  //alert ('Message received: ' + event.origin + ' : '  + event.data);
 
-  var pairs = event.data.split('&');
-  for (var i in pairs) {
-    var kv = pairs[i].split('=');
-    SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+  if (event.origin == 'https://s3.amazonaws.com') {
+    var pairs = event.data.split('?')[1].split('&');
+    for (var i in pairs) {
+      var kv = pairs[i].split('=');
+      SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+    }
+
+    debug(SF_RequestToken);
+    //sfGetAccessToken();
   }
-
-      debug(SF_RequestToken);
-
-sfGetAccessToken();
-
   
 /*        if (event.origin == 'http://documentA.com') {
                 if (event.data == 'Hello B') {
