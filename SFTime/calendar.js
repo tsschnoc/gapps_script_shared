@@ -125,7 +125,8 @@ window.addEventListener('message', receiver, false);
 		});
 
 		gadgets.window.adjustHeight();
-    sfOauth();
+//    sfOauth();
+    oauth2_ua();
     
 	}
 
@@ -171,6 +172,26 @@ window.addEventListener('message', receiver, false);
 	}
 
 
+
+
+function oauth2_ua() {  
+  
+  oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
+
+	var popup = shindig.oauth.popup({
+		destination: oauthApprovalUrl,
+		windowOptions: 'height=600,width=800',
+		onOpen: function() {
+			showOnly('waiting');
+		},
+		onClose: function() {
+			showOnly('loading');
+		}
+	});
+	$('#personalize').get(0).onclick = popup.createOpenerOnClick();
+	$('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
+	showOnly('approval');
+}
 
 
 function oauthcallback(response) {  
