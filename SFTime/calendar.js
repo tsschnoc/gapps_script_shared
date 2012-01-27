@@ -5,11 +5,6 @@
 
   var token = null;
   var sfurl = null;
-  var restServerUrl = null;
-
-  var responseFunc;
-  var searchTerm;
-
 
   var sf_timecards = null;
   var gcal_timecards = null;
@@ -17,6 +12,7 @@
   var viewstart = null;
   var viewend = null;
 
+  var sf_version = '23.0';
   var apikey = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
   var RecordTypeID = '012D0000000Uu3y';
 
@@ -184,6 +180,9 @@
           var identity_callback = function(response) {
               debug(response.data);
               oauth2_identity = response.data;
+              for (i in oauth2_identity.urls) {
+                oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}",sf_version);                
+              }
               showOnly('main');
               
               sf_searchTimekeeper();
@@ -431,7 +430,7 @@
   function sf_ReqTimeTickets() {
     var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
-    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -462,7 +461,7 @@
   function sf_queryCases() {
     //    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
     var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
-    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
     //debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -501,7 +500,7 @@
 
   function sf_searchTimekeeper() {
     var queryString = "Select Id, Name from Contact " + " WHERE Email = \'" + oauth2_identity.email + "\' ";
-    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
 
     var params = {};
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -514,7 +513,6 @@
     var ids = [];
 
     var callback = function(obj) {
-        $('select.Case').empty();
         for (var i = 0; i < obj.data.records.length; i++) {
           var record = obj.data.records[i];
           Timekeeper__c = record.Id;
@@ -969,7 +967,7 @@ shindig.oauth.popup = function(options) {
 
 function sf_searchCases() {
   var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
-  var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+  var callUrl = oauth2_identity.urls.rest + "search/?q=" + encodeURIComponent(queryString);
   //debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
   var params = {};
   params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
