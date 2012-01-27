@@ -33,6 +33,7 @@
 	
 	var SF_RequestToken = null;
   
+  var oAuthToken = null;
   
   var TestWin = null;
   
@@ -82,7 +83,27 @@ function receiver(event) {
 		};
 
     var oauth2_callback = function(response) {
-      debug(response);
+      debug(response.data);
+      oAuthToken = response.data;
+      var params = {};
+    	params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+  		params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+  		params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    	params[gadgets.io.RequestParameters.HEADERS] = {
+  			"Accept": "application/json",
+        "X-PrettyPrint": "1",
+        "Authorization": "OAuth " + oAuthToken.access_token
+  		};
+      
+      
+      var identity_callback = function(response) {
+        debug(response.data);
+      }
+      
+      
+      makeCachedRequest(oAuthToken.id, identity_callback, params);
+      
+      
     }
 		makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
     
