@@ -93,17 +93,17 @@ background: white;
 
         <div class="refresh">
               <button class="refreshCal">RefreshCalendar</button>
-              <input type=button id="Oauthtest" value="Oauthtest " name="Oauthtest"> 
 
       </div>
         
         <div id="main" style="display:none">          
           <div class="credentials">
+/*          
               <label for="username">SF-Username:</label>
               <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
               <label for="password">PasswordToken:</label>              
               <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
-              
+*/
               <br>
               <label for="CalID">Google Calendar ID:</label>
               <input type=text maxlength=50 name="CalID" id="CalID" style="width:100px;"> @group.calendar.google.com
