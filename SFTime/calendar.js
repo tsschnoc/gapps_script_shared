@@ -21,13 +21,13 @@
   var RecordTypeID = '012D0000000Uu3y';
 
   var Timekeeper__c = null;
-  var timeticket_calendarId = null;
 
 
 //  var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
 //  var consumerSecret = "884370394195470338";
   var consumerKey = null;
   var consumerSecret = null;
+  var timeticket_calendarId = null;
 
   var SF_RequestToken = null;
 
@@ -169,6 +169,7 @@
       var oauth2_callback = function(response) {
           debug(response.data);
           oAuthToken = response.data;
+          token = oAuthToken.access_token;
           var params = {};
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -184,6 +185,8 @@
               debug(response.data);
               oauth2_identity = response.data;
               showOnly('main');
+              
+              sf_searchTimekeeper();
               };
 
           makeCachedRequest(oAuthToken.id, identity_callback, params);
@@ -222,7 +225,8 @@
             var c = response.data.items[i];
             if (c.summary == 'Timecards' || c.summary == 'TimeCards') {                             
               consumerKey = c.description.split('/')[0];
-              consumerSecret = c.description.split('/')[1];              
+              consumerSecret = c.description.split('/')[1];    
+              timeticket_calendarId = c.id;
             }
           }
           
@@ -252,7 +256,6 @@
     };
 
     makeCachedRequest(callUrl, callback, params);
-
   }
 
 
@@ -488,6 +491,35 @@
           }
         }
         };
+
+
+    makeCachedRequest(callUrl, callback, params);
+  }
+
+
+
+
+  function sf_searchTimekeeper() {
+    var queryString = "Select Id, Name from Contact " + " WHERE Email = \'" + oauth2_identity.email + "\' ";
+    var callUrl = restServerUrl + "/services/data/v23.0/query/?q=" + encodeURIComponent(queryString);
+
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+
+    var ids = [];
+
+    var callback = function(obj) {
+        $('select.Case').empty();
+        for (var i = 0; i < obj.data.records.length; i++) {
+          var record = obj.data.records[i];
+          Timekeeper__c = record.Id;
+        }
+    };
 
 
     makeCachedRequest(callUrl, callback, params);
