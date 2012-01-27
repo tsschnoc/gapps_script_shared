@@ -3,8 +3,6 @@
   var calendar = null;
   var current_event = null;
 
-  var token = null;
-  var sfurl = null;
 
   var sf_timecards = null;
   var gcal_timecards = null;
@@ -63,14 +61,6 @@
       return false;
     });
 
-/*
-    $("#SFLogin").click(function() {
-      var prefs = new gadgets.Prefs();
-      prefs.set("CalID", $("#CalID").val());
-      prefs.set("TimeKeeper", $("#TimeKeeper").val());
-    });
-*/    
-
     gadgets.window.adjustHeight();
 
     window.addEventListener('message', popupMessageReceiver, false);
@@ -119,9 +109,7 @@
 
 
   function initialize_sf_oauth() {
-    //  oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=token&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
-    oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code&client_id=3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69&redirect_uri=https%3A%2F%2Fs3.amazonaws.com%2Ftsschnocwinn%2FoAuthcallback.html&state=mystate';
-
+    var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(consumerKey) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=mystate';
     var popup = shindig.oauth.popup({
       destination: oauthApprovalUrl,
       windowOptions: 'height=600,width=800',
@@ -165,7 +153,6 @@
       var oauth2_callback = function(response) {
           debug(response.data);
           oAuthToken = response.data;
-          token = oAuthToken.access_token;
           var params = {};
           params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
           params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -436,7 +423,7 @@
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "Authorization": "OAuth " + token,
+      "Authorization": "OAuth " + oAuthToken.access_token,
       "X-PrettyPrint": "1"
     };
 
@@ -468,7 +455,7 @@
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "Authorization": "OAuth " + token,
+      "Authorization": "OAuth " + oAuthToken.access_token,
       "X-PrettyPrint": "1"
     };
 
@@ -506,7 +493,7 @@
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "Authorization": "OAuth " + token,
+      "Authorization": "OAuth " + oAuthToken.access_token,
       "X-PrettyPrint": "1"
     };
 
@@ -551,7 +538,7 @@
     postdata += "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\" xmlns:urn1=\"urn:sobject.partner.soap.sforce.com\">";
     postdata += "   <soapenv:Header>";
     postdata += "      <urn:SessionHeader>";
-    postdata += "         <urn:sessionId>" + token + "</urn:sessionId>";
+    postdata += "         <urn:sessionId>" + oAuthToken.access_token + "</urn:sessionId>";
     postdata += "      </urn:SessionHeader>";
     postdata += "   </soapenv:Header>";
     postdata += "   <soapenv:Body>";
@@ -579,7 +566,7 @@
         syncCalendar();
 
         };
-    makeCachedRequest(sfurl, privateCallback, params);
+    makeCachedRequest(oauth2_identity.urls.partner, privateCallback, params);
   } //sf_soap_insertTimeTicket
 
   gadgets.util.registerOnLoadHandler(initGadget);
