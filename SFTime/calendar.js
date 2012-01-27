@@ -307,7 +307,8 @@ SF_RequestToken
 Object
 oauth_callback_confirmed: "true"
 oauth_token: "mToxhE5PRY63QaHwWfHFBFxDO1xxuFdtBWXarqvEoIJPoelRjo_xDDo5XjAD3i1gVyUvQS5lrUSayD0RLMoK"
-oauth_token_secret: "1350605358191929401"
+oauth_token_secret: "1350605358191929401"oauth_token_secret: "4004761199925836002"
+
 */
 
     var message = {};
@@ -328,7 +329,7 @@ oauth_token_secret: "1350605358191929401"
   	var baseString = OAuth.SignatureMethod.getBaseString(message);
   	debug(baseString);
   	b64pad = '=';
-  	var signature = b64_hmac_sha1(consumerSecret + "&", baseString);
+  	var signature = b64_hmac_sha1(consumerSecret + "&" + SF_RequestToken.oauth_token_secret, baseString);
   	debug(signature);
   	message.parameters.oauth_signature = signature;
   
