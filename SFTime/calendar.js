@@ -126,8 +126,57 @@
   }
 
 
+  function oauth2_callback(response) {
+      debug(response.data);
+      oAuthToken = response.data;
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Accept": "application/json",
+        "X-PrettyPrint": "1",
+        "Authorization": "OAuth " + oAuthToken.access_token
+      };
+
+
+      var identity_callback = function(response) {
+          debug(response.data);
+          oauth2_identity = response.data;
+          for (i in oauth2_identity.urls) {
+            oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}",sf_version);                
+          }
+          showOnly('main');
+          
+          sf_searchTimekeeper();
+          };
+
+      makeCachedRequest(oAuthToken.id, identity_callback, params);
+
+  }
+  
+  function oauth_refresh() {  
+      var postdata = 'grant_type=refresh_token&' + 'client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&refresh_token=' + encodeURIComponent(refresh_token) + '&format=json';
+
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
+      };
+
+      makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+  }  
+  
+
+
   function popupMessageReceiver(event) {
+    //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
+    
     //alert ('Message received: ' + event.origin + ' : '  + event.data);
+    
     if (SF_RequestToken === null) SF_RequestToken = {};
 
     if (event.origin == 'https://s3.amazonaws.com') {
@@ -150,34 +199,6 @@
         "X-PrettyPrint": "1"
       };
 
-      var oauth2_callback = function(response) {
-          debug(response.data);
-          oAuthToken = response.data;
-          var params = {};
-          params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-          params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-          params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-          params[gadgets.io.RequestParameters.HEADERS] = {
-            "Accept": "application/json",
-            "X-PrettyPrint": "1",
-            "Authorization": "OAuth " + oAuthToken.access_token
-          };
-
-
-          var identity_callback = function(response) {
-              debug(response.data);
-              oauth2_identity = response.data;
-              for (i in oauth2_identity.urls) {
-                oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}",sf_version);                
-              }
-              showOnly('main');
-              
-              sf_searchTimekeeper();
-              };
-
-          makeCachedRequest(oAuthToken.id, identity_callback, params);
-
-          }
       makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
     }
   }
