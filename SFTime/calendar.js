@@ -140,7 +140,7 @@
       debug(response.data);
       oAuthToken = response.data;
       
-      if (response.rc) {
+      if (response.rc!=200) {
 // auth fehler, refreshtoken löschen und nochmal approven lassen        
         var prefs = new gadgets.Prefs();
         prefs.set("refresh_token", null);      
