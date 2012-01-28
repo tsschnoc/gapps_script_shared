@@ -109,6 +109,16 @@
 
 
   function initialize_sf_oauth() {
+    var prefs = new gadgets.Prefs();
+    var refresh_token = prefs.setString("refresh_token");      
+    
+    if (refresh_token && refresh_token != '') {      
+      oAuthToken = {};
+      oAuthToken.refresh_token = refresh_token;
+      oauth_refresh();  
+      return;
+    }
+    
     var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(consumerKey) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=mystate';
     var popup = shindig.oauth.popup({
       destination: oauthApprovalUrl,
@@ -129,6 +139,13 @@
   function oauth2_callback(response) {
       debug(response.data);
       oAuthToken = response.data;
+      
+      if (oAuthToken.refresh_token) {
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", oAuthToken.refresh_token);        
+      }
+      
+      
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
@@ -155,7 +172,7 @@
   }
   
   function oauth_refresh() {  
-      var postdata = 'grant_type=refresh_token&' + 'client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&refresh_token=' + encodeURIComponent(refresh_token) + '&format=json';
+      var postdata = 'grant_type=refresh_token&' + 'client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&refresh_token=' + encodeURIComponent(oAuthToken.refresh_token) + '&format=json';
 
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;

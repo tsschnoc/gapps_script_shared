@@ -20,6 +20,8 @@
   <UserPref name="CalID" display_name="Google Calendar ID" datatype="string"/>
   <UserPref name="TimeKeeper" display_name="SF Timekeeper ID" datatype="string"/>
 
+  <UserPref name="refresh_token" display_name="refresh_token" datatype="string"/>
+
 
 <Content type="html">
 <![CDATA[
