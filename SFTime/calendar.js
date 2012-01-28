@@ -140,6 +140,15 @@
       debug(response.data);
       oAuthToken = response.data;
       
+      if (response.rc) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen        
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", null);      
+        initialize_sf_oauth();
+        return;
+      }
+
+      
       if (oAuthToken.refresh_token) {
         var prefs = new gadgets.Prefs();
         prefs.set("refresh_token", oAuthToken.refresh_token);        
