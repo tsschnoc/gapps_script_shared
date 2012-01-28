@@ -110,7 +110,7 @@
 
   function initialize_sf_oauth() {
     var prefs = new gadgets.Prefs();
-    var refresh_token = prefs.setString("refresh_token");      
+    var refresh_token = prefs.getString("refresh_token");      
     
     if (refresh_token && refresh_token != '') {      
       oAuthToken = {};
