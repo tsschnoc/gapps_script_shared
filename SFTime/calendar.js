@@ -175,7 +175,7 @@
           }
           showOnly('main');
           $('.refresh').get(0).style.display = '';
-          
+          gadgets.window.adjustHeight();
           sf_searchTimekeeper();
           };
 
