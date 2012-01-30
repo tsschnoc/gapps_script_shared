@@ -1,1 +1,1028 @@
-eval(function(p,a,c,k,e,d){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--){d[e(c)]=k[c]||e(c)}k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--){if(k[c]){p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c])}}return p}('(k($){5 E=u;5 1g=u;5 16=u;5 17=u;5 1n=u;5 4g=\'23.0\';5 2h=\'6O-6P-6N\';5 3k=\'6M\';5 1y=u;5 2e=u;5 2N=u;5 29=u;5 2b=u;5 3R=\'1o://4f.4y.18/6K/6L.3C\';5 13=u;5 1e=u;k z(2q){r(5d){r(1Y&&1Y.z){1Y.z(2q)}}}k 5p(){1r.V.6Q.6R(4z);1r.V.6W(k(3W){17=3W.C;1n=3W.3B});$(".6V").6U("6S");$(\'.6T\').4q(k(e){e.4r();3v()});$(\'.6J\').4q(k(e){e.4r();5 2G=$(\'#3e\').1w();5 3x=$(\'21[3V|="\'+2G+\'"]\').2q();3l(2G,3x);K 2C});6.1G.3f();1G.6y(\'6z\',4i,2C);3K()}k 1p(25){5 4w=[\'3O\',\'3P\',\'3F\',\'3G\',\'3h\'];Q(5 i=0,2O;2O=4w[i];++i){$(\'#\'+2O).1v(0).2f.2g=2O===25?\'4p\':\'3N\'}}k 3v(){4P();4D();1r.V.4E();5 3T="1r.V.4B(6x, 12, 31);1r.V.4B("+17.22+","+17.1s+","+17.v+");";4A(3T,6w);4A(3T,6u)}k 4z(e){r(e){z(6.1C.36(e));r((!e.V)||(e.V&&e.V.3m&&e.V.3m==29)){E=e;$(\'#3M\').1v(0).2f.2g=\'4p\';6.1G.3f();4F()}}2a{E=u;$(\'#3M\').1v(0).2f.2g=\'3N\';z("6B 1m");6.1G.3f()}}k 44(){5 28=1q 6.3Y();5 14=28.6G("14");r(14&&14!=\'\'){13={};13.14=14;4k();K}5 3j=\'1o://3J.2Z.18/3I/3H/6H?6F=40\'+\'&3S=\'+J(2e)+\'&4U=\'+J(3R)+\'&51=6E\';5 1x=1K.2s.1x({1R:3j,1X:\'4R=4I,4H=4G\',1S:k(){1p(\'3F\')},1U:k(){1p(\'3G\')}});$(\'#3L\').1v(0).3g=1x.2y();$(\'#3L\').2q(\'6C 6D\');$(\'#4L\').1v(0).3g=1x.2t();1p(\'3P\')}k 45(U){z(U.F);13=U.F;r(U.6Y!=6Z){5 28=1q 6.3Y();28.4h("14",u);44();K}r(13.14){5 28=1q 6.3Y();28.4h("14",13.14)}5 f={};f[6.9.j.1c]=6.9.1b.N;f[6.9.j.19]=6.9.1a.1O;f[6.9.j.R]={"7j":"1I/1C","X-1f":"1","2l":"2o "+13.2A};5 4o=k(U){z(U.F);1e=U.F;Q(i Y 1e.1A){1e.1A[i]=1e.1A[i].48("{7h}",4g)}1p(\'3O\');$(\'.7n\').1v(0).2f.2g=\'\';6.1G.3f();4Y()};11(13.25,4o,f)}k 4k(){5 w=\'4W=14&\'+\'3S=\'+J(2e)+\'&4T=\'+J(2N)+\'&14=\'+J(13.14)+\'&2u=1C\';5 f={};f[6.9.j.1c]=6.9.1b.N;f[6.9.j.19]=6.9.1a.2T;f[6.9.j.3b]=w;f[6.9.j.R]={"1W-1J":"1I/x-27-56-54","X-1f":"1"};11(\'1o://3J.2Z.18/3I/3H/2p\',45,f)}k 4i(1m){r(2b===u)2b={};r(1m.7p==\'1o://4f.4y.18\'){5 42=1m.F.2r(\'?\')[1].2r(\'&\');Q(5 i Y 42){5 41=42[i].2r(\'=\');2b[41[0]]=75(41[1])}z(2b);5 w=\'4W=73&\'+\'40=\'+J(2b.40)+\'&3S=\'+J(2e)+\'&4T=\'+J(2N)+\'&4U=\'+J(3R)+\'&51=7c&2u=1C\';5 f={};f[6.9.j.1c]=6.9.1b.N;f[6.9.j.19]=6.9.1a.2T;f[6.9.j.3b]=w;f[6.9.j.R]={"1W-1J":"1I/x-27-56-54","X-1f":"1"};11(\'1o://3J.2Z.18/3I/3H/2p\',45,f)}}k 3K(){$(\'#3h\').5M();5 O=k(U){r(U.3j){5 1x=1K.2s.1x({1R:U.3j,1X:\'4R=4I,4H=4G\',1S:k(){1p(\'3F\')},1U:k(){1p(\'3G\');3K()}});$(\'#3L\').1v(0).3g=1x.2y();$(\'#4L\').1v(0).3g=1x.2t();1p(\'3P\')}2a r(U.F){1p(\'3O\');r(E==u){$(\'#3M\')[0].2f.2g=\'3N\'}Q(i Y U.F.24){5 c=U.F.24[i];r(c.46==\'5r\'||c.46==\'5s\'){2e=c.2c.2r(\'/\')[0];2N=c.2c.2r(\'/\')[1];29=c.25}}44()}2a{r(1Y&&1Y.z){1Y.z(U.5y)}$(\'#3h\').3C(\'5z 5A 5Q\').6r();1p(\'3h\')}};5 I=\'1o://27.2Q.18/V/2K/6j/6h/6g?6e=6f&30=1&32=\'+2h;5 f={};f[6.9.j.1c]=6.9.1b.N;f[6.9.j.2X]=6.9.37.2V;f[6.9.j.2U]="1r";f[6.9.j.2Y]="34";f[6.9.j.19]=6.9.1a.1O;f[6.9.j.R]={"X-1f":"1","2S-2I":"3.0","1W-1J":"1I/1C"};11(I,O,f)}k 4P(){5 I=\'1o://27.2Q.18/V/2K/4b/\'+J(29)+\'/49\'+\'?6k=\'+J(1q 1j(1n.22,1n.1s-1,1n.v,23,59,59,6l).4Q())+\'&6q=\'+J(1q 1j(17.22,17.1s-1,17.v).4Q())+\'&6o=24(2c%6m%6n%6d%6c%62%63%61%4K)%4K&30=1\'+\'&32=\'+2h;z(\'I \'+I);5 f={};5 w="";f[6.9.j.1c]=6.9.1b.N;f[6.9.j.2X]=6.9.37.2V;f[6.9.j.2U]="1r";f[6.9.j.2Y]="34";f[6.9.j.19]=6.9.1a.1O;f[6.9.j.R]={"X-1f":"1","2S-2I":"3.0","1W-1J":"1I/1C"};5 O=k(B){16={};r(B.F!=u&&B.F.24!=u){Q(5 i=0;i<B.F.24.1z;i++){5 1m=B.F.24[i];z(1m.25);1m.G=N.4s(1m.2c);16[1m.G.W]=1m}}3u()};11(I,O,f)}k 3u(){5 1T=[];5 1V=[];r(1g!=u&&16!=u){}2a{K}Q(5 i Y 1g){z(i);r(16[i]!=u){z(\'5Y\');z(16[i].G.1P+" "+1g[i].1P);r(16[i].G.1P==1g[i].1P){z(\'64\')}2a{1T.26(1g[i]);1V.26(16[i])}3d 16[i];3d 1g[i]}2a{1T.26(1g[i]);3d 1g[i]}}z(\'1T \'+1T);z(\'1V \'+1V);Q(5 i Y 16){1V.26(16[i]);3d 16[i]}Q(5 i Y 1T){4Z(1T[i])}Q(5 i Y 1V){53(1V[i].25)}1r.V.4E();1g=u;16=u}k 53(52){5 I=\'1o://27.2Q.18/V/2K/4b/\'+J(29)+\'/49/\'+52+\'?30=1&32=\'+2h;5 f={};5 w="";f[6.9.j.1c]=6.9.1b.N;f[6.9.j.2X]=6.9.37.2V;f[6.9.j.2U]="1r";f[6.9.j.2Y]="34";f[6.9.j.19]=6.9.1a.67;f[6.9.j.R]={"X-1f":"1","2S-2I":"3.0","1W-1J":"1I/1C"};11(I,u,f)}k 4Z(1F){5 I=\'1o://27.2Q.18/V/2K/4b/\'+J(29)+\'/49?8O=2C&30=1&32=\'+2h;5 f={};5 1M={};1M.2c=N.36(1F);1M.46=1F.3r;1M.8u=\'1o://8s.8r.2Z.18/\'+1F.W+\'?\';5 C=1q 1j(1j.4s(1F.2D+"T"+1F.3c.4t(0,2)+":"+1F.3c.4t(2,4)+":4u+8w:4u"));1M.8B={"4S":C.2u("3E")};C=1q 1j(C.5o()+1F.3s*60*60*5m);1M.8z={"4S":C.2u("3E")};5 w=N.36(1M);f[6.9.j.1c]=6.9.1b.N;f[6.9.j.2X]=6.9.37.2V;f[6.9.j.2U]="1r";f[6.9.j.2Y]="34";f[6.9.j.19]=6.9.1a.2T;f[6.9.j.3b]=w;f[6.9.j.R]={"X-1f":"1","2S-2I":"3.0","1W-1J":"1I/1C"};11(I,4X,f)}k 4X(B){z(B)}k 4D(){5 1B="3y W ,8S ,2m ,8W ,8X ,91 ,90 ,1P ,8Z ,8Y ,8Q ,8n ,8o ,7P ,1y ,2D ,3s ,7O ,7N ,3r ,7L ,4J ,7M ,7Q ,7R ,7V ,7U ,7T ,7S ,7K ,3c ,7J "+" 7B 3D "+" 3p 1y = \\\'"+1y+"\\\'"+"   4V 2D >= "+17.22+"-"+(17.1s<10?"0":"")+17.1s+"-"+(17.v<10?"0":"")+17.v+" 4V 2D <= "+1n.22+"-"+(1n.1s<10?"0":"")+1n.1s+"-"+(1n.v<10?"0":"")+1n.v;5 I=1e.1A.33+"3o/?q="+J(1B);5 f={};f[6.9.j.19]=6.9.1a.1O;f[6.9.j.1c]=6.9.1b.N;f[6.9.j.R]={"2l":"2o "+13.2A,"X-1f":"1"};5 35={};5 O=k(B){Q(5 i=0;i<B.F.1Z.1z;i++){G=B.F.1Z[i];z(N.36(G));35[G.W]=G}z(35);1g=35;3u()};11(I,O,f,0)}k 4F(){5 1B="3y W, 2m, 1t.W, 1t.2L, 1t.3U, 1t.4M.2m, 1P 4O 3D "+" 3p 1y = \\\'"+1y+"\\\' 7H 7G 1P 7F 7W 50";5 I=1e.1A.33+"3o/?q="+J(1B);5 f={};f[6.9.j.19]=6.9.1a.1O;f[6.9.j.1c]=6.9.1b.N;f[6.9.j.R]={"2l":"2o "+13.2A,"X-1f":"1"};5 2F=[];5 O=k(B){$(\'4N.3e\').7X();Q(5 i=0;i<B.F.1Z.1z;i++){5 G=B.F.1Z[i];r(2F.5e(G.1t.W)<0&&2F.1z<20){2F.26(G.1t.W);5 21=$(\'<21 />\').8f({3V:G.1t.W});21.3C(G.1t.2L+G.1t.4M.2m);z(21);$(\'4N.3e\').8i(21)}}};11(I,O,f)}k 4Y(){5 1B="3y W, 2m 4O 8a "+" 3p 81 = \\\'"+1e.3m+"\\\' ";5 I=1e.1A.33+"3o/?q="+J(1B);5 f={};f[6.9.j.19]=6.9.1a.1O;f[6.9.j.1c]=6.9.1b.N;f[6.9.j.R]={"2l":"2o "+13.2A,"X-1f":"1"};5 2F=[];5 O=k(B){Q(5 i=0;i<B.F.1Z.1z;i++){5 G=B.F.1Z[i];1y=G.W}};11(I,O,f)}k 3l(2G,3x){5 55=E.C.22+\'-\'+((E.C.1s<10)?\'0\'+E.C.1s:E.C.1s)+\'-\'+((E.C.v<10)?\'0\'+E.C.v:E.C.v);5 1i={};1i.4J=2G;1i.3r=$(\'#3U\').1w();1i.1y=\'\'+1y+\'\';1i.3k=\'\'+3k+\'\';1i.2D=55;1i.3c=((E.C.2w<10)?\'0\'+E.C.2w:E.C.2w)+\'\'+((E.C.2v<10)?\'0\'+E.C.2v:E.C.2v);1i.3s=((E.3B.2w*60+E.3B.2v)-(E.C.2w*60+E.C.2v))/60;5 3t="";Q(i Y 1i){3t+="<"+i+">"+1i[i]+"</"+i+">\\n"}5 w=\'\';w+="<1Q:4v 3w:1Q=\\"95://94.8R.8y/3z/8t/\\" 3w:1h=\\"1h:3q.3z.57.18\\" 3w:3A=\\"1h:8D.3q.3z.57.18\\">";w+="   <1Q:4n>";w+="      <1h:4l>";w+="         <1h:4m>"+13.2A+"</1h:4m>";w+="      </1h:4l>";w+="   </1Q:4n>";w+="   <1Q:58>";w+="      <1h:4x>";w+="         <1h:4C>";w+="            <3A:4j>3D</3A:4j>";w+=3t w+="         </1h:4C>";w+="      </1h:4x>";w+="   </1Q:58>";w+="</1Q:4v>";5 f={};f[6.9.j.19]=6.9.1a.2T;f[6.9.j.1c]=6.9.1b.7o;f[6.9.j.3b]=w;f[6.9.j.R]={};f[6.9.j.R].7z="6X";f[6.9.j.R][\'1W-1J\']="2q/74;7b=7w-8";z("!!!!!!!!!!"+f);5 5q=k(B){z("!!!!!!!!!!!!!!!!!! 3l O B :"+B);3v()};11(1e.1A.3q,5q,f)}6.8p.8q(5p)})(8b);k 11(2B,O,f,2P){5 2W=1q 1j().5o();5 3n="?";r(2P&&2P>0){2W=2d.5b(2W/(2P*5m))}r(2B.5e("?")>-1){3n="&"}2B=[2B,3n,"8I=",2W].8H("");6.9.8G(2B,O,f)}5 2E=k(){5 2p=/d{1,4}|m{1,4}|2M(?:2M)?|([8E])\\1?|[8K]|"[^"]*"|\'[^\']*\'/g,5c=/\\b(?:[8L][8M]T|(?:8C|96|98|93|8U) (?:7A|7y|7C) 7D|(?:7I|39)(?:[-+]\\d{4})?)\\b/g,5a=/[^-+\\8g-Z]/g,1l=k(1w,3i){1w=2i(1w);3i=3i||2;86(1w.1z<3i)1w="0"+1w;K 1w};K k(v,1d,1N){5 1L=2E;r(85.1z==1&&87.5j.88.89(v)=="[84 2i]"&&!/\\d/.83(v)){1d=v;v=7Z}v=v?1q 1j(v):1q 1j;r(7Y(v))2x 80("82 v");1d=2i(1L.4e[1d]||1d||1L.4e["5g"]);r(1d.2J(0,4)=="39:"){1d=1d.2J(4);1N=5d}5 1u=1N?"8j":"1v",d=v[1u+"1j"](),D=v[1u+"8k"](),m=v[1u+"8l"](),y=v[1u+"8m"](),H=v[1u+"8h"](),M=v[1u+"8d"](),s=v[1u+"8c"](),L=v[1u+"8e"](),o=1N?0:v.7E(),4c={d:d,2k:1l(d),5n:1L.2j.4d[D],5l:1L.2j.4d[D+7],m:m+1,3a:1l(m+1),4a:1L.2j.3Q[m],47:1L.2j.3Q[m+12],2M:2i(y).2J(2),1E:y,h:H%12||12,7x:1l(H%12||12),H:H,2n:1l(H),M:M,1D:1l(M),s:s,1H:1l(s),l:1l(L,3),L:1l(L>99?2d.8T(L/10):L),t:H<12?"a":"p",92:H<12?"9a":"97",T:H<12?"A":"P",38:H<12?"8V":"8x",Z:1N?"39":(2i(v).8A(5c)||[""]).8v().48(5a,""),o:(o>0?"-":"+")+1l(2d.5b(2d.5f(o)/60)*43+2d.5f(o)%60,4),S:["8N","8P","8J","8F"][d%10>3?0:(d%43-d%10!=10)*d%10]};K 1d.48(2p,k($0){K $0 Y 4c?4c[$0]:$0.2J(1,$0.1z-1)})}}();2E.4e={"5g":"5n 4a 2k 1E 2n:1D:1H",7v:"m/d/2M",66:"4a d, 1E",68:"47 d, 1E",69:"5l, 47 d, 1E",6b:"h:1D 38",6a:"h:1D:1H 38",65:"h:1D:1H 38 Z",5X:"1E-3a-2k",5Z:"2n:1D:1H",6p:"1E-3a-2k\'T\'2n:1D:1H",3E:"39:1E-3a-2k\'T\'2n:1D:1H\'Z\'"};2E.2j={4d:["5W","5B","5C","5E","5x","5F","5v","5t","5w","5u","5D","5V","5G","5P"],3Q:["5R","5S","5U","5T","5k","5O","5N","5I","5H","5J","5K","5L","6i","6s","7a","79","5k","7e","7d","78","77","72","71","70"]};1j.5j.2u=k(1d,1N){K 2E(76,1d,1N)};5 1K=1K||{};1K.2s=1K.2s||{};1K.2s.1x=k(15){r(!("1R"Y 15)){2x"2H 2R 15.1R"}r(!("1X"Y 15)){2x"2H 2R 15.1X"}r(!("1S"Y 15)){2x"2H 2R 15.1S"}r(!("1U"Y 15)){2x"2H 2R 15.1U"}5 1R=15.1R;5 1X=15.1X;5 1S=15.1S;5 1U=15.1U;5 1k=u;5 2z=u;k 3Z(){r(2z){1G.7f(2z);2z=u}r(1k){1k.7g();1k=u}1U();K 2C}k 5h(){r((!1k)||1k.7q){1k=u;3Z()}}k 2y(){K k(){1k=1G.7r(1R,"7s",1X);7u=1k;r(1k){2z=1G.7t(5h,43);1S()}K 2C}}k 2t(){K 3Z}K{2y:2y,2t:2t}};k 7i(){5 1B="7k {*"+7m.7l+"*} 6A 3e(W, 3U, 2L, 6v)  ";5 I=1e.1A.33+"6t/?q="+J(1B);5 f={};f[6.9.j.19]=6.9.1a.1O;f[6.9.j.1c]=6.9.1b.N;f[6.9.j.R]={"2l":"2o "+2p,"X-1f":"1"};5 O=k(B){r(B.F==u){5i([]);K}5 3X=[];Q(5 i=0;i<B.F.1z;i++){5 G=B.F[i];3X.26({6I:G.2L,3V:G.W})}5i(3X)};11(I,O,f)}',62,569,'|||||var|gadgets|||io||||||params||||RequestParameters|function|||||||if|||null|date|postdata|||debug||obj|startTime||current_event|data|record||callUrl|encodeURIComponent|return|||JSON|callback||for|HEADERS|||response|calendar|Id||in|||makeCachedRequest||oAuthToken|refresh_token|options|gcal_timecards|viewstart|com|METHOD|MethodType|ContentType|CONTENT_TYPE|mask|oauth2_identity|PrettyPrint|sf_timecards|urn|ticket|Date|win|pad|event|viewend|https|showOnly|new|google|month|Case__r|_|get|val|popup|Timekeeper__c|length|urls|queryString|json|MM|yyyy|sftimecard|window|ss|application|Type|shindig|dF|insEvent|utc|GET|LastModifiedDate|soapenv|destination|onOpen|insert_timecards|onClose|delete_timecards|Content|windowOptions|console|records||option|year||items|id|push|www|prefs|timeticket_calendarId|else|SF_RequestToken|description|Math|consumerKey|style|display|apikey|String|i18n|dd|Authorization|Name|HH|OAuth|token|text|split|oauth|createApprovedOnClick|format|minute|hour|throw|createOpenerOnClick|timer|access_token|url|false|Date__c|dateFormat|ids|caseId|Must|Version|slice|v3|Subject|yy|consumerSecret|section|refreshInterval|googleapis|specify|GData|POST|OAUTH_SERVICE_NAME|OAUTH|ts|AUTHORIZATION|OAUTH_USE_TOKEN|salesforce|pp||key|rest|always|sf_timecards_tmp|stringify|AuthorizationType|TT|UTC|mm|POST_DATA|TimeStart__c|delete|Case|adjustHeight|onclick|errors|len|oauthApprovalUrl|RecordTypeID|sf_soap_insertTimeTicket|email|sep|query|WHERE|partner|Description__c|HoursWorked__c|objXML|matchTimeCards|syncCalendar|xmlns|caseDesc|Select|soap|urn1|endTime|html|TimeCard__c|isoUtcDateTime|waiting|loading|oauth2|services|login|fetchData|personalize|dialog|none|main|approval|monthNames|oauth2_callbackurl|client_id|refreshCode|Description|value|dates|arr|Prefs|handleApproval|code|kv|pairs|100|initialize_sf_oauth|oauth2_callback|summary|mmmm|replace|events|mmm|calendars|flags|dayNames|masks|s3|sf_version|set|popupMessageReceiver|type|oauth_refresh|SessionHeader|sessionId|Header|identity_callback|block|click|preventDefault|parse|substring|00|Envelope|sections|create|amazonaws|subscribeEventsCallback|setTimeout|showDate|sObjects|sf_ReqTimeTickets|refreshEvents|sf_queryCases|800|width|600|Case__c|2Cupdated|approvalLink|Project__r|select|from|reqCalTimecardEvents|toISOString|height|dateTime|client_secret|redirect_uri|and|grant_type|insCallback|sf_searchTimekeeper|insertSFToGcalEvent||state|eventid|delEvent|urlencoded|startDate|form|sforce|Body||timezoneClip|floor|timezone|true|indexOf|abs|default|checkClosed|responseFunc|prototype|May|dddd|1000|ddd|getTime|initGadget|privateCallback|Timecards|TimeCards|Sunday|Tuesday|Sat|Monday|Thu|stack|Something|went|Mon|Tue|Wednesday|Wed|Fri|Friday|Sep|Aug|Oct|Nov|Dec|hide|Jul|Jun|Saturday|wrong|Jan|Feb|Apr|Mar|Thursday|Sun|isoDate|compare|isoTime||2Csummary|2Cstart|2Cstatus|gleich|longTime|mediumDate|DELETE|longDate|fullDate|mediumTime|shortTime|2Clocation|2Cid|minAccessRole|owner|calendarList|me|January|users|timeMax|999|2Cend|2CextendedProperties|fields|isoDateTime|timeMin|fadeIn|February|search|5000|CaseNumber|2000|2009|addEventListener|message|RETURNING|kein|Authorize|Salesforce|mystate|response_type|getString|authorize|label|SaveEvent|tsschnocwinn|oAuthcallback|012D0000000Uu3y|FHEoGZ8Q|AIzaSyA9r8BLyijx8Wng|Ow1zG8AZ5|read|subscribeToEvents|invisible|refreshCal|addClass|credentials|subscribeToDates|Dummy|rc|200|December|November|October|authorization_code|xml|decodeURIComponent|this|September|August|April|March|charset|gettoken|July|June|clearInterval|close|version|sf_searchCases|Accept|FIND|term|searchTerm|refresh|DOM|origin|closed|open|_blank|setInterval|TestWin|shortDate|UTF|hh|Daylight|SOAPAction|Standard|FROM|Prevailing|Time|getTimezoneOffset|desc|by|order|GMT|CostInternal__c|AmountUnbillable__c|AmountWorked__c|CaseSubject__c|Task__c|Rate__c|Project__c|Invoice__c|ShowOnReport__c|HoursUnbillable__c|AmountBillable__c|RateInternal__c|HoursBillable__c|Limit|empty|isNaN|undefined|SyntaxError|Email|invalid|test|object|arguments|while|Object|toString|call|Contact|jQuery|Seconds|Minutes|Milliseconds|attr|dA|Hours|append|getUTC|Day|Month|FullYear|ConnectionReceivedId|ConnectionSentId|util|registerOnLoadHandler|my|parxch|envelope|location|pop|01|PM|org|end|match|start|Pacific|sobject|HhMsTt|rd|makeRequest|join|nocache|nd|LloSZ|PMCEA|SDP|th|sendNotifications|st|LastActivityDate|xmlsoap|IsDeleted|round|Atlantic|AM|CurrencyIsoCode|RecordTypeId|SystemModstamp|LastModifiedById|CreatedById|CreatedDate|tt|Eastern|schemas|http|Mountain|pm|Central||am'.split('|'),0,{}))
+// https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
+(function($) {
+  var current_event = null;
+
+
+  var sf_timecards = null;
+  var gcal_timecards = null;
+
+  var viewstart = null;
+  var viewend = null;
+
+  var sf_version = '23.0';
+  var apikey = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+  var RecordTypeID = '012D0000000Uu3y';
+
+  var Timekeeper__c = null;
+
+
+//  var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
+//  var consumerSecret = "884370394195470338";
+  var consumerKey = null;
+  var consumerSecret = null;
+  var timeticket_calendarId = null;
+
+  var SF_RequestToken = null;
+
+  var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
+  var oAuthToken = null;
+  var oauth2_identity = null;
+
+
+  function debug(text) {
+    if (true) {
+      if (console && console.debug) {
+        console.debug(text);
+      }
+    }
+  }
+
+  function initGadget() {
+    google.calendar.read.subscribeToEvents(subscribeEventsCallback);
+    google.calendar.subscribeToDates(function(dates) {
+      viewstart = dates.startTime;
+      viewend = dates.endTime;
+    });
+
+    $(".credentials").addClass("invisible");
+    $('.refreshCal').click(function(e) {
+      e.preventDefault();
+      syncCalendar();
+    });
+
+    $('.SaveEvent').click(function(e) {
+      e.preventDefault();
+
+      var caseId = $('#Case').val();
+      var caseDesc = $('option[value|="' + caseId + '"]').text();
+
+      sf_soap_insertTimeTicket(caseId, caseDesc);
+      return false;
+    });
+
+    gadgets.window.adjustHeight();
+
+    window.addEventListener('message', popupMessageReceiver, false);
+    fetchData();
+  }
+
+  function showOnly(id) {
+    var sections = ['main', 'approval', 'waiting', 'loading', 'errors'];
+    for (var i = 0, section; section = sections[i]; ++i) {
+      $('#' + section).get(0).style.display = section === id ? 'block' : 'none';
+    }
+  }
+
+
+  function syncCalendar() {
+    reqCalTimecardEvents();
+    sf_ReqTimeTickets();
+
+    google.calendar.refreshEvents();
+    var refreshCode = "google.calendar.showDate(2009, 12, 31);google.calendar.showDate(" + viewstart.year + "," + viewstart.month + "," + viewstart.date + ");";
+    setTimeout(refreshCode, 2000);
+    setTimeout(refreshCode, 5000);
+  }
+
+  function subscribeEventsCallback(e) {
+    if (e) {
+      //event aufgemacht
+      debug(gadgets.json.stringify(e));
+      if ((!e.calendar) || (e.calendar && e.calendar.email && e.calendar.email == timeticket_calendarId)) {
+        current_event = e;
+        $('#dialog').get(0).style.display = 'block';
+        gadgets.window.adjustHeight();
+        sf_queryCases();
+      }
+    }
+    else {
+      //event geschlossen
+      current_event = null;
+      $('#dialog').get(0).style.display = 'none';
+      debug("kein event");
+      gadgets.window.adjustHeight();
+    }
+  }
+
+
+// SF Oauth dane
+
+
+
+  function initialize_sf_oauth() {
+    var prefs = new gadgets.Prefs();
+    var refresh_token = prefs.getString("refresh_token");      
+    
+    if (refresh_token && refresh_token != '') {      
+      oAuthToken = {};
+      oAuthToken.refresh_token = refresh_token;
+      oauth_refresh();  
+      return;
+    }
+    
+    var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(consumerKey) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=mystate';
+    var popup = shindig.oauth.popup({
+      destination: oauthApprovalUrl,
+      windowOptions: 'height=600,width=800',
+      onOpen: function() {
+        showOnly('waiting');
+      },
+      onClose: function() {
+        showOnly('loading');
+      }
+    });
+    $('#personalize').get(0).onclick = popup.createOpenerOnClick();
+    $('#personalize').text('Authorize Salesforce');
+    $('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
+    showOnly('approval');
+  }
+
+
+  function oauth2_callback(response) {
+      debug(response.data);
+      oAuthToken = response.data;
+      
+      if (response.rc!=200) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen        
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", null);      
+        initialize_sf_oauth();
+        return;
+      }
+
+      
+      if (oAuthToken.refresh_token) {
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", oAuthToken.refresh_token);        
+      }
+      
+      
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Accept": "application/json",
+        "X-PrettyPrint": "1",
+        "Authorization": "OAuth " + oAuthToken.access_token
+      };
+
+
+      var identity_callback = function(response) {
+          debug(response.data);
+          oauth2_identity = response.data;
+          for (i in oauth2_identity.urls) {
+            oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}",sf_version);                
+          }
+          showOnly('main');
+          $('.refresh').get(0).style.display = '';
+          gadgets.window.adjustHeight();
+          sf_searchTimekeeper();
+          };
+
+      makeCachedRequest(oAuthToken.id, identity_callback, params);
+
+  }
+  
+  function oauth_refresh() {  
+      var postdata = 'grant_type=refresh_token&' + 'client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&refresh_token=' + encodeURIComponent(oAuthToken.refresh_token) + '&format=json';
+
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
+      };
+
+      makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+  }  
+  
+
+
+  function popupMessageReceiver(event) {
+    //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
+    
+    //alert ('Message received: ' + event.origin + ' : '  + event.data);
+    
+    if (SF_RequestToken === null) SF_RequestToken = {};
+
+    if (event.origin == 'https://s3.amazonaws.com') {
+      var pairs = event.data.split('?')[1].split('&');
+      for (var i in pairs) {
+        var kv = pairs[i].split('=');
+        SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+      }
+
+      debug(SF_RequestToken);
+
+      var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(SF_RequestToken.code) + '&client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=gettoken&format=json';
+
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
+      };
+
+      makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+    }
+  }
+  
+// end: SF Oauth dane  
+
+  function fetchData() {
+    $('#errors').hide();
+    var callback = function(response) {
+        if (response.oauthApprovalUrl) {
+          var popup = shindig.oauth.popup({
+            destination: response.oauthApprovalUrl,
+            windowOptions: 'height=600,width=800',
+            onOpen: function() {
+              showOnly('waiting');
+            },
+            onClose: function() {
+              showOnly('loading');
+              fetchData();
+            }
+          });
+          $('#personalize').get(0).onclick = popup.createOpenerOnClick();
+          $('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
+          showOnly('approval');
+        }
+        else if (response.data) {
+          showOnly('main');
+          if (current_event == null) {
+            $('#dialog')[0].style.display = 'none';
+          }
+          
+          for (i in response.data.items) {
+            var c = response.data.items[i];
+            if (c.summary == 'Timecards' || c.summary == 'TimeCards') {                             
+              consumerKey = c.description.split('/')[0];
+              consumerSecret = c.description.split('/')[1];    
+              timeticket_calendarId = c.id;
+            }
+          }
+          
+          initialize_sf_oauth();
+        }
+        else {
+          if (console && console.debug) {
+            console.debug(response.stack);
+          }
+          $('#errors').html('Something went wrong').fadeIn();
+          showOnly('errors');
+        }
+        };
+
+    var callUrl = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&pp=1&key=' + apikey;
+    var params = {};
+
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
+    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "X-PrettyPrint": "1",
+      "GData-Version": "3.0",
+      "Content-Type": "application/json"
+    };
+
+    makeCachedRequest(callUrl, callback, params);
+  }
+
+
+
+  function reqCalTimecardEvents() {
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events' + '?timeMax=' + encodeURIComponent(new Date(viewend.year, viewend.month - 1, viewend.date, 23, 59, 59, 999).toISOString()) + '&timeMin=' + encodeURIComponent(new Date(viewstart.year, viewstart.month - 1, viewstart.date).toISOString()) + '&fields=items(description%2Cend%2CextendedProperties%2Cid%2Clocation%2Cstart%2Cstatus%2Csummary%2Cupdated)%2Cupdated&pp=1' + '&key=' + apikey;
+
+    debug('callUrl ' + callUrl);
+
+    var params = {};
+    var postdata = "";
+
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
+    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "X-PrettyPrint": "1",
+      "GData-Version": "3.0",
+      "Content-Type": "application/json"
+    };
+
+    var callback = function(obj) {
+        gcal_timecards = {};
+        if (obj.data != null && obj.data.items != null) {
+          for (var i = 0; i < obj.data.items.length; i++) {
+            var event = obj.data.items[i];
+            debug(event.id);
+            event.record = JSON.parse(event.description);
+            gcal_timecards[event.record.Id] = event;
+
+          }
+        }
+        matchTimeCards();
+        };
+
+    makeCachedRequest(callUrl, callback, params);
+  }
+
+
+  function matchTimeCards() {
+
+    var insert_timecards = [];
+    var delete_timecards = [];
+
+
+    if (sf_timecards != null && gcal_timecards != null) {
+
+    }
+    else {
+      return;
+    }
+
+    for (var i in sf_timecards) {
+      debug(i);
+      if (gcal_timecards[i] != null) {
+        //compare
+        debug('compare');
+        debug(gcal_timecards[i].record.LastModifiedDate + " " + sf_timecards[i].LastModifiedDate);
+        if (gcal_timecards[i].record.LastModifiedDate == sf_timecards[i].LastModifiedDate) {
+          // tue nichts
+          debug('gleich');
+        }
+        else {
+          insert_timecards.push(sf_timecards[i]);
+          delete_timecards.push(gcal_timecards[i]);
+
+        }
+        delete gcal_timecards[i];
+        delete sf_timecards[i];
+      }
+      else {
+        insert_timecards.push(sf_timecards[i]);
+        delete sf_timecards[i];
+      }
+
+    }
+
+    debug('insert_timecards ' + insert_timecards);
+    debug('delete_timecards ' + delete_timecards);
+
+    for (var i in gcal_timecards) {
+
+      delete_timecards.push(gcal_timecards[i]);
+      delete gcal_timecards[i];
+    }
+
+    for (var i in insert_timecards) {
+      insertSFToGcalEvent(insert_timecards[i]);
+    }
+
+    for (var i in delete_timecards) {
+      delEvent(delete_timecards[i].id);
+    }
+
+
+    google.calendar.refreshEvents();
+
+    sf_timecards = null;
+    gcal_timecards = null;
+
+  }
+
+  function delEvent(eventid) {
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events/' + eventid + '?pp=1&key=' + apikey;
+    var params = {};
+    var postdata = "";
+
+
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.DELETE;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "X-PrettyPrint": "1",
+      "GData-Version": "3.0",
+      "Content-Type": "application/json"
+    };
+
+
+    makeCachedRequest(callUrl, null, params);
+  }
+
+  function insertSFToGcalEvent(sftimecard) {
+    var callUrl = 'https://www.googleapis.com/calendar/v3/calendars/' + encodeURIComponent(timeticket_calendarId) + '/events?sendNotifications=false&pp=1&key=' + apikey;
+    var params = {};
+
+
+    var insEvent = {};
+    insEvent.description = JSON.stringify(sftimecard);
+    insEvent.summary = sftimecard.Description__c;
+    insEvent.location = 'https://parxch.my.salesforce.com/' + sftimecard.Id + '?';
+
+    var startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+01:00"));
+
+
+    insEvent.start = {
+      "dateTime": startTime.format("isoUtcDateTime")
+    };
+
+
+    startTime = new Date(startTime.getTime() + sftimecard.HoursWorked__c * 60 * 60 * 1000);
+    insEvent.end = {
+      "dateTime": startTime.format("isoUtcDateTime")
+    };
+
+    var postdata = JSON.stringify(insEvent);
+
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+    params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
+    params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "X-PrettyPrint": "1",
+      "GData-Version": "3.0",
+      "Content-Type": "application/json"
+    };
+
+
+    makeCachedRequest(callUrl, insCallback, params);
+  }
+
+  function insCallback(obj) {
+    debug(obj);
+  }
+
+
+
+  function sf_ReqTimeTickets() {
+    var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
+
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + oAuthToken.access_token,
+      "X-PrettyPrint": "1"
+    };
+
+    var sf_timecards_tmp = {};
+    var callback = function(obj) {
+        for (var i = 0; i < obj.data.records.length; i++) {
+          record = obj.data.records[i];
+          debug(JSON.stringify(record));
+
+          sf_timecards_tmp[record.Id] = record;
+        }
+
+        debug(sf_timecards_tmp);
+        sf_timecards = sf_timecards_tmp;
+        matchTimeCards();
+        };
+
+    makeCachedRequest(callUrl, callback, params, 0);
+  }
+
+
+  function sf_queryCases() {
+    //    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
+    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
+    //debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + oAuthToken.access_token,
+      "X-PrettyPrint": "1"
+    };
+
+    var ids = [];
+
+    var callback = function(obj) {
+        $('select.Case').empty();
+        for (var i = 0; i < obj.data.records.length; i++) {
+          var record = obj.data.records[i];
+
+          if (ids.indexOf(record.Case__r.Id) < 0 && ids.length < 20) {
+            ids.push(record.Case__r.Id);
+            var option = $('<option />').attr({
+              value: record.Case__r.Id
+            });
+            option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
+            debug(option);
+            $('select.Case').append(option);
+          }
+        }
+        };
+
+
+    makeCachedRequest(callUrl, callback, params);
+  }
+
+
+
+
+  function sf_searchTimekeeper() {
+    var queryString = "Select Id, Name from Contact " + " WHERE Email = \'" + oauth2_identity.email + "\' ";
+    var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
+
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + oAuthToken.access_token,
+      "X-PrettyPrint": "1"
+    };
+
+    var ids = [];
+
+    var callback = function(obj) {
+        for (var i = 0; i < obj.data.records.length; i++) {
+          var record = obj.data.records[i];
+          Timekeeper__c = record.Id;
+        }
+    };
+
+
+    makeCachedRequest(callUrl, callback, params);
+  }
+
+
+
+
+  function sf_soap_insertTimeTicket(caseId, caseDesc) {
+
+    var startDate = current_event.startTime.year + '-' + ((current_event.startTime.month < 10) ? '0' + current_event.startTime.month : current_event.startTime.month) + '-' + ((current_event.startTime.date < 10) ? '0' + current_event.startTime.date : current_event.startTime.date);
+
+
+    var ticket = {};
+
+    ticket.Case__c = caseId;
+    ticket.Description__c = $('#Description').val();
+    ticket.Timekeeper__c = '' + Timekeeper__c + '';
+    ticket.RecordTypeID = '' + RecordTypeID + '';
+    ticket.Date__c = startDate;
+
+    ticket.TimeStart__c = ((current_event.startTime.hour < 10) ? '0' + current_event.startTime.hour : current_event.startTime.hour) + '' + ((current_event.startTime.minute < 10) ? '0' + current_event.startTime.minute : current_event.startTime.minute);
+    ticket.HoursWorked__c = ((current_event.endTime.hour * 60 + current_event.endTime.minute) - (current_event.startTime.hour * 60 + current_event.startTime.minute)) / 60;
+
+    var objXML = "";
+    for (i in ticket) {
+      objXML += "<" + i + ">" + ticket[i] + "</" + i + ">\n";
+    }
+
+    var postdata = '';
+    postdata += "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:urn=\"urn:partner.soap.sforce.com\" xmlns:urn1=\"urn:sobject.partner.soap.sforce.com\">";
+    postdata += "   <soapenv:Header>";
+    postdata += "      <urn:SessionHeader>";
+    postdata += "         <urn:sessionId>" + oAuthToken.access_token + "</urn:sessionId>";
+    postdata += "      </urn:SessionHeader>";
+    postdata += "   </soapenv:Header>";
+    postdata += "   <soapenv:Body>";
+    postdata += "      <urn:create>";
+    postdata += "         <urn:sObjects>";
+    postdata += "            <urn1:type>TimeCard__c</urn1:type>";
+    postdata += objXML
+    postdata += "         </urn:sObjects>";
+    postdata += "      </urn:create>";
+    postdata += "   </soapenv:Body>";
+    postdata += "</soapenv:Envelope>";
+
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {};
+    params[gadgets.io.RequestParameters.HEADERS].SOAPAction = "Dummy";
+    params[gadgets.io.RequestParameters.HEADERS]['Content-Type'] = "text/xml;charset=UTF-8";
+    debug("!!!!!!!!!!" + params);
+
+    var privateCallback = function(obj) {
+        debug("!!!!!!!!!!!!!!!!!! sf_soap_insertTimeTicket callback obj :" + obj);
+
+        syncCalendar();
+
+        };
+    makeCachedRequest(oauth2_identity.urls.partner, privateCallback, params);
+  } //sf_soap_insertTimeTicket
+
+  gadgets.util.registerOnLoadHandler(initGadget);
+})(jQuery);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function makeCachedRequest(url, callback, params, refreshInterval) {
+  var ts = new Date().getTime();
+  var sep = "?";
+  if (refreshInterval && refreshInterval > 0) {
+    ts = Math.floor(ts / (refreshInterval * 1000));
+  }
+  if (url.indexOf("?") > -1) {
+    sep = "&";
+  }
+  url = [url, sep, "nocache=", ts].join("");
+  gadgets.io.makeRequest(url, callback, params);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Date Format 1.2.3
+ * (c) 2007-2009 Steven Levithan <stevenlevithan.com>
+ * MIT license
+ *
+ * Includes enhancements by Scott Trenda <scott.trenda.net>
+ * and Kris Kowal <cixar.com/~kris.kowal/>
+ *
+ * Accepts a date, a mask, or a date and a mask.
+ * Returns a formatted version of the given date.
+ * The date defaults to the current date/time.
+ * The mask defaults to dateFormat.masks.default.
+ */
+
+var dateFormat = function() {
+    var token = /d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|[LloSZ]|"[^"]*"|'[^']*'/g,
+        timezone = /\b(?:[PMCEA][SDP]T|(?:Pacific|Mountain|Central|Eastern|Atlantic) (?:Standard|Daylight|Prevailing) Time|(?:GMT|UTC)(?:[-+]\d{4})?)\b/g,
+        timezoneClip = /[^-+\dA-Z]/g,
+        pad = function(val, len) {
+        val = String(val);
+        len = len || 2;
+        while (val.length < len) val = "0" + val;
+        return val;
+        };
+
+    // Regexes and supporting functions are cached through closure
+    return function(date, mask, utc) {
+      var dF = dateFormat;
+
+      // You can't provide utc if you skip other args (use the "UTC:" mask prefix)
+      if (arguments.length == 1 && Object.prototype.toString.call(date) == "[object String]" && !/\d/.test(date)) {
+        mask = date;
+        date = undefined;
+      }
+
+      // Passing date through Date applies Date.parse, if necessary
+      date = date ? new Date(date) : new Date;
+      if (isNaN(date)) throw SyntaxError("invalid date");
+
+      mask = String(dF.masks[mask] || mask || dF.masks["default"]);
+
+      // Allow setting the utc argument via the mask
+      if (mask.slice(0, 4) == "UTC:") {
+        mask = mask.slice(4);
+        utc = true;
+      }
+
+      var _ = utc ? "getUTC" : "get",
+          d = date[_ + "Date"](),
+          D = date[_ + "Day"](),
+          m = date[_ + "Month"](),
+          y = date[_ + "FullYear"](),
+          H = date[_ + "Hours"](),
+          M = date[_ + "Minutes"](),
+          s = date[_ + "Seconds"](),
+          L = date[_ + "Milliseconds"](),
+          o = utc ? 0 : date.getTimezoneOffset(),
+          flags = {
+          d: d,
+          dd: pad(d),
+          ddd: dF.i18n.dayNames[D],
+          dddd: dF.i18n.dayNames[D + 7],
+          m: m + 1,
+          mm: pad(m + 1),
+          mmm: dF.i18n.monthNames[m],
+          mmmm: dF.i18n.monthNames[m + 12],
+          yy: String(y).slice(2),
+          yyyy: y,
+          h: H % 12 || 12,
+          hh: pad(H % 12 || 12),
+          H: H,
+          HH: pad(H),
+          M: M,
+          MM: pad(M),
+          s: s,
+          ss: pad(s),
+          l: pad(L, 3),
+          L: pad(L > 99 ? Math.round(L / 10) : L),
+          t: H < 12 ? "a" : "p",
+          tt: H < 12 ? "am" : "pm",
+          T: H < 12 ? "A" : "P",
+          TT: H < 12 ? "AM" : "PM",
+          Z: utc ? "UTC" : (String(date).match(timezone) || [""]).pop().replace(timezoneClip, ""),
+          o: (o > 0 ? "-" : "+") + pad(Math.floor(Math.abs(o) / 60) * 100 + Math.abs(o) % 60, 4),
+          S: ["th", "st", "nd", "rd"][d % 10 > 3 ? 0 : (d % 100 - d % 10 != 10) * d % 10]
+          };
+
+      return mask.replace(token, function($0) {
+        return $0 in flags ? flags[$0] : $0.slice(1, $0.length - 1);
+      });
+    };
+    }();
+
+// Some common format strings
+dateFormat.masks = {
+  "default": "ddd mmm dd yyyy HH:MM:ss",
+  shortDate: "m/d/yy",
+  mediumDate: "mmm d, yyyy",
+  longDate: "mmmm d, yyyy",
+  fullDate: "dddd, mmmm d, yyyy",
+  shortTime: "h:MM TT",
+  mediumTime: "h:MM:ss TT",
+  longTime: "h:MM:ss TT Z",
+  isoDate: "yyyy-mm-dd",
+  isoTime: "HH:MM:ss",
+  isoDateTime: "yyyy-mm-dd'T'HH:MM:ss",
+  isoUtcDateTime: "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'"
+};
+
+// Internationalization strings
+dateFormat.i18n = {
+  dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  monthNames: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
+};
+
+// For convenience...
+Date.prototype.format = function(mask, utc) {
+  return dateFormat(this, mask, utc);
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
+/**
+ * API to assist with management of the OAuth popup window.
+ *
+ * MAKE A COPY OF THIS FILE.  Do not hot link to it.
+ *
+ * Expected usage:
+ *
+ * 1) Gadget attempts to fetch OAuth data for the user and discovers that
+ * approval is needed.  The gadget creates two new UI elements:
+ *
+ *   - a "personalize this gadget" button or link
+ *   - a "personalization done" button or link, which is initially hidden.
+ *
+ * With any luck, the user will never need to click the "personalization done"
+ * button, but it should be created and displayed in case we can't
+ * automatically detect when the user has approved access to their gadget.
+ *
+ * 2) Gadget creates a popup object and associates event handlers with the UI
+ * elements:
+ *
+ *    var popup = shindig.oauth.popup({
+ *        destination: response.oauthApprovalUrl,
+ *        windowOptions: "height=300,width=200",
+ *        onOpen: function() {
+ *          $("personalizeDone").style.display = "block"
+ *        },
+ *        onClose: function() {
+ *          $("personalizeDone").style.display = "none"
+ *          $("personalizeDone").style.display = "none"
+ *          fetchData();
+ *        }
+ *    });
+ *
+ *    personalizeButton.onclick = popup.createOpenerOnClick();
+ *    personalizeDoneButton.onclick = popup.createApprovedOnClick();
+ *
+ * 3) When the user clicks the personalization button/link, a window is opened
+ *    to the approval URL.
+ *
+ * 4) When the window is closed, the oauth popup calls the onClose function
+ *    and the gadget attempts to fetch the user's data.
+ */
+
+var shindig = shindig || {};
+shindig.oauth = shindig.oauth || {};
+
+/**
+ * Initialize a new OAuth popup manager.  Parameters must be specified as
+ * an object, e.g. shindig.oauth.popup({destination: somewhere,...});
+ *
+ * @param {String} destination Target URL for the popup window.
+ * @param {String} windowOptions Options for window.open, used to specify
+ *     look and feel of the window.
+ * @param {function} onOpen Function to call when the window is opened.
+ * @param {function} onClose Function to call when the window is closed.
+ */
+shindig.oauth.popup = function(options) {
+  if (!("destination" in options)) {
+    throw "Must specify options.destination";
+  }
+  if (!("windowOptions" in options)) {
+    throw "Must specify options.windowOptions";
+  }
+  if (!("onOpen" in options)) {
+    throw "Must specify options.onOpen";
+  }
+  if (!("onClose" in options)) {
+    throw "Must specify options.onClose";
+  }
+  var destination = options.destination;
+  var windowOptions = options.windowOptions;
+  var onOpen = options.onOpen;
+  var onClose = options.onClose;
+
+  // created window
+  var win = null;
+  // setInterval timer
+  var timer = null;
+
+  // Called when we recieve an indication the user has approved access, either
+  // because they closed the popup window or clicked an "I've approved" button.
+
+  function handleApproval() {
+    if (timer) {
+      window.clearInterval(timer);
+      timer = null;
+    }
+    if (win) {
+      win.close();
+      win = null;
+    }
+    onClose();
+    return false;
+  }
+
+  // Called at intervals to check whether the window has closed.  If it has,
+  // we act as if the user had clicked the "I've approved" link.
+
+  function checkClosed() {
+    if ((!win) || win.closed) {
+      win = null;
+      handleApproval();
+    }
+  }
+
+  /**
+   * @return an onclick handler for the "open the approval window" link
+   */
+
+  function createOpenerOnClick() {
+    return function() {
+      // If a popup blocker blocks the window, we do nothing.  The user will
+      // need to approve the popup, then click again to open the window.
+      // Note that because we don't call window.open until the user has clicked
+      // something the popup blockers *should* let us through.
+      win = window.open(destination, "_blank", windowOptions);
+      TestWin = win;
+      if (win) {
+        // Poll every 100ms to check if the window has been closed
+        timer = window.setInterval(checkClosed, 100);
+        onOpen();
+      }
+      return false;
+    };
+  }
+
+  /**
+   * @return an onclick handler for the "I've approved" link.  This may not
+   * ever be called.  If we successfully detect that the window was closed,
+   * this link is unnecessary.
+   */
+
+  function createApprovedOnClick() {
+    return handleApproval;
+  }
+
+  return {
+    createOpenerOnClick: createOpenerOnClick,
+    createApprovedOnClick: createApprovedOnClick
+  };
+};
+
+
+
+////////////////////////////////////
+////////////////////////////////////
+//    var responseFunc;
+//    var searchTerm;
+////////////////////////////////////
+
+function sf_searchCases() {
+  var queryString = "FIND {*" + searchTerm.term + "*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
+  var callUrl = oauth2_identity.urls.rest + "search/?q=" + encodeURIComponent(queryString);
+  //debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
+  var params = {};
+  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+  //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+  params[gadgets.io.RequestParameters.HEADERS] = {
+    "Authorization": "OAuth " + token,
+    "X-PrettyPrint": "1"
+  };
+
+  var callback = function(obj) {
+      if (obj.data == null) {
+        responseFunc([]);
+        return;
+      }
+      var arr = [];
+      for (var i = 0; i < obj.data.length; i++) {
+        var record = obj.data[i];
+
+        arr.push({
+          label: record.Subject,
+          value: record.Id
+        });
+      }
+
+      //      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      responseFunc(arr);
+      };
+
+
+  makeCachedRequest(callUrl, callback, params);
+}            
