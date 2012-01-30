@@ -281,7 +281,11 @@ Ext.onReady(function() {
   //   readSFData();
 
 
-
+  function doRequest(counter, params)
+  {
+    makeCachedRequest(callUrl, function(obj) {restCallback(obj, counter)}, params);
+  }
+        
 
 
   function readSFData() {
@@ -325,7 +329,10 @@ var params = {};
         };
         
         lastSentRequestId = lastSentRequestId + 1;
-
+        
+        
+        doRequest(lastSentRequestId, params);
+return;        
         eval("var cb = function(obj) {restCallback(obj," + lastSentRequestId + ");};");
 console.log("!!!!!!!!!!!!!!!!!! cb :" + cb);   
 
