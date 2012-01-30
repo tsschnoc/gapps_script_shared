@@ -132,7 +132,7 @@
       }
     });
     $('#personalize').get(0).onclick = popup.createOpenerOnClick();
-    $('#personalize').get(0).text('Authorize Salesforce');
+    $('#personalize').text('Authorize Salesforce');
     $('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
     showOnly('approval');
   }
