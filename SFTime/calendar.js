@@ -822,6 +822,13 @@ Date.prototype.format = function(mask, utc) {
 
 
 
+
+
+
+
+
+
+
 /*
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -985,6 +992,11 @@ shindig.oauth.popup = function(options) {
 
 
 
+
+
+
+
+
 ////////////////////////////////////
 ////////////////////////////////////
 //    var responseFunc;
@@ -1025,4 +1037,5 @@ function sf_searchCases() {
 
 
   makeCachedRequest(callUrl, callback, params);
-}            
+}
+
