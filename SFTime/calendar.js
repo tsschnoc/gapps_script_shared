@@ -1,6 +1,5 @@
 // https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 (function($) {
-  var calendar = null;
   var current_event = null;
 
 
@@ -106,6 +105,8 @@
   }
 
 
+// SF Oauth dane
+
 
 
   function initialize_sf_oauth() {
@@ -131,6 +132,7 @@
       }
     });
     $('#personalize').get(0).onclick = popup.createOpenerOnClick();
+    $('#personalize').get(0).text('Authorize Salesforce');
     $('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
     showOnly('approval');
   }
@@ -227,6 +229,8 @@
       makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
     }
   }
+  
+// end: SF Oauth dane  
 
   function fetchData() {
     $('#errors').hide();
