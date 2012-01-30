@@ -93,10 +93,9 @@ background: white;
       
         <div id="errors" style="display: none"></div>
 
-        <div class="refresh">
+        <div class="refresh" style="display:none">
               <button class="refreshCal">RefreshCalendar</button>
-
-      </div>
+        </div>
         
         <div id="main" style="display:none">          
           <div class="credentials">

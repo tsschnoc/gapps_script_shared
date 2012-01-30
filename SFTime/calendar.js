@@ -174,6 +174,7 @@
             oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}",sf_version);                
           }
           showOnly('main');
+          $('.refresh').get(0).style.display = 'none';
           
           sf_searchTimekeeper();
           };
