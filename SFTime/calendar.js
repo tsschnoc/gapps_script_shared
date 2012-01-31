@@ -105,7 +105,7 @@
   }
 
 
-// SF Oauth dane
+// SF Oauth dance
 
 
 
@@ -424,7 +424,7 @@
 
 
     var insEvent = {};
-    insEvent.description = JSON.stringify(sftimecard);
+    insEvent.description = JSON.stringify(sftimecard, null, '\t');
     insEvent.summary = sftimecard.Description__c;
     insEvent.location = 'https://parxch.my.salesforce.com/' + sftimecard.Id + '?';
 
