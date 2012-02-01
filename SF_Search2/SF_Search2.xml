@@ -38,7 +38,9 @@
     once you've approved access to your data.
   </div>
 
-  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/SF_Search2/SF_Search2.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/SF_Search2/SF_Search2.js"></script>
+  
+  
   
   ]]>
   </Content>
