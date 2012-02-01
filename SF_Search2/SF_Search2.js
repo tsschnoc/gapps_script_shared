@@ -55,7 +55,7 @@ function fetchData() {
         showOnly('approval');
       }
 
-      else if (response.feed) {
+      else if (response.data) {
         showOnly('main');
       }
 
@@ -66,13 +66,6 @@ function fetchData() {
 
 
       };
-
-
-
-
-
-
-
 
 
   gadgets.io.makeRequest(url, callback, params);
