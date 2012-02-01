@@ -33,10 +33,9 @@
 
         <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/oAuthGadget/oauth.js"></script>
         <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/oAuthGadget/sha1.js"></script>
-        
+<!--        
         <script type="text/javascript" src="https://s3.amazonaws.com/tsschnocwinn/cross.js"></script>
 
-<!--
 <script type="text/javascript" src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/popup.js"></script>
 -->
         
