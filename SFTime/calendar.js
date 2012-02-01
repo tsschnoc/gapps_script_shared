@@ -425,7 +425,7 @@
 
     var insEvent = {};
     insEvent.description = JSON.stringify(sftimecard, null, '\t');
-    insEvent.summary = sftimecard.Description__c;
+    insEvent.summary = sftimecard.Case__r.Project__r.Account__r.Name + ' ' + sftimecard.Description__c;
     insEvent.location = 'https://parxch.my.salesforce.com/' + sftimecard.Id + '?';
 
 
@@ -472,7 +472,7 @@
 
 
   function sf_ReqTimeTickets() {
-    var queryString = "Select Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
+    var queryString = "Select Case__r.Project__r.Account__r.Name, Id ,IsDeleted ,Name ,CurrencyIsoCode ,RecordTypeId ,CreatedDate ,CreatedById ,LastModifiedDate ,LastModifiedById ,SystemModstamp ,LastActivityDate ,ConnectionReceivedId ,ConnectionSentId ,Project__c ,Timekeeper__c ,Date__c ,HoursWorked__c ,Rate__c ,Task__c ,Description__c ,AmountWorked__c ,Case__c ,CaseSubject__c ,Invoice__c ,ShowOnReport__c ,HoursBillable__c ,RateInternal__c ,AmountBillable__c ,HoursUnbillable__c ,AmountUnbillable__c ,TimeStart__c ,CostInternal__c " + " FROM TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\'" + "   and Date__c >= " + viewstart.year + "-" + (viewstart.month < 10 ? "0" : "") + viewstart.month + "-" + (viewstart.date < 10 ? "0" : "") + viewstart.date + " and Date__c <= " + viewend.year + "-" + (viewend.month < 10 ? "0" : "") + viewend.month + "-" + (viewend.date < 10 ? "0" : "") + viewend.date;
 
     var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
     var params = {};
