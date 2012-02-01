@@ -161,6 +161,35 @@ SalesforceConnection.prototype.readObjectValues =
   return records;
 };
 
+SalesforceConnection.prototype.query = function(soql) {
+  if (this._authinfo == null) {
+    this.login();
+  }
+  Logger.log('SQL to execute:   ' + soql);
+  var queryUrl = "/services/data/v21.0/query?q=" + encodeURIComponent(soql);
+  var records = [];
+  while (queryUrl != null && queryUrl != 'undefined') {
+    var response = UrlFetchApp.fetch(
+    this._authinfo.restServerUrl + queryUrl, {
+      method: "GET",
+      headers: {
+        "Authorization": "OAuth " + this._authinfo.sessionId
+      }
+    });
+//Logger.log(   response.getContentText()); 
+    var queryResult = Utilities.jsonParse(response.getContentText());
+    queryResult.records.forEach(function(record, i) {
+      records.push(record);
+    });    
+    
+    queryUrl = queryResult.nextRecordsUrl;
+    Logger.log("!!!!!!!!!!!!!!!!!!!!!!" + queryUrl);
+  }
+  return records;
+};
+
+
+
 SalesforceConnection.prototype.readObjectValueList = 
   function(sf_objectname, fieldNames, where) {
   var lines = [];
