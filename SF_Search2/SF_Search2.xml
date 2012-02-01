@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="OAuth Contacts" scrolling="true">
+    <Require feature="locked-domain"/>
+    <OAuth>
+      <Service name="google">
+        <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+        <Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/" method="GET" />
+        <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+      </Service>
+    </OAuth>
+  </ModulePrefs>
+  <Content type="html">
+  <![CDATA[
+
+  <!-- shindig oauth popup handling code -->
+  <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
+
+  <style>
+  #main {
+    margin: 0px;
+    padding: 0px;
+    font-size: small;
+  }
+  </style>
+
+  <div id="main" style="display: none">
+  </div>
+
+  <div id="approval" style="display: none">
+    <img src="http://gadget-doc-examples.googlecode.com/svn/trunk/images/new.gif">
+    <a href="#" id="personalize">Personalize this gadget</a>
+  </div>
+
+  <div id="waiting" style="display: none">
+    Please click
+    <a href="#" id="approvaldone">I've approved access</a>
+    once you've approved access to your data.
+  </div>
+
+  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/SF_Search2/SF_Search2.js"></script>
+  
+  ]]>
+  </Content>
+</Module>
