@@ -189,6 +189,72 @@ SalesforceConnection.prototype.query = function(soql) {
 };
 
 
+function flachmachen(pre, record, obj) {
+    for (f in record) {
+      if (typeof record[f] == 'object') {
+         flachmachen(f + '.', record[f], obj);              
+      } else {
+        obj[pre+f] = record[f];
+      }      
+    }    
+}
+
+
+
+SalesforceConnection.prototype.queryFlat = function(soql) {
+  var records = query(soql);
+  var objs = [];
+  var keys = [];
+  
+  for (row in records) {
+    var record = records[row];
+//    Logger.log(record);
+    var obj = {};
+    flachmachen('', record, obj)
+    Logger.log(obj);
+    objs.push(obj);
+    for(var key in obj){
+      if (keys.indexOf(key) < 0)
+        keys.push(key);
+    }    
+  }
+  
+  Logger.log(keys);  
+  
+  
+  var values = [];
+  for (i in objs) {
+    obj = objs[i];
+    Logger.log('XX' + obj);  
+    var row = [];
+    for (j in keys) {
+      row.push(obj[keys[j]]);
+    }
+    values.push(row);
+  }
+  
+  var retObj = {};
+  retObj.keys =keys;
+  retObj.values =values;
+  return retObj;
+  
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 SalesforceConnection.prototype.readObjectValueList = 
   function(sf_objectname, fieldNames, where) {
