@@ -504,7 +504,7 @@
 
   function sf_queryCases() {
     //    var queryString = "Select c.Id, c.Description, c.CaseNumber From Case c";
-    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, Case__r.Account__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
+    var queryString = "Select Id, Name, Case__r.Id, Case__r.Subject, Case__r.Description, Case__r.Project__r.Name, Case__r.Project__r.Account__r.Name, LastModifiedDate from TimeCard__c " + " WHERE Timekeeper__c = \'" + Timekeeper__c + "\' order by LastModifiedDate desc Limit 50";
     var callUrl = oauth2_identity.urls.rest + "query/?q=" + encodeURIComponent(queryString);
     //debug("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);
     var params = {};
