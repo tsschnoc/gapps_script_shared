@@ -202,7 +202,7 @@ function flachmachen(pre, record, obj) {
 
 
 SalesforceConnection.prototype.queryFlat = function(soql) {
-  var records = query(soql);
+  var records = this.query(soql);
   var objs = [];
   var keys = [];
   
