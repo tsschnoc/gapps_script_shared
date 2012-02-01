@@ -425,7 +425,7 @@
 
     var insEvent = {};
     insEvent.description = JSON.stringify(sftimecard, null, '\t');
-    insEvent.summary = sftimecard.Case__r.Project__r.Account__r.Name + ' ' + sftimecard.Description__c;
+    insEvent.summary = sftimecard.Case__r.Project__r.Account__r.Name + ' - ' + sftimecard.Description__c;
     insEvent.location = 'https://parxch.my.salesforce.com/' + sftimecard.Id + '?';
 
 
