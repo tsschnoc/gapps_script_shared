@@ -11,20 +11,20 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
   gadgets.io.makeRequest(url, callback, params, 0);
 }
 
+function showOnly(id) {
+  jQuery('#main').hide();
+  jQuery('#approval').hide();
+  jQuery('#waiting').hide();
+  jQuery('#loading').hide();
+  jQuery('#errors').hide();
 
-
-
-
-// Invoke makeRequest() to fetch data from the service provider endpoint.
-// Depending on the results of makeRequest, decide which version of the UI
-// to ask showOneSection() to display. If user has approved access to his
-// or her data, display data.
-// If the user hasn't approved access yet, response.oauthApprovalUrl contains a
-// URL that includes a Google-supplied request token. This is presented in the
-// gadget as a link that the user clicks to begin the approval process.
+  jQuery('#' + id).show();
+}
 
 
 function fetchData() {
+  jQuery('#errors').hide();
+
   var params = {};
   url = "http://www.google.com/m8/feeds/contacts/default/base?alt=json";
   params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -33,47 +33,55 @@ function fetchData() {
   params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
   params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
 
-  gadgets.io.makeRequest(url, function(response) {
-    if (response.oauthApprovalUrl) {
-      // Create the popup handler. The onOpen function is called when the user
-      // opens the popup window. The onClose function is called when the popup
-      // window is closed.
-      var popup = shindig.oauth.popup({
-        destination: response.oauthApprovalUrl,
-        windowOptions: null,
-        onOpen: function() {
-          showOneSection('waiting');
-        },
-        onClose: function() {
-          fetchData();
-        }
-      });
-      // Use the popup handler to attach onclick handlers to UI elements.  The
-      // createOpenerOnClick() function returns an onclick handler to open the
-      // popup window.  The createApprovedOnClick function returns an onclick
-      // handler that will close the popup window and attempt to fetch the user's
-      // data again.
-      var personalize = document.getElementById('personalize');
-      personalize.onclick = popup.createOpenerOnClick();
-      var approvaldone = document.getElementById('approvaldone');
-      approvaldone.onclick = popup.createApprovedOnClick();
-//      showOneSection('approval');
-    }
-    else if (response.data) {
-      console.log(response.data);
-//      showOneSection('main');
-//      showResults(response.data);
-    }
-    else {
-      // The response.oauthError and response.oauthErrorText values may help debug
-      // problems with your gadget.
-      var main = document.getElementById('main');
-      var err = document.createTextNode('OAuth error: ' + response.oauthError + ': ' + response.oauthErrorText);
-      main.appendChild(err);
-//      showOneSection('main');
-    }
-  }, params);
+  var callback = function(response) {
+      if (response.oauthApprovalUrl) {
+        // You can set the sign in link directly:
+        // jQuery('#personalize').get(0).href = response.oauthApprovalUrl
+        // OR use the popup.js handler
+        var popup = shindig.oauth.popup({
+          destination: response.oauthApprovalUrl,
+          windowOptions: 'height=600,width=800',
+          onOpen: function() {
+            showOnly('waiting');
+          },
+          onClose: function() {
+            showOnly('loading');
+            fetchData();
+          }
+        });
+        jQuery('#personalize').get(0).onclick = popup.createOpenerOnClick();
+        jQuery('#approvalLink').get(0).onclick = popup.createApprovedOnClick();
+
+        showOnly('approval');
+      }
+
+      else if (response.feed) {
+        showOnly('main');
+      }
+
+      else {
+        jQuery('#errors').html('Something went wrong').fadeIn();
+        showOnly('errors');
+      }
+
+
+      };
+
+
+
+
+
+
+
+
+
+  gadgets.io.makeRequest(url, callback, params);
+
 }
+
+
+
+
 
 function initGadget() {
   google.load("jquery", "1.4.2");
