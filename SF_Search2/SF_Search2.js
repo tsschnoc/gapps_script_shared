@@ -53,7 +53,8 @@ function fetchData() {
   jQuery('#errors').hide();
 
   var params = {};
-  url = "http://www.google.com/m8/feeds/contacts/default/base?alt=json";
+  url = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&pp=1&key=' + apikey;
+  
   params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
   params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
   params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "google";
@@ -84,6 +85,15 @@ function fetchData() {
 
       else if (response.data) {
         showOnly('main');
+          for (i in response.data.items) {
+            var c = response.data.items[i];
+            if (c.summary == 'Timecards' || c.summary == 'TimeCards') {                             
+              consumerKey = c.description.split('/')[0];
+              consumerSecret = c.description.split('/')[1];    
+              timeticket_calendarId = c.id;
+            }
+          }
+        
         initialize_sf_oauth();
       }
 
