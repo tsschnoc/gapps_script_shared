@@ -76,12 +76,7 @@ function initSearchGui() {
 ////////////////////////////////////
   function sf_search() {
     var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
-    var restServerUrl = sfurl.split("/")[2];
-    restServerUrl = restServerUrl.replace("-api", "");
-    restServerUrl = "https://" + restServerUrl;
-    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
-    
-    var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+    var callUrl = oauth2_identity.urls.rest + "search/?q=" + encodeURIComponent(queryString);
 //console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
     
     var params = {};
