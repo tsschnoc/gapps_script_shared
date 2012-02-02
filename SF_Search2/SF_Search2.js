@@ -11,6 +11,10 @@ var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.ht
 var oAuthToken = null;
 var oauth2_identity = null;
 
+var responseFunc;
+var searchTerm;
+  
+
 // Call fetchData() when gadget loads.
 gadgets.util.registerOnLoadHandler(initGadget);
 
@@ -37,6 +41,96 @@ function initGadget() {
     fetchData();
   });
 }
+
+
+
+function initSearchGui() {
+  jQuery("#search").autocomplete({
+    source: function(request, response) {
+      responseFunc = response;
+      searchTerm = request;
+      sf_search();
+    },
+    minLength: 2,
+    select: function(event, ui) {
+      log(ui.item ? "Selected: " + ui.item.label : "Nothing selected, input was " + this.value);
+    },
+    open: function() {
+      $(this).removeClass("ui-corner-all").addClass("ui-corner-top");
+    },
+    close: function() {
+      $(this).removeClass("ui-corner-top").addClass("ui-corner-all");
+    }
+  });
+}
+
+
+
+
+
+
+////////////////////////////////////
+////////////////////////////////////
+//    var responseFunc;
+//    var searchTerm;
+////////////////////////////////////
+  function sf_search() {
+    var queryString = "FIND {*" + searchTerm.term +"*} RETURNING Case(Id, Description, Subject, CaseNumber)  ";
+    var restServerUrl = sfurl.split("/")[2];
+    restServerUrl = restServerUrl.replace("-api", "");
+    restServerUrl = "https://" + restServerUrl;
+    console.log("!!!!!!!!!!!!!!!!!! restServerUrl :" + restServerUrl);  
+    
+    var callUrl = restServerUrl + "/services/data/v23.0/search/?q=" + encodeURIComponent(queryString);
+//console.log("!!!!!!!!!!!!!!!!!! callUrl :" + callUrl);  
+    
+    var params = {};
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Authorization": "OAuth " + token,
+      "X-PrettyPrint": "1"
+    };
+        
+    var callback = function(obj) {        
+      if (obj.data == null) {
+        responseFunc([]);
+        return;
+      }
+      var arr = [];
+      for (var i=0;i<obj.data.length;i++)  {
+        var record = obj.data[i];
+        
+        arr.push({label:record.Subject, value:record.Id});
+      }
+      
+//      responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);
+      responseFunc(arr);
+    };
+        
+        
+    gadgets.io.makeRequest(callUrl, callback, params);
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 function showOnly(id) {
   jQuery('#main').hide();
@@ -192,9 +286,11 @@ function oauth2_callback(response) {
         oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}", sf_version);
       }
       showOnly('main');
-      $('.refresh').get(0).style.display = '';
       gadgets.window.adjustHeight();
-      sf_searchTimekeeper();
+
+
+      initSearchGui();
+
       };
 
   makeCachedRequest(oAuthToken.id, identity_callback, params);

@@ -26,6 +26,10 @@
 
   <div id="main" style="display: none">
     hier gibts was zu sehen
+    <div class="ui-widget">
+      <label for="search">search: </label>
+      <input id="search" />	
+    </div>    
   </div>
 
 
