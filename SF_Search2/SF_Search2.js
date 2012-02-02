@@ -34,8 +34,8 @@ function makeCachedRequest(url, callback, params, refreshInterval) {
 function initGadget() {
   window.addEventListener('message', popupMessageReceiver, false);
 
-  google.load("jquery", "1.4.2");
-  google.load("jqueryui", "1.7.2");
+  google.load("jquery", "1.7.1");
+  google.load("jqueryui", "1.8.17");
 
   google.setOnLoadCallback(function() {
     fetchData();
