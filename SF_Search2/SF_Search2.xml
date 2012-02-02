@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="OAuth Contacts" scrolling="false"  height="200">
+  <ModulePrefs title="OAuth Contacts" scrolling="false"  height="200" width="70">
     <Require feature="locked-domain"/>
     <OAuth>
       <Service name="google">
