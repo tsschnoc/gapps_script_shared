@@ -48,7 +48,7 @@
   <!-- Also not necessary, but great for informing users -->     
   <div id="loading" style="display: none">
     <h3>Loading...</h3>
-    <p><img src="ajax-loader.gif"></p>
+    <p><img src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/ajax-loader.gif"></p>
   </div>
   
   
