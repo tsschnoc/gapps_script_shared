@@ -84,7 +84,7 @@ function initSearchGui() {
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     //params[gadgets.io.RequestParameters.POST_DATA] = postdata;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "Authorization": "OAuth " + token,
+      "Authorization": "OAuth " + oAuthToken.access_token,
       "X-PrettyPrint": "1"
     };
         
