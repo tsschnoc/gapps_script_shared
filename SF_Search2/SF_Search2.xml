@@ -18,11 +18,51 @@
   <script src="http://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
 
   <style>
-  #main {
-    margin: 0px;
-    padding: 0px;
-    font-size: small;
-  }
+    #main {
+      margin: 0px;
+      padding: 0px;
+      font-size: small;
+    }
+    #main {
+      font-size: 10px;
+    }
+
+    #main ul, #mail ol {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .XXXXui-menu-item a {
+      color: red ! important;
+      font-size: small;
+    }
+    .invisible { display: none; }
+          
+
+
+    .ui-autocomplete {
+        max-height: 100px;
+      	overflow-y: auto;
+    		/* prevent horizontal scrollbar */
+    		overflow-x: hidden;
+    		/* add padding to account for vertical scrollbar */
+    		padding-right: 20px;
+        width: 150px ! important;
+        font-size: 8px;
+    }
+    
+    body {
+      background: white;
+    }
+
+
+
+          
+    .ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+    
+    #search { width: 25em; }          
+          
+            
   </style>
 
   <div id="main" style="display: none">
