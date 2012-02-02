@@ -9,6 +9,7 @@
         <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
       </Service>
     </OAuth>
+    <UserPref name="refresh_token" display_name="refresh_token" datatype="string"/>    
   </ModulePrefs>
   <Content type="html">
   <![CDATA[
