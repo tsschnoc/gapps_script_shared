@@ -533,7 +533,12 @@
             var option = $('<option />').attr({
               value: record.Case__r.Id
             });
-            option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);
+            if (record.Case__r.Project__r) {
+              option.html(record.Case__r.Subject + record.Case__r.Project__r.Name);  
+            } else {
+              option.html(record.Case__r.Subject + record.Case__r.Name);
+            }
+            
             debug(option);
             $('select.Case').append(option);
           }
