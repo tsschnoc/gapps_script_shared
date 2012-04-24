@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module>
+  <ModulePrefs title="Pusher" author="thomas.schnocklake@gmail.com" height="200">
+    <Require feature="setprefs"/>
+  </ModulePrefs>
+
+<UserPref name="ShowTypeColumn" display_name="Show Type Column" datatype="string"/>
+  <UserPref name="type_list" display_name="Type Query List" datatype="list" />    
+<Content type="html">
+<![CDATA[        
+ 
+<head>
+  <title>Pusher Test</title>
+  <script src="http://js.pusher.com/1.11/pusher.min.js" type="text/javascript"></script>
+  <script type="text/javascript">
+    // Enable pusher logging - don't include this in production
+    Pusher.log = function(message) {
+      if (window.console && window.console.log) window.console.log(message);
+    };
+
+    // Flash fallback logging - don't include this in production
+    WEB_SOCKET_DEBUG = true;
+
+    var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', function(data) {
+      alert(data);
+    });
+  </script>
+</head>  ]]> </Content> </Module> 
