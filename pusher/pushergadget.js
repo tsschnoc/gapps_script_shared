@@ -47,6 +47,16 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
 
 
 
+        function popitup(url) {
+            newwindow=window.open(url,'name','height=600,width=800');
+            if (window.focus) {
+                newwindow.focus()
+            }
+            return false;
+        }
+
+
+
     // Enable pusher logging - don't include this in production
     Pusher.log = function(message) {
       if (window.console && window.console.log) window.console.log(message);
@@ -58,7 +68,7 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
     var pusher = new Pusher('0bcfb89cee9d117b2b4e');
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(data) {
-      alert(data);
+      popitup("http://www.schnocklkake.de/apex/SipLogLanding?number" + data);
     });
 
 
