@@ -225,7 +225,7 @@ function gadgetOnLoad() {
   window.addEventListener('message', popupMessageReceiver, false);    
 
   var prefs = new gadgets.Prefs();
-  CalendarOauth.refresh_token = prefs.get("refresh_token");      
+  CalendarOauth.refresh_token = prefs.getString("refresh_token");      
   if (CalendarOauth.refresh_token) {
     return;
   }
