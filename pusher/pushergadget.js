@@ -153,7 +153,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
         "Authorization": "Bearer " + response.data.access_token,
       };
 
-      makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);      
+      makeCachedRequest(url, oauth2_callback, params);      
       
       return;
       
