@@ -146,7 +146,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
       var params = {};
 //      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+//      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
       params[gadgets.io.RequestParameters.HEADERS] = {
 //        "Content-Type": "application/x-www-form-urlencoded",
         "X-PrettyPrint": "1",
