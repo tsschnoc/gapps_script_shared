@@ -45,7 +45,7 @@ e.appendChild(h)}for(var f=0,g=d.length,h=0;h<g;h++)e(d[h],b)}}();
 (function(){var a=(document.location.protocol=="http:"?Pusher.cdn_http:Pusher.cdn_https)+Pusher.VERSION,d=[];window.JSON===void 0&&d.push(a+"/json2"+Pusher.dependency_suffix+".js");if(window.WebSocket===void 0&&window.MozWebSocket===void 0)window.WEB_SOCKET_DISABLE_AUTO_INITIALIZATION=!0,d.push(a+"/flashfallback"+Pusher.dependency_suffix+".js");var b=function(){return window.WebSocket===void 0&&window.MozWebSocket===void 0?function(){window.WebSocket!==void 0&&window.MozWebSocket===void 0?(Pusher.Transport=
 window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"/WebSocketMain.swf",WebSocket.__addTask(function(){Pusher.ready()}),WebSocket.__initialize()):(Pusher.Transport=null,Pusher.TransportType="none",Pusher.ready())}:function(){Pusher.Transport=window.MozWebSocket!==void 0?window.MozWebSocket:window.WebSocket;Pusher.TransportType="native";Pusher.ready()}}(),e=function(a){var b=function(){document.body?a():setTimeout(b,0)};b()},f=function(){e(b)};d.length>0?_require(d,f):f()})();
 
-
+var CalendarOauth = null;
 
     function popitup(url) {
         newwindow=window.open(url,'name','height=600,width=800');
@@ -97,14 +97,18 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
     alert ('Message received: ' + event.origin + ' : '  + event.data);
     
 
+    if (CalendarOauth === null) CalendarOauth = {};
+    
     if (event.origin == 'https://s3.amazonaws.com') {
       var pairs = event.data.split('?')[1].split('&');
+      
+      
       for (var i in pairs) {
         var kv = pairs[i].split('=');
-        SF_RequestToken[kv[0]] = decodeURIComponent(kv[1]);
+        CalendarOauth[kv[0]] = decodeURIComponent(kv[1]);
       }
 
-      debug(SF_RequestToken);
+      debug(CalendarOauth);
 
       var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(SF_RequestToken.code) + '&client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=gettoken&format=json';
 
