@@ -96,7 +96,6 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
     
     alert ('Message received: ' + event.origin + ' : '  + event.data);
     
-    if (SF_RequestToken === null) SF_RequestToken = {};
 
     if (event.origin == 'https://s3.amazonaws.com') {
       var pairs = event.data.split('?')[1].split('&');
