@@ -149,7 +149,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 //      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
       params[gadgets.io.RequestParameters.HEADERS] = {
 //        "Content-Type": "application/x-www-form-urlencoded",
-        "X-PrettyPrint": "1",
+        "GData-Version": "3.0",
         "Authorization": "Bearer " + response.data.access_token,
       };
 
