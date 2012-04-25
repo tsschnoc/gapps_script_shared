@@ -142,9 +142,20 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
 
 
+  String.prototype.formatPhoneForSearch = function(){
+    var number = this;
+  	while (number.charAt(0) == "0" || number.charAt(0) == "+") 
+  	{
+  		number = number.slice(1); 
+  	}  
+  	return number;
+  }
+
 
   function searchnumber(number) {
-      var url = "https://www.google.com/m8/feeds/contacts/default/full?q=435009730&alt=json";
+    
+      
+      var url = "https://www.google.com/m8/feeds/contacts/default/full?q=' + number.formatPhoneForSearch()  + '&alt=json";
       
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
