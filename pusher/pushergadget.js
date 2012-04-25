@@ -46,6 +46,11 @@ e.appendChild(h)}for(var f=0,g=d.length,h=0;h<g;h++)e(d[h],b)}}();
 window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"/WebSocketMain.swf",WebSocket.__addTask(function(){Pusher.ready()}),WebSocket.__initialize()):(Pusher.Transport=null,Pusher.TransportType="none",Pusher.ready())}:function(){Pusher.Transport=window.MozWebSocket!==void 0?window.MozWebSocket:window.WebSocket;Pusher.TransportType="native";Pusher.ready()}}(),e=function(a){var b=function(){document.body?a():setTimeout(b,0)};b()},f=function(){e(b)};d.length>0?_require(d,f):f()})();
 
 var CalendarOauth = null;
+var scope = 'http://www.google.com/m8/feeds/';
+var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
+var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
+var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
+
 
     function popitup(url) {
         newwindow=window.open(url,'name','height=600,width=800');
@@ -89,6 +94,13 @@ var CalendarOauth = null;
     gadgets.io.makeRequest(url, callback, params);
   }
 
+  function debug(text) {
+    if (true) {
+      if (console && console.debug) {
+        console.debug(text);
+      }
+    }
+  }
 
 
   function popupMessageReceiver(event) {
@@ -110,7 +122,7 @@ var CalendarOauth = null;
 
       debug(CalendarOauth);
 
-      var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(SF_RequestToken.code) + '&client_id=' + encodeURIComponent(consumerKey) + '&client_secret=' + encodeURIComponent(consumerSecret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&state=gettoken&format=json';
+      var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(redirect_uri) + '&grant_type=authorization_code';
 
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -121,20 +133,34 @@ var CalendarOauth = null;
         "X-PrettyPrint": "1"
       };
 
-      makeCachedRequest('https://login.salesforce.com/services/oauth2/token', oauth2_callback, params);
+      makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
     }
   }
 
 
+  function oauth2_callback(response) {
+      debug(response.data);
+      oAuthToken = response.data;
+      
+      if (response.rc!=200) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen        
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", null);      
+        initialize_sf_oauth();
+        return;
+      }
 
+      
+      if (oAuthToken.refresh_token) {
+        var prefs = new gadgets.Prefs();
+        prefs.set("refresh_token", oAuthToken.refresh_token);        
+      }
+  }
 
 
     function gadgetOnLoad() {
       window.addEventListener('message', popupMessageReceiver, false);    
 
-      var scope = 'http://www.google.com/m8/feeds/';
-      var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
-      var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
     
       var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=force';
 
