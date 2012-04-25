@@ -172,13 +172,13 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
           
           for (var i in response.data.feed.entry) {
             var contact = response.data.feed.entry[i];
+            window.console.log(contact);
             window.console.log(contact.title.$t);
             for (var j in contact.gd$phoneNumber) {
               var numberEntry = contact.gd$phoneNumber[j];
               window.console.log(numberEntry.$t);
               window.console.log(numberEntry.rel.split("#")[1]);
             }
-            window.console.log(contact);
             
           }
           
