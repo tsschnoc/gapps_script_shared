@@ -153,7 +153,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
 
   function searchnumber(number) {
-    
+      var number = number.split("@")[0];
       
       var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch()  + "&alt=json";
       
