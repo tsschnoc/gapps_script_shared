@@ -175,7 +175,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
     function gadgetOnLoad() {
       window.addEventListener('message', popupMessageReceiver, false);    
     
-      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=force';
+      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auth';
       popitup(authLink) ;
     }
 
