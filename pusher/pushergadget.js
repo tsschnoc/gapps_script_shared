@@ -74,7 +74,7 @@ var pusher = new Pusher('0bcfb89cee9d117b2b4e');
 var channel = pusher.subscribe('test_channel');
 channel.bind('my_event', function(phoneCall) {
 //      popitup("http://www.schnocklake.de?number" + data);
-  var x = 'Incoming call' + phoneCall.number.split("@")[0] + '<br/>'; 
+  var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>'; 
   $("#ny").html(x);
   
   
