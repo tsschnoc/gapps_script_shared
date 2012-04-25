@@ -106,7 +106,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
   function popupMessageReceiver(event) {
     //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
     
-    alert ('Message received: ' + event.origin + ' : '  + event.data);
+//    alert ('Message received: ' + event.origin + ' : '  + event.data);
     
 
     if (CalendarOauth === null) CalendarOauth = {};
@@ -175,7 +175,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
     function gadgetOnLoad() {
       window.addEventListener('message', popupMessageReceiver, false);    
     
-      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auth';
+      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto';
       popitup(authLink) ;
     }
 
