@@ -141,7 +141,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
   function oauth2_callback(response) {
       CalendarOauth.access_token = response.data.access_token;
       
-      var url = ""https://www.google.com/m8/feeds/contacts/default/full?q=thomas";
+      var url = "https://www.google.com/m8/feeds/contacts/default/full?q=thomas";
       
       var params = {};
 //      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
