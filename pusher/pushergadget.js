@@ -69,7 +69,7 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(data) {
 //      popitup("http://www.schnocklake.de?number" + data);
-      var x = '<a href="http://www.google.com">' + data + '</a>';
+      var x = '<a href="http://www.google.com">' + data.key + '</a>';
       $("#ny").html(x);
     });
 
