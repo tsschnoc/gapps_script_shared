@@ -174,7 +174,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
             var contact = response.data.feed.entry[i];
             window.console.log(contact.title.$t);
             for (var j in contact.gd$phoneNumber) {
-              var numberEntry = contact.gd$phoneNumber[i];
+              var numberEntry = contact.gd$phoneNumber[j];
               window.console.log(numberEntry.$t);
               window.console.log(numberEntry.rel.split("#")[1]);
             }
