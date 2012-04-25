@@ -230,6 +230,23 @@ function gadgetOnLoad() {
   CalendarOauth.refresh_token = prefs.getString("refresh_token");      
   
   if (CalendarOauth.refresh_token) {
+
+   var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-PrettyPrint": "1"
+    };
+
+    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
+
+
+
+
     return;
   }
   doAuth();
