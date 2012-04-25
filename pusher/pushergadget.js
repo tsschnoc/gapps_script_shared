@@ -74,7 +74,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(phoneCall) {
 //      popitup("http://www.schnocklake.de?number" + data);
-      var x = 'Incoming call' + phoneCall.number.split("@")[0] + ''; 
+      var x = 'Incoming call' + phoneCall.number.split("@")[0] + '<br/>'; 
       $("#ny").html(x);
       
       
