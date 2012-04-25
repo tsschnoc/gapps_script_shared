@@ -155,7 +155,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
   function searchnumber(number) {
     
       
-      var url = "https://www.google.com/m8/feeds/contacts/default/full?q=' + number.formatPhoneForSearch()  + '&alt=json";
+      var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch()  + "&alt=json";
       
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
