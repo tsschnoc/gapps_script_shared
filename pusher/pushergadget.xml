@@ -3,13 +3,6 @@
   <ModulePrefs title="Pusher" author="thomas.schnocklake@gmail.com" height="200">
     <Require feature="setprefs"/>
     <Require feature="locked-domain"/>
-    <OAuth>
-      <Service name="google">
-        <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
-        <Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/" method="GET" />
-        <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
-      </Service>
-    </OAuth>    
   </ModulePrefs>
 <Content type="html">
 <![CDATA[        
@@ -20,8 +13,6 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
 
-  <script src="https://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
-  
   <style>
   #main {
     margin: 0px;
