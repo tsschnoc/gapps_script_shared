@@ -178,7 +178,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
             
             
             var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
-            h += '<a href="' + contactUrl + '">' + contact.title.$t + '</a>';
+            h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
       
             //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
             
