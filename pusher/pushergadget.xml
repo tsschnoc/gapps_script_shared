@@ -2,6 +2,15 @@
 <Module>
   <ModulePrefs title="Pusher" author="thomas.schnocklake@gmail.com" height="200">
     <Require feature="setprefs"/>
+    <Require feature="locked-domain"/>
+    <OAuth>
+      <Service name="google">
+        <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+        <Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/" method="GET" />
+        <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+      </Service>
+    </OAuth>
+    
   </ModulePrefs>
 
 <UserPref name="ShowTypeColumn" display_name="Show Type Column" datatype="string"/>
