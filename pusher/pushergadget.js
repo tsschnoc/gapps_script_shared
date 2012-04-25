@@ -169,6 +169,12 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
       var cal_callback = function(response) {
           alert(JSON.stringify(response.data));
+          
+          for (var i in response.data.feed.entry) {
+            window.console.log(response.data.feed.entry[i].title.$t);
+            
+          }
+          
       };
 
 
