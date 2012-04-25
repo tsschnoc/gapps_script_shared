@@ -113,7 +113,6 @@ function popupMessageReceiver(event) {
 //    alert ('Message received: ' + event.origin + ' : '  + event.data);
   
 
-  if (CalendarOauth === null) CalendarOauth = {};
   
   if (event.origin == 'https://s3.amazonaws.com') {
     var pairs = event.data.split('?')[1].split('&');
@@ -225,7 +224,11 @@ function gadgetOnLoad() {
   window.addEventListener('message', popupMessageReceiver, false);    
 
   var prefs = new gadgets.Prefs();
+  
+  CalendarOauth = {};
+  
   CalendarOauth.refresh_token = prefs.getString("refresh_token");      
+  
   if (CalendarOauth.refresh_token) {
     return;
   }
