@@ -213,7 +213,7 @@ function oauth2_callback(response) {
     }
 
     
-    if (oAuthToken.refresh_token) {
+    if (CalendarOauth.refresh_token) {
       var prefs = new gadgets.Prefs();
       prefs.set("refresh_token", CalendarOauth.refresh_token);        
     }
