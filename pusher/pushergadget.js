@@ -122,7 +122,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
       debug(CalendarOauth);
 
-      var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(redirect_uri) + '&grant_type=authorization_code';
+      var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
 
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
