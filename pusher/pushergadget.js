@@ -139,14 +139,28 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
 
   function oauth2_callback(response) {
-      debug(response.data);
-      oAuthToken = response.data;
+      CalendarOauth.access_token = response.data.access_token;
+      
+      var url = ""https://www.google.com/m8/feeds/contacts/default/full?q=thomas";
+      
+      var params = {};
+//      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+//        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1",
+        "Authorization": "Bearer " + response.data.access_token,
+      };
+
+      makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);      
+      
+      return;
       
       if (response.rc!=200) {
 // auth fehler, refreshtoken löschen und nochmal approven lassen        
         var prefs = new gadgets.Prefs();
         prefs.set("refresh_token", null);      
-        initialize_sf_oauth();
         return;
       }
 
@@ -160,11 +174,9 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 
     function gadgetOnLoad() {
       window.addEventListener('message', popupMessageReceiver, false);    
-
     
       var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=force';
-
-popitup(authLink) ;
+      popitup(authLink) ;
     }
 
 
