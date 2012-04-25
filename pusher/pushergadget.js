@@ -74,8 +74,9 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
     var channel = pusher.subscribe('test_channel');
     channel.bind('my_event', function(phoneCall) {
 //      popitup("http://www.schnocklake.de?number" + data);
-      var x = '<a href="http://www.google.com">' + phoneCall.number + '</a>'; 
+      var x = 'Incoming call' + phoneCall.number.split("@")[0] + ''; 
       $("#ny").html(x);
+      
       
       
       searchnumber(phoneCall.number);
@@ -170,8 +171,20 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
       var cal_callback = function(response) {
           //alert(JSON.stringify(response.data));
           
+          var h = $("#ny").html();
+          
           for (var i in response.data.feed.entry) {
             var contact = response.data.feed.entry[i];
+            
+            
+            
+            h += "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1]
+      
+            //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
+            
+            
+            
+            
             window.console.log(contact);
             window.console.log(contact.title.$t);
             for (var j in contact.gd$phoneNumber) {
@@ -181,7 +194,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
             }
             
           }
-          
+           $("#ny").html(h);
       };
 
 
