@@ -171,8 +171,14 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
           //alert(JSON.stringify(response.data));
           
           for (var i in response.data.feed.entry) {
-            window.console.log(response.data.feed.entry[i].title.$t);
-            window.console.log(response.data.feed.entry[i]);
+            var contact = response.data.feed.entry[i];
+            for (var j in contact.gd$phoneNumber) {
+              var numberEntry = contact.gd$phoneNumber[i];
+              window.console.log(numberEntry.$t);
+              window.console.log(numberEntry.rel);
+            }
+            window.console.log(contact.title.$t);
+            window.console.log(contact);
             
           }
           
