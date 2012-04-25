@@ -11,12 +11,17 @@
  
 <head>
   <title>Pusher Test</title>
-<script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
-  hallo, ich bin ein test
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
+  
+  
 </head>  
 <body>
-
+vorher
 <div id='ny'/>
+nachher
 </body>
 
 
