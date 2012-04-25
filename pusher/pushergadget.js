@@ -177,8 +177,8 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
             var contact = response.data.feed.entry[i];
             
             
-            
-            h += "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1]
+            var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
+            h += '<a href="' + contactUrl + '">' + contact.title.$t + '</a>';
       
             //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
             
@@ -190,7 +190,7 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
             for (var j in contact.gd$phoneNumber) {
               var numberEntry = contact.gd$phoneNumber[j];
               window.console.log(numberEntry.$t);
-              window.console.log(numberEntry.rel.split("#")[1]);
+              //window.console.log(numberEntry.rel.split("#")[1]);
             }
             
           }
