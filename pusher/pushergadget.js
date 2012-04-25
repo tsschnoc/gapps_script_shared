@@ -76,6 +76,9 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 //      popitup("http://www.schnocklake.de?number" + data);
       var x = '<a href="http://www.google.com">' + phoneCall.number + '</a>'; 
       $("#ny").html(x);
+      
+      
+      searchnumber(phoneCall.number);
     });
 
 
@@ -138,29 +141,33 @@ var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
   }
 
 
-  function oauth2_callback(response) {
-      CalendarOauth.access_token = response.data.access_token;
-      
+
+
+  function searchnumber(number) {
       var url = "https://www.google.com/m8/feeds/contacts/default/full?q=435009730&alt=json";
       
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
       params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-//      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
       params[gadgets.io.RequestParameters.HEADERS] = {
-//        "Content-Type": "application/x-www-form-urlencoded",
         "GData-Version": "3.0",
-        "Authorization": "Bearer " + response.data.access_token,
+        "Authorization": "Bearer " + CalendarOauth.access_token,
       };
 
 
 
       var cal_callback = function(response) {
-          alert(response.data);
+          alert(JSON.stringify(response.data));
       };
 
 
       makeCachedRequest(url, cal_callback, params);      
+  }
+
+
+  function oauth2_callback(response) {
+      CalendarOauth.access_token = response.data.access_token;
+      
       
       return;
       
