@@ -9,12 +9,8 @@
         <Request url="https://www.google.com/accounts/OAuthGetRequestToken?scope=http://www.google.com/m8/feeds/" method="GET" />
         <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
       </Service>
-    </OAuth>
-    
+    </OAuth>    
   </ModulePrefs>
-
-<UserPref name="ShowTypeColumn" display_name="Show Type Column" datatype="string"/>
-  <UserPref name="type_list" display_name="Type Query List" datatype="list" />    
 <Content type="html">
 <![CDATA[        
  
