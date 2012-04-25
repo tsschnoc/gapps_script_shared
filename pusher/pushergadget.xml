@@ -13,14 +13,40 @@
   <title>Pusher Test</title>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
+
+  <script src="https://gadget-doc-examples.googlecode.com/svn/trunk/opensocial-gadgets/popup.js"></script>
   
-  
+  <style>
+  #main {
+    margin: 0px;
+    padding: 0px;
+    font-size: small;
+  }
+  </style>
 </head>  
+
+
 <body>
-<div id='ny'>no Calls
-</div>
+  <div id='ny'>no Calls</div>
+
+
+  <div id="main" style="display: none">
+  </div>
+
+  <div id="approval" style="display: none">
+    <img src="http://gadget-doc-examples.googlecode.com/svn/trunk/images/new.gif">
+    <a href="#" id="personalize">Personalize this gadget</a>
+  </div>
+
+  <div id="waiting" style="display: none">
+    Please click
+    <a href="#" id="approvaldone">I've approved access</a>
+    once you've approved access to your data.
+  </div>
+
+  
+  
 </body>
 
 
