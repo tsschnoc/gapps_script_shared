@@ -1,3 +1,264 @@
+var CalendarOauth = null;
+var scope = 'http://www.google.com/m8/feeds/';
+var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
+var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
+var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
+var gadgets = gadgets;
+
+
+function initPusher() {
+  // Flash fallback logging - don't include this in production
+  var WEB_SOCKET_DEBUG = true;
+  var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+  var channel = pusher.subscribe('test_channel');
+  channel.bind('my_event', function(phoneCall) {
+    var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>';
+    $("#ny").html(x);
+    gadgets.window.adjustHeight(200);
+
+
+
+    searchnumber(phoneCall.number);
+  });
+}
+
+
+
+
+
+
+
+
+
+
+function searchnumber(number) {
+    var number = number.split("@")[0];
+
+    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch()  + "&alt=json";
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "GData-Version": "3.0",
+      "Authorization": "Bearer " + CalendarOauth.access_token,
+    };
+
+    var cal_callback = function(response) {
+        var h = $("#ny").html();
+
+        for (var i in response.data.feed.entry) {
+          var contact = response.data.feed.entry[i];
+
+
+          var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
+          h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
+
+          //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
+
+          window.console.log(contact);
+          window.console.log(contact.title.$t);
+          for (var j in contact.gd$phoneNumber) {
+            var numberEntry = contact.gd$phoneNumber[j];
+            window.console.log(numberEntry.$t);
+            //window.console.log(numberEntry.rel.split("#")[1]);
+          }
+        }
+        $("#ny").html(h);
+        gadgets.window.adjustHeight(200);
+    };
+
+    makeCachedRequest(url, cal_callback, params);
+}
+
+
+function oauth2_callback(response) {
+    if (response.rc!=200) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen
+      var prefs = new gadgets.Prefs();
+      prefs.set("refresh_token", null);
+      doGoogleAuth();
+      return;
+    }
+
+    CalendarOauth.access_token = response.data.access_token;
+    CalendarOauth.refresh_token = response.data.refresh_token;
+
+    if (CalendarOauth.refresh_token) {
+      var prefs = new gadgets.Prefs();
+      prefs.set("refresh_token", CalendarOauth.refresh_token);
+    }
+}
+
+
+function gadgetOnLoad() {
+
+  uiInit();
+  initPusher();
+
+  window.addEventListener('message', popupMessageReceiver, false);
+
+  var prefs = new gadgets.Prefs();
+  CalendarOauth = {};
+  CalendarOauth.refresh_token = prefs.getString("refresh_token");
+
+  if (CalendarOauth.refresh_token) {
+    google_refresh_token();
+    return;
+  }
+  doGoogleAuth();
+}
+
+
+
+
+
+function uiInit() {
+  $(function() {
+    var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+    $("#searchfield").autocomplete({
+      source: availableTags
+    });
+  });
+}
+
+
+gadgets.util.registerOnLoadHandler(gadgetOnLoad);
+
+
+
+
+//google auth
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function doGoogleAuth() {
+//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto';
+  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto&access_type=offline';
+  popitup(authLink) ;
+}
+
+
+function popupMessageReceiver(event) {
+  //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
+
+//    alert ('Message received: ' + event.origin + ' : '  + event.data);
+
+  if (event.origin == 'https://s3.amazonaws.com') {
+    var pairs = event.data.split('?')[1].split('&');
+
+
+    for (var i in pairs) {
+      var kv = pairs[i].split('=');
+      CalendarOauth[kv[0]] = decodeURIComponent(kv[1]);
+    }
+
+    debug(CalendarOauth);
+
+    var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-PrettyPrint": "1"
+    };
+
+    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
+  }
+}
+
+
+function google_refresh_token() {
+    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+      "Content-Type": "application/x-www-form-urlencoded",
+      "X-PrettyPrint": "1"
+    };
+
+    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
+}
+
+
+
+
+//helper
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function popitup(url) {
+    var newwindow=window.open(url,'name','height=600,width=800');
+    if (window.focus) {
+        newwindow.focus()
+    }
+    return false;
+}
+
+// Enable pusher logging - don't include this in production
+Pusher.log = function(message) {
+  if (window.console && window.console.log) window.console.log(message);
+};
+
+function makeCachedRequest(url, callback, params, refreshInterval) {
+  var ts = new Date().getTime();
+  var sep = "?";
+  if (refreshInterval && refreshInterval > 0) {
+    ts = Math.floor(ts / (refreshInterval * 1000));
+  }
+  if (url.indexOf("?") > -1) {
+    sep = "&";
+  }
+  url = [url, sep, "nocache=", ts].join("");
+  gadgets.io.makeRequest(url, callback, params);
+}
+
+function debug(text) {
+  if (true) {
+    if (console && console.debug) {
+      console.debug(text);
+    }
+  }
+}
+
+String.prototype.formatPhoneForSearch = function(){
+  var number = this;
+  while (number.charAt(0) == "0" || number.charAt(0) == "+")
+	{
+		number = number.slice(1);
+	}
+	return number;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*!
  * Pusher JavaScript Library v1.11.2
  * http://pusherapp.com/
@@ -44,255 +305,3 @@ var _require=function(){var a;a=document.addEventListener?function(a,b){a.addEve
 e.appendChild(h)}for(var f=0,g=d.length,h=0;h<g;h++)e(d[h],b)}}();
 (function(){var a=(document.location.protocol=="http:"?Pusher.cdn_http:Pusher.cdn_https)+Pusher.VERSION,d=[];window.JSON===void 0&&d.push(a+"/json2"+Pusher.dependency_suffix+".js");if(window.WebSocket===void 0&&window.MozWebSocket===void 0)window.WEB_SOCKET_DISABLE_AUTO_INITIALIZATION=!0,d.push(a+"/flashfallback"+Pusher.dependency_suffix+".js");var b=function(){return window.WebSocket===void 0&&window.MozWebSocket===void 0?function(){window.WebSocket!==void 0&&window.MozWebSocket===void 0?(Pusher.Transport=
 window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"/WebSocketMain.swf",WebSocket.__addTask(function(){Pusher.ready()}),WebSocket.__initialize()):(Pusher.Transport=null,Pusher.TransportType="none",Pusher.ready())}:function(){Pusher.Transport=window.MozWebSocket!==void 0?window.MozWebSocket:window.WebSocket;Pusher.TransportType="native";Pusher.ready()}}(),e=function(a){var b=function(){document.body?a():setTimeout(b,0)};b()},f=function(){e(b)};d.length>0?_require(d,f):f()})();
-
-var CalendarOauth = null;
-var scope = 'http://www.google.com/m8/feeds/';
-var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
-var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
-var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
-var gadgets = gadgets;
-
-function popitup(url) {
-    var newwindow=window.open(url,'name','height=600,width=800');
-    if (window.focus) {
-        newwindow.focus()
-    }
-    return false;
-}
-
-
-
-// Enable pusher logging - don't include this in production
-Pusher.log = function(message) {
-  if (window.console && window.console.log) window.console.log(message);
-};
-
-// Flash fallback logging - don't include this in production
-var WEB_SOCKET_DEBUG = true;
-
-var pusher = new Pusher('0bcfb89cee9d117b2b4e');
-var channel = pusher.subscribe('test_channel');
-channel.bind('my_event', function(phoneCall) {
-//      popitup("http://www.schnocklake.de?number" + data);
-  var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>'; 
-  $("#ny").html(x);
-  gadgets.window.adjustHeight(200);         
-  
-  
-  
-  searchnumber(phoneCall.number);
-});
-
-
-
-
-function makeCachedRequest(url, callback, params, refreshInterval) {
-  var ts = new Date().getTime();
-  var sep = "?";
-  if (refreshInterval && refreshInterval > 0) {
-    ts = Math.floor(ts / (refreshInterval * 1000));
-  }
-  if (url.indexOf("?") > -1) {
-    sep = "&";
-  }
-  url = [url, sep, "nocache=", ts].join("");
-  gadgets.io.makeRequest(url, callback, params);
-}
-
-function debug(text) {
-  if (true) {
-    if (console && console.debug) {
-      console.debug(text);
-    }
-  }
-}
-
-
-function popupMessageReceiver(event) {
-  //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
-  
-//    alert ('Message received: ' + event.origin + ' : '  + event.data);
-  
-
-  
-  if (event.origin == 'https://s3.amazonaws.com') {
-    var pairs = event.data.split('?')[1].split('&');
-    
-    
-    for (var i in pairs) {
-      var kv = pairs[i].split('=');
-      CalendarOauth[kv[0]] = decodeURIComponent(kv[1]);
-    }
-
-    debug(CalendarOauth);
-
-    var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
-
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-PrettyPrint": "1"
-    };
-
-    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
-  }
-}
-
-
-
-String.prototype.formatPhoneForSearch = function(){
-  var number = this;
-	while (number.charAt(0) == "0" || number.charAt(0) == "+") 
-	{
-		number = number.slice(1); 
-	}  
-	return number;
-}
-
-
-function searchnumber(number) {
-    var number = number.split("@")[0];
-    
-    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch()  + "&alt=json";
-    
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "GData-Version": "3.0",
-      "Authorization": "Bearer " + CalendarOauth.access_token,
-    };
-
-
-
-    var cal_callback = function(response) {
-        //alert(JSON.stringify(response.data));
-        
-        var h = $("#ny").html();
-        
-        for (var i in response.data.feed.entry) {
-          var contact = response.data.feed.entry[i];
-          
-          
-          var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
-          h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
-    
-          //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
-          
-          
-          
-          
-          window.console.log(contact);
-          window.console.log(contact.title.$t);
-          for (var j in contact.gd$phoneNumber) {
-            var numberEntry = contact.gd$phoneNumber[j];
-            window.console.log(numberEntry.$t);
-            //window.console.log(numberEntry.rel.split("#")[1]);
-          }
-          
-        }
-        $("#ny").html(h);
-        gadgets.window.adjustHeight(200);         
-    };
-
-
-    makeCachedRequest(url, cal_callback, params);      
-}
-
-
-function oauth2_callback(response) {
-        
-    if (response.rc!=200) {
-// auth fehler, refreshtoken löschen und nochmal approven lassen        
-      var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", null);      
-      doAuth();
-      return;
-    }
-
-    CalendarOauth.access_token = response.data.access_token;
-    CalendarOauth.refresh_token = response.data.refresh_token;
-    
-    if (CalendarOauth.refresh_token) {
-      var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", CalendarOauth.refresh_token);        
-    }
-}
-
-
-function gadgetOnLoad() {
-  window.addEventListener('message', popupMessageReceiver, false);    
-
-  uiInit();
-
-  var prefs = new gadgets.Prefs();  
-  CalendarOauth = {};  
-  CalendarOauth.refresh_token = prefs.getString("refresh_token");      
-  
-  if (CalendarOauth.refresh_token) {
-
-    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
-
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-PrettyPrint": "1"
-    };
-    
-    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
-    return;
-  }
-  doAuth();
-}
-
-
-function doAuth() {
-//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto';
-  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto&access_type=offline';
-  popitup(authLink) ;  
-}
-
-
-
-gadgets.util.registerOnLoadHandler(gadgetOnLoad);
-
-function uiInit() {
-  $(function() {
-  		var availableTags = [
-  			"ActionScript",
-  			"AppleScript",
-  			"Asp",
-  			"BASIC",
-  			"C",
-  			"C++",
-  			"Clojure",
-  			"COBOL",
-  			"ColdFusion",
-  			"Erlang",
-  			"Fortran",
-  			"Groovy",
-  			"Haskell",
-  			"Java",
-  			"JavaScript",
-  			"Lisp",
-  			"Perl",
-  			"PHP",
-  			"Python",
-  			"Ruby",
-  			"Scala",
-  			"Scheme"
-  		];
-  		$( "#searchfield" ).autocomplete({
-  			source: availableTags
-  		});
-  	});
-}
-
-
-
