@@ -57,7 +57,6 @@ var gadgets = gadgets;
 
 
 function initPusher() {
-  initPusherLib();   
   // Flash fallback logging - don't include this in production
   var WEB_SOCKET_DEBUG = true;
   var pusher = new Pusher('0bcfb89cee9d117b2b4e');
