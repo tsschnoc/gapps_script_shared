@@ -160,7 +160,7 @@ function uiInit() {
       source: function(request, response) {
         responseFunc = response;
         searchTerm = request;
-        searchnumber(searchTerm);
+        searchnumber(searchTerm.term);
       }      
     });
   });
