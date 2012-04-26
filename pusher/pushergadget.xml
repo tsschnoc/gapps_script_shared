@@ -22,13 +22,13 @@
   }
   </style>
   
-  <link rel="stylesheet" href="https://jqueryui.com/themes/base/jquery.ui.all.css">
-	<script src="https://jqueryui.com/jquery-1.7.2.js"></script>
-	<script src="https://jqueryui.com/ui/jquery.ui.core.js"></script>
-	<script src="https://jqueryui.com/ui/jquery.ui.widget.js"></script>
-	<script src="https://jqueryui.com/ui/jquery.ui.position.js"></script>
-	<script src="https://jqueryui.com/ui/jquery.ui.autocomplete.js"></script>
-	<link rel="stylesheet" href="https://jqueryui.com/demos/demos.css">
+  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+	<script src="http://jqueryui.com/jquery-1.7.2.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.autocomplete.js"></script>
+	<link rel="stylesheet" href="http://jqueryui.com/demos/demos.css">
 	<script>
   	$(function() {
   		var availableTags = [
@@ -77,7 +77,7 @@
   
   </div><!-- End demo -->
 
-  <ul class="ui-autocomplete ui-menu ui-widget ui-widget-content ui-corner-all" role="listbox" aria-activedescendant="ui-active-menuitem" style="z-index: 1; display: block; width: 136px; top: 41px; left: 58px; "><li class="ui-menu-item" role="menuitem"><a class="ui-corner-all" tabindex="-1">ActionScript</a></li><li class="ui-menu-item" role="menuitem"><a class="ui-corner-all" tabindex="-1">AppleScript</a></li><li class="ui-menu-item" role="menuitem"><a class="ui-corner-all" tabindex="-1">Fortran</a></li><li class="ui-menu-item" role="menuitem"><a class="ui-corner-all" tabindex="-1">JavaScript</a></li><li class="ui-menu-item" role="menuitem"><a class="ui-corner-all" tabindex="-1">Python</a></li></ul>
+
   
 </body>
 
