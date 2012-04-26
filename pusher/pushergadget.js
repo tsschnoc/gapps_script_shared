@@ -97,14 +97,17 @@ function searchnumber(number) {
     };
 
     var cal_callback = function(response) {
-      
-responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);      
+        var resultArr = [];
         var h = $("#ny").html();
 
         for (var i in response.data.feed.entry) {
           var contact = response.data.feed.entry[i];
 
+          var resultEntry = {};
+          resultEntry.label = contact.title.$t;
+          resultEntry.value = contact.id.$t.split("\/base\/")[1];
 
+          
           var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
           h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
@@ -117,8 +120,12 @@ responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"
             window.console.log(numberEntry.$t);
             //window.console.log(numberEntry.rel.split("#")[1]);
           }
+          
+          resultArr.push(resultEntry);
         }
         $("#ny").html(h);
+        responseFunc(resultArr);      
+        
         gadgets.window.adjustHeight(200);
     };
 
