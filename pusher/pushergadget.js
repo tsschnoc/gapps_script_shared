@@ -53,7 +53,12 @@ googleOAuth.scope = 'http://www.google.com/m8/feeds/';
 googleOAuth.oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
 googleOAuth.client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
 googleOAuth.client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
+
 var gadgets = gadgets;
+
+var responseFunc;
+var searchTerm;
+
 
 
 function initPusher() {
@@ -92,6 +97,8 @@ function searchnumber(number) {
     };
 
     var cal_callback = function(response) {
+      
+responseFunc([{label:"hallo",value:"depp"},{label:"hallo",value:"depp"},{label:"hallo",value:"depp"}]);      
         var h = $("#ny").html();
 
         for (var i in response.data.feed.entry) {
@@ -144,8 +151,17 @@ function gadgetOnLoad() {
 function uiInit() {
   $(function() {
     var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
+/*
     $("#searchfield").autocomplete({
       source: availableTags
+    });
+*/    
+    $("#searchfield").autocomplete({
+      source: function(request, response) {
+        responseFunc = response;
+        searchTerm = request;
+        searchnumber(searchTerm);
+      }      
     });
   });
 }
