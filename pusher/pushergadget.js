@@ -104,7 +104,7 @@ function searchnumber(number) {
 
           var resultEntry = {};
           resultEntry.label = contact.title.$t;
-          resultEntry.label = contact.id.$t.split("\/base\/")[1];
+          resultEntry.value = contact.title.$t;
           resultEntry.id = contact.id.$t.split("\/base\/")[1];
           resultEntry.contactUrl = contactUrl;
 
@@ -171,7 +171,7 @@ function uiInit() {
       },
       select: function(event, ui) {
 //  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
-          popitup(contactUrl) ;
+          popitup(ui.item.contactUrl) ;
 
       },
       
