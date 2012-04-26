@@ -2,6 +2,7 @@
 <Module>
   <ModulePrefs title="Pusher" author="thomas.schnocklake@gmail.com" height="5">
     <Require feature="setprefs"/>
+    <Require feature="dynamic-height"/>
     <Require feature="locked-domain"/>
   </ModulePrefs>
 <Content type="html">
