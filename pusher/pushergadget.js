@@ -100,13 +100,15 @@ function searchnumber(number) {
 
         for (var i in response.data.feed.entry) {
           var contact = response.data.feed.entry[i];
+          var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
           var resultEntry = {};
           resultEntry.label = contact.title.$t;
-          resultEntry.value = contact.id.$t.split("\/base\/")[1];
+          resultEntry.label = contact.id.$t.split("\/base\/")[1];
+          resultEntry.id = contact.id.$t.split("\/base\/")[1];
+          resultEntry.contactUrl = contactUrl;
 
           
-          var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
           h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
           //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
@@ -168,7 +170,9 @@ function uiInit() {
         searchnumber(searchTerm.term);
       },
       select: function(event, ui) {
-  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
+//  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
+          popitup(contactUrl) ;
+
       },
       
     });
