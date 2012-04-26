@@ -166,7 +166,23 @@ function uiInit() {
         responseFunc = response;
         searchTerm = request;
         searchnumber(searchTerm.term);
-      }      
+      },
+      select: function(event, ui) {
+  			alert( ui.item ?
+					"Selected: " + ui.item.label :
+					"Nothing selected, input was " + this.value);
+
+        if (ui.item != null) {
+          //          sf_attach_rest(sfurl, token,ui.item.value);
+          $("#attachbutton").button("enable");
+          sf_queryOpps(ui.item.record);
+          $("#contactsearch").val(ui.item.label);
+          $("#contactid").val(ui.item.value);
+          showContactDiv(ui.item.record);
+          return false;
+        }
+      },
+      
     });
   });
 }
