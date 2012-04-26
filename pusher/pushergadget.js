@@ -48,11 +48,11 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
 
 
 
-var googleOAuth = null;
-var scope = 'http://www.google.com/m8/feeds/';
-var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
-var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
-var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
+var googleOAuth = {};
+googleOAuth.scope = 'http://www.google.com/m8/feeds/';
+googleOAuth.oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
+googleOAuth.client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
+googleOAuth.client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
 var gadgets = gadgets;
 
 
@@ -122,14 +122,12 @@ function searchnumber(number) {
 
 
 function gadgetOnLoad() {
-
   uiInit();
   initPusher();
 
   window.addEventListener('message', popupMessageReceiver, false);
 
   var prefs = new gadgets.Prefs();
-  googleOAuth = {};
   googleOAuth.refresh_token = prefs.getString("refresh_token");
 
   if (googleOAuth.refresh_token) {
@@ -163,8 +161,8 @@ gadgets.util.registerOnLoadHandler(gadgetOnLoad);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function doGoogleAuth() {
-//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto';
-  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(scope) + '&state=state1&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(client_id) + '&approval_prompt=auto&access_type=offline';
+//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
+  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
   popitup(authLink) ;
 }
 
@@ -185,7 +183,7 @@ function popupMessageReceiver(event) {
 
     debug(googleOAuth);
 
-    var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
+    var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -202,7 +200,7 @@ function popupMessageReceiver(event) {
 
 
 function google_refresh_token() {
-    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(googleOAuth.refresh_token) + '&grant_type=refresh_token';
+    var postdata = 'client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&refresh_token=' + encodeURIComponent(googleOAuth.refresh_token) + '&grant_type=refresh_token';
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
