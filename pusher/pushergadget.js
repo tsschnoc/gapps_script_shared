@@ -48,7 +48,7 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
 
 
 
-var CalendarOauth = null;
+var googleOAuth = null;
 var scope = 'http://www.google.com/m8/feeds/';
 var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
 var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
@@ -75,6 +75,9 @@ function receiveCall(phoneCall) {
 }
 
 
+
+
+
 function searchnumber(number) {
     var number = number.split("@")[0];
 
@@ -85,7 +88,7 @@ function searchnumber(number) {
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
       "GData-Version": "3.0",
-      "Authorization": "Bearer " + CalendarOauth.access_token,
+      "Authorization": "Bearer " + googleOAuth.access_token,
     };
 
     var cal_callback = function(response) {
@@ -116,23 +119,6 @@ function searchnumber(number) {
 }
 
 
-function oauth2_callback(response) {
-    if (response.rc!=200) {
-// auth fehler, refreshtoken löschen und nochmal approven lassen
-      var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", null);
-      doGoogleAuth();
-      return;
-    }
-
-    CalendarOauth.access_token = response.data.access_token;
-    CalendarOauth.refresh_token = response.data.refresh_token;
-
-    if (CalendarOauth.refresh_token) {
-      var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", CalendarOauth.refresh_token);
-    }
-}
 
 
 function gadgetOnLoad() {
@@ -143,10 +129,10 @@ function gadgetOnLoad() {
   window.addEventListener('message', popupMessageReceiver, false);
 
   var prefs = new gadgets.Prefs();
-  CalendarOauth = {};
-  CalendarOauth.refresh_token = prefs.getString("refresh_token");
+  googleOAuth = {};
+  googleOAuth.refresh_token = prefs.getString("refresh_token");
 
-  if (CalendarOauth.refresh_token) {
+  if (googleOAuth.refresh_token) {
     google_refresh_token();
     return;
   }
@@ -194,12 +180,12 @@ function popupMessageReceiver(event) {
 
     for (var i in pairs) {
       var kv = pairs[i].split('=');
-      CalendarOauth[kv[0]] = decodeURIComponent(kv[1]);
+      googleOAuth[kv[0]] = decodeURIComponent(kv[1]);
     }
 
-    debug(CalendarOauth);
+    debug(googleOAuth);
 
-    var postdata = 'code=' + encodeURIComponent(CalendarOauth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
+    var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&redirect_uri=' + encodeURIComponent(oauth2_callbackurl) + '&grant_type=authorization_code';
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -210,13 +196,13 @@ function popupMessageReceiver(event) {
       "X-PrettyPrint": "1"
     };
 
-    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
+    makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
   }
 }
 
 
 function google_refresh_token() {
-    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
+    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(googleOAuth.refresh_token) + '&grant_type=refresh_token';
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -227,9 +213,28 @@ function google_refresh_token() {
       "X-PrettyPrint": "1"
     };
 
-    makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
+    makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
 }
 
+
+
+function google_oauth_callback(response) {
+    if (response.rc!=200) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen
+      var prefs = new gadgets.Prefs();
+      prefs.set("refresh_token", null);
+      doGoogleAuth();
+      return;
+    }
+
+    googleOAuth.access_token = response.data.access_token;
+    googleOAuth.refresh_token = response.data.refresh_token;
+
+    if (googleOAuth.refresh_token) {
+      var prefs = new gadgets.Prefs();
+      prefs.set("refresh_token", googleOAuth.refresh_token);
+    }
+}
 
 
 
