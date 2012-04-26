@@ -50,10 +50,10 @@ var scope = 'http://www.google.com/m8/feeds/';
 var oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
 var client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
 var client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
-
+var gadgets = gadgets;
 
 function popitup(url) {
-    newwindow=window.open(url,'name','height=600,width=800');
+    var newwindow=window.open(url,'name','height=600,width=800');
     if (window.focus) {
         newwindow.focus()
     }
@@ -68,7 +68,7 @@ Pusher.log = function(message) {
 };
 
 // Flash fallback logging - don't include this in production
-WEB_SOCKET_DEBUG = true;
+var WEB_SOCKET_DEBUG = true;
 
 var pusher = new Pusher('0bcfb89cee9d117b2b4e');
 var channel = pusher.subscribe('test_channel');
@@ -234,7 +234,7 @@ function gadgetOnLoad() {
   
   if (CalendarOauth.refresh_token) {
 
-   var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
+    var postdata = 'client_id=' + encodeURIComponent(client_id) + '&client_secret=' + encodeURIComponent(client_secret) + '&refresh_token=' + encodeURIComponent(CalendarOauth.refresh_token) + '&grant_type=refresh_token';
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
@@ -244,12 +244,8 @@ function gadgetOnLoad() {
       "Content-Type": "application/x-www-form-urlencoded",
       "X-PrettyPrint": "1"
     };
-
+    
     makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauth2_callback, params);
-
-
-
-
     return;
   }
   doAuth();
