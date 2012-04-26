@@ -81,8 +81,6 @@ function receiveCall(phoneCall) {
 
 
 
-
-
 function searchnumber(number) {
     var number = number.split("@")[0];
 
