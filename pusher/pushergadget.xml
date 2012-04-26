@@ -72,7 +72,7 @@
   
   <div class="ui-widget">
     <label for="tags">Tags: </label>
-  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
+  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 50px;">
   </div>
   
   </div><!-- End demo -->
