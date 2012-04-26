@@ -13,14 +13,6 @@
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
-
-  <style>
-  #main {
-    margin: 0px;
-    padding: 0px;
-    font-size: small;
-  }
-  </style>
   
   <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
 	<script src="http://jqueryui.com/jquery-1.7.2.js"></script>
@@ -29,37 +21,6 @@
 	<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script>
 	<script src="http://jqueryui.com/ui/jquery.ui.autocomplete.js"></script>
 	<link rel="stylesheet" href="http://jqueryui.com/demos/demos.css">
-	<script>
-  	$(function() {
-  		var availableTags = [
-  			"ActionScript",
-  			"AppleScript",
-  			"Asp",
-  			"BASIC",
-  			"C",
-  			"C++",
-  			"Clojure",
-  			"COBOL",
-  			"ColdFusion",
-  			"Erlang",
-  			"Fortran",
-  			"Groovy",
-  			"Haskell",
-  			"Java",
-  			"JavaScript",
-  			"Lisp",
-  			"Perl",
-  			"PHP",
-  			"Python",
-  			"Ruby",
-  			"Scala",
-  			"Scheme"
-  		];
-  		$( "#searchfield" ).autocomplete({
-  			source: availableTags
-  		});
-  	});
-	</script>
 
 
 </head>  
@@ -67,7 +28,7 @@
 
 <body>
   <div class="ui-widget">
-  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="on" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
     <div id='ny'>no Calls</div>
   </div>  
 </body>

@@ -226,10 +226,10 @@ function oauth2_callback(response) {
 function gadgetOnLoad() {
   window.addEventListener('message', popupMessageReceiver, false);    
 
-  var prefs = new gadgets.Prefs();
-  
-  CalendarOauth = {};
-  
+  uiInit();
+
+  var prefs = new gadgets.Prefs();  
+  CalendarOauth = {};  
   CalendarOauth.refresh_token = prefs.getString("refresh_token");      
   
   if (CalendarOauth.refresh_token) {
@@ -262,6 +262,37 @@ function doAuth() {
 
 gadgets.util.registerOnLoadHandler(gadgetOnLoad);
 
+function uiInit() {
+  $(function() {
+  		var availableTags = [
+  			"ActionScript",
+  			"AppleScript",
+  			"Asp",
+  			"BASIC",
+  			"C",
+  			"C++",
+  			"Clojure",
+  			"COBOL",
+  			"ColdFusion",
+  			"Erlang",
+  			"Fortran",
+  			"Groovy",
+  			"Haskell",
+  			"Java",
+  			"JavaScript",
+  			"Lisp",
+  			"Perl",
+  			"PHP",
+  			"Python",
+  			"Ruby",
+  			"Scala",
+  			"Scheme"
+  		];
+  		$( "#searchfield" ).autocomplete({
+  			source: availableTags
+  		});
+  	});
+}
 
 
 
