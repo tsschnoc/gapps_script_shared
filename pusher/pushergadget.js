@@ -121,7 +121,7 @@ function searchnumber(number) {
           
           resultArr.push(resultEntry);
         }
-        $("#ny").html(h);
+//        $("#ny").html(h);
         responseFunc(resultArr);      
         
         gadgets.window.adjustHeight(200);
