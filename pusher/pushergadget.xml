@@ -21,26 +21,61 @@
     font-size: small;
   }
   </style>
+  
+  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+	<script src="http://jqueryui.com/jquery-1.7.2.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.autocomplete.js"></script>
+	<link rel="stylesheet" href="http://jqueryui.com/demos/demos.css">
+	<script>
+  	$(function() {
+  		var availableTags = [
+  			"ActionScript",
+  			"AppleScript",
+  			"Asp",
+  			"BASIC",
+  			"C",
+  			"C++",
+  			"Clojure",
+  			"COBOL",
+  			"ColdFusion",
+  			"Erlang",
+  			"Fortran",
+  			"Groovy",
+  			"Haskell",
+  			"Java",
+  			"JavaScript",
+  			"Lisp",
+  			"Perl",
+  			"PHP",
+  			"Python",
+  			"Ruby",
+  			"Scala",
+  			"Scheme"
+  		];
+  		$( "#tags" ).autocomplete({
+  			source: availableTags
+  		});
+  	});
+	</script>
+
+
 </head>  
 
 
 <body>
   <div id='ny'>no Calls</div>
-
-
-  <div id="main" style="display: none">
+  
+  <div class="demo">
+  
+  <div class="ui-widget">
+    <label for="tags">Tags: </label>
+  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true">
   </div>
-
-  <div id="approval" style="display: none">
-    <img src="http://gadget-doc-examples.googlecode.com/svn/trunk/images/new.gif">
-    <a href="#" id="personalize">Personalize this gadget</a>
-  </div>
-
-  <div id="waiting" style="display: none">
-    Please click
-    <a href="#" id="approvaldone">I've approved access</a>
-    once you've approved access to your data.
-  </div>
+  
+  </div><!-- End demo -->
 
   
   
