@@ -76,7 +76,7 @@ channel.bind('my_event', function(phoneCall) {
 //      popitup("http://www.schnocklake.de?number" + data);
   var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>'; 
   $("#ny").html(x);
-  gadgets.window.adjustHeight();         
+  gadgets.window.adjustHeight(200);         
   
   
   
@@ -195,7 +195,7 @@ function searchnumber(number) {
           
         }
         $("#ny").html(h);
-        gadgets.window.adjustHeight();         
+        gadgets.window.adjustHeight(200);         
     };
 
 
