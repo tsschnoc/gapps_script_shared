@@ -66,19 +66,10 @@
 
 
 <body>
-  <div id='ny'>no Calls</div>
-  
-  
   <div class="ui-widget">
-    
-  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 50px;">
-  </div>
-  
-  <div class="demo">
-  </div><!-- End demo -->
-
-
-  
+  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
+    <div id='ny'>no Calls</div>
+  </div>  
 </body>
 
 
