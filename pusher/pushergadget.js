@@ -61,24 +61,18 @@ function initPusher() {
   var WEB_SOCKET_DEBUG = true;
   var pusher = new Pusher('0bcfb89cee9d117b2b4e');
   var channel = pusher.subscribe('test_channel');
-  channel.bind('my_event', function(phoneCall) {
-    var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>';
-    $("#ny").html(x);
-    gadgets.window.adjustHeight(200);
-
-
-
-    searchnumber(phoneCall.number);
-  });
+  channel.bind('my_event', receiveCall);
 }
 
 
 
+function receiveCall(phoneCall) {
+    var x = 'Incoming call:<br/>' + phoneCall.number.split("@")[0] + '<br/>';
+    $("#ny").html(x);
+    gadgets.window.adjustHeight(200);
 
-
-
-
-
+    searchnumber(phoneCall.number);  
+}
 
 
 function searchnumber(number) {
