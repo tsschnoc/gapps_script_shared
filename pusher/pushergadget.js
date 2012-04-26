@@ -204,16 +204,17 @@ function searchnumber(number) {
 
 
 function oauth2_callback(response) {
-    CalendarOauth.access_token = response.data.access_token;
-    CalendarOauth.refresh_token = response.data.refresh_token;
         
     if (response.rc!=200) {
 // auth fehler, refreshtoken löschen und nochmal approven lassen        
       var prefs = new gadgets.Prefs();
       prefs.set("refresh_token", null);      
+      doAuth();
       return;
     }
 
+    CalendarOauth.access_token = response.data.access_token;
+    CalendarOauth.refresh_token = response.data.refresh_token;
     
     if (CalendarOauth.refresh_token) {
       var prefs = new gadgets.Prefs();
