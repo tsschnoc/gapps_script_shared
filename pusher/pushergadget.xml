@@ -55,7 +55,7 @@
   			"Scala",
   			"Scheme"
   		];
-  		$( "#tags" ).autocomplete({
+  		$( "#searchfield" ).autocomplete({
   			source: availableTags
   		});
   	});
@@ -67,7 +67,7 @@
 
 <body>
   <div class="ui-widget">
-  	<input id="tags" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="on" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
     <div id='ny'>no Calls</div>
   </div>  
 </body>
