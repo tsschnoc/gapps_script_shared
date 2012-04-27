@@ -153,14 +153,20 @@ function uiInit() {
         }).data("autocomplete")._renderItem = function(ul, item) {
             var itemHtml = $("<li></li>");
             itemHtml.data("item.autocomplete", item);
-            itemHtml.append("<a>" + item.label + "<br>" + item.id);
+            
+            var app = "<a>" + item.label + "<br>" + item.id;
+            
+            //itemHtml.append("<a>" + item.label + "<br>" + item.id);
 
             for (var i in item.phoneNumbers) {
-                itemHtml.append("<br>" + item.phoneNumbers[i].number);
+                //itemHtml.append("<br>" + item.phoneNumbers[i].number);
+                app += "<br>" + item.phoneNumbers[i].number;
             }
 
-            itemHtml.append("</a>");
-
+            //itemHtml.append("</a>");
+            app += "</a>";
+            itemHtml.append(app);    
+                
             itemHtml.appendTo(ul);
             return itemHtml;
 
