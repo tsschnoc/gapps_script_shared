@@ -139,29 +139,34 @@ function searchnumber(number) {
 }
 
 function uiInit() {
-  $(function() {   
-    $("#searchfield").autocomplete({
-      source: function(request, response) {
-        responseFunc = response;
-        searchTerm = request;
-        searchnumber(searchTerm.term);
-      },
-      select: function(event, ui) {
-//  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
-          popitup(ui.item.contactUrl) ;
-      },      
-    }).data( "autocomplete" )._renderItem = function( ul, item ) {
-      var itemHtml = $( "<li></li>" )
-  			.data( "item.autocomplete", item )
-				.append( "<a>" + item.label + "<br>" + item.id + "</a>" );
+    $(function() {
+        $("#searchfield").autocomplete({
+            source: function(request, response) {
+                responseFunc = response;
+                searchTerm = request;
+                searchnumber(searchTerm.term);
+            },
+            select: function(event, ui) {
+                //  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
+                popitup(ui.item.contactUrl);
+            },
+        }).data("autocomplete")._renderItem = function(ul, item) {
+            var itemHtml = $("<li></li>");
+            itemHtml.data("item.autocomplete", item);
+            itemHtml.append("<a>" + item.label + "<br>" + item.id);
 
-      itemHtml.appendTo( ul );
-  		return itemHtml;
-				
-		};
-  });
+            for (var i in item.phoneNumbers) {
+                itemHtml.append("<br>" + item.phoneNumbers[i].number);
+            }
+
+            itemHtml.append("</a>");
+
+            itemHtml.appendTo(ul);
+            return itemHtml;
+
+        };
+    });
 }
-
 
 function gadgetOnLoad() {
   uiInit();
