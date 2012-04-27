@@ -10,15 +10,16 @@
  
 <head>
   <title>Pusher Test</title>
+<!--  for jqueryui -->  
+  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+
 <!--  
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
 -->
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
 
-<!--  for jqueryui -->  
-  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
-  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <!--
   <script src="http://jqueryui.com/jquery-1.7.2.js"></script>
 	<script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
