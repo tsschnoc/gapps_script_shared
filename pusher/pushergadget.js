@@ -109,6 +109,7 @@ function searchnumber(number) {
           resultEntry.value = contact.title.$t;
           resultEntry.id = contact.id.$t.split("\/base\/")[1];
           resultEntry.contactUrl = contactUrl;
+          resultEntry.phoneNumbers = [];
 
           
           h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
@@ -118,8 +119,11 @@ function searchnumber(number) {
           window.console.log(contact);
           window.console.log(contact.title.$t);
           for (var j in contact.gd$phoneNumber) {
+            var phoneNumber = {};
             var numberEntry = contact.gd$phoneNumber[j];
             window.console.log(numberEntry.$t);
+            phoneNumber.number = numberEntry.$t;
+            resultEntry.phoneNumbers.push(phoneNumber);
             //window.console.log(numberEntry.rel.split("#")[1]);
           }
           
@@ -133,29 +137,6 @@ function searchnumber(number) {
 
     makeCachedRequest(url, cal_callback, params);
 }
-
-
-
-
-function gadgetOnLoad() {
-  uiInit();
-  initPusher();
-
-  window.addEventListener('message', popupMessageReceiver, false);
-
-  var prefs = new gadgets.Prefs();
-  googleOAuth.refresh_token = prefs.getString("refresh_token");
-
-  if (googleOAuth.refresh_token) {
-    google_refresh_token();
-    return;
-  }
-  doGoogleAuth();
-}
-
-
-
-
 
 function uiInit() {
   $(function() {   
@@ -177,6 +158,24 @@ function uiInit() {
 		};
   });
 }
+
+
+function gadgetOnLoad() {
+  uiInit();
+  initPusher();
+
+  window.addEventListener('message', popupMessageReceiver, false);
+
+  var prefs = new gadgets.Prefs();
+  googleOAuth.refresh_token = prefs.getString("refresh_token");
+
+  if (googleOAuth.refresh_token) {
+    google_refresh_token();
+    return;
+  }
+  doGoogleAuth();
+}
+
 
 
 gadgets.util.registerOnLoadHandler(gadgetOnLoad);
