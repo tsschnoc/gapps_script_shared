@@ -158,13 +158,7 @@ function gadgetOnLoad() {
 
 
 function uiInit() {
-  $(function() {
-    var availableTags = ["ActionScript", "AppleScript", "Asp", "BASIC", "C", "C++", "Clojure", "COBOL", "ColdFusion", "Erlang", "Fortran", "Groovy", "Haskell", "Java", "JavaScript", "Lisp", "Perl", "PHP", "Python", "Ruby", "Scala", "Scheme"];
-/*
-    $("#searchfield").autocomplete({
-      source: availableTags
-    });
-*/    
+  $(function() {   
     $("#searchfield").autocomplete({
       source: function(request, response) {
         responseFunc = response;
@@ -174,10 +168,13 @@ function uiInit() {
       select: function(event, ui) {
 //  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
           popitup(ui.item.contactUrl) ;
-
-      },
-      
-    });
+      },      
+    }).data( "autocomplete" )._renderItem = function( ul, item ) {
+  		return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( "<a>" + item.label + "<br>" + item.id + "</a>" )
+				.appendTo( ul );
+		};
   });
 }
 
