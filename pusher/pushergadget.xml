@@ -16,6 +16,7 @@
 
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
   <link rel="stylesheet" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/demos/demos.css">
+  <link type="text/css" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-darkness/jquery-ui.css" />
 
 
 <!--  
