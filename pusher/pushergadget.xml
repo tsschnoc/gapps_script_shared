@@ -11,7 +11,7 @@
 <head>
   <title>Pusher Test</title>
 <!--  for jqueryui -->  
-  <link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css">
+<!--<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css"> -->
   <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 
   <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>

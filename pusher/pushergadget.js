@@ -151,10 +151,13 @@ function uiInit() {
           popitup(ui.item.contactUrl) ;
       },      
     }).data( "autocomplete" )._renderItem = function( ul, item ) {
-  		return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( "<a>" + item.label + "<br>" + item.id + "</a>" )
-				.appendTo( ul );
+      var itemHtml = $( "<li></li>" )
+  			.data( "item.autocomplete", item )
+				.append( "<a>" + item.label + "<br>" + item.id + "</a>" );
+
+      itemHtml.appendTo( ul );
+  		return itemHtml;
+				
 		};
   });
 }
