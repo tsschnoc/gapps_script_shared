@@ -1,3 +1,5 @@
+google.load("jquery", "1");
+google.load("jqueryui", "1");
 /*!
  * Pusher JavaScript Library v1.11.2
  * http://pusherapp.com/
