@@ -149,7 +149,7 @@ function uiInit() {
                 app += item.phoneNumbers[i].number + "<br>";
             }
             
-            app.substring(0,app.indexOf("<br>"))
+            app.substring(0,app.indexOf("<br>"));
             app += "</div></a>";
 
             return $( "<li></li>" )
