@@ -151,12 +151,11 @@ function uiInit() {
                 popitup(ui.item.contactUrl);
             },
         }).data("autocomplete")._renderItem = function(ul, item) {
-            var app = "<a>" + item.label;
-//            var app = "<a>" + item.label + "<br>" + item.id;
+            var app = '<a>' + item.label + '<div style="font-size: 50%; ">';
             for (var i in item.phoneNumbers) {
                 app += "<br>" + item.phoneNumbers[i].number;
             }
-            app += "</a>";
+            app += "</div></a>";
 
             return $( "<li></li>" )
 				.data( "item.autocomplete", item )
