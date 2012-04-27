@@ -151,25 +151,16 @@ function uiInit() {
                 popitup(ui.item.contactUrl);
             },
         }).data("autocomplete")._renderItem = function(ul, item) {
-            var itemHtml = $("<li></li>");
-            itemHtml.data("item.autocomplete", item);
-            
             var app = "<a>" + item.label + "<br>" + item.id;
-            
-            //itemHtml.append("<a>" + item.label + "<br>" + item.id);
-
             for (var i in item.phoneNumbers) {
-                //itemHtml.append("<br>" + item.phoneNumbers[i].number);
                 app += "<br>" + item.phoneNumbers[i].number;
             }
-
-            //itemHtml.append("</a>");
             app += "</a>";
-            itemHtml.append(app);    
-                
-            itemHtml.appendTo(ul);
-            return itemHtml;
 
+            return $( "<li></li>" )
+				.data( "item.autocomplete", item )
+				.append( app )
+				.appendTo( ul );
         };
     });
 }
