@@ -114,22 +114,15 @@ function searchnumber(number) {
           
           h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
-          //"https://mail.google.com/mail/#contact/" + response.data.feed.entry[1].id.$t.split("\/base\/")[1]
-
-          window.console.log(contact);
-          window.console.log(contact.title.$t);
           for (var j in contact.gd$phoneNumber) {
             var phoneNumber = {};
             var numberEntry = contact.gd$phoneNumber[j];
-            window.console.log(numberEntry.$t);
             phoneNumber.number = numberEntry.$t;
             resultEntry.phoneNumbers.push(phoneNumber);
-            //window.console.log(numberEntry.rel.split("#")[1]);
           }
           
           resultArr.push(resultEntry);
         }
-//        $("#ny").html(h);
         responseFunc(resultArr);      
         
         gadgets.window.adjustHeight(200);
@@ -151,10 +144,12 @@ function uiInit() {
                 popitup(ui.item.contactUrl);
             },
         }).data("autocomplete")._renderItem = function(ul, item) {
-            var app = '<a>' + item.label + '<div style="font-size: 50%; ">';
+            var app = '<a>' + item.label + '<div style="font-size: 70%; ">';
             for (var i in item.phoneNumbers) {
-                app += "<br>" + item.phoneNumbers[i].number;
+                app += item.phoneNumbers[i].number + "<br>";
             }
+            
+            app.substring(0,app.indexOf("<br>"))
             app += "</div></a>";
 
             return $( "<li></li>" )
