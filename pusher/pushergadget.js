@@ -192,17 +192,13 @@ function gadgetOnLoad() {
     var prefs = new gadgets.Prefs();
     googleOAuth.refresh_token = prefs.getString("googleOAuth_refresh_token");
 
-
-//    doSFAuth();
-//    return;
-
     if (!googleOAuth.refresh_token) {
         doGoogleAuth();
         return;
     }
     google_refresh_token();
 
-//    doSFAuth();
+    doSFAuth();
 
 }
 
