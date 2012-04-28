@@ -228,6 +228,9 @@ function popupMessageReceiver(event) {
   if (event.origin == 'https://s3.amazonaws.com') {
     var pairs = event.data.split('?')[1].split('&');
 
+    if (pairs.state=="SF_initial")  {
+        return;
+    }
 
     for (var i in pairs) {
       var kv = pairs[i].split('=');
@@ -294,7 +297,7 @@ function google_oauth_callback(response) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function doSFAuth() {
 //      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
-    var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=mystate';
+    var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=SF_initial';
   popitup(oauthApprovalUrl) ;
 }
 
