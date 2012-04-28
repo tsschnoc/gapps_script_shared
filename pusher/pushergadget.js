@@ -215,7 +215,7 @@ gadgets.util.registerOnLoadHandler(gadgetOnLoad);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function doGoogleAuth() {
 //      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
-  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
+  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=goog_initial&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
   popitup(authLink) ;
 }
 
@@ -228,29 +228,33 @@ function popupMessageReceiver(event) {
   if (event.origin == 'https://s3.amazonaws.com') {
     var pairs = event.data.split('?')[1].split('&');
 
-    if (pairs.indexOf("state=SF_initial") >=0)  {
-        return;
-    }
-
+    var params = {};
     for (var i in pairs) {
       var kv = pairs[i].split('=');
-      googleOAuth[kv[0]] = decodeURIComponent(kv[1]);
+      params[kv[0]] = decodeURIComponent(kv[1]);
     }
 
-    debug(googleOAuth);
 
-    var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
-
-    var params = {};
-    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-    params[gadgets.io.RequestParameters.HEADERS] = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-PrettyPrint": "1"
-    };
-
-    makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
+    if (params.state=="SF_initial")  {
+        return;
+    } else if (params.state=="goog_initial")  {    
+        for (var attrname in params) { googleOAuth[attrname] = params[attrname]; }
+    
+        debug(googleOAuth);
+    
+        var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
+    
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+        params[gadgets.io.RequestParameters.HEADERS] = {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-PrettyPrint": "1"
+        };
+    
+        makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
+    }
   }
 }
 
