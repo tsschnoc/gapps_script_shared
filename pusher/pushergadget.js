@@ -190,7 +190,11 @@ function gadgetOnLoad() {
     window.addEventListener('message', popupMessageReceiver, false);
 
     var prefs = new gadgets.Prefs();
-    googleOAuth.refresh_token = prefs.getString("refresh_token");
+    googleOAuth.refresh_token = prefs.getString("googleOAuth_refresh_token");
+
+
+    doSFAuth();
+    return;
 
     if (!googleOAuth.refresh_token) {
         doGoogleAuth();
@@ -273,7 +277,7 @@ function google_oauth_callback(response) {
     if (response.rc!=200) {
 // auth fehler, refreshtoken löschen und nochmal approven lassen
       var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", null);
+      prefs.set("googleOAuth_refresh_token", null);
       doGoogleAuth();
       return;
     }
@@ -283,7 +287,7 @@ function google_oauth_callback(response) {
 
     if (googleOAuth.refresh_token) {
       var prefs = new gadgets.Prefs();
-      prefs.set("refresh_token", googleOAuth.refresh_token);
+      prefs.set("googleOAuth_refresh_token", googleOAuth.refresh_token);
     }
 }
 
