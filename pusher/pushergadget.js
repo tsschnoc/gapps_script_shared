@@ -321,26 +321,44 @@ function doSFAuth() {
 }
 
 
-
-
 function sf_oauth_callback(response) {
-    if (response.rc!=200) {
-// auth fehler, refreshtoken löschen und nochmal approven lassen
-      var prefs = new gadgets.Prefs();
-      prefs.set("googleOAuth_refresh_token", null);
-      doGoogleAuth();
-      return;
+    if (response.rc != 200) {
+        // auth fehler, refreshtoken löschen und nochmal approven lassen
+        var prefs = new gadgets.Prefs();
+        prefs.set("sfOAuth_refresh_token", null);
+        doSFAuth();
+        return;
     }
 
-    googleOAuth.access_token = response.data.access_token;
-    googleOAuth.refresh_token = response.data.refresh_token;
+    sfOAuth.access_token = response.data.access_token;
+    sfOAuth.refresh_token = response.data.refresh_token;
 
-    if (googleOAuth.refresh_token) {
-      var prefs = new gadgets.Prefs();
-      prefs.set("googleOAuth_refresh_token", googleOAuth.refresh_token);
+    if (sfOAuth.refresh_token) {
+        var prefs = new gadgets.Prefs();
+        prefs.set("sfOAuth_refresh_token", sfOAuth.refresh_token);
+
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+        params[gadgets.io.RequestParameters.HEADERS] = {
+            "Accept": "application/json",
+            "X-PrettyPrint": "1",
+            "Authorization": "OAuth " + sfOAuth.access_token
+        };
+
+        var identity_callback = function(response) {
+                debug(response.data);
+                var oauth2_identity = response.data;
+                for (var i in oauth2_identity.urls) {
+                    oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}", "23.0");
+                }
+            };
+
+        makeCachedRequest(sfOAuth.id, identity_callback, params);
+
+
     }
 }
-   
 
 
 //helper
