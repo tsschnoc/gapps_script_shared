@@ -236,7 +236,22 @@ function popupMessageReceiver(event) {
 
 
     if (params.state=="SF_initial")  {
-        return;
+        for (var attrname in params) { sfOAuth[attrname] = params[attrname]; }
+    
+        debug(sfOAuth);
+    
+        var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(sfOAuth.code) + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=gettoken&format=json';
+    
+        var params = {};
+        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+        params[gadgets.io.RequestParameters.HEADERS] = {
+          "Content-Type": "application/x-www-form-urlencoded",
+          "X-PrettyPrint": "1"
+        };
+    
+        makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sfOAuth.sf_oauth_callback, params);
     } else if (params.state=="goog_initial")  {    
         for (var attrname in params) { googleOAuth[attrname] = params[attrname]; }
     
@@ -306,6 +321,25 @@ function doSFAuth() {
 }
 
 
+
+
+function sf_oauth_callback(response) {
+    if (response.rc!=200) {
+// auth fehler, refreshtoken löschen und nochmal approven lassen
+      var prefs = new gadgets.Prefs();
+      prefs.set("googleOAuth_refresh_token", null);
+      doGoogleAuth();
+      return;
+    }
+
+    googleOAuth.access_token = response.data.access_token;
+    googleOAuth.refresh_token = response.data.refresh_token;
+
+    if (googleOAuth.refresh_token) {
+      var prefs = new gadgets.Prefs();
+      prefs.set("googleOAuth_refresh_token", googleOAuth.refresh_token);
+    }
+}
    
 
 
