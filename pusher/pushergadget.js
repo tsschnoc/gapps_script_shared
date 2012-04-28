@@ -354,9 +354,6 @@ function sf_oauth_callback(response) {
         };
 
     makeCachedRequest(sfOAuth.id, identity_callback, params);
-
-
-
 }
 
 //helper
