@@ -228,7 +228,7 @@ function popupMessageReceiver(event) {
   if (event.origin == 'https://s3.amazonaws.com') {
     var pairs = event.data.split('?')[1].split('&');
 
-    if (pairs.state=="SF_initial")  {
+    if (pairs.indexOf("state=SF_initial") >=0)  {
         return;
     }
 
