@@ -251,7 +251,7 @@ function popupMessageReceiver(event) {
           "X-PrettyPrint": "1"
         };
     
-        makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sfOAuth.sf_oauth_callback, params);
+        makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);
     } else if (params.state=="goog_initial")  {    
         for (var attrname in params) { googleOAuth[attrname] = params[attrname]; }
     
