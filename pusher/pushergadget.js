@@ -110,7 +110,7 @@ function searchnumber(number) {
 //    makeCachedRequest(url, cal_callback, params);
     
     lastSentRequestId = lastSentRequestId + 1;    
-    doGoogleSyncRequest(lastSentRequestId, callUrl, params);
+    doGoogleSyncRequest(lastSentRequestId, url, params);
     
 }
 
