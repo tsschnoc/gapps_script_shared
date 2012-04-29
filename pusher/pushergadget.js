@@ -111,6 +111,28 @@ function searchnumber(number) {
     };
 
     doGoogleSyncRequest(lastSentRequestId, url, params);
+    
+    
+    
+//    var queryString = "FIND {tho*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
+    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
+    
+    
+    var callUrl = sfOAuth.oauth2_identity.urls.rest +"search/?q=" + encodeURIComponent(queryString);
+
+    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch() + "&alt=json";
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+        "Authorization": "OAuth " + sfOAuth.access_token,
+    };
+    
+
+    doSFSyncRequest(lastSentRequestId, callUrl, params);
+    
+    
 }
 
 function doGoogleSyncRequest(counter, callUrl, params) {
@@ -119,7 +141,44 @@ function doGoogleSyncRequest(counter, callUrl, params) {
     }, params);
 }
 
+function doSFSyncRequest(counter, callUrl, params) {
+    makeCachedRequest(callUrl, function(response) {
+        sfCallback(response, counter)
+    }, params);
+}
+
 function googleCallback(response) {
+    var resultArr = [];
+    var h = $("#ny").html();
+
+    for (var i in response.data.feed.entry) {
+        var contact = response.data.feed.entry[i];
+        var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
+
+        var resultEntry = {};
+        resultEntry.label = contact.title.$t;
+        resultEntry.value = contact.title.$t;
+        resultEntry.id = contact.id.$t.split("\/base\/")[1];
+        resultEntry.contactUrl = contactUrl;
+        resultEntry.phoneNumbers = [];
+
+
+        h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
+
+        for (var j in contact.gd$phoneNumber) {
+            var phoneNumber = {};
+            var numberEntry = contact.gd$phoneNumber[j];
+            phoneNumber.number = numberEntry.$t;
+            resultEntry.phoneNumbers.push(phoneNumber);
+        }
+
+        resultArr.push(resultEntry);
+    }
+    responseFunc(resultArr);
+
+    gadgets.window.adjustHeight(200);
+}
+function sfCallback(response) {
     var resultArr = [];
     var h = $("#ny").html();
 
