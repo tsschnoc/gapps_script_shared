@@ -90,8 +90,15 @@ function receiveCall(phoneCall) {
 
 
 
+
+
+
+
 function searchnumber(number) {
     var number = number.split("@")[0];
+
+
+    lastSentRequestId = lastSentRequestId + 1;
 
     var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch() + "&alt=json";
 
@@ -103,19 +110,14 @@ function searchnumber(number) {
         "Authorization": "Bearer " + googleOAuth.access_token,
     };
 
-    lastSentRequestId = lastSentRequestId + 1;
     doGoogleSyncRequest(lastSentRequestId, url, params);
-
 }
-
 
 function doGoogleSyncRequest(counter, callUrl, params) {
     makeCachedRequest(callUrl, function(response) {
         googleCallback(response, counter)
     }, params);
 }
-
-
 
 function googleCallback(response) {
     var resultArr = [];
@@ -355,9 +357,10 @@ function sf_oauth_callback(response) {
 
     var identity_callback = function(response) {
             debug(response.data);
-            var oauth2_identity = response.data;
-            for (var i in oauth2_identity.urls) {
-                oauth2_identity.urls[i] = oauth2_identity.urls[i].replace("{version}", "23.0");
+            
+            sfOAuth.oauth2_identity = response.data;
+            for (var i in sfOAuth.oauth2_identity.urls) {
+                sfOAuth.oauth2_identity.urls[i] = sfOAuth.oauth2_identity.urls[i].replace("{version}", "23.0");
             }
         };
 
