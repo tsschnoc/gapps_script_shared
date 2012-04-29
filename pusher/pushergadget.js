@@ -49,7 +49,6 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
 
 
 
-
 var googleOAuth = {};
 googleOAuth.scope = 'http://www.google.com/m8/feeds/';
 googleOAuth.oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
@@ -72,11 +71,11 @@ var lastSentRequestId = 1;
 
 
 function initPusher() {
-  // Flash fallback logging - don't include this in production
-//  var WEB_SOCKET_DEBUG = true;
-  var pusher = new Pusher('0bcfb89cee9d117b2b4e');
-  var channel = pusher.subscribe('test_channel');
-  channel.bind('my_event', receiveCall);
+    // Flash fallback logging - don't include this in production
+    //  var WEB_SOCKET_DEBUG = true;
+    var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+    var channel = pusher.subscribe('test_channel');
+    channel.bind('my_event', receiveCall);
 }
 
 
@@ -86,7 +85,7 @@ function receiveCall(phoneCall) {
     $("#ny").html(x);
     gadgets.window.adjustHeight(200);
 
-    searchnumber(phoneCall.number);  
+    searchnumber(phoneCall.number);
 }
 
 
@@ -94,63 +93,59 @@ function receiveCall(phoneCall) {
 function searchnumber(number) {
     var number = number.split("@")[0];
 
-    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch()  + "&alt=json";
+    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch() + "&alt=json";
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "GData-Version": "3.0",
-      "Authorization": "Bearer " + googleOAuth.access_token,
+        "GData-Version": "3.0",
+        "Authorization": "Bearer " + googleOAuth.access_token,
     };
 
-    var cal_callback = function(response) {
-    };
-
-//    makeCachedRequest(url, cal_callback, params);
-    
-    lastSentRequestId = lastSentRequestId + 1;    
+    lastSentRequestId = lastSentRequestId + 1;
     doGoogleSyncRequest(lastSentRequestId, url, params);
-    
+
 }
 
 
-  function doGoogleSyncRequest(counter, callUrl, params)
-  {
-    makeCachedRequest(callUrl, function(response) {googleCallback(response, counter)}, params);
-  }
-        
+function doGoogleSyncRequest(counter, callUrl, params) {
+    makeCachedRequest(callUrl, function(response) {
+        googleCallback(response, counter)
+    }, params);
+}
+
 
 
 function googleCallback(response) {
     var resultArr = [];
     var h = $("#ny").html();
-    
+
     for (var i in response.data.feed.entry) {
-      var contact = response.data.feed.entry[i];
-      var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
-    
-      var resultEntry = {};
-      resultEntry.label = contact.title.$t;
-      resultEntry.value = contact.title.$t;
-      resultEntry.id = contact.id.$t.split("\/base\/")[1];
-      resultEntry.contactUrl = contactUrl;
-      resultEntry.phoneNumbers = [];
-    
-      
-      h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
-    
-      for (var j in contact.gd$phoneNumber) {
-        var phoneNumber = {};
-        var numberEntry = contact.gd$phoneNumber[j];
-        phoneNumber.number = numberEntry.$t;
-        resultEntry.phoneNumbers.push(phoneNumber);
-      }
-      
-      resultArr.push(resultEntry);
+        var contact = response.data.feed.entry[i];
+        var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
+
+        var resultEntry = {};
+        resultEntry.label = contact.title.$t;
+        resultEntry.value = contact.title.$t;
+        resultEntry.id = contact.id.$t.split("\/base\/")[1];
+        resultEntry.contactUrl = contactUrl;
+        resultEntry.phoneNumbers = [];
+
+
+        h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
+
+        for (var j in contact.gd$phoneNumber) {
+            var phoneNumber = {};
+            var numberEntry = contact.gd$phoneNumber[j];
+            phoneNumber.number = numberEntry.$t;
+            resultEntry.phoneNumbers.push(phoneNumber);
+        }
+
+        resultArr.push(resultEntry);
     }
-    responseFunc(resultArr);      
-    
+    responseFunc(resultArr);
+
     gadgets.window.adjustHeight(200);
 }
 
@@ -163,7 +158,7 @@ function uiInit() {
                 searchnumber(searchTerm.term);
             },
             select: function(event, ui) {
-                //  			alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
+                //      		alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
                 popitup(ui.item.contactUrl);
             },
         }).data("autocomplete")._renderItem = function(ul, item) {
@@ -171,14 +166,11 @@ function uiInit() {
             for (var i in item.phoneNumbers) {
                 app += item.phoneNumbers[i].number + "<br>";
             }
-            
-            app.substring(0,app.indexOf("<br>"));
+
+            app.substring(0, app.indexOf("<br>"));
             app += "</div></a>";
 
-            return $( "<li></li>" )
-				.data( "item.autocomplete", item )
-				.append( app )
-				.appendTo( ul );
+            return $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);
         };
     });
 }
@@ -198,7 +190,14 @@ function gadgetOnLoad() {
     }
     google_refresh_token();
 
-    doSFAuth();
+
+    sfOAuth.refresh_token = prefs.getString("sfOAuth_refresh_token");
+    if (!sfOAuth.refresh_token) {
+        doSFAuth();
+        return;
+    }
+    sf_refresh_token();
+
 
 }
 
@@ -213,64 +212,69 @@ gadgets.util.registerOnLoadHandler(gadgetOnLoad);
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 function doGoogleAuth() {
-//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
-  var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=goog_initial&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
-  popitup(authLink) ;
+    //      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
+    var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=goog_initial&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
+    popitup(authLink);
 }
 
 
 function popupMessageReceiver(event) {
-  //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
+    //this function is called by the popup when it opens the oauth-callback-page and passed the loaded url back
+    //    alert ('Message received: ' + event.origin + ' : '  + event.data);
+    if (event.origin == 'https://s3.amazonaws.com') {
+        var pairs = event.data.split('?')[1].split('&');
 
-//    alert ('Message received: ' + event.origin + ' : '  + event.data);
-
-  if (event.origin == 'https://s3.amazonaws.com') {
-    var pairs = event.data.split('?')[1].split('&');
-
-    var params = {};
-    for (var i in pairs) {
-      var kv = pairs[i].split('=');
-      params[kv[0]] = decodeURIComponent(kv[1]);
-    }
-
-
-    if (params.state=="SF_initial")  {
-        for (var attrname in params) { sfOAuth[attrname] = params[attrname]; }
-    
-        debug(sfOAuth);
-    
-        var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(sfOAuth.code) + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=gettoken&format=json';
-    
         var params = {};
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-        params[gadgets.io.RequestParameters.HEADERS] = {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-PrettyPrint": "1"
-        };
-    
-        makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);
-    } else if (params.state=="goog_initial")  {    
-        for (var attrname in params) { googleOAuth[attrname] = params[attrname]; }
-    
-        debug(googleOAuth);
-    
-        var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
-    
-        var params = {};
-        params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-        params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-        params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-        params[gadgets.io.RequestParameters.HEADERS] = {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "X-PrettyPrint": "1"
-        };
-    
-        makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
+        for (var i in pairs) {
+            var kv = pairs[i].split('=');
+            params[kv[0]] = decodeURIComponent(kv[1]);
+        }
+
+
+        if (params.state == "SF_initial") {
+            for (var attrname in params) {
+                sfOAuth[attrname] = params[attrname];
+            }
+
+            debug(sfOAuth);
+
+            var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(sfOAuth.code) + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=gettoken&format=json';
+
+            var params = {};
+            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+            params[gadgets.io.RequestParameters.HEADERS] = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-PrettyPrint": "1"
+            };
+
+            makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);
+        }
+        else if (params.state == "goog_initial") {
+            for (var attrname in params) {
+                googleOAuth[attrname] = params[attrname];
+            }
+
+            debug(googleOAuth);
+
+            var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
+
+            var params = {};
+            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+            params[gadgets.io.RequestParameters.HEADERS] = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-PrettyPrint": "1"
+            };
+
+            makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
+        }
     }
-  }
 }
 
 
@@ -282,8 +286,8 @@ function google_refresh_token() {
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
     params[gadgets.io.RequestParameters.POST_DATA] = postdata;
     params[gadgets.io.RequestParameters.HEADERS] = {
-      "Content-Type": "application/x-www-form-urlencoded",
-      "X-PrettyPrint": "1"
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
     };
 
     makeCachedRequest('https://accounts.google.com/o/oauth2/token', google_oauth_callback, params);
@@ -292,20 +296,20 @@ function google_refresh_token() {
 
 
 function google_oauth_callback(response) {
-    if (response.rc!=200) {
-// auth fehler, refreshtoken löschen und nochmal approven lassen
-      var prefs = new gadgets.Prefs();
-      prefs.set("googleOAuth_refresh_token", null);
-      doGoogleAuth();
-      return;
+    if (response.rc != 200) {
+        // auth fehler, refreshtoken löschen und nochmal approven lassen
+        var prefs = new gadgets.Prefs();
+        prefs.set("googleOAuth_refresh_token", null);
+        doGoogleAuth();
+        return;
     }
 
     googleOAuth.access_token = response.data.access_token;
     googleOAuth.refresh_token = response.data.refresh_token;
 
     if (googleOAuth.refresh_token) {
-      var prefs = new gadgets.Prefs();
-      prefs.set("googleOAuth_refresh_token", googleOAuth.refresh_token);
+        var prefs = new gadgets.Prefs();
+        prefs.set("googleOAuth_refresh_token", googleOAuth.refresh_token);
     }
 }
 
@@ -314,11 +318,15 @@ function google_oauth_callback(response) {
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 function doSFAuth() {
-//      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
+    //      var authLink = 'https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=state1&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto';
     var oauthApprovalUrl = 'https://login.salesforce.com/services/oauth2/authorize?response_type=code' + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=SF_initial';
-  popitup(oauthApprovalUrl) ;
+    popitup(oauthApprovalUrl);
 }
+
+
 function sf_oauth_callback(response) {
     if (response.rc != 200) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
@@ -356,12 +364,30 @@ function sf_oauth_callback(response) {
     makeCachedRequest(sfOAuth.id, identity_callback, params);
 }
 
+function sf_refresh_token() {
+    var postdata = 'grant_type=refresh_token&' + 'client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&refresh_token=' + encodeURIComponent(sfOAuth.refresh_token) + '&format=json';
+
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/x-www-form-urlencoded",
+        "X-PrettyPrint": "1"
+    };
+
+    makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);
+}
+
+
 //helper
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
 function popitup(url) {
-    var newwindow=window.open(url,'name','height=600,width=800');
+    var newwindow = window.open(url, 'name', 'height=600,width=800');
     if (window.focus) {
         newwindow.focus()
     }
@@ -370,62 +396,34 @@ function popitup(url) {
 
 // Enable pusher logging - don't include this in production
 Pusher.log = function(message) {
-  if (window.console && window.console.log) window.console.log(message);
+    if (window.console && window.console.log) window.console.log(message);
 };
 
 function makeCachedRequest(url, callback, params, refreshInterval) {
-  var ts = new Date().getTime();
-  var sep = "?";
-  if (refreshInterval && refreshInterval > 0) {
-    ts = Math.floor(ts / (refreshInterval * 1000));
-  }
-  if (url.indexOf("?") > -1) {
-    sep = "&";
-  }
-  url = [url, sep, "nocache=", ts].join("");
-  gadgets.io.makeRequest(url, callback, params);
+    var ts = new Date().getTime();
+    var sep = "?";
+    if (refreshInterval && refreshInterval > 0) {
+        ts = Math.floor(ts / (refreshInterval * 1000));
+    }
+    if (url.indexOf("?") > -1) {
+        sep = "&";
+    }
+    url = [url, sep, "nocache=", ts].join("");
+    gadgets.io.makeRequest(url, callback, params);
 }
 
 function debug(text) {
-  if (true) {
-    if (console && console.debug) {
-      console.debug(text);
+    if (true) {
+        if (console && console.debug) {
+            console.debug(text);
+        }
     }
-  }
 }
 
-String.prototype.formatPhoneForSearch = function(){
-  var number = this;
-  while (number.charAt(0) == "0" || number.charAt(0) == "+")
-	{
-		number = number.slice(1);
-	}
-	return number;
+String.prototype.formatPhoneForSearch = function() {
+    var number = this;
+    while (number.charAt(0) == "0" || number.charAt(0) == "+") {
+        number = number.slice(1);
+    }
+    return number;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
