@@ -179,17 +179,17 @@ function sfCallback(response) {
     var resultArr = [];
     var h = $("#ny").html();
 
-    for (var i in response.data.feed.entry) {
-        var contact = response.data.feed.entry[i];
-        var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
+    for (var i in response.data) {
+        var contact = response.data[i];
+        var contactUrl = contact.attributes.url;
 
         var resultEntry = {};
-        resultEntry.label = contact.title.$t;
-        resultEntry.value = contact.title.$t;
-        resultEntry.id = contact.id.$t.split("\/base\/")[1];
+        resultEntry.label = contact.Name;
+        resultEntry.value = contact.Name;
+        resultEntry.id = contact.Id;
         resultEntry.contactUrl = contactUrl;
         resultEntry.phoneNumbers = [];
-
+/*
 
         h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
@@ -199,6 +199,7 @@ function sfCallback(response) {
             phoneNumber.number = numberEntry.$t;
             resultEntry.phoneNumbers.push(phoneNumber);
         }
+*/        
 
         resultArr.push(resultEntry);
     }
