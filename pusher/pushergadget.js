@@ -218,6 +218,7 @@ function uiInit() {
                 //      		alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
                 popitup(ui.item.contactUrl);
             },
+            minLength: 2,
         }).data("autocomplete")._renderItem = function(ul, item) {
             var app = '<a>' + item.label + '<div style="font-size: 70%; ">';
             for (var i in item.phoneNumbers) {
