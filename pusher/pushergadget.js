@@ -413,7 +413,9 @@ function sf_oauth_callback(response) {
 
     sfOAuth.id = response.data.id;
     sfOAuth.access_token = response.data.access_token;
-    sfOAuth.refresh_token = response.data.refresh_token;
+    if (response.data.refresh_token) {
+        sfOAuth.refresh_token = response.data.refresh_token;
+    }
 
     if (sfOAuth.refresh_token) {
         var prefs = new gadgets.Prefs();
