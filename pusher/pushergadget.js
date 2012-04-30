@@ -88,7 +88,9 @@ function receiveCall(phoneCall) {
     $("#ny").html(x);
     gadgets.window.adjustHeight(200);
 
-    searchnumber(phoneCall.number);
+    //searchnumber(phoneCall.number);
+    $("#searchfield").val(phoneCall.number )
+    $("#searchfield").autocomplete( "search");
 }
 
 
