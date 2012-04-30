@@ -187,7 +187,7 @@ function sfCallback(response) {
     if (response.rc != 200) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
         sfOAuth.access_token = null;
-        sf_refresh_token()
+        sf_refresh_token();
         return;
     }
     
