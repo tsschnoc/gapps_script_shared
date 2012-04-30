@@ -250,7 +250,12 @@ function uiInit() {
             },
             minLength: 2,
         }).data("autocomplete")._renderItem = function(ul, item) {
-            var app = '<a>' + '<img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="14" height="14" />' + item.label + '<div style="font-size: 70%; ">';
+            var app;
+            if (item.type == "SF") {
+                app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + item.label + '<div style="font-size: 70%; ">';
+            } else {
+                app = '<a>' + '<img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10" />' + item.label + '<div style="font-size: 70%; ">';
+            }
             for (var i in item.phoneNumbers) {
                 app += item.phoneNumbers[i].number + "<br>";
             }
