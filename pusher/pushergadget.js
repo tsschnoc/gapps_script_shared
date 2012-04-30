@@ -210,7 +210,7 @@ function sfCallback(response, reqid) {
         resultEntry.label = contact.Name;
         resultEntry.value = contact.Name;
         resultEntry.id = contact.Id;
-        resultEntry.contactUrl = contactUrl;
+        resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + contactUrl;
         resultEntry.phoneNumbers = [];
 /*
 
