@@ -69,6 +69,8 @@ var searchTerm;
 var lastSentRequestId = 1;
 var lastReceivedRequestId = 0;
 
+var lastSFResult = [];
+var lastGoogleResult = [];
 
 function initPusher() {
     // Flash fallback logging - don't include this in production
@@ -182,7 +184,9 @@ function googleCallback(response, reqid) {
 
         resultArr.push(resultEntry);
     }
-    responseFunc(resultArr);
+    
+    lastGoogleResult = resultArr;
+    responseFunc(lastGoogleResult.concat(lastSFResult));
 
     gadgets.window.adjustHeight(200);
 }
@@ -226,7 +230,9 @@ function sfCallback(response, reqid) {
 
         resultArr.push(resultEntry);
     }
-    responseFunc(resultArr);
+
+    lastSFResult = resultArr;
+    responseFunc(lastGoogleResult.concat(lastSFResult));
 
     gadgets.window.adjustHeight(200);
 }
