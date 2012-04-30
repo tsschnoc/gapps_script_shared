@@ -127,13 +127,9 @@ function searchnumber(number) {
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
         "Authorization": "OAuth " + sfOAuth.access_token,
-        "callback": "baz",
-    };
-    
+    };    
 
-    doSFSyncRequest(lastSentRequestId, callUrl, params);
-    
-    
+    doSFSyncRequest(lastSentRequestId, callUrl, params);    
 }
 
 function doGoogleSyncRequest(counter, callUrl, params) {
