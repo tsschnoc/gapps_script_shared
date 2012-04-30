@@ -89,7 +89,7 @@ function receiveCall(phoneCall) {
     gadgets.window.adjustHeight(200);
 
     //searchnumber(phoneCall.number);
-    $("#searchfield").val(phoneCall.number )
+    $("#searchfield").val(phoneCall.number.split("@")[0] );
     $("#searchfield").autocomplete( "search");
 }
 
