@@ -165,6 +165,7 @@ function googleCallback(response, reqid) {
         var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
         var resultEntry = {};
+        resultEntry.type = "Google";
         resultEntry.label = contact.title.$t;
         resultEntry.value = contact.title.$t;
         resultEntry.id = contact.id.$t.split("\/base\/")[1];
@@ -207,13 +208,15 @@ function sfCallback(response, reqid) {
         var contactUrl = contact.attributes.url;
 
         var resultEntry = {};
+        resultEntry.type = "SF";
         resultEntry.label = contact.Name;
         resultEntry.value = contact.Name;
         resultEntry.id = contact.Id;
-        resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + contactUrl;
+//        resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + contactUrl;
+        resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + "/" + contact.Id;
         resultEntry.phoneNumbers = [];
-/*
 
+/*
         h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
         for (var j in contact.gd$phoneNumber) {
@@ -247,7 +250,7 @@ function uiInit() {
             },
             minLength: 2,
         }).data("autocomplete")._renderItem = function(ul, item) {
-            var app = '<a>' + item.label + '<div style="font-size: 70%; ">';
+            var app = '<a>' + '<img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="14" height="14" />' + item.label + '<div style="font-size: 70%; ">';
             for (var i in item.phoneNumbers) {
                 app += item.phoneNumbers[i].number + "<br>";
             }
