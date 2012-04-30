@@ -127,6 +127,7 @@ function searchnumber(number) {
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
         "Authorization": "OAuth " + sfOAuth.access_token,
+        "callback": "baz",
     };
     
 
