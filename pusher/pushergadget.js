@@ -67,7 +67,7 @@ var responseFunc;
 var searchTerm;
 
 var lastSentRequestId = 1;
-
+var lastReceivedRequestId = 0;
 
 
 function initPusher() {
@@ -144,11 +144,15 @@ function doSFSyncRequest(counter, callUrl, params) {
     }, params);
 }
 
-function googleCallback(response) {
+function googleCallback(response, reqid) {
     if (response.rc != 200) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
         googleOAuth.access_token = null;
         sf_refresh_token()
+        return;
+    }
+    
+    if (reqid < lastReceivedRequestId) {
         return;
     }
     
@@ -183,11 +187,15 @@ function googleCallback(response) {
     gadgets.window.adjustHeight(200);
 }
 
-function sfCallback(response) {
+function sfCallback(response, reqid) {
     if (response.rc != 200) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
         sfOAuth.access_token = null;
         sf_refresh_token();
+        return;
+    }
+    
+    if (reqid < lastReceivedRequestId) {
         return;
     }
     
