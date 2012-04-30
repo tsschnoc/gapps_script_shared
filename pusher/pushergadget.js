@@ -159,7 +159,6 @@ function googleCallback(response, reqid) {
     }
     
     var resultArr = [];
-    var h = $("#ny").html();
 
     for (var i in response.data.feed.entry) {
         var contact = response.data.feed.entry[i];
@@ -172,8 +171,6 @@ function googleCallback(response, reqid) {
         resultEntry.contactUrl = contactUrl;
         resultEntry.phoneNumbers = [];
 
-
-        h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
         for (var j in contact.gd$phoneNumber) {
             var phoneNumber = {};
@@ -204,7 +201,6 @@ function sfCallback(response, reqid) {
     }
     
     var resultArr = [];
-    var h = $("#ny").html();
 
     for (var i in response.data) {
         var contact = response.data[i];
