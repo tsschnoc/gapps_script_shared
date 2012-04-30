@@ -380,7 +380,9 @@ function google_oauth_callback(response) {
     }
 
     googleOAuth.access_token = response.data.access_token;
-    googleOAuth.refresh_token = response.data.refresh_token;
+    if (response.data.refresh_token) {
+        googleOAuth.refresh_token = response.data.refresh_token;
+    }
 
     if (googleOAuth.refresh_token) {
         var prefs = new gadgets.Prefs();
