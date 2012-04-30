@@ -110,7 +110,7 @@ function searchnumber(number) {
         "Authorization": "Bearer " + googleOAuth.access_token,
     };
 
-//    doGoogleSyncRequest(lastSentRequestId, url, params);
+    doGoogleSyncRequest(lastSentRequestId, url, params);
     
     
     
