@@ -147,10 +147,10 @@ function doSFSyncRequest(counter, callUrl, params) {
 }
 
 function googleCallback(response, reqid) {
-    if (response.rc != 200) {
+    if (response.rc == 401) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
         googleOAuth.access_token = null;
-        sf_refresh_token()
+        google_refresh_token();
         return;
     }
     
@@ -190,7 +190,7 @@ function googleCallback(response, reqid) {
 }
 
 function sfCallback(response, reqid) {
-    if (response.rc != 200) {
+    if (response.rc == 401) {
         // auth fehler, refreshtoken löschen und nochmal approven lassen
         sfOAuth.access_token = null;
         sf_refresh_token();
