@@ -533,6 +533,76 @@ SalesforceConnection.prototype.metaRetrieveObjectFields = function(sObjectName) 
     Logger.log( done );
   }
 
+
+
+  
+  
+  var param = [ "meta:checkRetrieveStatus",
+               [ "meta:asyncProcessId", responseId ]
+              ];
+  
+  var result = this.doSoapMetaRequest(param );
+  
+  
+  
+  Logger.log(result.Envelope.Body.checkRetrieveStatusResponse.result.zipFile.getText());   
+  
+  
+
+  var blob = Utilities.newBlob(Utilities.base64Decode(result.Envelope.Body.checkRetrieveStatusResponse.result.zipFile.getText()));
+  blob.setContentType("application/zip");
+  Logger.log(blob);
+
+  Logger.log(blob.getContentType());
+  var unzippedBlobs = Utilities.unzip(blob);
+  Logger.log(unzippedBlobs[0].getName());
+//  Logger.log(unzippedBlobs[0].getDataAsString());
+
+  
+  var sObjectXML = Xml.parse(unzippedBlobs[0].getDataAsString(), false);  
+  
+  
+  var headers = [ 'fullName', 'externalId', 'label', 'picklist', 'trackHistory', 'type', 'referenceTo', 'relationshipName', 'required', 'formula', 'formulaTreatBlanksAs', 'unique', 'description', 'defaultValue', 'visibleLines', 'precision', 'scale', 'relationshipOrder', 'writeRequiresMasterRead', 'length', 'caseSensitive', 'relationshipLabel', 'inlineHelpText'];
+  var records;
+    
+  records = sObjectXML.CustomObject.fields;
+  
+  var values = [];
+  
+  for (var i = 0; i < records.length; i++) {
+    var record = records[i];
+    
+    var obj = {};
+    
+    var attrs = records[i].getElements();
+    
+    for (var j = 0; j < attrs.length; j++) {
+      var att = attrs[j];
+      var locName = att.getName().getLocalName();
+      Logger.log(locName);
+
+      if (locName == 'picklist') {
+        if (att.picklistValues) {
+          obj[locName] = '';
+          var pValues = att.picklistValues;
+        Logger.log(att.toXmlString());
+          for (var k = 0; k < pValues.length; k++) {
+            Logger.log(" fsdf " + pValues[k].fullName.getText());
+            obj[locName] += pValues[k].fullName.getText() + ",";
+          }
+        }
+      } else {
+        obj[locName] = att.getText();
+      }
+      
+      
+    }
+    values.push(obj);
+  }  
+  return values;
+
+
+
 };
 
 
