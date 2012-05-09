@@ -499,7 +499,7 @@ SalesforceConnection.prototype.doSoapUrnRequest = function(body) {
   return this.doSoapRequest(this._authinfo.serverUrl, body, urn_header);
 };
 
-SalesforceConnection.prototype.metaUpdateFields = function(sObjectName, field) {
+SalesforceConnection.prototype.metaUpdateField = function(sObjectName, field) {
   var metadata = [ "meta:metadata",
                   { "xsi:type" : "meta:CustomField" }
                  ];     
