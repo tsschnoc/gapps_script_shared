@@ -447,19 +447,8 @@ SalesforceConnection.prototype.updateSfRecord =
 
 
 
-SalesforceConnection.prototype.doSoapMetaRequest = 
-  function(body) {
-  
-  if (this._authinfo == null) {
-    this.login();
-  }  
-  
-  var meta_header = [ "meta:SessionHeader",
-                  [ "meta:sessionId", this._authinfo.sessionId]
-                   ];
-
-  var header = meta_header;
-  var url = this._authinfo.metadataServerUrl;
+SalesforceConnection.prototype.doSoapRequest = 
+  function(url, body, header) {
   
   var req = [ "soapenv:Envelope",
              { "xmlns:soapenv" : "http://schemas.xmlsoap.org/soap/envelope/" }, { "xmlns:meta" : "http://soap.sforce.com/2006/04/metadata" }, { "xmlns:urn" : "urn:partner.soap.sforce.com" }, { "xmlns:xsi" : "http://www.w3.org/2001/XMLSchema-instance" },
@@ -487,6 +476,28 @@ SalesforceConnection.prototype.doSoapMetaRequest =
   return result;
 };
 
+
+SalesforceConnection.prototype.doSoapMetaRequest = function(body) {
+
+  if (this._authinfo == null) {
+    this.login();
+  }
+
+  var meta_header = ["meta:SessionHeader", ["meta:sessionId", this._authinfo.sessionId]];
+
+  return this.doSoapRequest(this._authinfo.metadataServerUrl, body, meta_header);
+};
+
+SalesforceConnection.prototype.doSoapUrnRequest = function(body) {
+
+  if (this._authinfo == null) {
+    this.login();
+  }
+
+  var urn_header = ["urn:SessionHeader", ["urn:sessionId", this._authinfo.sessionId]];
+
+  return this.doSoapRequest(this._authinfo.serverUrl, body, urn_header);
+};
 
 
 
