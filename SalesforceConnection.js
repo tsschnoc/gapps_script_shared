@@ -445,6 +445,58 @@ SalesforceConnection.prototype.updateSfRecord =
   });
 };
 
+
+
+SalesforceConnection.prototype.doSoapMetaRequest = 
+  function(body) {
+  
+  if (this._authinfo == null) {
+    this.login();
+  }  
+  
+  var meta_header = [ "meta:SessionHeader",
+                  [ "meta:sessionId", this._authinfo.sessionId]
+                   ];
+
+  var header = meta_header;
+  var url = this._authinfo.metadataServerUrl;
+  
+  var req = [ "soapenv:Envelope",
+             { "xmlns:soapenv" : "http://schemas.xmlsoap.org/soap/envelope/" }, { "xmlns:meta" : "http://soap.sforce.com/2006/04/metadata" }, { "xmlns:urn" : "urn:partner.soap.sforce.com" }, { "xmlns:xsi" : "http://www.w3.org/2001/XMLSchema-instance" },
+             [ "soapenv:Header", header ],
+             [ "soapenv:Body", body ]
+            ]; 
+  
+  Logger.log(body);
+  Logger.log(Xml.parseJS(req).toXmlString());
+  
+  var options =
+      {
+        "method" : "post",
+        "contentType" : "text/xml;charset=UTF-8",
+        "payload" : Xml.parseJS(req).toXmlString(),
+        "headers" : {SOAPAction : "\"\""}
+      };
+  
+  var fetchRes = UrlFetchApp.fetch(url, options);  
+  Logger.log(fetchRes.getContentText());
+  Logger.log(url);
+  
+  var result = Xml.parse(fetchRes.getContentText(), false);
+  
+  return result;
+};
+
+
+
+
+
+
+
+
+
+
+
 function insertToSObject(sObject, fieldName, value) {
   var name_comp = fieldName.split(".");
   var val = null;
