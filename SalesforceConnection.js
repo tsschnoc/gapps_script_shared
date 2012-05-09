@@ -501,6 +501,42 @@ SalesforceConnection.prototype.doSoapUrnRequest = function(body) {
 
 
 
+SalesforceConnection.prototype.metaRetrieveObjectFields = function(sObjectName) {
+  var param = [ "meta:retrieve",
+               [ "meta:retrieveRequest", 
+                [ "meta:apiVersion", "24"], 
+                [ "meta:singlePackage", "false"], 
+                [ "meta:unpackaged", 
+                 [ "meta:version", "24"],
+                 [ "meta:types", 
+                  [ "meta:members", sObjectName],
+                  [ "meta:name", "CustomObject"]
+                 ]                      
+                ]
+               ]
+              ];
+  
+  var result = this.doSoapMetaRequest(param );
+  
+  var responseId = result.Envelope.Body.retrieveResponse.result.id.getText();
+  
+  
+  var param = [ "meta:checkStatus",
+               [ "meta:asyncProcessId", responseId ]
+              ];
+  
+  
+  var done = "false";
+  while (done == "false") {  
+    var result = this.doSoapMetaRequest(param );
+    done = result.Envelope.Body.checkStatusResponse.result.done.getText();
+    Logger.log( done );
+  }
+
+};
+
+
+
 
 
 
