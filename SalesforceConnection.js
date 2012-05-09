@@ -499,9 +499,39 @@ SalesforceConnection.prototype.doSoapUrnRequest = function(body) {
   return this.doSoapRequest(this._authinfo.serverUrl, body, urn_header);
 };
 
+SalesforceConnection.prototype.metaUpdateFields = function(sObjectName, field) {
+  var metadata = [ "meta:metadata",
+                  { "xsi:type" : "meta:CustomField" }
+                 ];     
+                  
+  for (var i in field) {
+    if (i == "fullName") {
+      metadata.push([i,sObjectName + "." + field[i]]);
+    } else {
+      metadata.push([i,field[i]]);
+    }
+  }
+    
+  
+  var UpdateMetadata = [ "UpdateMetadata",
+                        ["currentName", sObjectName + "." + field.fullName],
+                        metadata
+                       ];  
+  
+  var param = [ "update",
+           { "xmlns" : "http://soap.sforce.com/2006/04/metadata" },
+           UpdateMetadata 
+          ];
+  
+  var result = this.doSoapMetaRequest(param );
+  Logger.log(result);
 
 
-SalesforceConnection.prototype.metaRetrieveObjectFields = function(sObjectName) {
+};
+
+
+
+SalesforceConnection.prototype.metaRetrieveObjectFields = function(sObjectName, field) {
   var param = [ "meta:retrieve",
                [ "meta:retrieveRequest", 
                 [ "meta:apiVersion", "24"], 
