@@ -216,6 +216,14 @@ function sfCallback(response, reqid) {
         resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + "/" + contact.Id;
         resultEntry.phoneNumbers = [];
 
+
+        for (var j in contact) {
+            if (j.toLowerCase().indexOf("phone") < 0 && j.toLowerCase().indexOf("telefon") < 0) { continue; }
+            var phoneNumber = {};
+            phoneNumber.number = contact[j];
+            resultEntry.phoneNumbers.push(phoneNumber);
+        }
+
 /*
         h += '<a href="' + contactUrl + '" TARGET="_blank">' + contact.title.$t + '</a><br/>';
 
