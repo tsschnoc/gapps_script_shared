@@ -221,8 +221,9 @@ function sfCallback(response, reqid) {
             if (j.toLowerCase().indexOf("phone") < 0 && j.toLowerCase().indexOf("telefon") < 0) { continue; }
             var phoneNumber = {};
             phoneNumber.number = contact[j];
-            if (phoneNumber.number != null && (phoneNumber.number.length > 3)
-            resultEntry.phoneNumbers.push(phoneNumber);
+            if (phoneNumber.number != null && (phoneNumber.number.length > 3)) {
+              resultEntry.phoneNumbers.push(phoneNumber);
+            }
         }
 
 /*
