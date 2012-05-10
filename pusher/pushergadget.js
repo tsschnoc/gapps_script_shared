@@ -105,7 +105,7 @@ function searchnumber(number) {
 
     lastSentRequestId = lastSentRequestId + 1;
 
-    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + number.formatPhoneForSearch() + "&alt=json";
+    var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + encodeURIComponent(number.formatPhoneForSearch()) + "&alt=json";
 
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;

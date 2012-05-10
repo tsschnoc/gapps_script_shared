@@ -525,7 +525,7 @@ SalesforceConnection.prototype.metaUpdateField = function(sObjectName, field) {
   
   var result = this.doSoapMetaRequest(param );
   Logger.log(result);
-
+  return result;
 
 };
 
