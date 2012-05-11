@@ -274,9 +274,10 @@ function uiInit() {
 			hide: {
 				fixed: true
 			},
-//			style: {
+			style: {
+        border-radius: 5px;
 //				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
-//			}
+			}
 		});
 	});
   
