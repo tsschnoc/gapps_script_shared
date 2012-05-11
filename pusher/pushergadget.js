@@ -251,7 +251,7 @@ function uiInit() {
         $("#searchfield").click(function(){
             // Select input field contents
             this.select();
-            this.val("leer");
+            this.val(searchTerm.term);
             return true;
         });    
       
@@ -263,7 +263,7 @@ function uiInit() {
             },
             select: function(event, ui) {
                 //      		alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
-                popitup(ui.item.contactUrl);
+                //popitup(ui.item.contactUrl);
             },
             minLength: 2,
         }).data("autocomplete")._renderItem = function(ul, item) {
@@ -310,6 +310,19 @@ function gadgetOnLoad() {
 }
 
 gadgets.util.registerOnLoadHandler(gadgetOnLoad);
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //google auth
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
