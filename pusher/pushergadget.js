@@ -245,15 +245,18 @@ function sfCallback(response, reqid) {
 
     gadgets.window.adjustHeight(200);
 }
-
 function uiInit() {
   $(function() {
     $('#ny').qtip({
       content: {
         attr: 'tip'
-      }
+      },
+      position: {
+        my: my[i],
+        // Use the corner...
+        at: at[i] // ...and opposite corner
+      },
     });
-
     $("#searchfield").click(function() {
       // Select input field contents
       this.select();
