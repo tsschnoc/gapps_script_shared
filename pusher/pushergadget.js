@@ -251,8 +251,9 @@ function uiInit() {
         $("#searchfield").click(function(){
             // Select input field contents
             this.select();
-            $("#searchfield").val("leeere");
-            //this.val(searchTerm.term + 'df'); 
+            if (searchTerm.term != null) {
+              $("#searchfield").val(searchTerm.term);
+            } 
             return true; 
         });    
       
