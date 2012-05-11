@@ -255,6 +255,7 @@ function uiInit() {
         my: "center",
         at: "center"
       },
+      hide: function(e) {alert("sadfadsf");},
     });
     $("#searchfield").click(function() {
       // Select input field contents
