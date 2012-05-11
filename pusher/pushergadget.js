@@ -248,6 +248,13 @@ function sfCallback(response, reqid) {
 
 function uiInit() {
     $(function() {
+        $("#searchfield").click(function(){
+            // Select input field contents
+            this.select();
+            this.val("leer");
+            return true;
+        });    
+      
         $("#searchfield").autocomplete({
             source: function(request, response) {
                 responseFunc = response;
