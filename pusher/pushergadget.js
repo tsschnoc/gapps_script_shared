@@ -245,6 +245,8 @@ function sfCallback(response, reqid) {
 
     gadgets.window.adjustHeight(200);
 }
+
+
 function uiInit() {
   $(function() {
     $('#ny').qtip({
@@ -255,7 +257,15 @@ function uiInit() {
         my: "center",
         at: "center"
       },
-      hide: function(e) {alert("sadfadsf");},
+      events: {
+        show: function(event, api) {
+          alert("safasdf");
+          // Only show the tooltip if it was a right-click
+          if (event.originalEvent.button !== 2) {
+            //event.preventDefault();
+          }
+        }
+      }
     });
     $("#searchfield").click(function() {
       // Select input field contents
