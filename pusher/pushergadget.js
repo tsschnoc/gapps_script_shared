@@ -252,9 +252,8 @@ function uiInit() {
         attr: 'tip'
       },
       position: {
-        my: my[i],
-        // Use the corner...
-        at: at[i] // ...and opposite corner
+        my: "center",
+        at: "center"
       },
     });
     $("#searchfield").click(function() {
