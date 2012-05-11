@@ -250,7 +250,7 @@ function uiInit() {
   $(function() {
     $('#ny').qtip({
       content: {
-        attr: 'alt'
+        attr: 'tip'
       }
     });
 
