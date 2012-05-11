@@ -250,7 +250,7 @@ function sfCallback(response, reqid) {
 function uiInit() {
   $(function() {
   
-/*
+
   $('#ny').each(function() {
 
     var content = $('<a />', { 
@@ -281,7 +281,6 @@ function uiInit() {
 		});
 	});
   
-  */
 
     
     $("#searchfield").click(function() {
