@@ -256,7 +256,7 @@ function uiInit() {
     var content = $('<a />', { 
 //			href: $(this).parent().attr('href'),
 		})
-		.append( "hallooo" ).append( $(this).parent().attr('tip') );
+		.append( $(this).parent().attr('tip') );
  
 		// Create the tooltip
 		$(this).qtip({
