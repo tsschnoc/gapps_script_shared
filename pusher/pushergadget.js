@@ -249,9 +249,22 @@ function sfCallback(response, reqid) {
 
 function uiInit() {
   $(function() {
+  
+  	var thumb = $(this).attr('src'), full, content;
+ 
+		// We can grab the fullsize image by replacing the _m at the end of the filename
+		full = thumb.replace('_m.jpg', '.jpg');
+ 
+		// Create the fullsize image with a link
+		content = $('<a />', { 
+//  		href: $(this).parent().attr('href'),
+		})
+  	.append( "hallo" );
+//  	.append( $('<img />', { src: full }) );
+
     $('#ny').qtip({
       content: {
-        attr: 'tip'
+        text: content,
       },
       position: {
         my: "center",
