@@ -250,13 +250,13 @@ function sfCallback(response, reqid) {
 function uiInit() {
   $(function() {
   
-
+/*
   $('#ny').each(function() {
 
     var content = $('<a />', { 
 //			href: $(this).parent().attr('href'),
 		})
-		.append( $(this).parent().attr('tip') );
+		.append( $(this).attr('tip') );
  
 		// Create the tooltip
 		$(this).qtip({
@@ -281,7 +281,7 @@ function uiInit() {
 		});
 	});
   
-  
+  */
 
     
     $("#searchfield").click(function() {
