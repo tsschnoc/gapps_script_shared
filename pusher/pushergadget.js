@@ -259,11 +259,7 @@ function uiInit() {
       },
       events: {
         show: function(event, api) {
-          alert("safasdf");
-          // Only show the tooltip if it was a right-click
-          if (event.originalEvent.button !== 2) {
-            //event.preventDefault();
-          }
+          api.elements.tooltip.val("sdfdsf");
         }
       }
     });
