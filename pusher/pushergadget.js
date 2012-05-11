@@ -274,9 +274,9 @@ function uiInit() {
 			hide: {
 				fixed: true
 			},
-			style: {
-				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
-			}
+//			style: {
+//				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
+//			}
 		});
 	});
   
