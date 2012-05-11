@@ -251,7 +251,7 @@ function uiInit() {
         $("#searchfield").click(function(){
             // Select input field contents
             this.select();
-            this.val(searchTerm.term);
+            this.val(searchTerm.term + 'df');
             return true; 
         });    
       
