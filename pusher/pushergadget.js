@@ -65,7 +65,7 @@ sfOAuth.consumerSecret = "884370394195470338";
 var gadgets = gadgets;
 
 var responseFunc;
-var searchTerm = null;
+var searchTerm = {};
 
 var lastSentRequestId = 1;
 var lastReceivedRequestId = 0;
