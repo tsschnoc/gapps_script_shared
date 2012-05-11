@@ -250,32 +250,39 @@ function sfCallback(response, reqid) {
 function uiInit() {
   $(function() {
   
-  	var thumb = $(this).attr('src'), full, content;
- 
-		// We can grab the fullsize image by replacing the _m at the end of the filename
-		full = thumb.replace('_m.jpg', '.jpg');
- 
-		// Create the fullsize image with a link
-		content = $('<a />', { 
-//  		href: $(this).parent().attr('href'),
-		})
-  	.append( "hallo" );
-//  	.append( $('<img />', { src: full }) );
 
-    $('#ny').qtip({
-      content: {
-        text: content,
-      },
-      position: {
-        my: "center",
-        at: "center"
-      },
-      events: {
-        show: function(event, api) {
-          api.elements.tooltip.val("sdfdsf");
-        }
-      }
-    });
+  $('#ny').each(function() {
+
+    var content = $('<a />', { 
+//			href: $(this).parent().attr('href'),
+		})
+		.append( "hallooo" );
+ 
+		// Create the tooltip
+		$(this).qtip({
+			content: {
+				text: content,
+				title: {
+					text: $(this).attr('alt') // Use the image ALT text for the title
+				}
+			},
+			position: {
+				my: 'center',
+				at: 'center',
+				viewport: $(window)
+			},
+			hide: {
+				fixed: true
+			},
+			style: {
+				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
+			}
+		});
+	});
+  
+  
+
+    
     $("#searchfield").click(function() {
       // Select input field contents
       this.select();
