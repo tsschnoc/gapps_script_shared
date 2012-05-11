@@ -253,6 +253,7 @@ function uiInit() {
             this.select();
             if (searchTerm.term != null) {
               $("#searchfield").val(searchTerm.term);
+              $("#searchfield").autocomplete( "search");
             } 
             return true; 
         });    
