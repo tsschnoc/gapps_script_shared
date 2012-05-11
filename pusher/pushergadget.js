@@ -256,7 +256,7 @@ function uiInit() {
     var content = $('<a />', { 
 //			href: $(this).parent().attr('href'),
 		})
-		.append( "hallooo" );
+		.append( "hallooo" ).append( $(this).parent().attr('tip') );
  
 		// Create the tooltip
 		$(this).qtip({
@@ -274,10 +274,10 @@ function uiInit() {
 			hide: {
 				fixed: true
 			},
-			style: {
-        border-radius: 5px;
+//			style: {
+//        border-radius: 5px;
 //				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
-			}
+//			}
 		});
 	});
   
