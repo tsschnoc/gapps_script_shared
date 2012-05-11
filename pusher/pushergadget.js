@@ -252,7 +252,7 @@ function uiInit() {
             // Select input field contents
             this.select();
             this.val(searchTerm.term);
-            return true;
+            return true; 
         });    
       
         $("#searchfield").autocomplete({
