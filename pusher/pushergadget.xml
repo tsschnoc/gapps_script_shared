@@ -45,8 +45,9 @@
 
 <body>
   <div class="ui-widget">
-  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
     <div id='ny' tip='hi tip'>no Calls</div>
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
+    <div id='itemDetail'></div>
   </div>  
 </body>
 

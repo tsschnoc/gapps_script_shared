@@ -300,7 +300,7 @@ function uiInit() {
         searchnumber(searchTerm.term);
       },
       select: function(event, ui) {
-        //      		alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
+        //alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
         //popitup(ui.item.contactUrl);
       },
       minLength: 2,
