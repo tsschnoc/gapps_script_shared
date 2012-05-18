@@ -316,7 +316,7 @@ function uiInit() {
             }
             
             if (zugangsdatenLogin) {
-              zugangsdatenLogin += "?un="+sfObj.Name+"&pw="+sfObj.Password__c + sfObj.Token__c+";//&startURL=/apex/somepage";
+              zugangsdatenLogin += "?un="+sfObj.Name+"&pw="+sfObj.Password__c + sfObj.Token__c;//+"&startURL=/apex/somepage";
               popitup(zugangsdatenLogin);        
             } 
               
