@@ -302,6 +302,11 @@ function uiInit() {
       select: function(event, ui) {
         //alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
         //popitup(ui.item.contactUrl);
+        
+        var frontDoor = ui.item.contactUrl;
+        frontDoor.replace("com/","com/secur/frontdoor.jsp?sid=" + sfOAuth.access_token);
+        alert(frontDoor);
+        popitup(frontDoor);
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
