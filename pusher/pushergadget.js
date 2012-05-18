@@ -215,6 +215,7 @@ function sfCallback(response, reqid) {
 //        resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + contactUrl;
         resultEntry.contactUrl = sfOAuth.oauth2_identity.urls.custom_domain + "/" + contact.Id;
         resultEntry.phoneNumbers = [];
+        resultEntry.sfObject = response.data[i];
 
 
         for (var j in contact) {
