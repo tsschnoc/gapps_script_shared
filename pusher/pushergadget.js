@@ -304,7 +304,7 @@ function uiInit() {
         //popitup(ui.item.contactUrl);
         
         var frontDoor = ui.item.contactUrl;
-        frontDoor.replace("com/","com/secur/frontdoor.jsp?sid=" + sfOAuth.access_token);
+        frontDoor = frontDoor.replace("com/","com/secur/frontdoor.jsp?sid=" + sfOAuth.access_token + "&retURL=/");
         alert(frontDoor);
         popitup(frontDoor);
       },
