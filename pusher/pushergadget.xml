@@ -87,7 +87,7 @@
           
           <% _.each(sfObject, function(value, key) { %> 
             <% if (((key.indexOf("Telefon")>=0) || (key.indexOf("Phone")>=0)) && (value!=null)) { %>  
-              <li class="phoneNumber">
+              <li class="phoneNumber" number="<%= value %>">
                 <%= value %> <span>(<%= key %>)</span>
               </li> 
             <% } %>
@@ -121,7 +121,7 @@
           <li><%= googleObject.title.$t %></li>          
           
           <% _.each(googleObject.gd$phoneNumber, function(phone) { %> 
-            <li class="phoneNumber">
+            <li class="phoneNumber" number="<%= phone.$t %>">
               <%= phone.$t %>
             </li> 
           <% }); %>

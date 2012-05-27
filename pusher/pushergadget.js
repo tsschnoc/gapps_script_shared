@@ -350,7 +350,8 @@ function uiInit() {
         $('li.phoneNumber').each(function() {
             $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">');
             $(this).children('img').click(function () {
-                  var number = $(this).parent().text().trim();
+//                  var number = $(this).parent().text().trim();
+                  var number = $(this).parent().attr("number").trim();
                   var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
         //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                   
