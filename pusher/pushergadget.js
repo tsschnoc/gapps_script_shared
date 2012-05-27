@@ -202,7 +202,7 @@ function googleCallback(response, reqid) {
 
 
 //        resultArr.push(resultEntry);
-        resultArr.push(resultEntry);
+        resultArr.push(ri);
     }
     
     lastGoogleResult = resultArr;
@@ -353,7 +353,7 @@ function uiInit() {
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
-      var resultItemView = new ResultItemView({model: item});
+      var resultItemView = new ResultItemListView({model: item});
       resultItemView.render();
       return resultItemView.el;
       /*
