@@ -71,7 +71,7 @@
 <body>
   <div class="ui-widget">
     <div id='ny' tip='hi tip'>no Calls</div>
-  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 100px;">
     <div id='itemDetail'></div>
     <iframe id="callToFrame" style="display: none;" width="5" height="5"></iframe> 
   </div>  
