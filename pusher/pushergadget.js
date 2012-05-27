@@ -99,7 +99,8 @@ function receiveCall(phoneCall) {
 var ResultItem = Backbone.Model.extend({});
 var ResultItemListView = Backbone.View.extend({
   tagName: 'a',
-  template: _.template('<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10"><%= label %><div style="font-size: 70%; "><%= label %></div></a>'),
+//  template: _.template('<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10"><%= label %><div style="font-size: 70%; "><%= label %></div>'),
+  template: _.template($('#itemDetail-template').html()),
 
   render: function(){
 //    $(this.el).html('<div>' + this.model.get('label') + '</div>');
