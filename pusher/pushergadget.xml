@@ -90,7 +90,7 @@
               <li class="phoneNumber">
                 <%= value %> <span>(<%= key %>)</span>
               </li> 
-            <% }); %>
+            <% } %>
           <% }); %>
           
           
