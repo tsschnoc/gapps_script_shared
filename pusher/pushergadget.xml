@@ -111,8 +111,8 @@
           
           <% _.each(googleObject.gd$phoneNumber, function(phone) { %> 
             <li class="phoneNumber">
-              <%= phone.$t %>
-                                <img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">
+              <span><%= phone.$t %></span>
+              <img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">
 
             </li> 
           <% }); %>
