@@ -254,61 +254,26 @@ function sfCallback(response, reqid) {
 function uiInit() {
   $(function() {
   
-  
-  
-
-  ResultItem = Backbone.Model.extend({});
-  ResultItemListView = Backbone.View.extend({
-    tagName: 'a',
-    template: _.template($('#ResultItemListView-template').html()),
-  
-    render: function(){
-      var attributes = this.model.toJSON();
-      this.$el.html(this.template(attributes));  
-    }
-  });
-  ResultItemDetailView = Backbone.View.extend({
-    tagName: 'a',
-    template: _.template($('#ResultItemDetailView-template').html()),
-  
-    render: function(){
-      var attributes = this.model.toJSON();
-      this.$el.html(this.template(attributes));  
-    }
-  });
-  
-
-  $('#ny').each(function() {
-
-    var content = $('<a />', { 
-//			href: $(this).parent().attr('href'),
-		})
-		.append( $(this).attr('tip') );
- 
-		// Create the tooltip
-		$(this).qtip({
-			content: {
-				text: content,
-				title: {
-					text: $(this).attr('alt') // Use the image ALT text for the title
-				}
-			},
-			position: {
-				my: 'center',
-				at: 'center',
-				viewport: $(window)
-			},
-			hide: {
-				fixed: true
-			},
-			style: {
-//        border-radius: 5px,
-//				classes: 'ui-tooltip-tipsy ui-tooltip-flickr'
-			}
-		});
-	});
-  
-
+    ResultItem = Backbone.Model.extend({});
+    ResultItemListView = Backbone.View.extend({
+      tagName: 'a',
+      template: _.template($('#ResultItemListView-template').html()),
+    
+      render: function(){
+        var attributes = this.model.toJSON();
+        this.$el.html(this.template(attributes));  
+      }
+    });
+    ResultItemDetailView = Backbone.View.extend({
+      tagName: 'a',
+      template: _.template($('#ResultItemDetailView-template').html()),
+    
+      render: function(){
+        var attributes = this.model.toJSON();
+        this.$el.html(this.template(attributes));  
+      }
+    });
+    
     
     $("#searchfield").click(function() {
       // Select input field contents
