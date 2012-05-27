@@ -115,7 +115,7 @@
           
           <% _.each(googleObject.gd$email, function(mail) { %> 
             <li class="mailAddress">
-              <%= mail.$t %>            
+              <%= mail.address %>            
             </li> 
           <% }); %>
   
