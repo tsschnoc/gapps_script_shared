@@ -59,7 +59,9 @@
   
   
   <script type="text/template" id="ResultItemListView-template">
-    <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+    <% if (type == "SF") { %>  
+      <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+    <% } %>
     <%= label %>
     <div style="font-size: 70%; ">
       <%= label %>
