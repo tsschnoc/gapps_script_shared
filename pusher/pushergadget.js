@@ -365,7 +365,7 @@ function uiInit() {
       
       app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + 'hallooo' + '<div style="font-size: 70%; ">';
       var x1 = $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);  
-      var x2 = $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
+      var x2 = $("<li></li>").data("item.autocomplete", item).append(resultItemView.el+'').appendTo(ul);
       debug(x1);
       debug(x2);
       
