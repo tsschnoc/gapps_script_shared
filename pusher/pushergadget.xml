@@ -88,13 +88,6 @@
           <%= sfObject.Password__c %><br/>
           <%= sfObject.Token__c %><br/>
           
-          <% if (sfObject.Typ__c == "Salesforce Live" || sfObject.Typ__c == "Salesforce Developer") { %>  
-            <a href="https://login.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c % target="_blank">">login</a>
-          <% } %>
-          <% if (sfObject.Typ__c == "Salesforce Sandbox" || sfObject.Typ__c == "Salesforce Trial") { %>  
-            <a href="https://test.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">login</a>
-          <% } %>
-          
         <% } %>
         
       <% } %>
