@@ -331,6 +331,12 @@ function uiInit() {
         searchnumber(searchTerm.term);
       },
       select: function(event, ui) {
+        
+        
+        var resultItemView = new ResultItemListView({model: ui.item});
+        resultItemView.render();
+$('#ny').html(resultItemView.el);
+        
         //alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
         //popitup(ui.item.contactUrl);
         if (ui.item.type == "SF") {
