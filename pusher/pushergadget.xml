@@ -71,7 +71,7 @@
     </div>
   </script>
   
-  <script type="text/template" id="ResultItemDetainView-template">
+  <script type="text/template" id="ResultItemDetailView-template">
     <% if (type == "SF") { %>  
       <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
     <% } %>

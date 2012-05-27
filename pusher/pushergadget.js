@@ -276,9 +276,9 @@ function uiInit() {
       this.$el.html(this.template(attributes));  
     }
   });
-  ResultItemDetainView = Backbone.View.extend({
+  ResultItemDetailView = Backbone.View.extend({
     tagName: 'a',
-    template: _.template($('#ResultItemDetainView-template').html()),
+    template: _.template($('#ResultItemDetailView-template').html()),
   
     render: function(){
       var attributes = this.model.toJSON();
@@ -338,7 +338,7 @@ function uiInit() {
       select: function(event, ui) {
         
         
-        var resultItemView = new ResultItemListView({model: ui.item});
+        var resultItemView = new ResultItemDetailView({model: ui.item});
         resultItemView.render();
         $('#itemDetail').html(resultItemView.el);
         
