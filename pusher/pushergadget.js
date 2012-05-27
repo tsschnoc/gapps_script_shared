@@ -182,6 +182,7 @@ function googleCallback(response, reqid) {
     var resultArr = [];
 
     for (var i in response.data.feed.entry) {
+        if (i > 3) continue;
         var contact = response.data.feed.entry[i];
         var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
@@ -366,9 +367,9 @@ function uiInit() {
       var app;
       
       app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + 'hallooo' + '<div style="font-size: 70%; ">';
-      var x1 = $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);  
+//      var x1 = $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);  
       var x2 = $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
-      debug(x1);
+//      debug(x1);
       debug(x2);
       
       return x2;
