@@ -80,7 +80,7 @@
     <% } %>    
     <%= label %>
     <% if (type == "SF") { %>  
-      <%= attributes.type %>
+      <%= sfObject.attributes.type %>
     <% } %>
     <div style="font-size: 70%; ">
       <%= label %>
