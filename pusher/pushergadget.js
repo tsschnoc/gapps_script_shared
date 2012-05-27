@@ -363,23 +363,33 @@ function uiInit() {
         
         });
         
-      $('li.mailAddress').each(function() {
-        $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/email.png" alt="google contact" width="15" height="10">');
+        $('li.mailAddress').each(function() {
+          $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/email.png" alt="google contact" width="15" height="10">');
+            
+        
+        	$(this).children('img').click(function (event){
+            var number = $(this).parent().text().trim();
+            var url = 'https://mail.google.com/mail/?view=cm&ui=2&tf=0&fs=1&to=' + escape(number) + ''; //&su=SUBJECTHERE&body=LINE1%0aLINE2
+            
+            window.open(url, '_blank');
+            console.log(url);
+            
+            event.preventDefault();         
+          });
           
-      
-      	$(this).children('img').click(function (event){
-          var number = $(this).parent().text().trim();
-          var url = 'https://mail.google.com/mail/?view=cm&ui=2&tf=0&fs=1&to=' + escape(number) + ''; //&su=SUBJECTHERE&body=LINE1%0aLINE2
+        });
+        $('#itemDetail .title').click(function (event){
+          var url = $(this).attr("url");
           
-//          window.open(url, '_blank', 'height=600,width=800');
           window.open(url, '_blank');
           console.log(url);
           
-          event.preventDefault();
-       
+          event.preventDefault();         
         });
-      });
-        
+
+
+
+
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
