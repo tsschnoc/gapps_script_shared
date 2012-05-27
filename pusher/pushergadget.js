@@ -106,7 +106,7 @@ var ResultItemDetailView = Backbone.View.extend({
     $(this.el).html('<li>' + this.model.get('title') + '</li>');
   }
 });
-
+var s = new ResultItemListView();
 
 
 
