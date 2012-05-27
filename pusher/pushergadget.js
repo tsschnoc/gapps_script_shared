@@ -98,12 +98,12 @@ function receiveCall(phoneCall) {
 var ResultItem = Backbone.Model.extend({});
 var ResultItemListView = Backbone.View.extend({
   render: function(){
-    $(this.el).html('<li>' + this.model.get('title') + '</li>');
+    $(this.el).html('<div>' + this.model.get('label') + '</div>');
   }
 });
 var ResultItemDetailView = Backbone.View.extend({
   render: function(){
-    $(this.el).html('<li>' + this.model.get('title') + '</li>');
+    $(this.el).html('<div>' + this.model.get('label') + '</div>');
   }
 });
 var s = new ResultItemListView();
