@@ -355,7 +355,8 @@ function uiInit() {
     }).data("autocomplete")._renderItem = function(ul, item) {
       var resultItemView = new ResultItemListView({model: item});
       resultItemView.render();
-      return resultItemView.el;
+      
+      return $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
       /*
       
       var app;
