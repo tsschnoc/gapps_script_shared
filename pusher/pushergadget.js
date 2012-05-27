@@ -360,10 +360,7 @@ function uiInit() {
             console.log( $(this));
         
         });
-        //mailToEnablement
-        $('li.mailAddress').each(function() {
-            $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/email.png" alt="google contact" width="15" height="10">');        
-        });
+        
         
       },
       minLength: 2,
