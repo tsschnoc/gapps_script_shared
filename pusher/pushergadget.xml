@@ -62,6 +62,9 @@
     <% if (type == "SF") { %>  
       <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
     <% } %>
+    <% if (type == "Google") { %>  
+      <img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10">
+    <% } %>
     <%= label %>
     <div style="font-size: 70%; ">
       <%= label %>
@@ -81,6 +84,7 @@
     <% if (done) { %>
       <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
     <% } %>
+    
     <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
   </script>
   
