@@ -63,7 +63,7 @@
   
   <script type="text/template" id="ResultItemListView-template">
     <% if (type == "SF") { %>  
-      <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+      <img border="0" src="https://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
     <% } %>
     <% if (type == "Google") { %>  
       <img border="0" src="https://ssl.gstatic.com/gb/images/silhouette_48.png" alt="google contact" width="10" height="10">
@@ -102,24 +102,19 @@
         <% } %>
         
       <% } %>
-      </ul>
+
+      <% if (type == "Google") { %>  
+        <li><%= googleObject.title.$t %></li>
+        <li><%= googleObject.id.$t %></li>
+      <% } %>
+
+  
+  
+  
+  
+</ul>
     </div>
   </script>
-  
-  
-  <!--   
-  hfemigration@lyric.sf.phonak.com.lyricq
-Typ__c: Salesforce Sandbox
-Password__c: Zg7A8TSi
-Token__c: rWrluL5FIeHrDnGPp
-http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png
-Id: "a0n20000000ctlIAAQ"
-Name: "salesforce.admin@phonak.com.lyricQ"
-Password__c: "TMg3MYFvJQfG"
-Token__c: "WLPYv8OQcgozs1KYgBXzrp8Z3"
-Typ__c: "Salesforce Sandbox"
--->
-
   
   <script type="text/template" id="nix-template">        
     

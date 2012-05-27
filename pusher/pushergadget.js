@@ -176,6 +176,7 @@ function googleCallback(response, reqid) {
         resultEntry.id = contact.id.$t.split("\/base\/")[1];
         resultEntry.contactUrl = contactUrl;
         resultEntry.phoneNumbers = [];
+        resultEntry.googleObject = response.data.feed.entry[i];
 
 
         for (var j in contact.gd$phoneNumber) {
