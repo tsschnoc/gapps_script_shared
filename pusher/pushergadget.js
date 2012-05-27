@@ -164,7 +164,7 @@ function googleCallback(response, reqid) {
     var resultArr = [];
 
     for (var i in response.data.feed.entry) {
-        if (i > 3) continue;
+//if (i > 3) continue;
         var contact = response.data.feed.entry[i];
         var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
@@ -214,7 +214,7 @@ function sfCallback(response, reqid) {
     var resultArr = [];
 
     for (var i in response.data) {
-              if (i > 3) continue;
+//if (i > 3) continue;
 
         var contact = response.data[i];
         var contactUrl = contact.attributes.url;
