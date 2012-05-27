@@ -120,7 +120,7 @@ function searchnumber(number) {
     doGoogleSyncRequest(lastSentRequestId, url, params);
     
     
-    /*
+    
 //    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
     var queryString = "FIND {" + number.formatPhoneForSearch() + "*} returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
         
@@ -134,7 +134,7 @@ function searchnumber(number) {
     };    
 
     doSFSyncRequest(lastSentRequestId, callUrl, params);    
-    */
+    
 }
 
 function doGoogleSyncRequest(counter, callUrl, params) {
@@ -216,6 +216,8 @@ function sfCallback(response, reqid) {
     var resultArr = [];
 
     for (var i in response.data) {
+              if (i > 3) continue;
+
         var contact = response.data[i];
         var contactUrl = contact.attributes.url;
 

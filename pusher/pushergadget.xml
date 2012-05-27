@@ -77,9 +77,11 @@
     <% } %>
     <% if (type == "Google") { %>  
       <img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10">
-    <% } %>
-    Detail
+    <% } %>    
     <%= label %>
+    <% if (type == "SF") { %>  
+      <%= attributes.type %>
+    <% } %>
     <div style="font-size: 70%; ">
       <%= label %>
     </div>
