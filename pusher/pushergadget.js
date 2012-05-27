@@ -345,6 +345,8 @@ function uiInit() {
         resultItemView.render();
         $('#itemDetail').html(resultItemView.el);
         
+        
+        //callTo enablement
         $('li.phoneNumber').each(function() {
             $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">');
             $(this).children('img').click(function () {
@@ -357,18 +359,12 @@ function uiInit() {
                 });
             console.log( $(this));
         
-        });        
-        /*
-        $("li.phoneNumber img").click(function () {
-          var number = $(this).parent().children('span').text();
-//          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
-          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
-          
-          
-          $('#callToFrame').attr("src",url); 
+        });
+        //mailToEnablement
+        $('li.mailAddress').each(function() {
+            $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/email.png" alt="google contact" width="15" height="10">');        
         });
         
-        */
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
