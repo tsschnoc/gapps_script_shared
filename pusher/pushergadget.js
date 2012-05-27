@@ -350,7 +350,7 @@ function uiInit() {
         $('li.phoneNumber').each(function() {
             $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">');
             $(this).children('img').click(function () {
-                  var number = $(this).parent().text();
+                  var number = $(this).parent().text().trim();
         //          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
                   var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                   
@@ -367,7 +367,7 @@ function uiInit() {
           
       
       	$(this).children('img').click(function (event){
-          var number = $(this).parent().text();
+          var number = $(this).parent().text().trim();
           var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
           
           window.open(url, 'sendMail', 'height=600,width=800');
