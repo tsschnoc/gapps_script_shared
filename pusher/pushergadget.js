@@ -95,6 +95,19 @@ function receiveCall(phoneCall) {
 
 
 
+var ResultItem = Backbone.Model.extend({});
+var ResultItemListView = Backbone.View.extend({
+  render: function(){
+    $(this.el).html('<li>' + this.model.get('title') + '</li>');
+  }
+});
+var ResultItemDetailView = Backbone.View.extend({
+  render: function(){
+    $(this.el).html('<li>' + this.model.get('title') + '</li>');
+  }
+});
+
+
 
 
 
@@ -118,7 +131,7 @@ function searchnumber(number) {
     doGoogleSyncRequest(lastSentRequestId, url, params);
     
     
-    
+    /*
 //    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
     var queryString = "FIND {" + number.formatPhoneForSearch() + "*} returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
         
@@ -132,6 +145,7 @@ function searchnumber(number) {
     };    
 
     doSFSyncRequest(lastSentRequestId, callUrl, params);    
+    */
 }
 
 function doGoogleSyncRequest(counter, callUrl, params) {
@@ -164,6 +178,10 @@ function googleCallback(response, reqid) {
         var contact = response.data.feed.entry[i];
         var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
+       
+//        var appointmentView = new ResultItemView({model: appointment});
+
+
         var resultEntry = {};
         resultEntry.type = "Google";
         resultEntry.label = contact.title.$t;
@@ -180,6 +198,10 @@ function googleCallback(response, reqid) {
             resultEntry.phoneNumbers.push(phoneNumber);
         }
 
+        var ri = new ResultItem(resultEntry);
+
+
+//        resultArr.push(resultEntry);
         resultArr.push(resultEntry);
     }
     
@@ -331,6 +353,11 @@ function uiInit() {
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
+      var resultItemView = new ResultItemView({model: item});
+      resultItemView.render();
+      return resultItemView.el;
+      /*
+      
       var app;
       if (item.type == "SF") {
         app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + item.label + '<div style="font-size: 70%; ">';
@@ -346,6 +373,7 @@ function uiInit() {
       app += "</div></a>";
 
       return $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);
+      */
     };
   });
 }
