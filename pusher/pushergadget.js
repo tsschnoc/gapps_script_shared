@@ -269,14 +269,20 @@ function uiInit() {
   ResultItem = Backbone.Model.extend({});
   ResultItemListView = Backbone.View.extend({
     tagName: 'a',
-  //  template: _.template('<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10"><%= label %><div style="font-size: 70%; "><%= label %></div>'),
     template: _.template($('#ResultItemListView-template').html()),
   
     render: function(){
-  //    $(this.el).html('<div>' + this.model.get('label') + '</div>');
       var attributes = this.model.toJSON();
-      this.$el.html(this.template(attributes));
+      this.$el.html(this.template(attributes));  
+    }
+  });
+  ResultItemDetainView = Backbone.View.extend({
+    tagName: 'a',
+    template: _.template($('#ResultItemDetainView-template').html()),
   
+    render: function(){
+      var attributes = this.model.toJSON();
+      this.$el.html(this.template(attributes));  
     }
   });
   
@@ -368,16 +374,8 @@ function uiInit() {
     }).data("autocomplete")._renderItem = function(ul, item) {
       var resultItemView = new ResultItemListView({model: item});
       resultItemView.render();
-      
-      var app;
-      
-      app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + 'hallooo' + '<div style="font-size: 70%; ">';
-//      var x1 = $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);  
-      var x2 = $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
-//      debug(x1);
-      debug(x2);
-      
-      return x2;
+            
+      return $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
       /*
       
       var app;

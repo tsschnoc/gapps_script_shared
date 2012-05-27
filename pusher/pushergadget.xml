@@ -70,14 +70,21 @@
       <%= label %>
     </div>
   </script>
-
-  <script type="text/template" id="itemDetail-template">
-    <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+  
+  <script type="text/template" id="ResultItemDetainView-template">
+    <% if (type == "SF") { %>  
+      <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+    <% } %>
+    <% if (type == "Google") { %>  
+      <img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10">
+    <% } %>
+    Detail
     <%= label %>
     <div style="font-size: 70%; ">
       <%= label %>
     </div>
   </script>
+
   
   <script type="text/template" id="nix-template">        
     
