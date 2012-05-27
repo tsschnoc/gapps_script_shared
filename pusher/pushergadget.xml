@@ -58,10 +58,17 @@
   
   
   
+  <script type="text/template" id="ResultItemListView-template">
+    <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+    <%= label %>
+    <div style="font-size: 70%; ">
+      <%= label %>
+    </div>
+  </script>
+
   <script type="text/template" id="itemDetail-template">
     <img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
     <%= label %>
-    ...........................
     <div style="font-size: 70%; ">
       <%= label %>
     </div>
