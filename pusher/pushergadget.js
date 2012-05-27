@@ -97,6 +97,7 @@ function receiveCall(phoneCall) {
 
 var ResultItem = Backbone.Model.extend({});
 var ResultItemListView = Backbone.View.extend({
+  tagName: 'a',
   template: _.template('<%= label %>'),
 
   render: function(){
