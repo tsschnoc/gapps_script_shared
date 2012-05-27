@@ -54,7 +54,7 @@
 		/* prevent horizontal scrollbar */
 		overflow-x: hidden;
 		/* add padding to account for vertical scrollbar */
-		padding-right: 20px;
+		padding-right: 0px;
 	}
 	/* IE 6 doesn't support max-height
 	 * we use height instead, but this forces the menu to always be this tall
@@ -71,7 +71,7 @@
 <body>
   <div class="ui-widget">
     <div id='ny' tip='hi tip'>no Calls</div>
-  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 90px;">
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
     <div id='itemDetail'></div>
     <iframe id="callToFrame" style="display: none;" width="5" height="5"></iframe> 
   </div>  
