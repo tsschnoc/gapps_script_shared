@@ -345,6 +345,14 @@ function uiInit() {
         resultItemView.render();
         $('#itemDetail').html(resultItemView.el);
         
+        
+        var number = '+41788223356';
+        var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+        
+        
+        $('#callToFrame').attr("src",url); 
+        
+        
         //alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
         //popitup(ui.item.contactUrl);
         if (ui.item.type == "SF") {
