@@ -47,6 +47,9 @@
   #itemDetail ul {
     padding-left: 10px;
   }
+  .ui-menu .ui-menu-item {
+    max-width: 130px;
+  }
 
   .ui-autocomplete {
 		max-height: 150px;
@@ -71,7 +74,7 @@
 <body>
   <div class="ui-widget">
     <div id='ny' tip='hi tip'>no Calls</div>
-  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 100px;">
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 130px;">
     <div id='itemDetail'></div>
     <iframe id="callToFrame" style="display: none;" width="5" height="5"></iframe> 
   </div>  
