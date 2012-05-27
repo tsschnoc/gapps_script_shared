@@ -345,8 +345,20 @@ function uiInit() {
         resultItemView.render();
         $('#itemDetail').html(resultItemView.el);
         
+        $('li.phoneNumber').each(function() {
+            $(this).append('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">');
+            $(this).children('img').click(function () {
+                  var number = $(this).parent().children('span').text();
+        //          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+                  var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
+                  
+                  
+                  $('#callToFrame').attr("src",url); 
+                });
+            console.log( $(this));
         
-        
+        });        
+        /*
         $("li.phoneNumber img").click(function () {
           var number = $(this).parent().children('span').text();
 //          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
@@ -356,34 +368,7 @@ function uiInit() {
           $('#callToFrame').attr("src",url); 
         });
         
-        
-        //alert( ui.item ? "Selected: " + ui.item.label :	"Nothing selected, input was " + this.value);
-        //popitup(ui.item.contactUrl);
-        if (ui.item.type == "SF") {
-          var sfObj = ui.item.sfObject;
-          if (sfObj.attributes.type == "Zugangsdaten__c") {
-            var zugangsdatenLogin = null;
-            if (sfObj.Typ__c == "Salesforce Sandbox") {
-              zugangsdatenLogin = "https://test.salesforce.com";
-            } else if (sfObj.Typ__c == "Salesforce Live") {
-              zugangsdatenLogin = "https://login.salesforce.com";
-            } if (sfObj.Typ__c == "Salesforce Developer") {
-              zugangsdatenLogin = "https://login.salesforce.com";
-            }
-            
-            if (zugangsdatenLogin) {
-              zugangsdatenLogin += "?un="+sfObj.Name+"&pw="+sfObj.Password__c;// + sfObj.Token__c;//+"&startURL=/apex/somepage";
-              popitup(zugangsdatenLogin);        
-            } 
-              
-          }
-        }
-        
-        
-//        var frontDoor = ui.item.contactUrl;
-//        frontDoor = frontDoor.replace("com/","com/secur/frontdoor.jsp?sid=" + sfOAuth.access_token + "&retURL=/");
-//        alert(frontDoor);
-//        popitup(frontDoor);
+        */
       },
       minLength: 2,
     }).data("autocomplete")._renderItem = function(ul, item) {
