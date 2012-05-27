@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Module>
-  <ModulePrefs title="Pusher" author="thomas.schnocklake@gmail.com" height="200">
+  <ModulePrefs title="Search" author="thomas.schnocklake@gmail.com" height="200">
     <Require feature="setprefs"/>
     <Require feature="dynamic-height"/>
     <Require feature="locked-domain"/>
