@@ -168,9 +168,6 @@ function googleCallback(response, reqid) {
         var contact = response.data.feed.entry[i];
         var contactUrl = "https://mail.google.com/mail/#contact/" + contact.id.$t.split("\/base\/")[1];
 
-       
-//        var appointmentView = new ResultItemView({model: appointment});
-
 
         var resultEntry = {};
         resultEntry.type = "Google";
@@ -188,10 +185,10 @@ function googleCallback(response, reqid) {
             resultEntry.phoneNumbers.push(phoneNumber);
         }
 
-        var ri = new ResultItem(resultEntry);
 
 
 //        resultArr.push(resultEntry);
+        var ri = new ResultItem(resultEntry);
         resultArr.push(ri);
     }
     
@@ -252,7 +249,10 @@ function sfCallback(response, reqid) {
         }
 */        
 
-        resultArr.push(resultEntry);
+//        resultArr.push(resultEntry);
+        var ri = new ResultItem(resultEntry);
+        resultArr.push(ri);
+        
     }
 
     lastSFResult = resultArr;
