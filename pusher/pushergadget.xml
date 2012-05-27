@@ -71,7 +71,9 @@
     <% } %>
     <%= label %>
     <div style="font-size: 70%; ">
-      <% if (sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %>(<%= sfObject.Account.Name %>)<% } %>
+      <% if (sfObject && sfObject.Account != null && sfObject.Account.Name != null) { %>
+        <%= sfObject.Account.Name %>
+      <% } %>
     </div>
   </script>
   
