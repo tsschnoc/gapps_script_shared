@@ -368,12 +368,10 @@ function uiInit() {
       
       	$(this).children('img').click(function (event){
           var number = $(this).parent().text().trim();
-          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
-          
           var url = 'https://mail.google.com/mail/?view=cm&ui=2&tf=0&fs=1&to=' + escape(number) + ''; //&su=SUBJECTHERE&body=LINE1%0aLINE2
           
           window.open(url, 'sendMail', 'height=600,width=800');
-                  console.log(url);
+          console.log(url);
           
           event.preventDefault();
        
