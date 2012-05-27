@@ -84,11 +84,13 @@
         <%= sfObject.attributes.type %>
         <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
           <%= sfObject.Name %><br/>
-          <%= sfObject.Type__c %><br/>
+          <%= sfObject.Typ__c %><br/>
+          <%= sfObject.Password__c %><br/>
+          <%= sfObject.Token__c %><br/>
+          
         <% } %>
         
       <% } %>
-      <%= label %>
     </div>
   </script>
   
@@ -98,6 +100,12 @@
 Typ__c: Salesforce Sandbox
 Password__c: Zg7A8TSi
 Token__c: rWrluL5FIeHrDnGPp
+
+Id: "a0n20000000ctlIAAQ"
+Name: "salesforce.admin@phonak.com.lyricQ"
+Password__c: "TMg3MYFvJQfG"
+Token__c: "WLPYv8OQcgozs1KYgBXzrp8Z3"
+Typ__c: "Salesforce Sandbox"
 -->
 
   
