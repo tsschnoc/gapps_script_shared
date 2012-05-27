@@ -348,8 +348,9 @@ function uiInit() {
         
         
         $("li.phoneNumber img").click(function () {
-          var number = '+41788223356';
-          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+          var number = $(this).parent().children('span').text();
+//          var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
           
           
           $('#callToFrame').attr("src",url); 
