@@ -82,10 +82,23 @@
     <div style="font-size: 70%; ">
       <% if (type == "SF") { %>  
         <%= sfObject.attributes.type %>
+        <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
+          <%= sfObject.Name %><br/>
+          <%= sfObject.Type__c %><br/>
+        <% } %>
+        
       <% } %>
       <%= label %>
     </div>
   </script>
+  
+  
+  <!--   
+  hfemigration@lyric.sf.phonak.com.lyricq
+Typ__c: Salesforce Sandbox
+Password__c: Zg7A8TSi
+Token__c: rWrluL5FIeHrDnGPp
+-->
 
   
   <script type="text/template" id="nix-template">        
