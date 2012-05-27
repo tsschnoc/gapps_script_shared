@@ -82,6 +82,17 @@
         <% if (type == "SF") { %>  
           
           <li><%= sfObject.attributes.type %></li>
+          
+          
+          
+          <% _.each(sfObject, function(obj) { %> 
+            <li class="mailAddress">
+              <%= obj %>            
+            </li> 
+          <% }); %>
+          
+          
+          
           <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
             <li><%= sfObject.Typ__c %></li>
             <li><%= sfObject.Password__c %></li>
