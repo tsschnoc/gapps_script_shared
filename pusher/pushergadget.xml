@@ -71,12 +71,12 @@
     <% } %>
     <%= label %>
     <div style="font-size: 70%; ">
-      <%= label %>
+      <% if (sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %>(<%= sfObject.Account.Name %>)<% } %>
     </div>
   </script>
   
   <script type="text/template" id="ResultItemDetailView-template">
-    <span class="title" url="<%= contactUrl %>"><%= label %><% if (sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %><%= sfObject.Account.Name %><% } %></span>
+    <span class="title" url="<%= contactUrl %>"><%= label %><% if (sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %>(<%= sfObject.Account.Name %>)<% } %></span>
     <div style="font-size: 70%; ">
       <ul>
         <% if (type == "SF") { %>  
