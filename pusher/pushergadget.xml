@@ -57,7 +57,7 @@
     <div id='ny' tip='hi tip'>no Calls</div>
   	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 110px;">
     <div id='itemDetail'></div>
-    <iframe id="callToFrame" width="50" height="50"></iframe> 
+    <iframe id="callToFrame" style="display: none;" width="5" height="5"></iframe> 
   </div>  
   
   
@@ -105,15 +105,12 @@
         <% } %>
   
         <% if (type == "Google") { %>  
-          <li><%= googleObject.title.$t %></li>
-          <li><%= googleObject.id.$t %></li>
-          
+          <li><%= googleObject.title.$t %></li>          
           
           <% _.each(googleObject.gd$phoneNumber, function(phone) { %> 
             <li class="phoneNumber">
-              <span><%= phone.$t %></span>
+              <span class="number"><%= phone.$t %></span>
               <img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10">
-
             </li> 
           <% }); %>
           <% _.each(googleObject.gd$email, function(mail) { %> 
