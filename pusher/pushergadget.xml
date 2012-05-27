@@ -80,24 +80,27 @@
     <% } %>    
     <%= label %>
     <div style="font-size: 70%; ">
+      <ul>
       <% if (type == "SF") { %>  
-        <%= sfObject.attributes.type %>
+        
+        <li><%= sfObject.attributes.type %></li>
         <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
-          <%= sfObject.Name %><br/>
-          <%= sfObject.Typ__c %><br/>
-          <%= sfObject.Password__c %><br/>
-          <%= sfObject.Token__c %><br/>
+          <li><%= sfObject.Name %></li>
+          <li><%= sfObject.Typ__c %></li>
+          <li><%= sfObject.Password__c %></li>
+          <li><%= sfObject.Token__c %></li>
 
           <% if (sfObject.Typ__c == "Salesforce Live" || sfObject.Typ__c == "Salesforce Developer") { %>  
-            <a href="https://login.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">">login</a>
+            <li><a href="https://login.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">">login</a></li>
           <% } %>
           <% if (sfObject.Typ__c == "Salesforce Sandbox" || sfObject.Typ__c == "Salesforce Trial") { %>  
-            <a href="https://test.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">login</a>
+            <li><a href="https://test.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">login</a></li>
           <% } %>
                     
         <% } %>
         
       <% } %>
+      </ul>
     </div>
   </script>
   
