@@ -93,6 +93,14 @@
             <% } %>
           <% }); %>
           
+          <% _.each(sfObject, function(value, key) { %> 
+            <% if (((key.indexOf("Email")>=0) || (key.indexOf("EMAIL")>=0)) && (value!=null)) { %>  
+              <li class="mailAddress" address="<%= value %>">
+                <%= value %> <span>(<%= key %>)</span>
+              </li> 
+            <% } %>
+          <% }); %>
+          
           
           
           <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
@@ -127,7 +135,7 @@
           <% }); %>
           
           <% _.each(googleObject.gd$email, function(mail) { %> 
-            <li class="mailAddress">
+            <li class="mailAddress" address="<%= mail.address %>">
               <%= mail.address %>            
             </li> 
           <% }); %>
