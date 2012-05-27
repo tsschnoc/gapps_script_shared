@@ -85,9 +85,9 @@
           
           
           
-          <% _.each(sfObject, function(obj) { %> 
+          <% _.each(sfObject, function(value, key) { %> 
             <li class="mailAddress">
-              <%= obj %>            
+              <%= key %> :<%= value %>            
             </li> 
           <% }); %>
           
