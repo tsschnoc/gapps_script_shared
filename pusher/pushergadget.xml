@@ -79,10 +79,10 @@
       <img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10">
     <% } %>    
     <%= label %>
-    <% if (type == "SF") { %>  
-      <%= sfObject.attributes.type %>
-    <% } %>
     <div style="font-size: 70%; ">
+      <% if (type == "SF") { %>  
+        <%= sfObject.attributes.type %>
+      <% } %>
       <%= label %>
     </div>
   </script>
