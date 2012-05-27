@@ -88,7 +88,6 @@
         
         <li><%= sfObject.attributes.type %></li>
         <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
-          <li><%= sfObject.Name %></li>
           <li><%= sfObject.Typ__c %></li>
           <li><%= sfObject.Password__c %></li>
           <li><%= sfObject.Token__c %></li>
@@ -97,7 +96,7 @@
             <li><a href="https://login.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">">login</a></li>
           <% } %>
           <% if (sfObject.Typ__c == "Salesforce Sandbox" || sfObject.Typ__c == "Salesforce Trial") { %>  
-            <li><a href="https://test.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">login</a></li>
+            <li><img border="0" src="http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png" alt="google contact" width="10" height="10"><a href="https://test.salesforce.com?un=<%= sfObject.Name %>&pw=<%= sfObject.Password__c %>" target="_blank">login</a></li>
           <% } %>
                     
         <% } %>
@@ -113,7 +112,7 @@
 Typ__c: Salesforce Sandbox
 Password__c: Zg7A8TSi
 Token__c: rWrluL5FIeHrDnGPp
-
+http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png
 Id: "a0n20000000ctlIAAQ"
 Name: "salesforce.admin@phonak.com.lyricQ"
 Password__c: "TMg3MYFvJQfG"
