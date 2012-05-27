@@ -97,8 +97,13 @@ function receiveCall(phoneCall) {
 
 var ResultItem = Backbone.Model.extend({});
 var ResultItemListView = Backbone.View.extend({
+  template: _.template('<a><%= label %></a>'),
+
   render: function(){
-    $(this.el).html('<div>' + this.model.get('label') + '</div>');
+//    $(this.el).html('<div>' + this.model.get('label') + '</div>');
+    var attributes = this.model.toJSON();
+    this.$el.html(this.template(attributes));
+
   }
 });
 var ResultItemDetailView = Backbone.View.extend({
