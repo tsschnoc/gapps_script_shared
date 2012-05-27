@@ -86,7 +86,7 @@
           
           
           <% _.each(sfObject, function(value, key) { %> 
-            <% if (key.indexOf("Telefon")>=0 || key.indexOf("Phone")>=0) { %>  
+            <% if ((key.indexOf("Telefon")>=0) || (key.indexOf("Phone")>=0)) { %>  
               <li class="phoneNumber">
                 <%= value %> <span>(<%= key %>)</span>
               </li> 
