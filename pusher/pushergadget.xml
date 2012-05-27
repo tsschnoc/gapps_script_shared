@@ -86,9 +86,11 @@
           
           
           <% _.each(sfObject, function(value, key) { %> 
-            <li class="mailAddress">
-              <%= key %> :<%= value %>            
-            </li> 
+            <% if (key.indexOf("Telefon")>=0 || key.indexOf("Phone")>=0) { %>  
+              <li class="phoneNumber">
+                <%= value %> <span>(<%= key %>)</span>
+              </li> 
+            <% }); %>
           <% }); %>
           
           
