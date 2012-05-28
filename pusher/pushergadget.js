@@ -281,13 +281,15 @@ function uiInit() {
     });
     
     
-    $("#searchfield").click(function() {
-      // Select input field contents
-      this.select();
+    $("#searchfield").click(function(event) {
+      // Select input field contents      
       if (searchTerm.term != null) {
         $("#searchfield").val(searchTerm.term);
+      
         $("#searchfield").autocomplete("search");
       }
+      this.select();
+      event.preventDefault();      
       return true;
     });
 
