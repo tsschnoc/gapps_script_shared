@@ -314,13 +314,18 @@ function uiInit() {
                   var prefs = new gadgets.Prefs();
                   var phoneBaseUrl = prefs.getString("phoneBaseUrl");
                   
-                  var url = phoneBaseUrl + escape(number).replace('+', '%2B');
-//                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
-        //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
-                  
-                  console.log(url);
-                  $('#callToFrame').attr("src",url); 
-                  
+                  if (phoneBaseUrl == "callto") {
+                    var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
+                    var callto = 'phoner://' + escape(number).replace('+', '00');
+                    location.href = callto;
+                  } else {
+                    var url = phoneBaseUrl + escape(number).replace('+', '%2B');
+  //                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+          //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
+                    
+                    console.log(url);
+                    $('#callToFrame').attr("src",url); 
+                  }
                 });
             console.log( $(this));
         
