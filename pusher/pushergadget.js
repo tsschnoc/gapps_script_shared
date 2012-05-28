@@ -102,6 +102,12 @@ var ResultItemListView = null;
 
 
 function searchnumber(number) {
+  
+    if (number == "SETTINGS") {
+      doSettings();
+      $("#searchfield").val("");
+    }
+  
     var number = number.split("@")[0];
 
 
@@ -305,7 +311,11 @@ function uiInit() {
             $(this).children('img').click(function () {
 //                  var number = $(this).parent().text().trim();
                   var number = $(this).parent().attr("number").trim();
-                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
+                  var prefs = new gadgets.Prefs();
+                  var phoneBaseUrl = prefs.getString("phoneBaseUrl");
+                  
+                  var url = phoneBaseUrl + escape(number).replace('+', '%2B');
+//                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
         //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                   
                   console.log(url);
@@ -400,8 +410,15 @@ function gadgetOnLoad() {
 gadgets.util.registerOnLoadHandler(gadgetOnLoad);
 
 
-
-
+function doSettings() {
+    var prefs = new gadgets.Prefs();
+    var phoneBaseUrl = prefs.getString("phoneBaseUrl");
+    if (phoneBaseUrl==null || phoneBaseUrl=='') {
+      phoneBaseUrl = 'http://10.71.115.221/command.htm?number=';
+    }
+    phoneBaseUrl = prompt("phoneBaseUrl:",phoneBaseUrl);
+    prefs.set("phoneBaseUrl", phoneBaseUrl);
+}
 
 
 
