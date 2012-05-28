@@ -76,9 +76,9 @@ var lastGoogleResult = [];
 function initPusher() {
     // Flash fallback logging - don't include this in production
     //  var WEB_SOCKET_DEBUG = true;
-    var pusher = new Pusher('0bcfb89cee9d117b2b4e');
-    var channel = pusher.subscribe('test_channel');
-    channel.bind('my_event', receiveCall);
+    //var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+    //var channel = pusher.subscribe('test_channel');
+    //channel.bind('my_event', receiveCall);
 }
 
 
