@@ -130,11 +130,13 @@ function searchnumber(number) {
 
     doGoogleSyncRequest(lastSentRequestId, url, params);
     
+    "+41" + number.formatPhoneForSearch().substring(1)
     
-    
-//    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
-    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} returning account(id, phone, name), contact(name, id, account.Name, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, Email, Private_Email__c, Weitere_Email__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    
-        
+//    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} IN Name Fields returning account(id, phone, name), contact(name, id, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)"    ;
+//    var queryString = "FIND {" + number.formatPhoneForSearch() + "*} returning account(id, phone, name), contact(name, id, account.Name, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, Email, Private_Email__c, Weitere_Email__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)";    
+    var queryString = 'FIND {"' + number.formatPhoneForSearch() + '*" OR "' + "+41" + number.formatPhoneForSearch().substring(1) + '*"} returning account(id, phone, name), contact(name, id, account.Name, phone, MobilePhone, HomePhone, OtherPhone, Weiteres_Telefon_direkt__c, Email, Private_Email__c, Weitere_Email__c, firstname, lastname), lead(name, id, phone, firstname, lastname), Zugangsdaten__c(name, id, Typ__c, Password__c, Token__c)';    
+      
+    debug(queryString)  ;
     var callUrl = sfOAuth.oauth2_identity.urls.rest +"search?q=" + encodeURIComponent(queryString);
 
     var params = {};
