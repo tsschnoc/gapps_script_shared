@@ -79,7 +79,8 @@ function initPusher() {
     var prefs = new gadgets.Prefs();
     var pusherId = prefs.getString("pusherId");
     if (pusherId && pusherId != '') {
-      var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+//      var pusher = new Pusher('0bcfb89cee9d117b2b4e');
+      var pusher = new Pusher(pusherId);
       var channel = pusher.subscribe('test_channel');
       channel.bind('my_event', receiveCall);      
     }
