@@ -126,6 +126,7 @@
           
           <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
             <li><%= sfObject.Typ__c %></li>
+            <li><%= sfObject.Name %></li>
             <li><%= sfObject.Password__c %></li>
             <li><%= sfObject.Token__c %></li>
   
