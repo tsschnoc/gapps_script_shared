@@ -1,4 +1,5 @@
 //git commit -a -m 'SF'
+// https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.xml
 //google.load("jquery", "1");
 //google.load("jqueryui", "1");
 /*!
@@ -428,7 +429,7 @@ function doSettings() {
     var prefs = new gadgets.Prefs();
     var phoneBaseUrl = prefs.getString("phoneBaseUrl");
     if (phoneBaseUrl==null || phoneBaseUrl=='') {
-      phoneBaseUrl = 'http://10.71.115.221/command.htm?number=';
+      phoneBaseUrl = 'http://10.71.115.XXX/command.htm?number=';
     }
     phoneBaseUrl = prompt("phoneBaseUrl:",phoneBaseUrl);
     prefs.set("phoneBaseUrl", phoneBaseUrl);
