@@ -375,7 +375,7 @@ function uiInit() {
       var resultItemView = new ResultItemListView({model: item});
       resultItemView.render();
             
-      return $("<li></li>").attr('title',item.label).data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
+      return $("<li></li>").attr('title',item.toJSON().label).data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
     };
   });
 }
