@@ -114,7 +114,7 @@ function searchnumber(number) {
       $("#searchfield").val("");
     }
   
-    var number = number.split("@")[0];
+//    var number = number.split("@")[0];
 
 
     lastSentRequestId = lastSentRequestId + 1;
