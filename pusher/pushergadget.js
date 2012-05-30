@@ -375,25 +375,7 @@ function uiInit() {
       var resultItemView = new ResultItemListView({model: item});
       resultItemView.render();
             
-      return $("<li></li>").data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
-      /*
-      
-      var app;
-      if (item.type == "SF") {
-        app = '<a>' + '<img border="0" src="http://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10" />' + item.label + '<div style="font-size: 70%; ">';
-      }
-      else {
-        app = '<a>' + '<img border="0" src="http://www.ltech.com/img/icon_contact.jpg" alt="google contact" width="10" height="10" />' + item.label + '<div style="font-size: 70%; ">';
-      }
-      for (var i in item.phoneNumbers) {
-        app += item.phoneNumbers[i].number + "<br>";
-      }
-
-      app.substring(0, app.indexOf("<br>"));
-      app += "</div></a>";
-
-      return $("<li></li>").data("item.autocomplete", item).append(app).appendTo(ul);
-      */
+      return $("<li></li>").attr('title',item.label).data("item.autocomplete", item).append(resultItemView.el).appendTo(ul);
     };
   });
 }
