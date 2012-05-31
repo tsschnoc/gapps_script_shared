@@ -612,7 +612,7 @@ function sf_refresh_token() {
 
 
 function popitup(url) {
-    var newwindow = window.open(url, 'name', 'height=600,width=800');
+    var newwindow = window.open(url, '_blank', 'height=600,width=800');
     if (window.focus) {
         newwindow.focus()
     }
