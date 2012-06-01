@@ -117,6 +117,25 @@ function searchnumber(number) {
 //    var number = number.split("@")[0];
 
 
+
+$("#searchfield").after('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10" id="searchDialImage">');
+$("#searchDialImage").click(function () {
+  var number = $("#searchfield").val();
+  var prefs = new gadgets.Prefs();
+  var phoneBaseUrl = prefs.getString("phoneBaseUrl");
+  
+  if (phoneBaseUrl == "callto") {
+    var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
+    var callto = 'phoner://' + escape(number).replace('+', '00');
+    location.href = callto;
+  } else {
+    var url = phoneBaseUrl + escape(number).replace('+', '%2B');
+    console.log(url);
+    $('#callToFrame').attr("src",url); 
+  }
+});
+
+
     lastSentRequestId = lastSentRequestId + 1;
 
     var url = "https://www.google.com/m8/feeds/contacts/default/full?q=" + encodeURIComponent(number.formatPhoneForSearch()) + "&alt=json";
