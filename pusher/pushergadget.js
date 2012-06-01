@@ -294,7 +294,7 @@ function uiInit() {
     
 $("#searchfield").after('<img border="0" src="https://ssl.gstatic.com/s2/contacts/images/icons/call.png" alt="google contact" width="15" height="10" id="searchDialImage">');
 $("#searchDialImage").click(function () {
-  var number = $("#searchfield").val();
+  var number = $("#searchfield").val().replace("(","").replace(")","");
   var prefs = new gadgets.Prefs();
   var phoneBaseUrl = prefs.getString("phoneBaseUrl");
   
