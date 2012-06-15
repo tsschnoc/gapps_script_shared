@@ -119,9 +119,12 @@ function createMetadataSpreadsheet(username, password, url) {
   };
 
   var tempateCallback = function(response) {
+    var settingsCeffFeedUrl;
+    
     
     debug(response);
     var id = decodeURIComponent(response.data.getElementsByTagName('id')[0].textContent).split(':')[2];
+    
     var docUrl = 'https://docs.google.com/a/parx.com/spreadsheet/ccc?key=' + id + '#gid=0';
     var params = {};
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
@@ -136,25 +139,46 @@ function createMetadataSpreadsheet(username, password, url) {
     var workSheetCallback = function(response) {
       debug(response);
       var entries = response.data.getElementsByTagName('entry');
-      for (c in entries) {
+      for (var c in entries) {
         var entry = entries[c];
         var title = entry.getElementsByTagName('title')[0].textContent;
         if (title == 'Settings') {
+          var workSheetId = decodeURIComponent(entry.getElementsByTagName('id')[0].textContent).split('/')[5];
           var links = entry.getElementsByTagName('link');
           for (var v in links) {
             var link = links[v];
                   
             if (link.getAttribute('rel') == 'http://schemas.google.com/spreadsheets/2006#cellsfeed') {
-            alert(link.getAttribute('href'));  
+              alert(link.getAttribute('href'));   
+              settingsCeffFeedUrl = link.getAttribute('href');
             }
           }
         }
-        //<link rel=​"http:​/​/​schemas.google.com/​spreadsheets/​2006#cellsfeed" type=​"application/​atom+xml" href=​"https:​/​/​spreadsheets.google.com/​feeds/​cells/​0Ag5xGwdJpcHXdE80VVBGX21sVHlLUzFtdTVfOWI3bmc/​od6/​private/​full">​</link>​
-        
+        //<link rel=​"http:​/​/​schemas.google.com/​spreadsheets/​2006#cellsfeed" type=​"application/​atom+xml" href=​"https:​/​/​spreadsheets.google.com/​feeds/​cells/​0Ag5xGwdJpcHXdE80VVBGX21sVHlLUzFtdTVfOWI3bmc/​od6/​private/​full">​</link>​        
       }
       
       
-    }
+      
+      
+      var postdata = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006">  <id>' + settingsCeffFeedUrl + '</id>  <link rel="edit" type="application/atom+xml"    href="' + settingsCeffFeedUrl + '"/>  <gs:cell row="1" col="1" inputValue="du depp"/></entry>';
+    
+      var params = {};
+      params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+      params[gadgets.io.RequestParameters.HEADERS] = {
+          "Content-Type": "application/atom+xml",
+          "Authorization": "Bearer " + googleOAuth.access_token,
+          "GData-Version" : "3.0",
+          "X-PrettyPrint": "1"
+      };
+    
+      var setCellsCallback = function(response) {
+          debug(response);
+      }
+      makeCachedRequest('https://spreadsheets.google.com/feeds/cells/key/' + workSheetId + '/private/full/cell', setCellsCallback, params);  
+
+    };
     makeCachedRequest('https://spreadsheets.google.com/feeds/worksheets/' + id + '/private/full', workSheetCallback, params);  
 
     
