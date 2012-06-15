@@ -106,6 +106,18 @@ function receiveCall(phoneCall) {
 
 function createMetadataSpreadsheet(username, password, url) {
   alert('createMetadataSpreadsheet' + username + ' ' + password + ' ' + url);
+  var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(sfOAuth.code) + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=gettoken&format=json';
+
+            var params = {};
+            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+            params[gadgets.io.RequestParameters.HEADERS] = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-PrettyPrint": "1"
+            };
+
+            makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);  
 }
 
 
