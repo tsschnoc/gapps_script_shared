@@ -102,6 +102,12 @@ function receiveCall(phoneCall) {
 
 
 
+
+function createMetadataSpreadsheet() {
+  alert('createMetadataSpreadsheet');
+}
+
+
 var ResultItem = null;
 var ResultItemListView = null;
 

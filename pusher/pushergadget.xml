@@ -142,6 +142,7 @@
                 <a href="https://test.salesforce.com?un=<%= escape(sfObject.Name) %>&pw=<%= escape(sfObject.Password__c) %>" target="_blank">login</a>              
               </li>
             <% } %>
+            <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet();">createMetadataSpreadsheet</a></li>
                       
           <% } %>
           
