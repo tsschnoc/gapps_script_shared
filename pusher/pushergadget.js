@@ -106,18 +106,26 @@ function receiveCall(phoneCall) {
 
 function createMetadataSpreadsheet(username, password, url) {
   alert('createMetadataSpreadsheet' + username + ' ' + password + ' ' + url);
-  var postdata = 'grant_type=authorization_code&' + 'code=' + encodeURIComponent(sfOAuth.code) + '&client_id=' + encodeURIComponent(sfOAuth.consumerKey) + '&client_secret=' + encodeURIComponent(sfOAuth.consumerSecret) + '&redirect_uri=' + encodeURIComponent(sfOAuth.oauth2_callbackurl) + '&state=gettoken&format=json';
+  var postdata = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom">  <id>https://docs.google.com/feeds/default/private/full/document:0Ag5xGwdJpcHXdDJaNmVfajBlUXpucmNobENRTnVWVUE</id>  <title>My Copy</title></entry>';
 
-            var params = {};
-            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
-            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
-            params[gadgets.io.RequestParameters.HEADERS] = {
-                "Content-Type": "application/x-www-form-urlencoded",
-                "X-PrettyPrint": "1"
-            };
+  var params = {};
+  params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.XML;
+  params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+  params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+  params[gadgets.io.RequestParameters.HEADERS] = {
+      "Content-Type": "application/atom+xml",
+      "Authorization": "Bearer " + googleOAuth.access_token,
+      "X-PrettyPrint": "1"
+  };
 
-            makeCachedRequest('https://login.salesforce.com/services/oauth2/token', sf_oauth_callback, params);  
+  var tempateCallback = new function(response) {
+    debug(response);
+  };
+
+  makeCachedRequest('https://docs.google.com/feeds/default/private/full', tempateCallback, params);  
+  
+  
+  
 }
 
 
