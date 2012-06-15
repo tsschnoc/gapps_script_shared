@@ -105,7 +105,6 @@ function receiveCall(phoneCall) {
 
 
 function createMetadataSpreadsheet(username, password, url) {
-  alert('createMetadataSpreadsheet' + username + ' ' + password + ' ' + url);
   var postdata = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom">  <id>https://docs.google.com/feeds/default/private/full/document:0Ag5xGwdJpcHXdDJaNmVfajBlUXpucmNobENRTnVWVUE</id>  <title>My Copy</title></entry>';
 
   var params = {};
