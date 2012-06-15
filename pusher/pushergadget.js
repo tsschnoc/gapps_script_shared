@@ -52,7 +52,8 @@ window.WebSocket,Pusher.TransportType="flash",window.WEB_SOCKET_SWF_LOCATION=a+"
 
 
 var googleOAuth = {};
-googleOAuth.scope = 'http://www.google.com/m8/feeds/';
+//googleOAuth.scope = 'http://www.google.com/m8/feeds/';
+googleOAuth.scope = 'http://www.google.com/m8/feeds/ https://docs.google.com/feeds/ https://docs.googleusercontent.com/ https://spreadsheets.google.com/feeds/';
 googleOAuth.oauth2_callbackurl = 'https://s3.amazonaws.com/tsschnocwinn/oAuthcallback.html';
 googleOAuth.client_id = '759881060264-k2s770vd2ghjbo2d90fq972kqoo9b0ma.apps.googleusercontent.com';
 googleOAuth.client_secret = '9NVVoedrErw7xLtkKhaAU9qn';
