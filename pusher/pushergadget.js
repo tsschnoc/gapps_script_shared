@@ -115,6 +115,7 @@ function createMetadataSpreadsheet(username, password, url) {
   params[gadgets.io.RequestParameters.HEADERS] = {
       "Content-Type": "application/atom+xml",
       "Authorization": "Bearer " + googleOAuth.access_token,
+      "GData-Version" : "3.0",
       "X-PrettyPrint": "1"
   };
 
