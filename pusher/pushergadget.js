@@ -139,7 +139,7 @@ function createMetadataSpreadsheet(username, password, url) {
     var workSheetCallback = function(response) {
       debug(response);
       var entries = response.data.getElementsByTagName('entry');
-      for (var c in entries) {
+      for (var c = 0; c < entries.length; c++) {
         var entry = entries[c];
         var title = entry.getElementsByTagName('title')[0].textContent;
         if (title == 'Settings') {
