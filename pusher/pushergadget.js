@@ -103,8 +103,8 @@ function receiveCall(phoneCall) {
 
 
 
-function createMetadataSpreadsheet() {
-  alert('createMetadataSpreadsheet');
+function createMetadataSpreadsheet(username, password, url) {
+  alert('createMetadataSpreadsheet' + username + ' ' + password + ' ' + url);
 }
 
 

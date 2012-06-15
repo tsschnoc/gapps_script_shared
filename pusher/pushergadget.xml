@@ -135,14 +135,15 @@
                 <img border="0" src="http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png" alt="google contact" width="10" height="10">
                 <a href="https://login.salesforce.com?un=<%= escape(sfObject.Name) %>&pw=<%= escape(sfObject.Password__c) %>" target="_blank">">login</a>                
               </li>
+              <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet(<%= sfObject.Name %>,<%= sfObject.Password__c %><%= sfObject.Token__c %>,"https://login.salesforce.com");">createMetadataSpreadsheet</a></li>
             <% } %>
             <% if (sfObject.Typ__c == "Salesforce Sandbox" || sfObject.Typ__c == "Salesforce Trial") { %>  
               <li>
                 <img border="0" src="http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png" alt="google contact" width="10" height="10">
                 <a href="https://test.salesforce.com?un=<%= escape(sfObject.Name) %>&pw=<%= escape(sfObject.Password__c) %>" target="_blank">login</a>              
+              <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet(<%= sfObject.Name %>,<%= sfObject.Password__c %><%= sfObject.Token__c %>,"https://test.salesforce.com");">createMetadataSpreadsheet</a></li>
               </li>
             <% } %>
-            <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet();">createMetadataSpreadsheet</a></li>
                       
           <% } %>
           
