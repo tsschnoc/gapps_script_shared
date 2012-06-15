@@ -118,7 +118,7 @@ function createMetadataSpreadsheet(username, password, url) {
       "X-PrettyPrint": "1"
   };
 
-  var tempateCallback = new function(response) {
+  var tempateCallback = function(response) {
     debug(response);
   };
 
