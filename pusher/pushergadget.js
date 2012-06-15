@@ -145,7 +145,7 @@ function createMetadataSpreadsheet(username, password, url) {
         if (title == 'Settings') {
           var workSheetId = decodeURIComponent(entry.getElementsByTagName('id')[0].textContent).split('/')[5];
           var links = entry.getElementsByTagName('link');
-          for (var v in links) {
+          for (var v = 0; v < links.length; v++) {
             var link = links[v];
                   
             if (link.getAttribute('rel') == 'http://schemas.google.com/spreadsheets/2006#cellsfeed') {
