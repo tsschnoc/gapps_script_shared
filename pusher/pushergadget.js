@@ -136,6 +136,23 @@ function createMetadataSpreadsheet(username, password, url) {
     };
     var workSheetCallback = function(response) {
       debug(response);
+      
+      var entries = response.data.getElementsByTagName('entry');
+      for (c in entries) {
+
+        var title = entries.getElementsByTagName('title')[0].textContent;
+        if (title == 'Settings') {
+          var links = response.data.getElementsByTagName('link');
+          for (var v in links) {
+            var link = links[v];
+            alert(link.rel);            
+          }
+        }
+        //<link rel=​"http:​/​/​schemas.google.com/​spreadsheets/​2006#cellsfeed" type=​"application/​atom+xml" href=​"https:​/​/​spreadsheets.google.com/​feeds/​cells/​0Ag5xGwdJpcHXdE80VVBGX21sVHlLUzFtdTVfOWI3bmc/​od6/​private/​full">​</link>​
+        
+      }
+      
+      
     }
     makeCachedRequest('https://spreadsheets.google.com/feeds/worksheets/' + id + '/private/full', workSheetCallback, params);  
 
