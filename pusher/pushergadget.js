@@ -117,14 +117,14 @@ function createMetadataSpreadsheet(username, password, url) {
       "Authorization": "Bearer " + googleOAuth.access_token,
       "X-PrettyPrint": "1"
   };
-/*
+
   var tempateCallback = new function(response) {
     debug(response);
   };
 
   makeCachedRequest('https://docs.google.com/feeds/default/private/full', tempateCallback, params);  
   
-  */
+  
   
 }
 
