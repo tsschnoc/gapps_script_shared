@@ -164,7 +164,7 @@ function createMetadataSpreadsheet(username, password, url) {
     
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
-      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+      params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.PUT;
       params[gadgets.io.RequestParameters.POST_DATA] = postdata;
       params[gadgets.io.RequestParameters.HEADERS] = {
           "Content-Type": "application/atom+xml",
