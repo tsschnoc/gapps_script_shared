@@ -160,7 +160,9 @@ function createMetadataSpreadsheet(username, password, url) {
       
       
       
-      var postdata = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006">  <id>' + settingsCeffFeedUrl + '</id>  <link rel="edit" type="application/atom+xml"    href="' + settingsCeffFeedUrl + '"/>  <gs:cell row="1" col="1" inputValue="du depp"/></entry>';
+      var postdata = '<?xml version="1.0" encoding="UTF-8"?><entry xmlns="http://www.w3.org/2005/Atom" xmlns:gs="http://schemas.google.com/spreadsheets/2006">  <id>' + 
+                  'https://spreadsheets.google.com/feeds/cells/key/' + workSheetId + '/private/full/R1C1' + '</id>  <link rel="edit" type="application/atom+xml"    href="' + 
+                  'https://spreadsheets.google.com/feeds/cells/key/' + workSheetId + '/private/full/R1C1' + '"/>  <gs:cell row="1" col="1" inputValue="du depp"/></entry>';
     
       var params = {};
       params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
