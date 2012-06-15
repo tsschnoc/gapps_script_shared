@@ -120,7 +120,26 @@ function createMetadataSpreadsheet(username, password, url) {
   };
 
   var tempateCallback = function(response) {
+    
     debug(response);
+    var id = decodeURIComponent(response.data.getElementsByTagName('id')[0].textContent).split(':')[2];
+    var docUrl = 'https://docs.google.com/a/parx.com/spreadsheet/ccc?key=' + id + '#gid=0';
+    var params = {};
+    params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.DOM;
+    params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+    params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+    params[gadgets.io.RequestParameters.HEADERS] = {
+        "Content-Type": "application/atom+xml",
+        "Authorization": "Bearer " + googleOAuth.access_token,
+        "GData-Version" : "3.0",
+        "X-PrettyPrint": "1"
+    };
+    var workSheetCallback = function(response) {
+      debug(response);
+    }
+    makeCachedRequest('https://spreadsheets.google.com/feeds/worksheets/' + id + '/private/full', workSheetCallback, params);  
+
+    
   };
 
   makeCachedRequest('https://docs.google.com/feeds/default/private/full', tempateCallback, params);  
