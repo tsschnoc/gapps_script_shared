@@ -394,7 +394,7 @@ $("#searchDialImage").click(function () {
     var callto = 'phoner://' + escape(number).replace('+', '00');
     location.href = callto;
   } else  if (phoneBaseUrl == "callTo") {
-    var callto = 'callto://' + escape(number).replace(/\s/g, "").replace('+', '00');
+    var callto = 'callto://' + escape(number.replace(/\s/g, "")).replace('+', '00');
     location.href = callto;
   } else {
     var url = phoneBaseUrl + escape(number).replace('+', '%2B');
@@ -443,7 +443,7 @@ $("#searchDialImage").click(function () {
                     var callto = 'phoner://' + escape(number).replace('+', '00');
                     location.href = callto;
                   } else  if (phoneBaseUrl == "callTo") {
-                    var callto = 'callto://' + escape(number).replace(/\s/g, "").replace('+', '00');
+                    var callto = 'callto://' + escape(number.replace(/\s/g, "")).replace('+', '00');
                     location.href = callto;
                   } else {
                     var url = phoneBaseUrl + escape(number).replace('+', '%2B');
