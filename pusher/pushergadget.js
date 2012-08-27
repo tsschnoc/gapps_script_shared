@@ -393,6 +393,9 @@ $("#searchDialImage").click(function () {
     var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
     var callto = 'phoner://' + escape(number).replace('+', '00');
     location.href = callto;
+  } else  if (phoneBaseUrl == "callTo") {
+    var callto = 'callto://' + escape(number).replace('+', '00');
+    location.href = callto;
   } else {
     var url = phoneBaseUrl + escape(number).replace('+', '%2B');
     console.log(url);
@@ -438,6 +441,9 @@ $("#searchDialImage").click(function () {
                   if (phoneBaseUrl == "callto") {
                     var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
                     var callto = 'phoner://' + escape(number).replace('+', '00');
+                    location.href = callto;
+                  } else  if (phoneBaseUrl == "callTo") {
+                    var callto = 'callto://' + escape(number).replace('+', '00');
                     location.href = callto;
                   } else {
                     var url = phoneBaseUrl + escape(number).replace('+', '%2B');
