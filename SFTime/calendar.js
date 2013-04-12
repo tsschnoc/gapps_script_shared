@@ -1,4 +1,4 @@
-// https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://raw.github.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
+// https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://rawgithub.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.xml?x=17
 (function($) {
   var current_event = null;
 
