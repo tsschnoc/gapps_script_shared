@@ -2,9 +2,9 @@
 <Module> 
   <ModulePrefs title="Time Cards" author="Fred.vom.Jupiter@parx.com" height="20">
   <OAuth> 
-    <Service name="google"> 
+    <Service name="oauthcalendarservice"> 
       <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
-      <Request  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=hhttps://www.google.com/m8/feeds" method="GET" /> 
+      <Request  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=https://www.google.com/m8/feeds" method="GET" /> 
       <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
     </Service> 
   </OAuth> 
