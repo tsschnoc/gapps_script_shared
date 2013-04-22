@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Module> 
+  <ModulePrefs title="Time Cards" author="Fred.vom.Jupiter@parx.com" height="20">
+  <OAuth> 
+    <Service name="oauthcalendarservice"> 
+      <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
+      <Request  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=https://www.googleapis.com/auth/calendar" method="GET" /> 
+      <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+    </Service> 
+  </OAuth> 
+  <Optional feature="google.calendar-0.5.read" /> 
+  <Require feature="dynamic-height"/>
+  <Require feature="setprefs"/>
+  <Require feature="minimessage"/>
+  <Require feature="locked-domain"/>  
+</ModulePrefs> 
+  <UserPref name="Username" display_name="SF Username" datatype="string"/>
+  <UserPref name="Password" display_name="SF Password" datatype="string"/>  
+  <UserPref name="Loginurl" display_name="SF Login URL" datatype="string"/>
+  <UserPref name="CalID" display_name="Google Calendar ID" datatype="string"/>
+  <UserPref name="TimeKeeper" display_name="SF Timekeeper ID" datatype="string"/>
+
+  <UserPref name="refresh_token" display_name="refresh_token" datatype="string"/>
+
+
+<Content type="html">
+<![CDATA[
+    <html>
+      <head>
+        <script src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+
+        <script type="text/javascript" src="https://rawgithub.com/tsschnoc/gapps_script_shared/master/oAuthGadget/oauth.js"></script>
+        <script type="text/javascript" src="https://rawgithub.com/tsschnoc/gapps_script_shared/master/oAuthGadget/sha1.js"></script>
+<!--        
+        <script type="text/javascript" src="https://s3.amazonaws.com/tsschnocwinn/cross.js"></script>
+
+<script type="text/javascript" src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/popup.js"></script>
+-->
+        
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/base/jquery-ui.css" type="text/css" media="all">
+<!--
+        
+        <link rel="stylesheet" href="https://static.jquery.com/ui/css/demo-docs-theme/ui.theme.css" type="text/css" media="all">
+        <link rel="stylesheet" href="https://jqueryui.com/themeroller/css/parseTheme.css.php?ffDefault=Trebuchet+MS,+Tahoma,+Verdana,+Arial,+sans-serif&fwDefault=bold&fsDefault=1.1em&cornerRadius=4px&bgColorHeader=f6a828&bgTextureHeader=12_gloss_wave.png&bgImgOpacityHeader=35&borderColorHeader=e78f08&fcHeader=ffffff&iconColorHeader=ffffff&bgColorContent=eeeeee&bgTextureContent=03_highlight_soft.png&bgImgOpacityContent=100&borderColorContent=dddddd&fcContent=333333&iconColorContent=222222&bgColorDefault=f6f6f6&bgTextureDefault=02_glass.png&bgImgOpacityDefault=100&borderColorDefault=cccccc&fcDefault=1c94c4&iconColorDefault=ef8c08&bgColorHover=fdf5ce&bgTextureHover=02_glass.png&bgImgOpacityHover=100&borderColorHover=fbcb09&fcHover=c77405&iconColorHover=ef8c08&bgColorActive=ffffff&bgTextureActive=02_glass.png&bgImgOpacityActive=65&borderColorActive=fbd850&fcActive=eb8f00&iconColorActive=ef8c08&bgColorHighlight=ffe45c&bgTextureHighlight=03_highlight_soft.png&bgImgOpacityHighlight=75&borderColorHighlight=fed22f&fcHighlight=363636&iconColorHighlight=228ef1&bgColorError=b81900&bgTextureError=08_diagonals_thick.png&bgImgOpacityError=18&borderColorError=cd0a0a&fcError=ffffff&iconColorError=ffd27a&bgColorOverlay=666666&bgTextureOverlay=08_diagonals_thick.png&bgImgOpacityOverlay=20&opacityOverlay=50&bgColorShadow=000000&bgTextureShadow=01_flat.png&bgImgOpacityShadow=10&opacityShadow=20&thicknessShadow=5px&offsetTopShadow=-5px&offsetLeftShadow=-5px&cornerRadiusShadow=5px" type="text/css" media="all">
+        <link rel="stylesheet" href="https://jqueryui.com/css/base.css" type="text/css" media="all">
+-->        
+        <style type="text/css">
+          #main {
+            font-size: 10px;
+          }
+
+          #main ul, #mail ol {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+          }
+          .XXXXui-menu-item a {
+            color: red ! important;
+            font-size: small;
+          }
+          .invisible { display: none; }
+          
+
+
+.ui-autocomplete {
+    max-height: 100px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 20px;
+width: 150px ! important;
+font-size: 8px;
+}
+
+body {
+background: white;
+}
+
+
+
+          
+.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+  #city { width: 25em; }          
+          
+          
+        </style>
+      </head>
+      <body>      
+      
+        <div id="errors" style="display: none"></div>
+
+        <div class="refresh" style="display:none">
+              <button class="refreshCal">RefreshCalendar</button>
+        </div>
+        
+        <div id="main" style="display:none">          
+          <div class="credentials">
+/*          
+              <label for="username">SF-Username:</label>
+              <input type=text maxlength=50 name="username" id="username" style="width:100px;"> 
+              <label for="password">PasswordToken:</label>              
+              <input type=text maxlength=70 name="password" id="password" style="width:100px;"> 
+              <br>
+              <label for="CalID">Google Calendar ID:</label>
+              <input type=text maxlength=50 name="CalID" id="CalID" style="width:100px;"> @group.calendar.google.com
+              <label for="TimeKeeper">SF Timekeeper ID:</label>              
+              <input type=text maxlength=70 name="TimeKeeper" id="TimeKeeper" style="width:100px;"> 
+              
+              <input type=button id="SFLogin" value="SF Login " name="SF Login "> 
+*/
+          </div>
+          <div id="dialog">
+            <form>
+              <div>
+              
+                <label for="Case">Case</label>
+                <select id="Case" name="Case" class="Case" style="width: 150px;">
+                </select>
+                
+                <label for="Description">Description: </label>
+                
+                <textarea type="text" name="Description" id="Description" rows="10" cols="20"/> 
+
+
+              </div>
+              <button class="SaveEvent">Save Event</button>
+            </form>
+
+          </div>
+        </div>
+
+        <div id="loading">
+          <h3>Login...</h3>
+          <p><img src="https://gdata-samples.googlecode.com/svn/trunk/gadgets/blogger/ajax-loader.gif"></p>
+        </div>
+
+        <div id="approval" style="display: none">
+          <a href="#" id="personalize">Allow access to Google Calendar</a>
+        </div>
+
+        <div id="waiting" style="display: none">
+          <a href="#" id="approvalLink">I've approved access</a>
+        </div>
+
+        <script type="text/javascript" src="https://rawgithub.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.js"></script>
+      </body>
+    </html>
+  ]]> </Content> </Module>
