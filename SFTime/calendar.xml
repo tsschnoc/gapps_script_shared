@@ -5,7 +5,7 @@
     <Service name="oauthcalendarservice"> 
       <Access url="https://www.google.com/accounts/OAuthGetAccessToken" method="GET" />
       <Request  url="https://www.google.com/accounts/OAuthGetRequestToken?scope=https://www.google.com/m8/feeds" method="GET" /> 
-      <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=http://oauth.gmodules.com/gadgets/oauthcallback" />
+      <Authorization url="https://www.google.com/accounts/OAuthAuthorizeToken?oauth_callback=https://c9.io/tsschnoc/gapps_script_shared/workspace/SFTime/oauthcallback.html" />
     </Service> 
   </OAuth> 
   <Optional feature="google.calendar-0.5.read" /> 
