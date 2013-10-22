@@ -452,7 +452,8 @@ $("#searchDialImage").click(function () {
           //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                     
                     console.log(url);
-                    $('#callToFrame').attr("src",url); 
+                    //$('#callToFrame').attr("src",url); 
+                    window.open("http://preview.parxwerk.ch:9292/tel_link_test.html?url=" + encodeURIComponent(url), "fenster1", "width=600,height=400,status=yes,scrollbars=yes,resizable=yes");
                   }
                 });
             console.log( $(this));

@@ -1,15 +1,44 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>Close this window</title>
+    <title>Close this window</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 </head>
 <body>
 <script type='text/javascript'>
 try {
-  window.opener.gadgets.io.oauthReceivedCallbackUrl_ = document.location.href;
+    var googleOAuth = {};
+    //googleOAuth.scope = 'http://www.google.com/m8/feeds/';
+    googleOAuth.scope = 'https://www.googleapis.com/auth/calendar ';
+    googleOAuth.oauth2_callbackurl = 'https://c9.io/tsschnoc/gapps_script_shared/workspace/SFTime/oauthcallback.html';
+    googleOAuth.client_id = '313770248092.apps.googleusercontent.com';
+    googleOAuth.client_secret = 'OWp1bX6dtxdIyL6p2DwPRPVX';
+    authLink = 'https://www.google.com/m8/feeds https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=goog_initial&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
+
+
+    console.log(document.location.href);
+    var params = {};
+    _.forEach(document.location.search.substring(1).split('&'), function (value, idx) {
+        console.log(value);
+        console.log(idx);
+        var tokens = value.split('=');
+        params[tokens[0]] = tokens[1];
+    });
+    console.log(params);
+    googleOAuth.code = params.code;
+    
+    
+    
+    var postdata = 'code=' + encodeURIComponent(googleOAuth.code) + '&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&grant_type=authorization_code';
+    console.log(postdata);
+    
+    
 } catch (e) {
+    //    alert(e);
 }
-window.close();
+//window.close();
 </script>
 Close this window.
 </body>

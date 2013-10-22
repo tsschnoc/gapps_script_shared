@@ -13,9 +13,22 @@
 
   var sf_version = '23.0';
   var apikey = 'AIzaSyA9r8BLyijx8Wng-Ow1zG8AZ5-FHEoGZ8Q';
+  apikey = 'AIzaSyBHhRITvVVPmjcNN2K5Jtbcwb3EWcoKRlU';
   var RecordTypeID = '012D0000000Uu3y';
 
   var Timekeeper__c = null;
+
+//very bad idea
+var googleOAuth = {};
+//googleOAuth.scope = 'http://www.google.com/m8/feeds/';
+googleOAuth.scope = 'https://www.googleapis.com/auth/calendar ';
+googleOAuth.oauth2_callbackurl = 'https://c9.io/tsschnoc/gapps_script_shared/workspace/SFTime/oauthcallback.html';
+googleOAuth.client_id = '313770248092.apps.googleusercontent.com';
+googleOAuth.client_secret = 'OWp1bX6dtxdIyL6p2DwPRPVX';
+authLink = 'https://www.google.com/m8/feeds https://accounts.google.com/o/oauth2/auth?scope=' + encodeURIComponent(googleOAuth.scope) + '&state=goog_initial&redirect_uri=' + encodeURIComponent(googleOAuth.oauth2_callbackurl) + '&response_type=code&client_id=' + encodeURIComponent(googleOAuth.client_id) + '&approval_prompt=auto&access_type=offline';
+
+googleOAuth.refresh_token = '1/k-STjUClS8q5-5VX-ryBsGK3DnfcXcTi8gZCK3fmCNA';
+googleOAuth.access_token = null;  //= 'ya29.AHES6ZQU3RuoAigj9JyraqxLF5ILoeCV3MP86l4TQC5QaVJnUwIoSA';
 
 
 //  var consumerKey = "3MVG9yZ.WNe6byQCAGhFiyIdi2we5m.7_OCAMWNLmiM6n6XV.jV6kb46NSTUdvxNrjT_CevTwM4ZYp0xT_p69";
@@ -238,7 +251,29 @@
   function fetchData() {
     $('#errors').hide();
     var callback = function(response) {
-        if (response.oauthApprovalUrl) {
+        if (response.rc == 401) {
+
+            var oauthRefreshCallback = function(response) {
+                console.log(response)  ;
+                googleOAuth.access_token = response.data.access_token;
+                fetchData();
+            }
+
+            var postdata = 'client_id=' + encodeURIComponent(googleOAuth.client_id) + '&client_secret=' + encodeURIComponent(googleOAuth.client_secret) + '&refresh_token=' + encodeURIComponent(googleOAuth.refresh_token) + '&grant_type=refresh_token';
+        
+            var params = {};
+            params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
+            params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
+            params[gadgets.io.RequestParameters.POST_DATA] = postdata;
+            params[gadgets.io.RequestParameters.HEADERS] = {
+                "Content-Type": "application/x-www-form-urlencoded",
+                "X-PrettyPrint": "1"
+            };
+        
+            makeCachedRequest('https://accounts.google.com/o/oauth2/token', oauthRefreshCallback, params);
+
+            
+        } else if (response.oauthApprovalUrl) {
           var popup = shindig.oauth.popup({
             destination: response.oauthApprovalUrl,
             windowOptions: 'height=600,width=800',
@@ -279,19 +314,22 @@
           showOnly('errors');
         }
         };
+        
+        
 
     var callUrl = 'https://www.googleapis.com/calendar/v3/users/me/calendarList?minAccessRole=owner&pp=1&key=' + apikey;
     var params = {};
 
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
-    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+//    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "oauthcalendarservice";
     params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
       "X-PrettyPrint": "1",
       "GData-Version": "3.0",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: 'OAuth ' + googleOAuth.access_token
     };
 
     makeCachedRequest(callUrl, callback, params);
@@ -308,14 +346,15 @@
     var postdata = "";
 
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;;
-    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+//    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "oauthcalendarservice";
     params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.GET;
     params[gadgets.io.RequestParameters.HEADERS] = {
       "X-PrettyPrint": "1",
       "GData-Version": "3.0",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: 'OAuth ' + googleOAuth.access_token
     };
 
     var callback = function(obj) {
@@ -406,14 +445,15 @@
 
 
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+//    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "oauthcalendarservice";
     params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.DELETE;
     params[gadgets.io.RequestParameters.HEADERS] = {
       "X-PrettyPrint": "1",
       "GData-Version": "3.0",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: 'OAuth ' + googleOAuth.access_token
     };
 
 
@@ -457,7 +497,7 @@
     var postdata = JSON.stringify(insEvent);
 
     params[gadgets.io.RequestParameters.CONTENT_TYPE] = gadgets.io.ContentType.JSON;
-    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
+//    params[gadgets.io.RequestParameters.AUTHORIZATION] = gadgets.io.AuthorizationType.OAUTH;
     params[gadgets.io.RequestParameters.OAUTH_SERVICE_NAME] = "oauthcalendarservice";
     params[gadgets.io.RequestParameters.OAUTH_USE_TOKEN] = "always";
     params[gadgets.io.RequestParameters.METHOD] = gadgets.io.MethodType.POST;
@@ -465,7 +505,8 @@
     params[gadgets.io.RequestParameters.HEADERS] = {
       "X-PrettyPrint": "1",
       "GData-Version": "3.0",
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Authorization: 'OAuth ' + googleOAuth.access_token
     };
 
 
