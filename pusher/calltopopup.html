@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+   <TITLE>Self Close</TITLE>
+ 
+   <SCRIPT>
+      var howLong = 500;
+      t = null;
+      function doCall(){
+         var url = decodeURIComponent(window.location.search.split('=')[1])
+         console.log(url);
+         //var url = window.location.search.split('=')[1];
+         var iFrame = document.createElement('iFrame');
+         if (url.indexOf('phoner')==0) {
+            iFrame.src =url;
+         } else {
+            iFrame.src =url.replace('+', '%2B');
+         }
+//         iFrame.src = 'phoner://%2B41%2078%20822%2033%2056';
+//         iFrame.src = 'phoner://' + encodeURI('+41 78 822 33 56');
+         document.getElementsByTagName('body')[0].appendChild(iFrame);
+      }
+
+      function closeMe(){
+         t = setTimeout("self.close()",howLong);
+      }
+   </SCRIPT>
+</HEAD>
+
+<BODY text="#990000" onload="doCall();closeMe();">
+
+<TABLE align="center" width="300">
+<TR>
+   <TD align="center">
+         <P align="center"><B>This window will self destruct in 5 seconds!</B>
+   </TD>
+
+<!--   <iframe height="5" id="callToFrame" style="display: none;" width="5" src="phoner://0788223356"></iframe> 
+
+   <iframe height="5" id="callToFrame" style="display: none;" width="5" src="phoner://0788223356"></iframe>-->
+</TR>
+</TABLE>  
+
+</BODY>
+
+</HTML>
+
+<!--   
+
+http://10.71.115.236/command.htm?number=   
+phoner://
+
+-->
