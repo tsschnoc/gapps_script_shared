@@ -447,7 +447,8 @@ $("#searchDialImage").click(function () {
                     var callto = 'callto://' + escape(number.replace(/\s/g, "")).replace('+', '00');
                     location.href = callto;
                   } else {
-                    var url = phoneBaseUrl + escape(number).replace('+', '%2B');
+                    //var url = phoneBaseUrl + escape(number).replace('+', '%2B');
+                    var url = phoneBaseUrl + encodeURI(number);
   //                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
           //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                     
