@@ -448,7 +448,8 @@ $("#searchDialImage").click(function () {
                     location.href = callto;
                   } else {
                     //var url = phoneBaseUrl + escape(number).replace('+', '%2B');
-                    var url = phoneBaseUrl + encodeURI(number);
+                    //var url = phoneBaseUrl + encodeURI(number);
+                    var url = phoneBaseUrl + number;
   //                  var url = 'http://10.71.115.221/command.htm?number=' + escape(number).replace('+', '%2B');
           //          var url = 'http://www.schnocklake.de?number=' + escape(number).replace('+', '%2B');
                     
