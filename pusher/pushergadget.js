@@ -455,7 +455,7 @@ $("#searchDialImage").click(function () {
                     
                     console.log(url);
                     //$('#callToFrame').attr("src",url); 
-                    window.open("http://preview.parxwerk.ch:9292/tel_link_test.html?url=" + encodeURIcomponent(url), "fenster1", "width=600,height=400,status=yes,scrollbars=yes,resizable=yes");
+                    window.open("http://preview.parxwerk.ch:9292/tel_link_test.html?url=" + encodeURIComponent(url), "fenster1", "width=600,height=400,status=yes,scrollbars=yes,resizable=yes");
                   }
                 });
             console.log( $(this));
