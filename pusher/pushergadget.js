@@ -442,10 +442,10 @@ $("#searchDialImage").click(function () {
                   if (phoneBaseUrl == "callto") {
                     var callto = 'callto://sip:' + escape(number).replace('+', '00') + '@e-fon.ch';
                     var callto = 'phoner://' + escape(number).replace('+', '00');
-                    location.href = callto;
+                    location.href = callto.replace(/\s/g, "");
                   } else  if (phoneBaseUrl == "callTo") {
                     var callto = 'callto://' + escape(number.replace(/\s/g, "")).replace('+', '00');
-                    location.href = callto;
+                    location.href = callto.replace(/\s/g, "");
                   } else {
                     //var url = phoneBaseUrl + escape(number).replace('+', '%2B');
                     var url = phoneBaseUrl + encodeURI(number);
