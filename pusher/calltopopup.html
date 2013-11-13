@@ -12,8 +12,10 @@
          var iFrame = document.createElement('iFrame');
          if (url.indexOf('phoner')==0) {
             iFrame.src =url;
+         } else if (url.indexOf('tel')==0) {
+            iFrame.src = url;
          } else {
-            iFrame.src =url.replace('+', '%2B');
+            iFrame.src = url.replace('+', '%2B');
          }
 //         iFrame.src = 'phoner://%2B41%2078%20822%2033%2056';
 //         iFrame.src = 'phoner://' + encodeURI('+41 78 822 33 56');
