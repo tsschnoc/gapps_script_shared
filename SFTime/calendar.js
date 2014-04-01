@@ -478,9 +478,9 @@ googleOAuth.access_token = null;  //= 'ya29.AHES6ZQU3RuoAigj9JyraqxLF5ILoeCV3MP8
 
     var startTime = null;
     if (sftimecard.TimeStart__c) {
-      startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+01:00"));
+      startTime = new Date(Date.parse(sftimecard.Date__c + "T" + sftimecard.TimeStart__c.substring(0, 2) + ":" + sftimecard.TimeStart__c.substring(2, 4) + ":00+02:00"));
     } else {
-      startTime = new Date(Date.parse(sftimecard.Date__c + "T" + "09" + ":" + "00" + ":00+01:00"));
+      startTime = new Date(Date.parse(sftimecard.Date__c + "T" + "09" + ":" + "00" + ":00+02:00"));
     }
 
 
