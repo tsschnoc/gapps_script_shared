@@ -146,7 +146,7 @@ background: white;
         </div>
 
         <!--<script type="text/javascript" src="https://c9.io/tsschnoc/gapps_script_shared/workspace/SFTime/calendar.js"></script>-->
-        <script type="text/javascript" src="https://www.google.com/calendar/b/0/render?nogagetcache=1&gadgeturl=https://rawgithub.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.js"></script>
+        <script type="text/javascript" src="https://rawgithub.com/tsschnoc/gapps_script_shared/master/SFTime/calendar.js"> </script>
       </body>
     </html>
   ]]> </Content> </Module>
