@@ -1,0 +1,116 @@
+<html>
+<head>
+      <!-- Imports Open CTI JavaScript library. It should point to a valid Salesforce domain. -->
+      <script src="https://testitest-developer-edition.my.salesforce.com/support/api/25.0/interaction.js"></script>
+      <script type="text/javascript">
+             // Callback of API method: isInConsole
+             var isInConsoleCallback = function (response) {
+                  // Returns true if method is executed in Service Cloud console, false otherwise.
+                  if (response.result) {
+                      alert('SoftPhone is in Service Cloud console.');
+                  } else {
+                      alert('SoftPhone is not in Service Cloud console.');
+                  }
+              };
+              // Invokes API method: isInConsole
+              function isInConsole() {
+                       sforce.interaction.isInConsole(isInConsoleCallback);
+              }
+              // Callback of API method: getCallCenterSettings
+              var getCallCenterSettingsCallback = function (response) {
+                     // Result returns call center settings as a JSON string.
+                     if (response.result) {
+                            alert(response.result);
+                     } else {
+                            alert('Error retrieving call center settings ' + response.error);
+                     }
+               };
+               // Invokes API method: getCallCenterSettings
+               function getCallCenterSettings() {
+                        sforce.interaction.cti.getCallCenterSettings(getCallCenterSettingsCallback);
+               }
+               // Callback of API method: setSoftphoneHeight
+               var setSoftphoneHeightCallback = function (response) {
+                        // Returns true if SoftPhone height was set successfully, false otherwise.
+               if (response.result) {
+                       alert('Setting SoftPhone height to 300px was successful.');
+               } else {
+                      alert('Setting softphone height failed.');
+               }
+               };
+               // Invokes setSoftphoneHeight API method.
+               function setSoftphoneHeight() {
+                       //sforce.interaction.cti.setSoftphoneHeight(300, setSoftphoneHeightCallback);
+                       sforce.interaction.screenPop('/001A000000ZvYBf', null);
+               }
+               // Callback of API method: getPageInfo
+               var getPageInfoCallback = function (response) {
+                      if (response.result) {
+                             alert(response.result);
+                      } else {
+                             alert('Error occured while trying to get page info: ' + response.error);
+                      }
+               };
+               
+               // Invokes API method getPageInfo
+               function getPageInfo() {
+                       sforce.interaction.getPageInfo(getPageInfoCallback);
+               }
+               
+    function setVisible(value) {
+       sforce.interaction.setVisible(value, null);
+    }               
+    
+function enableClickToDial() {
+   //Invokes API method
+   sforce.interaction.cti.enableClickToDial(null);
+}    
+    
+           var callback = function (response) {
+           if (response.result) {
+                  alert(response.result);
+            } else {
+                   alert(response.error);
+           }
+        };
+    
+function searchAndScreenPop() {
+                //Invokes API method
+                sforce.interaction.searchAndScreenPop('United', '', 'inbound', callback);
+        }    
+    
+    
+    
+    
+function saveLog() {
+           //Invokes API method
+                sforce.interaction.saveLog('Account','Id=001G000000vqaBU&Name=NewAccountName&Phone=4155551299', callback);
+       }    
+    
+var listener = function (response) {
+           if (response.result) {
+              alert('User clicked on a phone number.' + response.result );
+           }
+        };
+   //Invokes API method
+   sforce.interaction.cti.onClickToDial(listener);
+   
+      </script>
+</head>
+<body>
+      <button onclick="isInConsole();">isInConsole</button></br>
+      <button onclick="getCallCenterSettings();">getCallCenterSettings</button></br>
+      <button onclick="setSoftphoneHeight();">setSoftphoneHeight(300)</button></br>
+      <button onclick="getPageInfo();">getPageInfo</button>
+      
+      <button onclick="setVisible(true);">hide softphone</button>
+      
+   <button onclick="enableClickToDial();">enable click to dial</button>
+      
+             <button onclick="searchAndScreenPop();">searchAndScreenPop</button>
+             
+                <button onclick="saveLog();">saveLog</button>
+
+
+</body>
+</html>

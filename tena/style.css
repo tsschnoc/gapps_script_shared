@@ -1,0 +1,136 @@
+/* This makes absolutely positioned elements like p, h1,
+     and some bootstrap elements placed properly. */
+ #absolute-wrapper p, #absolute-wrapper h1, #absolute-wrapper h2, #absolute-wrapper h3, #absolute-wrapper h4, #absolute-wrapper h5, #absolute-wrapper h6 {
+  margin-top: 0 !important;
+}
+.container .row-fluid .span12 p.p-3 {
+  font-weight: 300;
+  font-size: 22px;
+  text-align: center;
+}
+.container-fluid .container .row-fluid .span12 .nav li a.a-2 {
+  text-align: center;
+  color: #cccccc;
+}
+.container-fluid .container .row-fluid .span7 .page-header h1 small.small-1 {
+  font-size: 42px;
+  line-height: 42px;
+}
+.container-fluid .container .row-fluid .span7 .page-header h1.h1-1 {
+  font-weight: normal;
+  font-size: 42px;
+  color: #555555;
+}
+.container-fluid .container .row-fluid .span7 .page-header.page-header-1 {
+  padding: 0px;
+  border: none;
+}
+.container-fluid .container .row-fluid .span7 p.p-1 {
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 30px;
+}
+.container-fluid.container-fluid-1 {
+  padding: 60px 20px 60px 20px;
+  background: transparent;
+}
+.container-fluid.container-fluid-2 {
+  border-top: 1px solid #ededed;
+  border-right: none;
+  border-left: none;
+  border-bottom: 1px solid #ededed;
+  padding: 60px 20px 60px 20px;
+  background: #3c47ff;
+}
+.container-fluid.container-fluid-3 {
+  padding: 60px 20px 60px 20px;
+}
+.container-fluid.container-fluid-4 {
+  background: #333333;
+  padding: 30px 20px 30px 20px;
+}
+.container.container-1 {
+  padding: 60px 0px 60px 0px;
+}
+.navbar .navbar-inner .nav li a.a-1 {
+  line-height: 40px;
+}
+.container-fluid .container .row-fluid .span7 .page-header.page-header-1 h1 small.small-2 {
+  font-size: 42px;
+  line-height: 42px;
+}
+.container-fluid .container .row-fluid .span7 .page-header.page-header-1 h1.h1-2 {
+  font-weight: normal;
+  font-size: 42px;
+  color: #555555;
+}
+.container-fluid.container-fluid-3 .container .row-fluid .span7 .page-header h1 small.small-3 {
+  font-size: 42px;
+  line-height: 42px;
+}
+.container-fluid.container-fluid-3 .container .row-fluid .span7 .page-header h1.h1-3 {
+  font-weight: normal;
+  font-size: 42px;
+  color: #555555;
+}
+.container-fluid.container-fluid-3 .container .row-fluid .span7 .page-header.page-header-2 {
+  padding: 0px;
+  border: none;
+}
+.container-fluid.container-fluid-3 .container .row-fluid .span7 p.p-2 {
+  font-weight: 300;
+  font-size: 19px;
+  line-height: 30px;
+}
+#absolute-wrapper {
+  position: relative;
+  width: 980px;
+  /* centers the document */
+  margin: 0 auto;
+  /* hack to stick to top of page */
+  height: 1px;
+}
+.image {
+  border-radius: 0px;
+  margin: 0px;
+  width: 0px;
+  height: 0px;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+.navbar {
+  height: 60px;
+}
+.navbar .navbar-inner {
+  border: none;
+  background: #294a80;
+  background-image: -moz-linear-gradient(270deg, #294a80 0%, #5596ff 44%);
+  background-image: -webkit-linear-gradient(270deg, #294a80 0%, #5596ff 44%);
+  background-image: -o-linear-gradient(270deg, #294a80 0%, #5596ff 44%);
+  background-image: linear-gradient(180deg, #294a80 0%, #5596ff 44%);
+  height: 60px;
+}
+.navbar .navbar-inner .brand {
+  margin: 0px;
+  text-shadow: none;
+  font-family:"oswald";
+  font-weight: bold;
+  font-size: 24px;
+  color: #333333;
+  line-height: 40px;
+}
+.navbar .navbar-inner .image-1 {
+  margin: 16px 0px 0px;
+  height: 30px;
+  width: 35px;
+}
+.container-fluid .container .row-fluid .span12 p {
+  font-weight: 300;
+  font-size: 19px;
+  color: #ffffff;
+  line-height: 30px;
+}
+.container-fluid .container .row-fluid .span12 .nav {
+  margin: 0px;
+}

@@ -1,0 +1,8 @@
+{"ts":1357572517759,"silentsave":true,"restoring":false,"patch":[[]],"length":0}
+{"contributors":[],"silentsave":true,"ts":1357572518020,"patch":[[{"diffs":[[1,"echo"]],"start1":0,"start2":0,"length1":0,"length2":4}]],"length":4,"saved":false}
+{"ts":1357572520495,"patch":[[{"diffs":[[0,"echo"],[1," \"\"\""]],"start1":0,"start2":0,"length1":4,"length2":8}]],"length":8,"saved":false}
+{"ts":1357572523176,"patch":[[{"diffs":[[0,"echo \""],[-1,"\""],[1,"test"],[0,"\""]],"start1":0,"start2":0,"length1":8,"length2":11}]],"length":11,"saved":false}
+{"ts":1357572531601,"patch":[[{"diffs":[[1,"<"],[0,"echo \"te"]],"start1":0,"start2":0,"length1":8,"length2":9}]],"length":12,"saved":false}
+{"ts":1357572734678,"patch":[[{"diffs":[[0,"<"],[1,"? "],[0,"echo \"te"]],"start1":0,"start2":0,"length1":9,"length2":11},{"diffs":[[0,"o \"test\""],[1," "]],"start1":6,"start2":6,"length1":8,"length2":9}]],"length":15,"saved":false}
+{"ts":1357572747333,"patch":[[{"diffs":[[0," \"test\" "],[1,"?>"]],"start1":7,"start2":7,"length1":8,"length2":10}]],"length":17,"saved":false}
+{"ts":1357572807526,"patch":[[{"diffs":[[0,"<"],[-1,"? echo \"test\" ?"],[1,"!DOCTYPE HTML>\r\n <html>\r\n   <head>\r\n     <title> Hallo-Welt-Beispiel </title>\r\n   </head>\r\n   <body>\r\n     <?php\r\n       echo 'Hallo Welt!';\r\n     ?>\r\n   </body>\r\n </html"],[0,">"]],"start1":0,"start2":0,"length1":17,"length2":172}]],"length":172,"saved":false}

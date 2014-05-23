@@ -1,0 +1,14 @@
+.navbar .nav>li>a {
+  color: rgba(0, 0, 0, 0);
+}
+@media(max-width: 480px) {
+  .navbar .nav>li>a {
+    color: blue;
+  }
+}
+.container-fluid.blue {
+  background: #3c47ff;
+}
+.container-fluid.white {
+  background: #FFFFFF;
+}

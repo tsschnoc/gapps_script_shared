@@ -1,0 +1,106 @@
+     .container .row-fluid .span12 p.p-2 {
+       font-weight: 300;
+       font-size: 22px;
+       text-align: center;
+     }
+     .container-fluid .container .row-fluid .span12 .nav li a.a-2 {
+       text-align: center;
+       color: #cccccc;
+     }
+     .container-fluid .container .row-fluid .span7 .page-header h1 small.small-1 {
+       font-size: 42px;
+       line-height: 42px;
+     }
+     .container-fluid .container .row-fluid .span7 .page-header h1.h1-1 {
+       font-weight: normal;
+       font-size: 42px;
+       color: #555555;
+     }
+     .container-fluid .container .row-fluid .span7 .page-header.page-header-1 {
+       padding: 0px;
+       border: none;
+     }
+     .container-fluid .container .row-fluid .span7 p.p-1 {
+       font-weight: 300;
+       font-size: 19px;
+       line-height: 30px;
+     }
+     .container-fluid.container-fluid-1 {
+       padding: 60px 20px 60px 20px;
+       background: transparent;
+     }
+     .container-fluid.container-fluid-2 {
+       background: #f8f8f8;
+       border-top: 1px solid #ededed;
+       border-right: none;
+       border-left: none;
+       border-bottom: 1px solid #ededed;
+       padding: 60px 20px 60px 20px;
+     }
+     .container-fluid.container-fluid-3 {
+       background: #333333;
+       padding: 30px 20px 30px 20px;
+     }
+     .container.container-1 {
+       padding: 60px 0px 60px 0px;
+     }
+     .navbar .navbar-inner .nav li a.a-1 {
+       line-height: 40px;
+     }
+     .container-fluid .container .row-fluid .span7 .page-header.page-header-1 h1 small.small-2 {
+       font-size: 42px;
+       line-height: 42px;
+     }
+     .container-fluid .container .row-fluid .span7 .page-header.page-header-1 h1.h1-2 {
+       font-weight: normal;
+       font-size: 42px;
+       color: #555555;
+     }
+     .navbar {
+       height: 60px;
+     }
+     .navbar .navbar-inner {
+       background: rgba(255, 255, 255, 0.960784);
+       border: none;
+       height: 60px;
+     }
+     .navbar .navbar-inner .brand {
+       margin: 0px 0px 0px -15px;
+       text-shadow: none;
+       color: #333333;
+       line-height: 40px;
+       font-family:"oswald";
+       font-size: 24px;
+       font-weight: bold;
+     }
+     .navbar .navbar-inner .image {
+       border-top-left-radius: 0px;
+       border-top-right-radius: 0px;
+       border-bottom-right-radius: 0px;
+       border-bottom-left-radius: 0px;
+       margin: 16px 0px 0px;
+       height: 30px;
+       width: 30px;
+     }
+     .container-fluid .container .row-fluid .span5 .image {
+       border-top-left-radius: 3px;
+       border-top-right-radius: 3px;
+       border-bottom-right-radius: 3px;
+       border-bottom-left-radius: 3px;
+       margin: 0px;
+     }
+     .container-fluid .container .row-fluid .span5 .image-1 {
+       border-top-left-radius: 3px;
+       border-top-right-radius: 3px;
+       border-bottom-right-radius: 3px;
+       border-bottom-left-radius: 3px;
+       margin: 0px;
+     }
+     .container-fluid .container .row-fluid .span12 .nav {
+       margin: 0px;
+     }
+     .container-fluid .container .row-fluid .span12 .pull-left p {
+       font-weight: 300;
+       color: #ffffff;
+       line-height: 36px;
+     }

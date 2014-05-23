@@ -1,0 +1,73 @@
+<!DOCTYPE html> 
+<html>
+    <head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Funkstecker</title> 
+	<link rel="stylesheet"  href="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.css" />  
+
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.mobile/1.2.0/jquery.mobile-1.2.0.js"></script>
+    <script>
+        $(document).ready(function()
+        {
+            $('.powerbutton').on( "click", function(event, ui) {
+              console.log($(this).data('powerswitch'));
+              console.log($(this).data('onoff'));
+
+
+
+$.ajax({
+  url: "remotePower.php?" + $(this).data('powerswitch') + "on=" + $(this).data('onoff') 
+}).done(function() {
+//  $(this).addClass("done");
+});
+
+
+            });        
+
+
+
+        });        
+        
+    </script>
+
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="content">
+		<div class="content-primary">
+		<p><strong>Brennstuhl</strong> power buttons</p>
+		<div data-role="controlgroup"  data-type="horizontal">
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=10000&version=2&" data-onoff="1">Button element</button>
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=01000&version=2&" data-onoff="1">Button element</button>
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=00100&version=2&" data-onoff="1">Button element</button>
+        </div>
+		<div data-role="controlgroup"  data-type="horizontal">
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=10000&version=2&" data-onoff="0">Button element</button>
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=01000&version=2&" data-onoff="0">Button element</button>
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=b&master=11111&slave=00100&version=2&" data-onoff="0">Button element</button>
+    	</div>
+    	<p><strong>Intertechno</strong> power buttons</p>
+        <div data-role="controlgroup"  data-type="horizontal">
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=1&version=1&" data-onoff="1">Button element</button>
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=2&version=1&" data-onoff="1">Button element</button>
+            <button data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=3&version=1&" data-onoff="1">Button element</button>
+		</div>
+		<div data-role="controlgroup"  data-type="horizontal">            
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=1&version=1&" data-onoff="0">Button element</button>
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=2&version=1&" data-onoff="0">Button element</button>
+            <button data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true" class="powerbutton" data-powerswitch="vendor=i&master=A&slave=3&version=1&" data-onoff="0">Button element</button>
+		</div>
+	
+	</div><!--/content-primary -->		
+	
+</div><!-- /content -->
+
+	
+</div><!-- /page -->
+
+</body>
+</html>

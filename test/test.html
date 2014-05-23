@@ -1,0 +1,86 @@
+<td class="dataCol col02">
+    <input type="hidden" name="con8" id="con8" value="thomas ex">
+    <input type="hidden" name="con8_lkold" id="con8_lkold" value="thomas ex">
+    <input type="hidden" name="con8_lktp" id="con8_lktp" value="003">
+    <input type="hidden" name="con8_lspf" id="con8_lspf" value="0">
+    <input type="hidden" name="con8_lspfsub" id="con8_lspfsub" value="0">
+    <input type="hidden" name="con8_mod" id="con8_mod" value="1">
+    <span class="lookupInput">
+        <select id="con8_lkid" name="con8_lkid" onchange="getElementByIdCS('con8').value = getElementByIdCS('con8_lkid').selectedIndex == 0 ? '' : getElementByIdCS('con8_lkid').options[getElementByIdCS('con8_lkid').selectedIndex].text ; getElementByIdCS('con8_lkold').value = getElementByIdCS('con8').value"
+        tabindex="8" title="Reports To Select">
+            <option value="">--None--</option>
+            <option value="003G00000138aDk" selected="selected">thomas ex</option>
+            <option value="003G0000011wzvj">Thomas Schnocklake</option>
+        </select>
+        <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dcon8%26lktp%3D%27%20%2B%20getElementByIdCS%28%27con8_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28%28getElementByIdCS%28%27con8_lkid%27%29.selectedIndex%20%3E%200%29%20%3F%20getElementByIdCS%28%27con8_lkid%27%29.options%5BgetElementByIdCS%28%27con8_lkid%27%29.selectedIndex%5D.text%20%3A%20%27%27.substring%280%2C%2080%29%29%29"
+        id="con8_lkwgt" onclick="setLastMousePosition(event)" tabindex="8" title="Reports To Lookup (New Window)"><img src="/s.gif" alt="Reports To Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Reports To Lookup (New Window)"></a>
+    </span>
+    <div class="errorMsg">
+        <strong>Error:</strong>Multiple items found. Select from drop-down or click icon
+        to refine search.</div>
+</td>
+
+
+
+<td class="dataCol col02">
+    <input type="hidden" name="con8_lkid" id="con8_lkid" value="000000000000000">
+    <input type="hidden" name="con8_lkold" id="con8_lkold" value="null">
+    <input type="hidden" name="con8_lktp" id="con8_lktp" value="003">
+    <input type="hidden" name="con8_lspf" id="con8_lspf" value="0">
+    <input type="hidden" name="con8_lspfsub" id="con8_lspfsub" value="0">
+    <input type="hidden" name="con8_mod" id="con8_mod" value="0">
+    <span class="lookupInput">
+        <input id="con8" maxlength="255" name="con8" onchange="getElementByIdCS('con8_lkid').value='';getElementByIdCS('con8_mod').value='1';"
+        size="20" tabindex="8" type="text">
+        <a href="javascript:%20openLookup%28%27%2F_ui%2Fcommon%2Fdata%2FLookupPage%3Flkfm%3DeditPage%26lknm%3Dcon8%26lktp%3D%27%20%2B%20getElementByIdCS%28%27con8_lktp%27%29.value%2C670%2C%271%27%2C%27%26lksrch%3D%27%20%2B%20escapeUTF%28getElementByIdCS%28%27con8%27%29.value.substring%280%2C%2080%29%29%29"
+        id="con8_lkwgt" onclick="setLastMousePosition(event)" tabindex="8" title="Reports To Lookup (New Window)"><img src="/s.gif" alt="Reports To Lookup (New Window)" class="lookupIcon" onblur="this.className = 'lookupIcon';" onfocus="this.className = 'lookupIconOn';" onmouseout="this.className = 'lookupIcon';this.className = 'lookupIcon';" onmouseover="this.className = 'lookupIconOn';this.className = 'lookupIconOn';" title="Reports To Lookup (New Window)"></a>
+    </span>
+</td>
+
+
+console.log($('#con8').after('<select id="questionBox"  name="questionBox">      <option selected="selected" value="-">------------------------</option>      </select>'));
+$('#con8').hide();
+$('#con8').parent().removeClass('lookupInput');
+$('#con8').parent().find('a').remove();
+
+
+var container = $('#con8').parent().parent();
+var lkid = $('#con8_lkid').clone();
+var selectedId = $('#con8_lkid').val();
+var selectedVal = $('#con8').val();
+container.empty();
+container.append(lkid);
+var set =$('<select id="questionBox"  name="questionBox">  </select>')
+            .append('<option selected="selected" value="-">------------------------</option>');
+container.append('<select id="questionBox"  name="questionBox">      <option selected="selected" value="-">------------------------</option>      </select>');
+            
+container.append('<select id="questionBox"  name="questionBox">      <option selected="selected" value="-">------------------------</option>      </select>');
+
+
+
+
+var container = $('#con8').parent().parent();
+var selectedId = $('#con8_lkid').val();
+var selectedVal = $('#con8').val();
+container.empty();
+var sel =$('<select id="con8_lkid"  name="con8_lkid">  </select>');
+
+if (selectedId == '000000000000000') {
+    sel.append('<option selected="selected" value="">------------------------</option>')
+} else {
+    sel.append('<option value="">------------------------</option>')
+    sel.append('<option selected="selected" value="' + selectedId +  '">' + selectedVal +  '</option>');
+}
+
+var cont = [
+    {id:'003A000000gHIVW', name:'Mr. Avi Green'}, 
+    {id:'003A000000gHIVV', name:'Ms. Edna Frank'}
+    ];
+    
+for (i = 0; i < cont.length; i++) {    
+    sel.append('<option selected="selected" value="' + cont[i].id +  '">' + cont[i].name +  '</option>');
+}
+
+container.append(sel);
+
+

@@ -1,0 +1,1 @@
+{"ts":1340217921355,"silentsave":true,"restoring":false,"patch":[[{"diffs":[[1,"var buf = new Buffer(4);\r\n\r\nbuf[0] = 0x3;\r\nbuf[1] = 0x4;\r\nbuf[2] = 0x23;\r\nbuf[3] = 0x42;\r\n\r\n\r\nconsole.log(buf.readUInt32BE(0));\r\nconsole.log(buf.readUInt32LE(0));\r\n\r\n"]],"start1":0,"start2":0,"length1":0,"length2":166}]],"length":166}

@@ -1,0 +1,173 @@
+<html>
+<head>
+  <title>Pusher Test</title>
+<!--  for jqueryui -->  
+<!--<link rel="stylesheet" href="http://jqueryui.com/themes/base/jquery.ui.all.css"> -->
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.8.19/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.3.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/0.9.2/backbone-min.js"></script>
+  
+  <link rel="stylesheet" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/demos/demos.css">
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/themes/ui-lightness/jquery-ui.css"/>
+
+  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/qtip/jquery.qtip.min.js"></script>
+  <link rel="stylesheet" href="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/qtip/jquery.qtip.min.css">
+
+  <script type="text/javascript" src="https://raw.github.com/tsschnoc/gapps_script_shared/master/pusher/pushergadget.js"></script>
+
+
+<!--  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+-->
+<!--
+  <script src="http://jqueryui.com/jquery-1.7.2.js"></script>
+  <script src="http://jqueryui.com/ui/jquery.ui.core.js"></script>
+    <script src="http://jqueryui.com/ui/jquery.ui.widget.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.position.js"></script>
+	<script src="http://jqueryui.com/ui/jquery.ui.autocomplete.js"></script>
+	<link rel="stylesheet" href="http://jqueryui.com/demos/demos.css">
+-->  
+
+
+<style>
+  #itemDetail ul {
+    padding-left: 10px;
+  }
+  .ui-menu .ui-menu-item {
+    max-width: 130px;
+  }
+
+  .ui-autocomplete {
+		max-height: 130px;
+		overflow-y: auto;
+		/* prevent horizontal scrollbar */
+		overflow-x: hidden;
+		/* add padding to account for vertical scrollbar */
+		padding-right: 0px;
+	}
+	/* IE 6 doesn't support max-height
+	 * we use height instead, but this forces the menu to always be this tall
+	 */
+	* html .ui-autocomplete {
+		height: 100px;
+	}
+	  
+</style>
+
+</head>  
+
+
+<body>
+  <div class="ui-widget">
+    <div id='ny' tip='hi tip'>no Calls</div>
+  	<input id="searchfield" class="ui-autocomplete-input" autocomplete="off" role="textbox" aria-autocomplete="list" aria-haspopup="true" style="width: 130px;">
+    <div id='itemDetail'></div>
+    <iframe id="callToFrame" style="display: none;" width="5" height="5"></iframe> 
+  </div>  
+  
+  
+  
+  <script type="text/template" id="ResultItemListView-template">
+    <% if (type == "SF") { %>  
+      <img border="0" src="https://www.salesforce.com/favicon.ico" alt="google contact" width="10" height="10">
+    <% } %>
+    <% if (type == "Google") { %>  
+      <img border="0" src="https://ssl.gstatic.com/gb/images/silhouette_48.png" alt="google contact" width="10" height="10">
+    <% } %>
+    <%= label %>
+    <div style="font-size: 70%; ">
+      <% if (type == "SF" && sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %>
+        <%= sfObject.Account.Name %>
+      <% } %>
+    </div>
+  </script>
+  
+  <script type="text/template" id="ResultItemDetailView-template">
+    <span class="title" url="<%= contactUrl %>"><%= label %><% if (type == "SF" && sfObject != null && sfObject.Account != null && sfObject.Account.Name != null) { %>(<%= sfObject.Account.Name %>)<% } %></span>
+    <div style="font-size: 70%; ">
+      <ul>
+        <% if (type == "SF") { %>  
+          
+          <li><%= sfObject.attributes.type %></li>
+          
+          
+          
+          <% _.each(sfObject, function(value, key) { %> 
+            <% if (((key.indexOf("Telefon")>=0) || (key.indexOf("Phone")>=0)) && (value!=null)) { %>  
+              <li class="phoneNumber" number="<%= value %>">
+                <%= value %> <span>(<%= key %>)</span>
+              </li> 
+            <% } %>
+          <% }); %>
+          
+          <% _.each(sfObject, function(value, key) { %> 
+            <% if (((key.indexOf("Email")>=0) || (key.indexOf("EMAIL")>=0)) && (value!=null)) { %>  
+              <li class="mailAddress" address="<%= value %>">
+                <%= value %> <span>(<%= key %>)</span>
+              </li> 
+            <% } %>
+          <% }); %>
+          
+          
+          
+          <% if (sfObject.attributes.type == "Zugangsdaten__c") { %>      
+            <li><%= sfObject.Typ__c %></li>
+            <li><%= sfObject.Name %></li>
+            <li><%= sfObject.Password__c %></li>
+            <li><%= sfObject.Token__c %></li>
+  
+            <% if (sfObject.Typ__c == "Salesforce Live" || sfObject.Typ__c == "Salesforce Developer") { %>  
+              <li>
+                <img border="0" src="http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png" alt="google contact" width="10" height="10">
+                <a href="https://login.salesforce.com?un=<%= escape(sfObject.Name) %>&pw=<%= escape(sfObject.Password__c) %>" target="_blank">">login</a>                
+              </li>
+              <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet('<%= sfObject.Name %>','<%= sfObject.Password__c %><%= sfObject.Token__c %>','https://login.salesforce.com');">createMetadataSpreadsheet</a></li>
+            <% } %>
+            <% if (sfObject.Typ__c == "Salesforce Sandbox" || sfObject.Typ__c == "Salesforce Trial") { %>  
+              <li>
+                <img border="0" src="http://cdn1.iconfinder.com/data/icons/Futurosoft%20Icons%200.5.2/22x22/apps/kwalletmanager.png" alt="google contact" width="10" height="10">
+                <a href="https://test.salesforce.com?un=<%= escape(sfObject.Name) %>&pw=<%= escape(sfObject.Password__c) %>" target="_blank">login</a>              
+              </li>
+              <li><a href="javascript:void(0)" onclick="createMetadataSpreadsheet('<%= sfObject.Name %>','<%= sfObject.Password__c %><%= sfObject.Token__c %>','https://test.salesforce.com');">createMetadataSpreadsheet</a></li>
+            <% } %>
+                      
+          <% } %>
+          
+        <% } %>
+  
+        <% if (type == "Google") { %>  
+          <li><%= googleObject.title.$t %></li>          
+          
+          <% _.each(googleObject.gd$phoneNumber, function(phone) { %> 
+            <li class="phoneNumber" number="<%= phone.$t %>">
+              <%= phone.$t %>
+            </li> 
+          <% }); %>
+          
+          <% _.each(googleObject.gd$email, function(mail) { %> 
+            <li class="mailAddress" address="<%= mail.address %>">
+              <%= mail.address %>            
+            </li> 
+          <% }); %>
+  
+        <% } %>
+      </ul>
+    </div>
+  </script>
+  
+  <script type="text/template" id="nix-template">        
+    
+    <% if (done) { %>
+      <a id="clear-completed">Clear <%= done %> completed <%= done == 1 ? 'item' : 'items' %></a>
+    <% } %>
+    
+    <div class="todo-count"><b><%= remaining %></b> <%= remaining == 1 ? 'item' : 'items' %> left</div>
+  </script>
+  
+</body>
+</html>

@@ -1,0 +1,21 @@
+{
+  "name": "sip",
+  "subdomain": "tsschnoc.sip",
+  "scripts": {
+    "start": "app.js"
+  },
+  "version": "0.0.0-18",
+  "engines": {
+    "node": "0.8.x"
+  },
+  "dependencies": {
+    "mongodb": "*",
+    "underscore": "*",
+    "sip": "*",
+    "express": "*",
+    "passport": "*",
+    "passport-forcedotcom": "*",
+    "async": "*",
+    "node-salesforce": "*"
+  }
+}
